@@ -38,7 +38,7 @@ html, body {
 }
 
 body {
-    background: var(--background-100) url('/media/homepage_background_cropped.jpg') no-repeat center center fixed;
+    background: var(--background-100) url('/media/hero1.jpg') no-repeat center center fixed;
     background-size: cover;
     color: var(--text-100);
     margin: 0; /* Ensure no margin for body */

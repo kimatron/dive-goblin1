@@ -1,0 +1,60 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Custom color scheme */
+:root {
+    --primary-100: #00bfff;
+    --primary-200: #3cf;
+    --primary-300: #66d9ff;
+    --accent-100: #ffd700;
+    --accent-200: #ffd700;
+    --accent-300: #ffd700;
+    --background-100: #f9fdfe;
+    --background-200: #e3f6fa;
+    --background-300: #cdeef7;
+    --text-100: #002734;
+    --text-200: #004d67;
+    --text-300: #00749a;
+}
+
+/* Global styles */
+html, body {
+    height: 100%;
+    font-family: 'Lato', sans-serif;
+    scroll-behavior: smooth; /* Enable smooth scrolling */
+}
+
+body {
+    background: var(--background-100) url('/media/homepage_background_cropped.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: var(--text-100);
+    padding-top: 164px; /* Adjusted padding for fixed top navbar */
+}
+
+/* Navbar styles */
+.header-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    background-color: var(--background-100);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.main-logo-link {
+    text-decoration: none;
+    color: var(--text-100);
+    font-weight: bold;
+}
+
+/* Button styles */
+.shop-now-button, .btn-black {
+    background-color: var(--primary-100);
+    color: white;
+    min-width: 2

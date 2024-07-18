@@ -5,19 +5,19 @@
     box-sizing: border-box;
 }
 
-/* Apply Mulish font to body and specify fallback */
+/* Fonts */
 body {
     font-family: 'Mulish', sans-serif;
 }
 
-/* Apply Noto Sans Manichaean font to headings and specify fallback */
 h1, h2, h3 {
     font-family: 'Noto Sans Manichaean', sans-serif;
+}
 
 /* Custom color scheme */
 :root {
     --primary-100: #00bfff;
-    --primary-200: #3cf;
+    --primary-200: #0033cc;
     --primary-300: #66d9ff;
     --accent-100: #ffd700;
     --accent-200: #ffd700;
@@ -28,12 +28,12 @@ h1, h2, h3 {
     --text-100: #002734;
     --text-200: #004d67;
     --text-300: #00749a;
+    --black: #000;
 }
 
 /* Global styles */
 html, body {
     height: 100%;
-    font-family: 'Lato', sans-serif;
     scroll-behavior: smooth; /* Enable smooth scrolling */
 }
 
@@ -41,37 +41,70 @@ body {
     background: var(--background-100) url('/media/homepage_background_cropped.jpg') no-repeat center center fixed;
     background-size: cover;
     color: var(--text-100);
-    padding-top: 164px; /* Adjusted padding for fixed top navbar */
+    margin: 0; /* Ensure no margin for body */
+    padding: 0;
 }
 
 /* Navbar styles */
-.header-container {
+.navbar {
     position: fixed;
     top: 0;
-    right: 0;
     left: 0;
+    right: 0;
     z-index: 1030;
     background-color: var(--background-100);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
+    padding: 16px 0;
 }
 
-.logo-font {
+.navbar-brand {
+    margin-left: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-100);
     text-transform: uppercase;
 }
 
-.main-logo-link {
-    text-decoration: none;
+.navbar-nav {
+    margin-right: 20px;
+}
+
+.nav-link {
     color: var(--text-100);
-    font-weight: bold;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    margin-right: 20px;
+}
+
+.nav-link:hover {
+    color: var(--primary-100);
 }
 
 /* Button styles */
-.shop-now-button, .btn-black {
+.btn {
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.shop-now-button {
     background-color: var(--primary-100);
     color: white;
-    min-width: 2
+}
 
+.shop-now-button:hover {
+    background-color: var(--primary-200);
+}
+
+.btn-black {
+    background-color: var(--black);
+    color: white;
+}
+
+.btn-black:hover {
+    background-color: #222;
+}
 
 /* Footer styles */
 footer {
@@ -83,9 +116,28 @@ footer {
     padding: 15px 0;
     text-align: center;
 }
+/* Additional classes */
+.text-black {
+    color: var(--black) !important;
+}
 
-@media (min-height: 100vh) {
-    body {
-        margin-bottom: 60px; /* Adjust to match footer height */
+.border-black {
+    border: 1px solid var(--black) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 8px 0;
+    }
+
+    .navbar-brand {
+        margin-left: 10px;
+        font-size: 1.2rem;
+    }
+
+    .nav-link {
+        font-size: 1rem;
+        margin-right: 10px;
     }
 }

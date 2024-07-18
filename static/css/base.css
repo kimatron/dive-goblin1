@@ -5,6 +5,15 @@
     box-sizing: border-box;
 }
 
+/* Apply Mulish font to body and specify fallback */
+body {
+    font-family: 'Mulish', sans-serif;
+}
+
+/* Apply Noto Sans Manichaean font to headings and specify fallback */
+h1, h2, h3 {
+    font-family: 'Noto Sans Manichaean', sans-serif;
+
 /* Custom color scheme */
 :root {
     --primary-100: #00bfff;
@@ -47,6 +56,10 @@ body {
     transition: background-color 0.3s ease;
 }
 
+.logo-font {
+    text-transform: uppercase;
+}
+
 .main-logo-link {
     text-decoration: none;
     color: var(--text-100);
@@ -58,3 +71,21 @@ body {
     background-color: var(--primary-100);
     color: white;
     min-width: 2
+
+
+/* Footer styles */
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--background-300); /* Adjust as per your color scheme */
+    color: white; /* Adjust text color */
+    padding: 15px 0;
+    text-align: center;
+}
+
+@media (min-height: 100vh) {
+    body {
+        margin-bottom: 60px; /* Adjust to match footer height */
+    }
+}

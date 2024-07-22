@@ -8,3 +8,10 @@ def index(request):
 def cart_view(request):
     # Your cart view logic here
     return render(request, 'cart.html')
+
+    # views.py
+
+
+def search_results(request):
+    # Your search logic here
+    return render(request, 'search_results.html')

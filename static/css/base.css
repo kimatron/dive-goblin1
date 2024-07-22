@@ -45,7 +45,7 @@ body {
     padding: 0;
 }
 
-/* Navbar styles */
+/* Navbar styles
 .navbar {
     position: fixed;
     top: 0;
@@ -63,7 +63,7 @@ body {
     font-weight: bold;
     color: var(--text-100);
     text-transform: uppercase;
-}
+} */
 
 .navbar-nav {
     margin-right: 20px;
@@ -123,6 +123,10 @@ footer {
 
 .border-black {
     border: 1px solid var(--black) !important;
+}
+
+.bg-black {
+    background: #000 !important;
 }
 
 /* Responsive adjustments */

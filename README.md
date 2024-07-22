@@ -46,7 +46,7 @@ The development of Dive Goblin followed Agile methodologies, with detailed evide
 - **External Link**: Included a link to an external resource with a `rel` attribute for improved SEO.
 
 ## Digital Marketing
-- **Facebook Business Page**: A real/mockup Facebook business page for Dive Goblin.
+- **Facebook Business Page**: For more information, visit [Dive Goblin Facebook Page](https://www.facebook.com/divegoblin).
 - **Newsletter Signup Form**: Integrated to capture user emails for marketing campaigns.
 
 ## E-Commerce Business Model

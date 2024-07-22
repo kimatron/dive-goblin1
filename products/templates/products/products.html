@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+<div class="container header-container">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Add any specific header content here if needed -->
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5 pt-5">
+    <div class="row">
+        <div class="col-md-12 my-auto">
+
+            {{ products }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Add more content sections as needed -->
+        </div>
+    </div>
+</div>
+{% endblock %}

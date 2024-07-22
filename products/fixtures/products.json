@@ -1,0 +1,110 @@
+[
+    {
+        "model": "products.product",
+        "pk": 1,
+        "fields": {
+            "name": "Premium Scuba Mask",
+            "description": "High-quality silicone scuba mask with anti-fog technology for crystal clear vision underwater.",
+            "price": 89.99,
+            "stock": 50,
+            "category": 1,
+            "image": "products/premium_scuba_mask.jpg"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 2,
+        "fields": {
+            "name": "Advanced Regulator",
+            "description": "A robust and reliable scuba regulator with balanced diaphragm for optimal performance.",
+            "price": 299.99,
+            "stock": 30,
+            "category": 1,
+            "image": "products/advanced_regulator.jpg"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 3,
+        "fields": {
+            "name": "Snorkeling Fins",
+            "description": "Comfortable and durable snorkeling fins for easy swimming and maneuverability.",
+            "price": 49.99,
+            "stock": 75,
+            "category": 2,
+            "image": "products/snorkeling_fins.jpg"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 4,
+        "fields": {
+            "name": "Full-Length Wetsuit",
+            "description": "A full-length wetsuit designed for warmth and flexibility in cold water conditions.",
+            "price": 159.99,
+            "stock": 40,
+            "category": 3,
+            "image": "products/full_length_wetsuit.jpg"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 5,
+        "fields": {
+            "name": "UV Protection Rash Guard",
+            "description": "A lightweight rash guard with UV protection for sun safety during water activities.",
+            "price": 39.99,
+            "stock": 100,
+            "category": 3,
+            "image": "products/uv_protection_rash_guard.jpg"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 6,
+        "fields": {
+            "name": "Underwater Camera",
+            "description": "A waterproof camera with high-resolution capability for capturing underwater adventures.",
+            "price": 199.99,
+            "stock": 20,
+            "category": 4,
+            "image": "products/underwater_camera.jpg"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 7,
+        "fields": {
+            "name": "Dive Knife",
+            "description": "A sturdy dive knife with a corrosion-resistant blade, essential for underwater safety.",
+            "price": 29.99,
+            "stock": 60,
+            "category": 1,
+            "image": "products/dive_knife.jpg"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 8,
+        "fields": {
+            "name": "Travel Dive Bag",
+            "description": "A spacious dive bag for carrying all your diving gear securely during travel.",
+            "price": 89.99,
+            "stock": 25,
+            "category": 4,
+            "image": "products/travel_dive_bag.jpg"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 9,
+        "fields": {
+            "name": "Discounted Scuba Mask",
+            "description": "Special offer on our popular scuba mask. Limited stock available.",
+            "price": 69.99,
+            "stock": 15,
+            "category": 5,
+            "image": "products/discounted_scuba_mask.jpg"
+        }
+    }
+]

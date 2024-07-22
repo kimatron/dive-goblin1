@@ -1,0 +1,47 @@
+[
+    {
+        "model": "products.category",
+        "pk": 1,
+        "fields": {
+            "name": "Scuba Gear",
+            "friendly_name": "Scuba Gear",
+            "description": "All essential gear for scuba diving, including BCD's, fins, and regulators."
+        }
+    },
+    {
+        "model": "products.category",
+        "pk": 2,
+        "fields": {
+            "name": "Snorkeling Gear",
+            "friendly_name": "Snorkeling Gear",
+            "description": "Gear designed for snorkeling, including snorkels, masks, and snorkel vests."
+        }
+    },
+    {
+        "model": "products.category",
+        "pk": 3,
+        "fields": {
+            "name": "Apparel",
+            "friendly_name": "Apparel",
+            "description": "Clothing and accessories for diving and underwater activities."
+        }
+    },
+    {
+        "model": "products.category",
+        "pk": 4,
+        "fields": {
+            "name": "Travel",
+            "friendly_name": "Travel",
+            "description": "Travel accessories and guides for diving destinations."
+        }
+    },
+    {
+        "model": "products.category",
+        "pk": 5,
+        "fields": {
+            "name": "Special Offers",
+            "friendly_name": "Special Offers",
+            "description": "Discounted items and special deals on scuba and snorkeling gear."
+        }
+    }
+]

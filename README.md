@@ -106,6 +106,31 @@ Access to the site here: [Dive Goblin](https://8000-kimatron-divegoblin1-r3dva5y
 2. **Order**: Handles customer orders, including order status, payment information, and shipping details.
 3. **CustomerProfile**: Stores additional information about customers, such as address, order history, and preferences.
 
+## Wishlist Feature
+
+### Overview
+
+The Wishlist feature allows users to save products they are interested in, making it easy to keep track of items they might want to purchase in the future. Each user has their own wishlist, which can contain multiple products.
+
+### Model Implementation
+
+The `Wishlist` model is implemented as follows:
+
+```python
+from django.db import models
+from django.contrib.auth.models import User
+from products.models import Product
+
+class Wishlist(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    products = models.ManyToManyField(Product)
+
+    def __str__(self):
+        return f'Wishlist of {self.user.username}
+
+```
+
+
 ## Forms and UI Elements
 - **CRUD Form**: A front-end form allowing users to add, edit, and delete products without accessing the admin panel.
 - **Delete UI Element**: A front-end interface that allows users to delete records (e.g., products, orders) directly from the UI.

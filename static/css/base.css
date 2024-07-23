@@ -287,6 +287,26 @@ footer .font-weight-bold {
     flex-grow: 1; /* Ensures the body grows to fill space */
 }
 
+/* Ensure image container is responsive and allows full image display */
+.image-container {
+    position: relative;
+    overflow: hidden; /* Hide any overflow if necessary */
+}
+
+/* Ensure card images fit well within the card */
+.card-img-top {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Ensures image fits well without cropping */
+    display: block; /* Remove any unwanted spacing */
+}
+
+/* Additional styles for card body to handle spacing */
+.card-body {
+    padding: 1rem; /* Adjust padding if needed */
+}
+
+
 /* Responsive Adjustments */
 
 /* Desktop and larger devices */
@@ -328,5 +348,16 @@ footer .font-weight-bold {
         height: auto; /* Adjust height to auto for mobile */
         max-height: 200px; /* Optional: Limit maximum height */
         object-fit: contain; /* Ensure image is fully visible */
+    }
+}
+
+/* pad the top a bit when navbar is collapsed on mobile */
+@media (max-width: 991px) {
+    .header-container {
+        padding-top: 220px;
+    }
+
+    body {
+        height: calc(100vh - 116px);
     }
 }

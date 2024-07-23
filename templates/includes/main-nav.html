@@ -6,9 +6,9 @@
                 <i class="fas fa-th-large"></i> All Products
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
-                <a href="{% url 'products' %}?sort=price" class="dropdown-item"><i class="fas fa-tag"></i> By Price</a>
-                <a href="{% url 'products' %}?sort=rating" class="dropdown-item"><i class="fas fa-star"></i> By Rating</a>
-                <a href="{% url 'products' %}?sort=category" class="dropdown-item"><i class="fas fa-th-list"></i> By Category</a>
+                <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item"><i class="fas fa-tag"></i> By Price</a>
+                <a href="{% url 'products' %}?sort=rating&direction=desc" class="dropdown-item"><i class="fas fa-star"></i> By Rating</a>
+                <a href="{% url 'products' %}?sort=category&direction=asc" class="dropdown-item"><i class="fas fa-th-list"></i> By Category</a>
                 <a href="{% url 'products' %}" class="dropdown-item"><i class="fas fa-box"></i> All Products</a>
             </div>
         </li>

@@ -8,7 +8,8 @@
             "price": 89.99,
             "stock": 50,
             "category": 1,
-            "image": "oceanic-shadow-50th-diving-mask.jpg"
+            "image": "oceanic-shadow-50th-diving-mask.jpg",
+            "rating": 4.5
         }
     },
     {
@@ -20,7 +21,8 @@
             "price": 299.99,
             "stock": 30,
             "category": 1,
-            "image": "mares-abyss-22-regulator.jpg"
+            "image": "mares-abyss-22-regulator.jpg",
+            "rating": 4.8
         }
     },
     {
@@ -32,7 +34,8 @@
             "price": 49.99,
             "stock": 75,
             "category": 2,
-            "image": "scubapro-go-sport-diving-fins.jpg"
+            "image": "scubapro-go-sport-diving-fins.jpg",
+            "rating": 4.3
         }
     },
     {
@@ -43,8 +46,9 @@
             "description": "A full-length wetsuit designed for warmth and flexibility in cold water conditions.",
             "price": 159.99,
             "stock": 40,
-            "category": 4,
-            "image": "aqualung-freeflex-freediving-wetsuit.jpg"
+            "category": 3,
+            "image": "aqualung-freeflex-freediving-wetsuit.jpg",
+            "rating": 4.6
         }
     },
     {
@@ -56,7 +60,8 @@
             "price": 39.99,
             "stock": 100,
             "category": 3,
-            "image": "billabong-shortie-wetsuit.jpg"
+            "image": "billabong-shortie-wetsuit.jpg",
+            "rating": 4.2
         }
     },
     {
@@ -68,7 +73,8 @@
             "price": 199.99,
             "stock": 20,
             "category": 3,
-            "image": "kodak_waterproof_camera_rood_1.jpg"
+            "image": "kodak_waterproof_camera_rood_1.jpg",
+            "rating": 4.7
         }
     },
     {
@@ -80,7 +86,8 @@
             "price": 29.99,
             "stock": 60,
             "category": 3,
-            "image": "seac-hammer-knife.jpg"
+            "image": "seac-hammer-knife.jpg",
+            "rating": 4.1
         }
     },
     {
@@ -91,8 +98,9 @@
             "description": "A spacious dive bag for carrying all your diving gear securely during travel.",
             "price": 89.99,
             "stock": 25,
-            "category": 8,
-            "image": "Mares-Cruise-Mesh-Dive-Bag.jpg"
+            "category": 4,
+            "image": "Mares-Cruise-Mesh-Dive-Bag.jpg",
+            "rating": 4.4
         }
     },
     {
@@ -104,7 +112,8 @@
             "price": 69.99,
             "stock": 15,
             "category": 5,
-            "image": "salvimar-francy-junior-diving-mask.jpg"
+            "image": "salvimar-francy-junior-diving-mask.jpg",
+            "rating": 4.3
         }
     },
     {
@@ -116,7 +125,8 @@
             "price": 399.99,
             "stock": 25,
             "category": 1,
-            "image": "hydros_black_mens_lr-bpi.jpg"
+            "image": "hydros_black_mens_lr-bpi.jpg",
+            "rating": 4.6
         }
     },
     {
@@ -128,10 +138,10 @@
             "price": 429.99,
             "stock": 20,
             "category": 1,
-            "image": "aqualung-pro-hd-woman-bcd.jpg"
+            "image": "aqualung-pro-hd-woman-bcd.jpg",
+            "rating": 0
         }
     },
-
     {
         "model": "products.product",
         "pk": 12,
@@ -141,7 +151,8 @@
             "price": 25.99,
             "stock": 35,
             "category": 6,
-            "image": "travelbook.jpg"
+            "image": "travelbook.jpg",
+            "rating": 0
         }
     },
     {
@@ -152,8 +163,9 @@
             "description": "A comprehensive travel package that includes accommodations, dives, and local excursions.",
             "price": 1499.99,
             "stock": 10,
-            "category": 8,
-            "image": "shark.jpg"
+            "category": 7,
+            "image": "shark.jpg",
+            "rating": 0
         }
     },
     {
@@ -165,7 +177,8 @@
             "price": 1199.99,
             "stock": 15,
             "category": 6,
-            "image": "cayman.jpg"
+            "image": "cayman.jpg",
+            "rating": 5
         }
     },
     {
@@ -177,7 +190,8 @@
             "price": 1799.99,
             "stock": 10,
             "category": 6,
-            "image": "maldives.jpg"
+            "image": "maldives.jpg",
+            "rating": 0
         }
     },
     {
@@ -189,7 +203,8 @@
             "price": 2299.99,
             "stock": 8,
             "category": 6,
-            "image": "indonesia.jpg"
+            "image": "indonesia.jpg",
+            "rating": 0
         }
     }
 ]

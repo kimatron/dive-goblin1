@@ -48,11 +48,12 @@
   <header class="container-fluid fixed-top">
     <div id="topnav" class="row bg-white pt-lg-2">
         <!-- Logo Section -->
-        <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
-            <a href="{% url 'home' %}" class="nav-link main-logo-link">
-                <h2 class="logo-font text-black my-0"><strong>Dive</strong> Goblin</h2>
-            </a>
-        </div>
+        <a href="{% url 'home' %}" class="nav-link main-logo-link">
+          <button class="logo1" data-text="Dive Goblin">
+              <span class="actual-text">&nbsp;Dive Goblin&nbsp;</span>
+              <span aria-hidden="true" class="front-text">&nbsp;Dive Goblin&nbsp;</span>
+          </button>
+      </a>
 
         <!-- Search Bar Section -->
         <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
@@ -147,21 +148,54 @@
     {% endblock %}
   </main>
 
-  <footer class="container-fluid bg-dark text-white py-3 mt-5">
+  <footer class="container-fluid bg-dark text-white py-5 mt-5">
     <div class="row">
-      <div class="col-md-4 text-center text-md-left">
-        <p>&copy; {{ current_year }} Dive Goblin. All rights reserved.</p>
+      <!-- About Us Section -->
+      <div class="col-md-4 mb-4 mb-md-0 text-center text-md-left">
+        <h4 class="font-weight-bold mb-3">About Dive Goblin</h4>
+        <p>
+          Dive Goblin is your ultimate destination for unique and high-quality products. Our mission is to provide exceptional service and memorable experiences for our customers.
+        </p>
       </div>
-      <div class="col-md-4 text-center">
-        <a href="https://www.facebook.com/divegoblin" class="text-white mx-2">Facebook</a>
-        <a href="#" class="text-white mx-2">Instagram</a>
-        <a href="#" class="text-white mx-2">Twitter</a>
+  
+      <!-- Social Media Links -->
+      <div class="col-md-4 mb-4 mb-md-0 text-center">
+        <h4 class="font-weight-bold mb-3">Follow Us</h4>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/divegoblin" class="text-white mx-2" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="text-white mx-2" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="#" class="text-white mx-2" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
       </div>
+  
+      <!-- Contact Us and Legal Information -->
       <div class="col-md-4 text-center text-md-right">
-        x
+        <h4 class="font-weight-bold mb-3">Contact Us</h4>
+        <p>
+          <strong>Email:</strong> <a href="mailto:info@divegoblin.com" class="text-white">info@divegoblin.com</a><br>
+          <strong>Phone:</strong> +1 234 567 890
+        </p>
+        <p>
+          <a href="#" class="text-white">Privacy Policy</a> | 
+          <a href="#" class="text-white">Terms of Service</a>
+        </p>
+      </div>
+    </div>
+  
+    <!-- Footer Bottom -->
+    <div class="row border-top border-light pt-3 mt-3">
+      <div class="col text-center">
+        <p class="mb-0">&copy; {{ current_year }} Dive Goblin. All rights reserved.</p>
       </div>
     </div>
   </footer>
+  
 
   {% block postloadjs %}
   {% endblock %}

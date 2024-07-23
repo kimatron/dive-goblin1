@@ -16,6 +16,8 @@
 ## Project Overview
 Dive Goblin is an e-commerce platform specializing in dive gear, watersports apparel, and travel-related products. Our goal is to provide enthusiasts with high-quality products and exceptional user experience.
 
+Access to the site here: [Dive Goblin](https://8000-kimatron-divegoblin1-r3dva5yy76r.ws.codeinstitute-ide.net/)
+
 ## Features
 - User registration, login, and logout functionality
 - E-commerce functionality to browse, search, and purchase products
@@ -23,6 +25,81 @@ Dive Goblin is an e-commerce platform specializing in dive gear, watersports app
 - Newsletter signup form for marketing purposes
 - Custom 404 error page
 - SEO optimized with robots.txt, sitemap.xml, and meta tags
+
+## User Stories
+
+### [Basic Home Landing Page Design](https://github.com/kimatron/dive-goblin1/issues/13)
+
+**As a** user  
+**I want to** see a well-designed home landing page  
+**So that** I get a good first impression of the site and can easily navigate to other sections
+
+### [Front-End Product Search and Filtering](https://github.com/kimatron/dive-goblin1/issues/12)
+
+**As a** user  
+**I want to** search for and filter products  
+**So that** I can quickly find the items I am interested in without having to browse through all products
+
+### [Manage Inventory - Admin](https://github.com/kimatron/dive-goblin1/issues/11)
+
+**As an** admin  
+**I want to** manage the inventory  
+**So that** I can ensure the product listings are up-to-date and accurate
+
+### [Provide Product Reviews - User](https://github.com/kimatron/dive-goblin1/issues/10)
+
+**As a** user  
+**I want to** provide reviews for products  
+**So that** I can share my feedback and help other customers make informed purchasing decisions
+
+### [View Order History - User](https://github.com/kimatron/dive-goblin1/issues/9)
+
+**As a** user  
+**I want to** view my order history  
+**So that** I can keep track of my past purchases and reorder items if necessary
+
+### [Manage User Account - User](https://github.com/kimatron/dive-goblin1/issues/8)
+
+**As a** user  
+**I want to** manage my account details  
+**So that** I can update my personal information and view my account status
+
+### [Admin Product Details Management](https://github.com/kimatron/dive-goblin1/issues/7)
+
+**As an** admin  
+**I want to** manage product details  
+**So that** I can ensure the product information is accurate and comprehensive
+
+### [Enable Management - Admin](https://github.com/kimatron/dive-goblin1/issues/6)
+
+**As an** admin  
+**I want to** enable management features  
+**So that** I can control various aspects of the site and ensure smooth operation
+
+### [Save Items for Later](https://github.com/kimatron/dive-goblin1/issues/5)
+
+**As a** user  
+**I want to** save items for later  
+**So that** I can keep track of products I am interested in and purchase them at a later time
+
+### [Add Items to Basket](https://github.com/kimatron/dive-goblin1/issues/4)
+
+**As a** user  
+**I want to** add items to my basket  
+**So that** I can purchase multiple products in a single transaction
+
+### [Facilitate Payment Process](https://github.com/kimatron/dive-goblin1/issues/3)
+
+**As a** user  
+**I want to** have a smooth and secure payment process  
+**So that** I can complete my purchases with confidence
+
+### [Browse Dive Gear and Apparel](https://github.com/kimatron/dive-goblin1/issues/2)
+
+**As a** user  
+**I want to** browse various dive gear and apparel  
+**So that** I can find the products that meet my needs and preferences
+
 
 ## Custom Models
 1. **Product**: Manages the details of dive gear and watersports apparel, including categories, prices, descriptions, and stock levels.

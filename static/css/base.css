@@ -180,7 +180,11 @@ body {
 .btn-black:hover {
     background-color: #222;
 }
-
+/* Ensure image scales correctly within the modal */
+.modal-body img {
+    width: 100%;
+    height: auto;
+}
 /* Footer Styles */
 footer {
     background-color: var(--background-300);

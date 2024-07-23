@@ -8,19 +8,19 @@
             "price": 89.99,
             "stock": 50,
             "category": 1,
-            "image": "products/premium_scuba_mask.jpg"
+            "image": "oceanic-shadow-50th-diving-mask.jpg"
         }
     },
     {
         "model": "products.product",
         "pk": 2,
         "fields": {
-            "name": "Advanced Regulator",
+            "name": "Mares Abyss 22 Regulator",
             "description": "A robust and reliable scuba regulator with balanced diaphragm for optimal performance.",
             "price": 299.99,
             "stock": 30,
             "category": 1,
-            "image": "products/advanced_regulator.jpg"
+            "image": "mares-abyss-22-regulator.jpg"
         }
     },
     {
@@ -32,7 +32,7 @@
             "price": 49.99,
             "stock": 75,
             "category": 2,
-            "image": "products/snorkeling_fins.jpg"
+            "image": "scubapro-go-sport-diving-fins.jpg"
         }
     },
     {
@@ -44,19 +44,19 @@
             "price": 159.99,
             "stock": 40,
             "category": 3,
-            "image": "products/full_length_wetsuit.jpg"
+            "image": "aqualung-freeflex-freediving-wetsuit.jpg"
         }
     },
     {
         "model": "products.product",
         "pk": 5,
         "fields": {
-            "name": "UV Protection Rash Guard",
+            "name": "UV Protection Shortie Wetsuit",
             "description": "A lightweight rash guard with UV protection for sun safety during water activities.",
             "price": 39.99,
             "stock": 100,
             "category": 3,
-            "image": "products/uv_protection_rash_guard.jpg"
+            "image": "billabong-shortie-wetsuit.jpg"
         }
     },
     {
@@ -68,7 +68,7 @@
             "price": 199.99,
             "stock": 20,
             "category": 4,
-            "image": "products/underwater_camera.jpg"
+            "image": "kodak_waterproof_camera_rood_1.jpg"
         }
     },
     {
@@ -80,7 +80,7 @@
             "price": 29.99,
             "stock": 60,
             "category": 1,
-            "image": "products/dive_knife.jpg"
+            "image": "seac-hammer-knife.jpg"
         }
     },
     {
@@ -92,7 +92,7 @@
             "price": 89.99,
             "stock": 25,
             "category": 4,
-            "image": "products/travel_dive_bag.jpg"
+            "image": "Mares-Cruise-Mesh-Dive-Bag.jpg"
         }
     },
     {
@@ -104,7 +104,7 @@
             "price": 69.99,
             "stock": 15,
             "category": 5,
-            "image": "products/discounted_scuba_mask.jpg"
+            "image": "salvimar-francy-junior-diving-mask.jpg"
         }
     }
 ]

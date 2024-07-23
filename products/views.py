@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
-from .models import Product, Category
+from django.contrib.auth.decorators import login_required
+from .models import Product, Category, Wishlist
 
 # Create your views here.
 
@@ -65,3 +66,22 @@ def product_detail(request, product_id):
     }
 
     return render(request, 'products/product_detail.html', context)
+
+@login_required
+def add_to_wishlist(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    wishlist, created = Wishlist.objects.get_or_create(user=request.user)
+    wishlist.products.add(product)
+    return redirect('wishlist')
+
+@login_required
+def remove_from_wishlist(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    wishlist = get_object_or_404(Wishlist, user=request.user)
+    wishlist.products.remove(product)
+    return redirect('wishlist')
+
+@login_required
+def wishlist(request):
+    wishlist, created = Wishlist.objects.get_or_create(user=request.user)
+    return render(request, 'wishlist.html', {'wishlist': wishlist})

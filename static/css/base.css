@@ -43,9 +43,11 @@ body {
     color: var(--text-100);
     margin: 0; /* Ensure no margin for body */
     padding: 0;
+    padding-top: 60px; /* Space for fixed navbar */
+    padding-bottom: 60px; /* Space for fixed footer */
 }
 
-/* Navbar styles
+/* Navbar styles */
 .navbar {
     position: fixed;
     top: 0;
@@ -63,7 +65,7 @@ body {
     font-weight: bold;
     color: var(--text-100);
     text-transform: uppercase;
-} */
+}
 
 .navbar-nav {
     margin-right: 20px;
@@ -116,6 +118,7 @@ footer {
     padding: 15px 0;
     text-align: center;
 }
+
 /* Additional classes */
 .text-black {
     color: var(--black) !important;
@@ -129,11 +132,25 @@ footer {
     background: #000 !important;
 }
 
+/* Overlay Styles */
+.overlay {
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background: white;
+    z-index: -1;
+}
+
 /* Product Card Styles */
 .card {
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 15px; /* Space between cards */
+    display: flex;
+    flex-direction: column;
 }
 
 .card:hover {
@@ -142,43 +159,34 @@ footer {
 }
 
 .card-img-top {
-    height: 200px; /* Adjust height as needed */
-    object-fit: cover;
-}
-
-/* Overlay Styles */
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Dark overlay */
-    z-index: 10; /* Make sure it's on top */
+    height: auto; /* Ensure the height adjusts based on content */
+    max-height: 200px; /* Limit maximum height */
+    object-fit: cover; /* Ensure image covers the card area */
 }
 
-/* Header Styles */
-.header-container {
-    padding: 20px 0;
-    background-color: #f8f9fa; /* Light background */
-}
-
-.logo-font {
-    font-family: 'Roboto', sans-serif; /* Use your desired font */
-    font-weight: 700;
+/* Card Body */
+.card-body {
+    padding: 15px; /* Padding for content inside the card */
+    flex-grow: 1; /* Ensures the body grows to fill space */
 }
 
 /* Responsive Adjustments */
-@media (max-width: 768px) {
-    .product-container {
-        padding-left: 0;
-        padding-right: 0;
+
+/* Desktop and larger devices */
+@media (min-width: 769px) {
+    .card-img-top {
+        height: 200px; /* Default height for desktop */
     }
 }
 
-
-/* Responsive adjustments */
+/* Mobile Devices */
 @media (max-width: 768px) {
+    .body {
+        padding-top: 50px; /* Adjust for smaller screen navbar */
+        padding-bottom: 50px; /* Adjust for smaller screen footer */
+    }
+
     .navbar {
         padding: 8px 0;
     }
@@ -191,5 +199,18 @@ footer {
     .nav-link {
         font-size: 1rem;
         margin-right: 10px;
+    }
+
+    /* Mobile specific card styles */
+    .card {
+        /* Ensure cards fit the screen */
+        margin: 0; /* Remove margin on mobile */
+        width: 100%; /* Full width */
+    }
+
+    .card-img-top {
+        height: auto; /* Adjust height to auto for mobile */
+        max-height: 200px; /* Optional: Limit maximum height */
+        object-fit: contain; /* Ensure image is fully visible */
     }
 }

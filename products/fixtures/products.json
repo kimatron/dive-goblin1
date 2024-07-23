@@ -43,7 +43,7 @@
             "description": "A full-length wetsuit designed for warmth and flexibility in cold water conditions.",
             "price": 159.99,
             "stock": 40,
-            "category": 3,
+            "category": 4,
             "image": "aqualung-freeflex-freediving-wetsuit.jpg"
         }
     },
@@ -67,7 +67,7 @@
             "description": "A waterproof camera with high-resolution capability for capturing underwater adventures.",
             "price": 199.99,
             "stock": 20,
-            "category": 4,
+            "category": 3,
             "image": "kodak_waterproof_camera_rood_1.jpg"
         }
     },
@@ -79,7 +79,7 @@
             "description": "A sturdy dive knife with a corrosion-resistant blade, essential for underwater safety.",
             "price": 29.99,
             "stock": 60,
-            "category": 1,
+            "category": 3,
             "image": "seac-hammer-knife.jpg"
         }
     },
@@ -91,7 +91,7 @@
             "description": "A spacious dive bag for carrying all your diving gear securely during travel.",
             "price": 89.99,
             "stock": 25,
-            "category": 4,
+            "category": 8,
             "image": "Mares-Cruise-Mesh-Dive-Bag.jpg"
         }
     },
@@ -105,6 +105,91 @@
             "stock": 15,
             "category": 5,
             "image": "salvimar-francy-junior-diving-mask.jpg"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 10,
+        "fields": {
+            "name": "Scubapro X-Force BCD",
+            "description": "The Scubapro X-Force is a high-performance BCD designed for durability and comfort with advanced features for experienced divers.",
+            "price": 399.99,
+            "stock": 25,
+            "category": 1,
+            "image": "hydros_black_mens_lr-bpi.jpg"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 11,
+        "fields": {
+            "name": "Aqualung Pro HD BCD",
+            "description": "The Aqualung Pro HD BCD offers superior buoyancy control with its ergonomic design and integrated weight system, ideal for frequent divers.",
+            "price": 429.99,
+            "stock": 20,
+            "category": 1,
+            "image": "aqualung-pro-hd-woman-bcd.jpg"
+        }
+    },
+
+    {
+        "model": "products.product",
+        "pk": 12,
+        "fields": {
+            "name": "Diving Travel Guidebook",
+            "description": "An essential guidebook featuring top diving destinations and tips for travelers.",
+            "price": 25.99,
+            "stock": 35,
+            "category": 6,
+            "image": "travelbook.jpg"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 13,
+        "fields": {
+            "name": "All-Inclusive Diving Package",
+            "description": "A comprehensive travel package that includes accommodations, dives, and local excursions.",
+            "price": 1499.99,
+            "stock": 10,
+            "category": 8,
+            "image": "shark.jpg"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 14,
+        "fields": {
+            "name": "Grand Cayman Diving Adventure",
+            "description": "Explore the crystal-clear waters of Grand Cayman. Dive the famous Wall and visit Stingray City.",
+            "price": 1199.99,
+            "stock": 15,
+            "category": 6,
+            "image": "cayman.jpg"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 15,
+        "fields": {
+            "name": "Maldives Diving Experience",
+            "description": "Dive into the turquoise waters of the Maldives. Experience breathtaking coral reefs and diverse marine life.",
+            "price": 1799.99,
+            "stock": 10,
+            "category": 6,
+            "image": "maldives.jpg"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 16,
+        "fields": {
+            "name": "Indonesia Diving Safari",
+            "description": "Embark on a diving safari across Indonesia's top dive sites, including Raja Ampat and Komodo.",
+            "price": 2299.99,
+            "stock": 8,
+            "category": 6,
+            "image": "indonesia.jpg"
         }
     }
 ]

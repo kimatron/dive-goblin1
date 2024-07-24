@@ -237,3 +237,50 @@ Detailed testing documentation can be found in the [TESTING.md](TESTING.md) file
 ## Development and Deployment
 - **DEBUG Mode**: Ensure `DEBUG = False` in the settings file before deployment.
 - **Deployment**: Instructions for deploying the project to a production environment are provided in the deployment section of this documentation.
+
+# Credits
+
+## Image Sources
+- **Unsplash**: Various product images were sourced from [Unsplash](https://unsplash.com).
+- **Aqualung**: Product images and descriptions sourced from [Aqualung](https://www.aqualung.com).
+- **ScubaPro**: Product images and descriptions sourced from [ScubaPro](https://www.scubapro.com).
+- **Personal Collection**: Some images were taken by myself from my personal photo collection.
+- **Adobe Firefly**: Logo created using [Adobe Firefly](https://www.adobe.com/sensei/generative-ai/firefly.html).
+
+## Button CSS Styling
+- **UIVERSE**: Button CSS styling inspired by Kirzin on [UIVERSE](https://uiverse.io/Kirzin).
+
+## Tutorials and Coding Assistance
+- **Code Institute**: This project was developed using Code Institute's Boutique Ado tutorial as a base.
+- **W3Schools**: Referenced various coding examples and explanations from [W3Schools](https://www.w3schools.com).
+- **Stack Overflow**: Sourced solutions and ideas for coding issues from the [Stack Overflow](https://stackoverflow.com) community.
+- **Slack Communities**: Received assistance and feedback from various Slack communities.
+
+# Technologies Used
+
+## Frontend
+- **HTML5**: The latest version of HTML for structuring the content.
+- **CSS3**: For styling the web pages.
+- **JavaScript**: To create dynamic and interactive web pages.
+- **Bootstrap 5**: Utilized the Bootstrap framework for responsive design and styling. [Bootstrap](https://getbootstrap.com).
+
+## Backend
+- **Django**: A high-level Python web framework for building robust and scalable web applications. [Django](https://www.djangoproject.com).
+- **Python**: The programming language used in conjunction with Django. [Python](https://www.python.org).
+
+## Database
+- **SQLite**: Used as the default database during development. [SQLite](https://www.sqlite.org/index.html).
+
+## Version Control
+- **Git**: Version control system used for tracking changes. [Git](https://git-scm.com).
+- **GitHub**: Repository hosting service for version control and collaboration. [GitHub](https://github.com).
+
+## Development Tools
+- **Visual Studio Code**: A powerful and flexible code editor. [Visual Studio Code](https://code.visualstudio.com).
+- **Gitpod**: An online IDE for GitHub that provides a complete development environment. [Gitpod](https://www.gitpod.io).
+
+## Additional Resources
+
+## Thank You
+A big thank you to all the resources and communities that provided assistance, inspiration, and support throughout the development of this project.
+

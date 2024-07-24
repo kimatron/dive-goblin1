@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from products.models import Product 
+from django.views.decorators.http import require_POST
 
 # Create your views here.
 
@@ -43,3 +44,19 @@ def checkout(request):
     """ Display the checkout page """
     # Add any logic needed for the checkout page here
     return render(request, 'bag/checkout.html')
+
+@require_POST
+def update_bag(request):
+    # Logic to update quantities in the shopping bag
+    # Example:
+    bag = request.session.get('bag', {})
+    for item_id, quantity in request.POST.items():
+        if item_id.startswith('quantity_'):
+            item_id = item_id.split('_')[1]
+            quantity = int(quantity)
+            if quantity > 0:
+                bag[item_id] = quantity
+            else:
+                bag.pop(item_id, None)
+    request.session['bag'] = bag
+    return redirect('bag')  # Redirect to the shopping bag page

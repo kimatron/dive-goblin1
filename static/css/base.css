@@ -244,6 +244,50 @@ body {
   .wishlist-button:active {
     background: linear-gradient(32deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
   }
+
+/* Checkout button styles */
+.shop-now-button {
+    background-color: var(--primary-100);
+    color: white;
+}
+
+.shop-now-button:hover {
+    background-color: var(--primary-200);
+}
+
+.shop-now-button:active {
+    background-color: var(--primary-300);
+}
+
+/* Ensure button styles */
+.custom-button {
+    font-size: 18px;
+    display: inline-block;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    will-change: box-shadow, transform;
+    background: radial-gradient(100% 100% at 100% 0%, var(--primary-300) 0%, var(--primary-200) 100%);
+    box-shadow: 0px 0.01em 0.01em rgba(45, 35, 66, 0.4), 0px 0.3em 0.7em -0.01em rgba(45, 35, 66, 0.3), inset 0px -0.01em 0px rgba(58, 65, 111, 0.5);
+    padding: 0 2em;
+    border-radius: 0.3em;
+    color: #fff;
+    height: 2.6em;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.custom-button:hover {
+    box-shadow: 0px 0.1em 0.2em rgba(45, 35, 66, 0.4), 0px 0.4em 0.7em -0.1em rgba(45, 35, 66, 0.3), inset 0px -0.1em 0px var(--primary-200);
+    transform: translateY(-0.1em);
+}
+
+.custom-button:active {
+    box-shadow: inset 0px 0.1em 0.6em var(--primary-200);
+    transform: translateY(0em);
+}
+
+  
   
   /* Container for the sign-in form */
 .signin-container {
@@ -328,6 +372,65 @@ body {
     background: linear-gradient(32deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
 }
 
+/* Custom Table Styles */
+.custom-table-wrapper {
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.custom-table thead {
+    background-color: #343a40;
+    color: #fff;
+}
+
+.custom-table th, .custom-table td {
+    padding: 10px;
+    text-align: left;
+}
+
+.custom-table tbody tr:nth-child(odd) {
+    background-color: #e9ecef;
+}
+
+/* Product Info */
+.custom-product-info {
+    display: flex;
+    align-items: center;
+}
+
+.custom-product-info img {
+    margin-right: 15px;
+    border-radius: 5px;
+}
+
+/* Buttons */
+.custom-button {
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.custom-button.btn-outline-danger {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+.custom-button.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.custom-total {
+    font-size: 20px;
+    font-weight: bold;
+}
 
 
 /* Footer Styles */

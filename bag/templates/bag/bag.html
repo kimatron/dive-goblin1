@@ -32,7 +32,7 @@
                                     <th scope="col">Product</th>
                                     <th scope="col">Quantity</th>
                                     <th scope="col">Price</th>
-                                    <th scope="col">Total</th>
+                                    <th scope="col">Subtotal</th>
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
@@ -47,9 +47,12 @@
                                         </td>
                                         <td>{{ item.quantity }}</td>
                                         <td>${{ item.product.price }}</td>
-                                        <td>${{ item.total_price }}</td>
+                                        <td>${{ item.total_price|floatformat:2 }}</td>
                                         <td>
-                                            <a href="{% url 'remove_from_bag' item.product.id %}" class="btn btn-outline-danger btn-sm">Remove</a>
+                                            <form action="{% url 'remove_from_bag' item.product.id %}" method="post">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -57,7 +60,7 @@
                         </table>
                     </div>
                     <div class="text-right mt-4">
-                        <h4>Total: ${{ bag_total }}</h4>
+                        <h4>Total: ${{ bag_total|floatformat:2 }}</h4>
                         <a href="{% url 'checkout' %}" class="btn btn-success btn-lg mt-3">Proceed to Checkout</a>
                     </div>
                 {% else %}

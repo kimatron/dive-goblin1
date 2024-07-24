@@ -372,64 +372,80 @@ body {
     background: linear-gradient(32deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
 }
 
-/* Custom Table Styles */
-.custom-table-wrapper {
-    border-radius: 10px;
-    overflow: hidden;
-    background-color: #f8f9fa;
-    padding: 20px;
+/* Responsive Table Layout */
+.responsive-table {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 20px; /* Add padding around the table */
+    background-color: #fff; /* Ensure table background is white */
+    border-radius: 8px; /* Rounded corners for the table */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
 }
 
-.custom-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.custom-table thead {
-    background-color: #343a40;
-    color: #fff;
-}
-
-.custom-table th, .custom-table td {
+.table-row {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #ddd;
     padding: 10px;
-    text-align: left;
 }
 
-.custom-table tbody tr:nth-child(odd) {
-    background-color: #e9ecef;
+.table-cell {
+    flex: 1;
+    min-width: 120px;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 /* Product Info */
-.custom-product-info {
+.product-info {
     display: flex;
     align-items: center;
 }
 
-.custom-product-info img {
-    margin-right: 15px;
-    border-radius: 5px;
+.product-image {
+    max-width: 60px;
+    height: auto;
+    margin-right: 10px;
 }
 
-/* Buttons */
+/* Buttons and Text */
 .custom-button {
     font-size: 16px;
-    font-weight: bold;
+    padding: 10px;
     border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
 
-.custom-button.btn-outline-danger {
-    border-color: #dc3545;
-    color: #dc3545;
+.shop-now-button {
+    background-color: var(--primary-100);
+    color: white;
 }
 
-.custom-button.btn-outline-danger:hover {
-    background-color: #dc3545;
-    color: #fff;
+.shop-now-button:hover {
+    background-color: var(--primary-200);
+}
+
+.custom-button:hover {
+    box-shadow: 0px 0.1em 0.2em rgb(45 35 66 / 40%), 0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%), inset 0px -0.1em 0px #3c4fe0;
+    transform: translateY(-0.1em);
+}
+
+.custom-button:active {
+    box-shadow: inset 0px 0.1em 0.6em #3c4fe0;
+    transform: translateY(0em);
+}
+
+/* Section Styling */
+h1, h2, h3 {
+    margin-bottom: 20px; /* Add spacing below headings */
 }
 
 .custom-total {
     font-size: 20px;
     font-weight: bold;
+    margin: 10px 0; /* Add margin for spacing */
 }
 
 
@@ -609,4 +625,41 @@ cing */
     body {
         height: calc(100vh - 116px);
     }
+}
+
+/* Media Queries for Smaller Screens */
+@media (max-width: 768px) {
+    .custom-button {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .table-row {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .table-cell {
+        flex: none;
+        width: 100%;
+        padding: 8px;
+    }
+
+    .product-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .product-image {
+        margin-bottom: 10px;
+    }
+
+    .custom-total {
+        font-size: 18px;
+    }
+}
+
+/* Ensure overlay is applied only when needed */
+body.overlay-active .overlay {
+    display: block;
 }

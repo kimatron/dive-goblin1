@@ -2,46 +2,36 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="overlay"></div> <!-- Add overlay -->
+
 <div class="container">
     <h1 class="my-4">Shopping Bag</h1>
 
     {% if bag_items %}
-    <div class="custom-table-wrapper">
-        <table class="custom-table">
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Remove</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in bag_items %}
-                <tr>
-                    <td class="custom-product-info">
-                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" width="80">
-                        <div>{{ item.product.name }}</div>
-                    </td>
-                    <td>
-                        <form action="{% url 'update_bag' %}" method="post">
-                            {% csrf_token %}
-                            <input type="hidden" name="item_id" value="{{ item.item_id }}">
-                            <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
-                            <button type="submit" class="custom-button">Update</button>
-                        </form>
-                    </td>
-                    <td>${{ item.product.price }}</td>
-                    <td>
-                        <form action="{% url 'remove_from_bag' item.item_id %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit" class="custom-button">Remove</button>
-                        </form>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <div class="responsive-table">
+        {% for item in bag_items %}
+        <div class="table-row">
+            <div class="table-cell product-info">
+                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="product-image">
+                <div>{{ item.product.name }}</div>
+            </div>
+            <div class="table-cell">
+                <form action="{% url 'update_bag' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="item_id" value="{{ item.item_id }}">
+                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
+                    <button type="submit" class="custom-button">Update</button>
+                </form>
+            </div>
+            <div class="table-cell">${{ item.product.price }}</div>
+            <div class="table-cell">
+                <form action="{% url 'remove_from_bag' item.item_id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="custom-button">Remove</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 
     <div class="my-4">

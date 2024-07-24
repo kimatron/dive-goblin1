@@ -129,7 +129,7 @@ class Wishlist(models.Model):
         return f'Wishlist of {self.user.username}
 
 ```
-
+![Wishlist Button](media/wishlistbutton.png)
 
 ## Forms and UI Elements
 - **CRUD Form**: A front-end form allowing users to add, edit, and delete products without accessing the admin panel.

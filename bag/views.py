@@ -24,6 +24,7 @@ def add_to_bag(request, product_id):
     request.session['bag'] = bag
     return redirect(redirect_url)
 
+@require_POST
 def remove_from_bag(request, item_id):
     """ Remove a specified item from the shopping bag """
     
@@ -31,8 +32,8 @@ def remove_from_bag(request, item_id):
     bag = request.session.get('bag', {})
     
     # Remove the item if it exists
-    if item_id in bag:
-        del bag[item_id]
+    if str(item_id) in bag:
+        del bag[str(item_id)]
     
     # Save the updated bag back to the session
     request.session['bag'] = bag

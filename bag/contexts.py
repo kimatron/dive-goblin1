@@ -1,4 +1,4 @@
-from decimal import Decimal
+from decimal import Decimal, ROUND_HALF_UP
 from django.conf import settings
 from django.shortcuts import get_object_or_404
 from products.models import Product
@@ -30,6 +30,11 @@ def bag_contents(request):
     
     grand_total = delivery + total
     
+    # Round values to 2 decimal places
+    total = total.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+    delivery = delivery.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+    grand_total = grand_total.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+
     context = {
         'bag_items': bag_items,
         'total': total,

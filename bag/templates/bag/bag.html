@@ -16,7 +16,7 @@
                 <form action="{% url 'update_bag' %}" method="post">
                     {% csrf_token %}
                     <input type="hidden" name="item_id" value="{{ item.item_id }}">
-                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
+                    <input type="number" name="quantity_{{ item.item_id }}" value="{{ item.quantity }}" min="1">
                     <button type="submit" class="custom-button">Update</button>
                 </form>
             </div>

@@ -47,16 +47,27 @@ def checkout(request):
 
 @require_POST
 def update_bag(request):
-    # Logic to update quantities in the shopping bag
-    # Example:
+    # Get the current bag from the session
     bag = request.session.get('bag', {})
+    
+    print("Request POST data:", request.POST)  # Debugging line
+    
+    # Iterate over the POST data
     for item_id, quantity in request.POST.items():
         if item_id.startswith('quantity_'):
             item_id = item_id.split('_')[1]
-            quantity = int(quantity)
-            if quantity > 0:
-                bag[item_id] = quantity
-            else:
-                bag.pop(item_id, None)
+            try:
+                quantity = int(quantity)
+                if quantity > 0:
+                    bag[item_id] = quantity
+                else:
+                    bag.pop(item_id, None)
+            except ValueError:
+                continue  # If quantity is not a valid integer, skip it
+    
+    # Update the session with the modified bag
     request.session['bag'] = bag
-    return redirect('bag')  # Redirect to the shopping bag page
+    
+    print("Updated bag:", bag)  # Debugging line
+    
+    return redirect('view_bag')  # Redirect to the shopping bag page

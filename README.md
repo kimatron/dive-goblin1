@@ -26,6 +26,72 @@ Access to the site here: [Dive Goblin](https://8000-kimatron-divegoblin1-r3dva5y
 - Custom 404 error page
 - SEO optimized with robots.txt, sitemap.xml, and meta tags
 
+# Front end Features to be implemented
+
+## Home Page
+- **Welcome Message**: A brief introduction to the website and its purpose.
+- **Featured Products**: Display of top products or new arrivals to attract customer attention.
+- **Navigation**: Easy access to different sections such as Shop, About, and Contact.
+
+## Product Listings
+- **Categories**: Products are organized into categories for easy browsing.
+- **Product Cards**: Each product is displayed in a card with an image, name, price, and a short description.
+- **Pagination**: Users can navigate through multiple pages of products.
+
+## Product Detail Page
+- **Product Images**: High-quality images of the product.
+- **Product Information**: Detailed description, price, available sizes, and colors.
+- **Add to Bag**: Option to select quantity and add the product to the shopping bag.
+- **Related Products**: Suggestions for similar or complementary products.
+
+## Shopping Bag
+- **View Bag**: Overview of items added to the shopping bag with their details (name, quantity, price).
+- **Update Quantities**: Ability to update the quantity of each item directly in the shopping bag.
+- **Remove Items**: Option to remove items from the bag. ![Remove Update](media/updateremove.gif)
+- **Order Summary**: Subtotal, delivery charges, and total amount calculated and displayed.
+- **Checkout Button**: Easy navigation to the checkout page.
+
+## Checkout
+- **Order Summary**: Recap of items in the bag with the total amount.
+- **Delivery Details**: Form to enter shipping address and contact information.
+- **Payment**: Secure payment gateway integration for processing payments.
+- **Order Confirmation**: Confirmation message and order summary displayed after successful payment.
+
+## User Accounts
+- **Registration**: Users can create a new account by providing their details.
+- **Login**: Existing users can log in using their email and password.
+- **Profile Management**: Users can view and edit their profile information, including saved addresses and order history.
+
+## Responsive Design
+- **Mobile Friendly**: The website is fully responsive, providing a seamless experience on both desktop and mobile devices.
+- **Navigation**: Mobile navigation menu for easy access to different sections.
+
+## Search Functionality
+- **Search Bar**: Users can search for products using keywords.
+- **Search Results**: Display of products that match the search criteria with sorting options.
+
+## Notifications
+- **Success Messages**: Confirmation messages for actions such as adding items to the bag, updating quantities, and placing orders.
+- **Error Messages**: User-friendly error messages for issues like invalid login credentials or out-of-stock items.
+
+## Contact Form
+- **Get in Touch**: Form for users to send messages or inquiries.
+- **Validation**: Input validation to ensure the form is filled out correctly before submission.
+
+## Footer
+- **Quick Links**: Links to important pages such as Terms of Service, Privacy Policy, and FAQs.
+- **Social Media**: Icons linking to the brand's social media profiles.
+- **Contact Information**: Email and phone number for customer support.
+
+## Enhancements
+- **Animations**: Smooth transitions and hover effects to enhance user experience.
+- **Accessibility**: Features to improve accessibility for users with disabilities, such as alt text for images and keyboard navigation.
+
+---
+
+Feel free to customize this section further and add images and GIFs to illustrate each feature more effectively.
+
+
 ## User Stories
 
 ### [Basic Home Landing Page Design](https://github.com/kimatron/dive-goblin1/issues/13)

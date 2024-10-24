@@ -1,73 +1,99 @@
+<!-- bag.html -->
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
-    <h1 class="my-4">Shopping Bag</h1>
+<div class="brutal-cart-container">
+    <h1 class="brutal-cart-title">Shopping Cart</h1>
 
-    <div class="card mb-4">
-        <div class="card-body">
-            {% if bag_items %}
-                <div class="responsive-table">
-                    {% for item in bag_items %}
-                    <div class="table-row">
-                        <div class="table-cell product-info">
-                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="product-image">
-                            <div>{{ item.product.name }}</div>
-                        </div>
-                        <div class="table-cell">
-                            <form action="{% url 'update_bag' %}" method="post">
-                                {% csrf_token %}
-                                <input type="hidden" name="item_id" value="{{ item.item_id }}">
-                                <input type="number" name="quantity_{{ item.item_id }}" value="{{ item.quantity }}" min="1">
-                                <button type="submit" class="custom-button">Update</button>
-                            </form>
-                        </div>
-                        <div class="table-cell">${{ item.product.price }}</div>
-                        <div class="table-cell">
-                            <form action="{% url 'remove_from_bag' item.item_id %}" method="post">
-                                {% csrf_token %}
-                                <button type="submit" class="custom-button">Remove</button>
-                            </form>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
+    {% if bag_items %}
+    <div class="brutal-cart">
+        <!-- Cart Header -->
+        <div class="cart-header">
+            <div class="cart-header-item">Product</div>
+            <div class="cart-header-item">Quantity</div>
+            <div class="cart-header-item">Price</div>
+            <div class="cart-header-item">Action</div>
+        </div>
 
-                <div class="total-section">
-                    <div class="total-item">
-                        <div>Subtotal</div>
-                        <div>${{ total }}</div>
-                    </div>
-                    <div class="total-item">
-                        <div>Delivery</div>
-                        <div>${{ delivery }}</div>
-                    </div>
-                    <div class="total-item">
-                        <div>Total</div>
-                        <div>${{ grand_total }}</div>
-                    </div>
-                    <form action="{% url 'checkout' %}" method="get">
-                        <button type="submit" class="button">
-                            <svg viewBox="0 0 16 16" class="bi bi-cart-check" height="24" width="24" xmlns="http://www.w3.org/2000/svg" fill="#fff">
-                                <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"></path>
-                                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path>
-                            </svg>
-                            <p class="text">Buy Now</p>
-                        </button>
-                    </form>
+        <!-- Cart Items -->
+        {% for item in bag_items %}
+        <div class="cart-item">
+            <div class="cart-product">
+                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="cart-product-image">
+                <div class="cart-product-details">
+                    <h3>{{ item.product.name }}</h3>
+                    <p class="cart-product-sku">SKU: {{ item.product.sku }}</p>
                 </div>
+            </div>
+            
+            <div class="cart-quantity">
+                <form action="{% url 'update_bag' %}" method="post" class="cart-quantity-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="item_id" value="{{ item.item_id }}">
+                    <input type="number" name="quantity_{{ item.item_id }}" 
+                           value="{{ item.quantity }}" min="1" 
+                           class="quantity-input">
+                    <button type="submit" class="brutal-btn brutal-btn-update">Update</button>
+                </form>
+            </div>
 
-            {% else %}
-                <!-- Empty cart design -->
-                <div class="empty-cart-card">
-                    <div class="card-body">
-                        <h3>Your bag is empty.</h3>
-                        <p>Add items to your bag to see them here.</p>
-                        <a href="{% url 'home' %}" class="btn btn-primary">Continue Shopping</a>
-                    </div>
+            <div class="cart-price">${{ item.product.price }}</div>
+
+            <div class="cart-actions">
+                <form action="{% url 'remove_from_bag' item.item_id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="brutal-btn brutal-btn-remove">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- Cart Summary -->
+        <div class="cart-summary">
+            <div class="cart-totals">
+                <div class="cart-total-row">
+                    <span>Subtotal</span>
+                    <span>${{ total }}</span>
                 </div>
-            {% endif %}
+                <div class="cart-total-row">
+                    <span>Delivery</span>
+                    <span>${{ delivery }}</span>
+                </div>
+                <div class="cart-total-row grand-total">
+                    <span>Total</span>
+                    <span>${{ grand_total }}</span>
+                </div>
+                {% if free_delivery_delta > 0 %}
+                <div class="delivery-alert">
+                    Spend ${{ free_delivery_delta }} more for free delivery!
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="cart-actions-bottom">
+                <a href="{% url 'products' %}" class="brutal-btn brutal-btn-continue">
+                    Continue Shopping
+                </a>
+                <a href="{% url 'checkout' %}" class="brutal-btn brutal-btn-checkout">
+                    Secure Checkout
+                </a>
+            </div>
         </div>
     </div>
+
+    {% else %}
+    <div class="empty-cart">
+        <div class="empty-cart-content">
+            <i class="fas fa-shopping-cart empty-cart-icon"></i>
+            <h2>Your cart is empty</h2>
+            <p>Add some awesome products to your cart!</p>
+            <a href="{% url 'products' %}" class="brutal-btn brutal-btn-continue">
+                Start Shopping
+            </a>
+        </div>
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

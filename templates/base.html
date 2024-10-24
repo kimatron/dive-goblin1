@@ -34,6 +34,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
   </script>
+
   {% endblock %}
 
   {% block extra_js %}
@@ -43,90 +44,139 @@
 </head>
 
 <body>
-  <header class="container-fluid fixed-top">
-    <div id="topnav" class="row bg-white pt-lg-2">
-        <!-- Logo Section -->
-        <a href="{% url 'home' %}" class="nav-link main-logo-link">
-          <button class="logo1" data-text="Dive Goblin">
-              <span class="actual-text">&nbsp;Dive Goblin&nbsp;</span>
-              <span aria-hidden="true" class="front-text">&nbsp;Dive Goblin&nbsp;</span>
-          </button>
-      </a>
+<!-- base.html header section -->
+<header class="brutal-header">
+  <!-- Logo and Main Nav -->
+  <div class="main-nav">
+      <div class="container">
+          <div class="nav-grid">
+              <!-- Brutal Logo -->
+              <div class="brutal-logo">
+                  <a href="{% url 'home' %}">
+                      <div class="logo-box">
+                          <div class="logo-text">DIVE</div>
+                          <div class="logo-text-alt">GOBLIN</div>
+                          <div class="logo-decoration">est.2024</div>
+                      </div>
+                  </a>
+              </div>
 
-        <!-- Search Bar Section -->
-        <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
-            <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'search_results' %}">
-                <div class="input-group w-100">
-                    <input class="form-control border border-black rounded-0" type="text" name="q" placeholder="Search our site" aria-label="Search query">
-                    <div class="input-group-append">
-                        <button class="btn btn-black border border-black rounded-0" type="submit" aria-label="Submit search">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
+              <!-- Search Bar -->
+              <div class="search-bar">
+                  <form method="GET" action="{% url 'products' %}">
+                      <div class="search-box">
+                          <input type="text" name="q" placeholder="SEARCH THE VOID..." class="search-input">
+                          <button type="submit" class="search-btn">
+                              <i class="fas fa-search"></i>
+                          </button>
+                      </div>
+                  </form>
+              </div>
 
-        <!-- Account and Cart Section -->
-        <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
-            <ul class="list-inline list-unstyled text-center text-lg-right my-0">
-                <!-- Account Dropdown -->
-                <li class="list-inline-item dropdown">
-                    <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="User options">
-                        <div class="text-center">
-                            <div><i class="fas fa-user fa-lg"></i></div>
-                            <p class="my-0">My Account</p>
-                        </div>
-                    </a>
-                    <div class="dropdown-menu border-0" aria-labelledby="user-options">
-                        {% if request.user.is_authenticated %}
-                            {% if request.user.is_superuser %}
-                                <a href="{% url 'product_management' %}" class="dropdown-item">Product Management</a>
-                            {% endif %}
-                            <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
-                            <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
-                        {% else %}
-                            <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
-                            <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
-                        {% endif %}
-                    </div>
-                </li>
-                <!-- Cart Icon -->
-                <li class="list-inline-item">
-                  <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'view_bag' %}">
-                        <div class="text-center">
-                            <div><i class="fas fa-shopping-bag fa-lg"></i></div>
-                            <p class="my-0">
-                                {% if grand_total %}
-                                    ${{ grand_total|floatformat:2 }}
-                                {% else %}
-                                    $0.00
-                                {% endif %}
-                            </p>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
+              <!-- Nav Icons -->
+              <div class="nav-actions">
+                  <div class="nav-icon-group">
+                      <!-- Account -->
+                      <div class="nav-icon dropdown">
+                          <button class="icon-btn" type="button" id="accountDropdown" data-toggle="dropdown">
+                              <i class="fas fa-user"></i>
+                              <span>Account</span>
+                          </button>
+                          <div class="dropdown-menu">
+                              {% if request.user.is_authenticated %}
+                                  {% if request.user.is_superuser %}
+                                      <a href="{% url 'product_management' %}">Product Management</a>
+                                  {% endif %}
+                                  <a href="{% url 'profile' %}">My Profile</a>
+                                  <a href="{% url 'account_logout' %}">Logout</a>
+                              {% else %}
+                                  <a href="{% url 'account_signup' %}">Register</a>
+                                  <a href="{% url 'account_login' %}">Login</a>
+                              {% endif %}
+                          </div>
+                      </div>
 
-    <!-- Mobile Navbar -->
-    <div class="row bg-white">
-        <nav class="navbar navbar-expand-lg navbar-light w-100">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <!-- {% include 'includes/mobile-nav-header.html' %} -->
-            {% include 'includes/main-nav.html' %}
-        </nav>
-    </div>
+                      <!-- Wishlist -->
+                      <a href="{% url 'wishlist' %}" class="nav-icon">
+                          <button class="icon-btn">
+                              <i class="fas fa-heart"></i>
+                              <span>Wishlist</span>
+                          </button>
+                      </a>
 
-    <!-- Delivery Banner -->
-    <div id="delivery-banner" class="row text-center">
-        <div class="col bg-black text-white">
-            <h4 class="logo-font my-1">Free delivery on orders over ${{ free_delivery_threshold }}!</h4>
-        </div>
-    </div>
+                      <!-- Cart -->
+                      <a href="{% url 'view_bag' %}" class="nav-icon">
+                          <button class="icon-btn">
+                              <i class="fas fa-shopping-bag"></i>
+                              <span class="bag-total">
+                                  {% if grand_total %}
+                                      ${{ grand_total|floatformat:2 }}
+                                  {% else %}
+                                      $0.00
+                                  {% endif %}
+                              </span>
+                          </button>
+                      </a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+<!-- Category Mega Menu -->
+<div class="category-nav">
+  <div class="container">
+      <nav class="mega-menu">
+          <button class="menu-toggle">Shop Categories</button>
+          <div class="menu-content">
+              <div class="menu-grid">
+                  <!-- Diving Gear -->
+                  <div class="menu-column">
+                      <h3>Diving Gear</h3>
+                      <ul>
+                          <li><a href="{% url 'products' %}?category=scuba">Scuba Gear</a></li>
+                          <li><a href="{% url 'products' %}?category=snorkeling">Snorkeling</a></li>
+                          <li><a href="{% url 'products' %}?category=wetsuits">Wetsuits</a></li>
+                      </ul>
+                  </div>
+                  <!-- Apparel & Accessories -->
+                  <div class="menu-column">
+                      <h3>Apparel & Extras</h3>
+                      <ul>
+                          <li><a href="{% url 'products' %}?category=shirts_apparel">Shirts & Apparel</a></li>
+                          <li><a href="{% url 'products' %}?category=accessories">Accessories</a></li>
+                          <li><a href="{% url 'products' %}?category=travel_gear">Travel Gear</a></li>
+                      </ul>
+                  </div>
+                  <!-- Travel & Packages -->
+                  <div class="menu-column">
+                      <h3>Travel & Tours</h3>
+                      <ul>
+                          <li><a href="{% url 'products' %}?category=destinations">Destinations</a></li>
+                          <li><a href="{% url 'products' %}?category=packages">Dive Packages</a></li>
+                      </ul>
+                  </div>
+                  <!-- Special Offers -->
+                  <div class="menu-column">
+                      <h3>Special Offers</h3>
+                      <ul>
+                          <li><a href="{% url 'products' %}?category=new_arrivals">New Arrivals</a></li>
+                          <li><a href="{% url 'products' %}?category=deals">Deals</a></li>
+                          <li><a href="{% url 'products' %}?category=clearance">Clearance</a></li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </nav>
+  </div>
+</div>
+
+  <!-- Delivery Banner -->
+  <!-- <div class="delivery-banner">
+      <div class="banner-content">
+          <span class="banner-text">Free delivery on orders over ${{ free_delivery_threshold }}!</span>
+          <div class="banner-decoration"></div>
+      </div>
+  </div> -->
 </header>
 
 {% if messages %}
@@ -235,7 +285,9 @@
           $(this).remove();
       });
   </script>
+  <script src="{% static 'js/main.js' %}"></script>
   {% endblock %}
+  
 </body>
 
 

@@ -214,13 +214,29 @@
   
 
   {% block postloadjs %}
+  <script type="text/javascript">
+      // Initialize all toasts
+      $('.toast').toast({
+          autohide: true,
+          delay: 5000,
+          animation: true
+      });
+      
+      // Show all toasts
+      $('.toast').toast('show');
+      
+      // Add click handler for close button
+      $('.btn-close').on('click', function() {
+          $(this).closest('.toast').toast('hide');
+      });
+      
+      // Remove toast from DOM after it's hidden
+      $('.toast').on('hidden.bs.toast', function () {
+          $(this).remove();
+      });
+  </script>
   {% endblock %}
 </body>
 
-{% block postloadjs %}
-<script type="text/javascript">
-    $('.toast').toast('show');
-</script>
-{% endblock %}
 
 </html>

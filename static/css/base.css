@@ -698,57 +698,88 @@ cing */
 }
 
 /* Toast Styles */
-
 .message-container {
     position: fixed;
-    top: 72px;
-    right: 15px;
-    z-index: 99999999999;
+    top: 90px;
+    right: 20px;
+    z-index: 99999;
+    max-width: 300px;
 }
 
 .custom-toast {
-    overflow: visible;
+    background: white;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    margin-bottom: 1rem;
+    opacity: 1 !important;
 }
 
-.toast-capper {
-    height: 2px;
+.toast-header {
+    background: white;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 0.75rem 1rem;
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
-/* from CSS-tricks.com: https://css-tricks.com/snippets/css/css-triangle/ */
-.arrow-up {
-    width: 0; 
-    height: 0; 
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent; 
-    border-bottom: 10px solid black;
-    position: absolute;
-    top: -10px;
-    right: 36px;
+.success-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Convenience classes - colors copied from Bootstrap */
-.arrow-primary {
-    border-bottom-color: #007bff !important;
+.success-icon i {
+    font-size: 12px;
 }
 
-.arrow-secondary {
-    border-bottom-color: #6c757d !important;
+.toast-body {
+    padding: 1rem;
+    background: white;
 }
 
-.arrow-success {
-    border-bottom-color: #28a745 !important;
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+    padding: 0;
+    margin-left: auto;
 }
 
-.arrow-danger {
-    border-bottom-color: #dc3545 !important;
+.btn-close:hover {
+    opacity: 1;
 }
 
-.arrow-warning {
-    border-bottom-color: #ffc107 !important;
+.mini-bag-preview {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 10px;
 }
 
-.arrow-info {
-    border-bottom-color: #17a2b8 !important;
+.bag-total {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Toast Animation */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.custom-toast {
+    animation: slideIn 0.3s ease-out;
 }
 
 /* Bag notification wrapper */

@@ -4,6 +4,7 @@ from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from .models import Product, Category, Wishlist
 
+
 # Create your views here.
 
 def all_products(request):
@@ -72,6 +73,7 @@ def add_to_wishlist(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     wishlist, created = Wishlist.objects.get_or_create(user=request.user)
     wishlist.products.add(product)
+    messages.success(request, f'{product.name} has been added to your wishlist!')
     return redirect('wishlist')
 
 @login_required
@@ -79,6 +81,7 @@ def remove_from_wishlist(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     wishlist = get_object_or_404(Wishlist, user=request.user)
     wishlist.products.remove(product)
+    messages.success(request, f'{product.name} has been removed from your wishlist!')
     return redirect('wishlist')
 
 @login_required

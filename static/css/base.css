@@ -1768,3 +1768,119 @@ body.overlay-active .overlay {
     transform: translate(-2px, -2px);
     box-shadow: 5px 5px 0 var(--dark);
 }
+
+/* Product Detail Styles */
+.brutal-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.brutal-product-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* Product Images */
+.brutal-image-box {
+    border: 3px solid var(--dark);
+    box-shadow: 8px 8px 0 var(--dark);
+    background: white;
+    padding: 1rem;
+}
+
+.brutal-product__main-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Product Info */
+.brutal-product__info {
+    background: white;
+    border: 3px solid var(--dark);
+    box-shadow: 8px 8px 0 var(--dark);
+    padding: 2rem;
+}
+
+.brutal-product__title {
+    font-size: 2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.brutal-product__price-box {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.brutal-product__price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.brutal-product__description {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid #eee;
+}
+
+/* Quantity Controls */
+.brutal-quantity-box {
+    margin-bottom: 2rem;
+}
+
+.brutal-quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    max-width: 200px;
+}
+
+.brutal-qty-btn {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--dark);
+    background: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.brutal-qty-btn:hover {
+    background: var(--dark);
+    color: white;
+}
+
+.brutal-qty-input {
+    width: 60px;
+    height: 40px;
+    border: 2px solid var(--dark);
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Action Buttons */
+.brutal-product__actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.brutal-btn--large {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .brutal-product-detail {
+        grid-template-columns: 1fr;
+    }
+}

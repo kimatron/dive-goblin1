@@ -5,6 +5,15 @@
     box-sizing: border-box;
 }
 
+:root {
+    --brutal-black: #000000;
+    --brutal-white: #ffffff;
+    --brutal-accent: #00AC7C;
+    --brutal-hover: #5ad641;
+    --brutal-shadow: 6px 6px 0 var(--brutal-black);
+    --brutal-border: 3px solid var(--brutal-black);
+}
+
 /* Fonts */
 body {
     font-family: 'Mulish', sans-serif;
@@ -13,23 +22,9 @@ body {
 h1, h2, h3 {
     font-family: 'Noto Sans Manichaean', sans-serif;
 }
+/*
+Custom color scheme
 
-/* Custom color scheme */
-/* :root {
-    --primary-100: #00bfff;
-    --primary-200: #0033cc;
-    --primary-300: #66d9ff;
-    --accent-100: #ffd700;
-    --accent-200: #ffd700;
-    --accent-300: #ffd700;
-    --background-100: #f9fdfe;
-    --background-200: #e3f6fa;
-    --background-300: #cdeef7;
-    --text-100: #002734;
-    --text-200: #004d67;
-    --text-300: #00749a;
-    --black: #000;
-} */
 
 /* Global styles */
 html, body {
@@ -110,15 +105,7 @@ body {
   }
   
 
-/* Add to base.css */
-:root {
-    --brutal-black: #000000;
-    --brutal-white: #ffffff;
-    --brutal-accent: #00AC7C;
-    --brutal-hover: #5ad641;
-    --brutal-shadow: 6px 6px 0 var(--brutal-black);
-    --brutal-border: 3px solid var(--brutal-black);
-}
+
 
 /* Header and Navigation Styles */
 .brutal-header {
@@ -259,10 +246,49 @@ body {
     font-weight: 600;
 }
 
-/* Mega Menu */
+/* Mega Menu and Mobile Navigation Styles */
+:root {
+    --menu-bg: #ffffff;
+    --menu-border: #000000;
+    --menu-highlight: #FF6B6B;
+    --menu-text: #000000;
+}
+
+/* New delivery notice styles */
+.delivery-notice {
+    width: 100%;
+    background: var(--menu-highlight);
+    padding: 0.5rem;
+    text-align: center;
+    border-bottom: var(--brutal-border);
+}
+
+.notice-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+.notice-content i {
+    font-size: 1rem;
+}
+
+/* Reverse direction of second truck icon */
+.notice-content i:last-child {
+    transform: scaleX(-1);
+}
+
+/* Enhanced Mega Menu */
 .category-nav {
-    background: var(--dark);
-    padding: 0.5rem 0;
+    border-bottom: 3px solid var(--menu-border);
+    background: var(--menu-bg);
+    position: relative;
 }
 
 .mega-menu {
@@ -270,42 +296,80 @@ body {
 }
 
 .menu-toggle {
-    background: white;
-    border: 2px solid var(--dark);
-    padding: 0.5rem 1rem;
-    font-weight: 600;
+    background: none;
+    border: 3px solid var(--menu-border);
+    padding: 1rem 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.menu-toggle:hover {
+    background: var(--menu-border);
+    color: var(--menu-bg);
+}
+
+.menu-toggle::after {
+    content: '▼';
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+}
+
+.menu-toggle.active::after {
+    transform: rotate(180deg);
 }
 
 .menu-content {
-    display: none;
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
-    background: white;
-    border: 3px solid var(--dark);
-    box-shadow: 5px 5px 0 var(--dark);
-    padding: 2rem;
+    background: var(--menu-bg);
+    border: 3px solid var(--menu-border);
+    border-top: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.menu-content.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 .menu-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.menu-column {
+    position: relative;
 }
 
 .menu-column h3 {
     font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
+    font-weight: 800;
     text-transform: uppercase;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--menu-border);
 }
 
 .menu-column ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .menu-column ul li {
@@ -313,74 +377,94 @@ body {
 }
 
 .menu-column ul li a {
-    color: var(--dark);
+    color: var(--menu-text);
     text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.menu-column ul li a:hover {
-    color: var(--primary);
-}
-
-/* Delivery Banner */
-.delivery-banner {
-    background: var(--primary);
-    color: white;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: block;
     padding: 0.5rem;
-    text-align: center;
-    font-weight: 700;
     position: relative;
     overflow: hidden;
 }
 
-.banner-content {
-    position: relative;
-    z-index: 1;
-}
-
-.banner-decoration {
+.menu-column ul li a::before {
+    content: '';
     position: absolute;
-    top: 0;
     left: -100%;
+    top: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    animation: shine 3s infinite;
+    background: var(--menu-highlight);
+    opacity: 0.1;
+    transition: left 0.3s ease;
 }
 
-@keyframes shine {
-    to {
-        left: 100%;
-    }
+.menu-column ul li a:hover::before {
+    left: 0;
 }
 
-/* Responsive Styles */
+.menu-column ul li a:hover {
+    color: var(--menu-highlight);
+    transform: translateX(5px);
+}
+
+/* Mobile Navigation */
 @media (max-width: 991px) {
-    .nav-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-
-    .brutal-logo,
-    .search-bar,
-    .nav-actions {
-        width: 100%;
-    }
-
-    .nav-icon-group {
-        justify-content: center;
-    }
-
-    .menu-content {
-        position: static;
-    }
-
     .menu-grid {
         grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+
+    .menu-toggle {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .menu-column {
+        padding: 1rem;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .menu-column:last-child {
+        border-bottom: none;
+    }
+
+    .menu-column h3 {
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .menu-column h3::after {
+        content: '+';
+        font-size: 1.2em;
+    }
+
+    .menu-column.active h3::after {
+        content: '-';
+    }
+
+    .menu-column ul {
+        display: none;
+    }
+
+    .menu-column.active ul {
+        display: block;
+        animation: slideDown 0.3s ease forwards;
     }
 }
-/* Add to your base.css */
 
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 /* Button Styles */
 .brutal-button {
     display: inline-flex;
@@ -699,7 +783,7 @@ body {
 }
 
 /* Product Info */
-.product-info {
+/* .product-info {
     display: flex;
     align-items: center;
 }
@@ -715,7 +799,7 @@ body {
 
 .product-image:hover {
     transform: scale(1.1);
-}
+} */
 
 /* Buttons and Text */
 .custom-button {
@@ -1382,3 +1466,257 @@ body.overlay-active .overlay {
     display: block;
 }
 
+/* Brutalist styling */
+
+/* Brutalist Product Card */
+.product-card {
+    position: relative;
+    border: 3px solid var(--dark);
+    background: white;
+    padding: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 8px 8px 0 var(--dark);
+}
+
+.product-card:hover {
+    transform: translate(-5px, -5px);
+    box-shadow: 12px 12px 0 var(--dark);
+}
+
+/* Glitch Effect on Hover */
+.product-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 107, 107, 0.1);
+    clip-path: inset(0 100% 0 0);
+    transition: all 0.3s ease;
+}
+
+.product-card:hover::before {
+    clip-path: inset(0 0 0 0);
+    animation: glitch 0.3s steps(2) infinite;
+}
+
+@keyframes glitch {
+    0% { transform: translate(0) }
+    20% { transform: translate(-2px, 2px) }
+    40% { transform: translate(-2px, -2px) }
+    60% { transform: translate(2px, 2px) }
+    80% { transform: translate(2px, -2px) }
+    100% { transform: translate(0) }
+}
+
+/* Product Image Container */
+.product-image-container {
+    position: relative;
+    overflow: hidden;
+    border: 2px solid var(--dark);
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.05);
+}
+
+/* Price Tag */
+.price-tag {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: var(--primary);
+    color: white;
+    padding: 0.5rem 1rem;
+    transform: rotate(5deg);
+    border: 2px solid var(--dark);
+    box-shadow: 3px 3px 0 var(--dark);
+    z-index: 1;
+}
+
+/* Product Details */
+.product-details {
+    margin-top: 1rem;
+}
+
+.product-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+/* Action Buttons */
+.product-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.brutal-btn {
+    flex: 1;
+    padding: 0.8rem;
+    border: 2px solid var(--dark);
+    background: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 3px 3px 0 var(--dark);
+}
+
+.brutal-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--dark);
+}
+
+.brutal-btn--primary {
+    background: var(--primary);
+    color: white;
+}
+
+/* Brutalist Product Grid */
+.brutal-title {
+    font-size: 3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+}
+
+.brutal-divider {
+    width: 100px;
+    height: 5px;
+    background: var(--dark);
+    margin: 0 auto 2rem;
+}
+
+/* Product Card */
+.brutal-card {
+    position: relative;
+    background: white;
+    border: 3px solid var(--dark);
+    margin-bottom: 2rem;
+    box-shadow: 8px 8px 0 var(--dark);
+    transition: all 0.3s ease;
+}
+
+.brutal-card:hover {
+    transform: translate(-5px, -5px);
+    box-shadow: 13px 13px 0 var(--dark);
+}
+
+/* Price Badge */
+.brutal-badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: var(--primary);
+    color: white;
+    padding: 0.5rem 1rem;
+    font-weight: 700;
+    border: 2px solid var(--dark);
+    box-shadow: 4px 4px 0 var(--dark);
+    z-index: 1;
+    transform: rotate(3deg);
+}
+
+/* Image Container */
+.brutal-card__image {
+    position: relative;
+    overflow: hidden;
+    border-bottom: 3px solid var(--dark);
+}
+
+.brutal-card__image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.brutal-card:hover .brutal-card__image img {
+    transform: scale(1.1);
+}
+
+/* Content */
+.brutal-card__content {
+    padding: 1rem;
+}
+
+.brutal-card__title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+/* Rating */
+.brutal-card__rating {
+    margin-bottom: 1rem;
+}
+
+.rating-stars {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.rating-stars i {
+    color: var(--primary);
+}
+
+.no-rating {
+    color: #666;
+    font-style: italic;
+}
+
+/* Actions */
+.brutal-card__actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.brutal-btn {
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--dark);
+    background: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.brutal-btn--cart {
+    flex: 1;
+    background: var(--primary);
+    color: white;
+    box-shadow: 3px 3px 0 var(--dark);
+}
+
+.brutal-btn--cart:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--dark);
+}
+
+.brutal-btn--wishlist {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 3px 3px 0 var(--dark);
+}
+
+.brutal-btn--wishlist:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--dark);
+}

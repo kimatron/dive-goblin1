@@ -43,3 +43,47 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// Add to static/js/main.js
+document.addEventListener('DOMContentLoaded', function() {
+    // Mega Menu Toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const menuContent = document.querySelector('.menu-content');
+
+    menuToggle.addEventListener('click', function() {
+        menuToggle.classList.toggle('active');
+        menuContent.classList.toggle('active');
+    });
+
+    // Mobile Menu Accordion
+    if (window.innerWidth <= 991) {
+        const menuColumns = document.querySelectorAll('.menu-column');
+        
+        menuColumns.forEach(column => {
+            const heading = column.querySelector('h3');
+            heading.addEventListener('click', () => {
+                // Close other columns
+                menuColumns.forEach(otherColumn => {
+                    if (otherColumn !== column) {
+                        otherColumn.classList.remove('active');
+                    }
+                });
+                // Toggle current column
+                column.classList.toggle('active');
+            });
+        });
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.mega-menu')) {
+            menuToggle.classList.remove('active');
+            menuContent.classList.remove('active');
+        }
+    });
+
+    // Stop propagation for menu content clicks
+    menuContent.addEventListener('click', function(event) {
+        event.stopPropagation();
+    });
+});

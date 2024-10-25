@@ -161,20 +161,37 @@ h1, h2, h3 {
 }
 
 /* 5. Mega Menu */
-.category-nav {
+/* .category-nav {
     border-bottom: var(--brutal-border);
     background: var(--brutal-white);
     position: relative;
+} */
+
+/* Mega Menu Fixed Styles */
+.mega-menu {
+    position: relative;
+    width: 100%;
+    max-width: var(--container-max);
+    margin: 0 auto;
 }
 
 .menu-toggle {
-    background: none;
+    background: var(--brutal-white);
     border: var(--brutal-border);
     padding: 1rem 2rem;
     font-weight: 700;
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 200px;
+}
+
+.menu-toggle:hover {
+    background: var(--brutal-black);
+    color: var(--brutal-white);
 }
 
 .menu-content {
@@ -184,6 +201,7 @@ h1, h2, h3 {
     width: 100%;
     background: var(--brutal-white);
     border: var(--brutal-border);
+    border-top: none;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
@@ -195,6 +213,81 @@ h1, h2, h3 {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.menu-column h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--brutal-black);
+}
+
+.menu-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-column ul li {
+    margin-bottom: 0.5rem;
+}
+
+.menu-column ul li a {
+    color: var(--brutal-black);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: block;
+    padding: 0.5rem;
+    position: relative;
+}
+
+.menu-column ul li a:hover {
+    color: var(--brutal-accent);
+    transform: translateX(5px);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 991px) {
+    .brutal-product-detail {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .brutal-product__actions {
+        grid-template-columns: 1fr;
+    }
+
+    .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .brutal-product__title {
+        font-size: 2rem;
+    }
+
+    .brutal-product__price {
+        font-size: 1.5rem;
+    }
+
+    .brutal-quantity-controls {
+        max-width: 100%;
+    }
 }
 
 /* 6. Buttons */
@@ -365,6 +458,20 @@ h1, h2, h3 {
     text-align: center;
     font-size: 1.2rem;
     font-weight: 600;
+}
+
+/* Product Action Buttons */
+.brutal-product__actions {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.brutal-btn--large {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    height: auto;
 }
 
 /* 9. Cart & Wishlist */

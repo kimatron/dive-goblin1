@@ -298,13 +298,22 @@ h1, h2, h3 {
     border: var(--brutal-border);
     box-shadow: var(--brutal-shadow);
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .brutal-product__title {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 900;
     text-transform: uppercase;
-    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.brutal-product__price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--brutal-accent);
 }
 
 .brutal-product__price-box {
@@ -314,10 +323,16 @@ h1, h2, h3 {
     margin-bottom: 1.5rem;
 }
 
-.brutal-product__price {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--brutal-accent);
+.brutal-product__description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 1.5rem 0;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #eee;
+}
+
+.brutal-quantity-box {
+    margin: 1.5rem 0;
 }
 
 .brutal-quantity-controls {
@@ -325,24 +340,30 @@ h1, h2, h3 {
     align-items: center;
     gap: 0.5rem;
     max-width: 200px;
-    margin-bottom: 2rem;
 }
 
 .brutal-qty-btn {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     border: 2px solid var(--brutal-black);
     background: var(--brutal-white);
     font-size: 1.2rem;
+    font-weight: bold;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
+.brutal-qty-btn:hover {
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+}
+
 .brutal-qty-input {
-    width: 60px;
-    height: 40px;
+    width: 70px;
+    height: 45px;
     border: 2px solid var(--brutal-black);
     text-align: center;
+    font-size: 1.2rem;
     font-weight: 600;
 }
 

@@ -254,29 +254,77 @@ body {
     --menu-text: #000000;
 }
 
-/* New delivery notice styles */
-.delivery-notice {
-    width: 100%;
-    background: var(--menu-highlight);
-    padding: 0.5rem;
-    text-align: center;
-    border-bottom: var(--brutal-border);
+/* Updated Header and Banner Styles */
+:root {
+    --header-height: 160px; /* Adjust based on your header size */
+    --banner-height: 40px;  /* Adjust based on your banner size */
 }
 
-.notice-content {
+body {
+    padding-top: calc(var(--header-height) + var(--banner-height));
+}
+
+.brutal-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* Announcement Banner */
+.brutal-announcement {
+    background: var(--dark);
+    color: white;
+    padding: 0.5rem 0;
+    position: relative;
+    z-index: 1001;
+}
+
+.announcement-content {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
-    color: white;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.announcement-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
     font-size: 0.9rem;
 }
 
-.notice-content i {
-    font-size: 1rem;
+.announcement-tag i {
+    color: var(--primary);
+}
+
+/* Page Headers */
+.page-header {
+    margin: 2rem 0;
+    position: relative;
+}
+
+.brutal-page-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--dark);
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    background: white;
+    border: 3px solid var(--dark);
+    box-shadow: 5px 5px 0 var(--dark);
+}
+
+/* Main Content Spacing */
+.main-content {
+    padding-top: 2rem;
 }
 
 /* Reverse direction of second truck icon */

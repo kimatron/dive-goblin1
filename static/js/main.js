@@ -44,6 +44,35 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Add to your main.js or in a script tag in your template
+document.addEventListener('DOMContentLoaded', function() {
+    // Quantity buttons
+    const minusButtons = document.querySelectorAll('.brutal-qty-btn.minus');
+    const plusButtons = document.querySelectorAll('.brutal-qty-btn.plus');
+    
+    minusButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            const itemId = this.getAttribute('data-item_id');
+            const input = document.querySelector(`#id_qty_${itemId}`);
+            const currentValue = parseInt(input.value);
+            if (currentValue > 1) {
+                input.value = currentValue - 1;
+            }
+        });
+    });
+    
+    plusButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            const itemId = this.getAttribute('data-item_id');
+            const input = document.querySelector(`#id_qty_${itemId}`);
+            const currentValue = parseInt(input.value);
+            if (currentValue < 99) {
+                input.value = currentValue + 1;
+            }
+        });
+    });
+});
+
 // Add to static/js/main.js
 document.addEventListener('DOMContentLoaded', function() {
     // Mega Menu Toggle

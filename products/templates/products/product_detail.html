@@ -7,12 +7,16 @@
     <div class="brutal-product-detail">
         <!-- Product Images Section -->
         <div class="brutal-product__images">
-            <div class="brutal-image-box">
-                {% if product.image %}
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="brutal-product__main-image">
-                {% else %}
-                    <img src="{% static 'noimage.png' %}" alt="{{ product.name }}" class="brutal-product__main-image">
-                {% endif %}
+            <div class="brutal-image-box" onclick="document.getElementById('imageModal').classList.add('active')">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="brutal-product__main-image">
+                <div class="image-zoom-hint">Click to zoom</div>
+            </div>
+    
+        </div>
+        <div class="brutal-modal" id="imageModal">
+            <div class="brutal-modal__content">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="brutal-modal__image">
+                <button class="brutal-modal__close">&times;</button>
             </div>
         </div>
 

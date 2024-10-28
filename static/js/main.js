@@ -116,3 +116,20 @@ document.addEventListener('DOMContentLoaded', function() {
         event.stopPropagation();
     });
 });
+
+
+document.querySelector('.brutal-modal__close').addEventListener('click', function() {
+    document.getElementById('imageModal').classList.remove('active');
+});
+
+// Close modal when clicking outside the image
+document.getElementById('imageModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        this.classList.remove('active');
+    }
+});
+
+// Prevent closing when clicking the image itself
+document.querySelector('.brutal-modal__content').addEventListener('click', function(e) {
+    e.stopPropagation();
+});

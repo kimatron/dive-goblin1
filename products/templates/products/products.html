@@ -30,6 +30,12 @@
                                         {% endif %}
                                     </a>
                                 </div>
+                                <div class="brutal-modal" id="imageModal">
+                                    <div class="brutal-modal__content">
+                                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="brutal-modal__image">
+                                        <button class="brutal-modal__close">&times;</button>
+                                    </div>
+                                </div>
 
                                 <!-- Content -->
                                 <div class="brutal-card__content">

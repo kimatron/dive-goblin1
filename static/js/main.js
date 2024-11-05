@@ -1,135 +1,136 @@
-
 document.addEventListener('DOMContentLoaded', function() {
-    // Mega Menu Toggle
+    initializeMegaMenu();
+    initializeQuantityControls();
+    initializeModal();
+});
+
+function initializeMegaMenu() {
     const menuToggle = document.querySelector('.menu-toggle');
     const menuContent = document.querySelector('.menu-content');
 
-    menuToggle.addEventListener('click', function() {
-        menuContent.style.display = menuContent.style.display === 'block' ? 'none' : 'block';
-    });
+    if (!menuToggle || !menuContent) return;
 
-    // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
-        if (!event.target.closest('.mega-menu')) {
-            menuContent.style.display = 'none';
-        }
-    });
-
-    // Prevent menu from closing when clicking inside
-    menuContent.addEventListener('click', function(event) {
-        event.stopPropagation();
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Quantity controls
-    document.querySelectorAll('.quantity-control').forEach(control => {
-        const input = control.querySelector('.quantity-input');
-        const minusBtn = control.querySelector('.minus');
-        const plusBtn = control.querySelector('.plus');
-
-        minusBtn.addEventListener('click', () => {
-            const currentValue = parseInt(input.value);
-            if (currentValue > 1) {
-                input.value = currentValue - 1;
-            }
-        });
-
-        plusBtn.addEventListener('click', () => {
-            const currentValue = parseInt(input.value);
-            if (currentValue < 99) {
-                input.value = currentValue + 1;
-            }
-        });
-    });
-});
-
-// Add to your main.js or in a script tag in your template
-document.addEventListener('DOMContentLoaded', function() {
-    // Quantity buttons
-    const minusButtons = document.querySelectorAll('.brutal-qty-btn.minus');
-    const plusButtons = document.querySelectorAll('.brutal-qty-btn.plus');
-    
-    minusButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            const itemId = this.getAttribute('data-item_id');
-            const input = document.querySelector(`#id_qty_${itemId}`);
-            const currentValue = parseInt(input.value);
-            if (currentValue > 1) {
-                input.value = currentValue - 1;
-            }
-        });
-    });
-    
-    plusButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            const itemId = this.getAttribute('data-item_id');
-            const input = document.querySelector(`#id_qty_${itemId}`);
-            const currentValue = parseInt(input.value);
-            if (currentValue < 99) {
-                input.value = currentValue + 1;
-            }
-        });
-    });
-});
-
-// Add to static/js/main.js
-document.addEventListener('DOMContentLoaded', function() {
-    // Mega Menu Toggle
-    const menuToggle = document.querySelector('.menu-toggle');
-    const menuContent = document.querySelector('.menu-content');
-
-    menuToggle.addEventListener('click', function() {
+    // Menu Toggle Click Handler
+    menuToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
         menuToggle.classList.toggle('active');
         menuContent.classList.toggle('active');
     });
 
-    // Mobile Menu Accordion
-    if (window.innerWidth <= 991) {
-        const menuColumns = document.querySelectorAll('.menu-column');
-        
-        menuColumns.forEach(column => {
-            const heading = column.querySelector('h3');
-            heading.addEventListener('click', () => {
-                // Close other columns
-                menuColumns.forEach(otherColumn => {
-                    if (otherColumn !== column) {
-                        otherColumn.classList.remove('active');
-                    }
-                });
-                // Toggle current column
-                column.classList.toggle('active');
-            });
-        });
-    }
-
     // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
-        if (!event.target.closest('.mega-menu')) {
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.mega-menu')) {
             menuToggle.classList.remove('active');
             menuContent.classList.remove('active');
         }
     });
 
-    // Stop propagation for menu content clicks
-    menuContent.addEventListener('click', function(event) {
-        event.stopPropagation();
+    // Prevent closing when clicking inside menu
+    menuContent.addEventListener('click', function(e) {
+        e.stopPropagation();
     });
-});
 
-
-document.querySelector('.brutal-modal__close').addEventListener('click', function() {
-    document.getElementById('imageModal').classList.remove('active');
-});
-
-// Close modal when clicking outside the image
-document.getElementById('imageModal').addEventListener('click', function(e) {
-    if (e.target === this) {
-        this.classList.remove('active');
+    // Mobile Menu Accordion
+    function initializeMobileMenu() {
+        const menuColumns = document.querySelectorAll('.menu-column');
+        
+        menuColumns.forEach(column => {
+            const heading = column.querySelector('h3');
+            const list = column.querySelector('ul');
+            
+            if (heading && list && window.innerWidth <= 768) {
+                heading.style.cursor = 'pointer';
+                
+                heading.addEventListener('click', () => {
+                    menuColumns.forEach(col => {
+                        const colList = col.querySelector('ul');
+                        const isCurrentColumn = col === column;
+                        
+                        if (colList) {
+                            colList.style.display = isCurrentColumn && 
+                                                  colList.style.display !== 'block' ? 'block' : 'none';
+                        }
+                    });
+                });
+            }
+        });
     }
-});
 
-// Prevent closing when clicking the image itself
-document.querySelector('.brutal-modal__content').addEventListener('click', function(e) {
-    e.stopPropagation();
-});
+    initializeMobileMenu();
+    window.addEventListener('resize', initializeMobileMenu);
+}
+
+function initializeQuantityControls() {
+    // Quantity Controls
+    const quantityControls = document.querySelectorAll('.quantity-control, .brutal-quantity-controls');
+    
+    quantityControls.forEach(control => {
+        const input = control.querySelector('.quantity-input, .brutal-qty-input');
+        const minusBtn = control.querySelector('.minus, .brutal-qty-btn.minus');
+        const plusBtn = control.querySelector('.plus, .brutal-qty-btn.plus');
+        
+        if (!input || !minusBtn || !plusBtn) return;
+
+        minusBtn.addEventListener('click', () => {
+            const currentValue = parseInt(input.value) || 1;
+            if (currentValue > 1) {
+                input.value = currentValue - 1;
+                input.dispatchEvent(new Event('change'));
+            }
+        });
+
+        plusBtn.addEventListener('click', () => {
+            const currentValue = parseInt(input.value) || 1;
+            if (currentValue < 99) {
+                input.value = currentValue + 1;
+                input.dispatchEvent(new Event('change'));
+            }
+        });
+    });
+}
+
+function initializeModal() {
+    const modalClose = document.querySelector('.brutal-modal__close');
+    const imageModal = document.getElementById('imageModal');
+    const modalContent = document.querySelector('.brutal-modal__content');
+
+    if (modalClose && imageModal) {
+        // Close button click
+        modalClose.addEventListener('click', () => {
+            imageModal.classList.remove('active');
+        });
+
+        // Click outside modal
+        imageModal.addEventListener('click', (e) => {
+            if (e.target === imageModal) {
+                imageModal.classList.remove('active');
+            }
+        });
+
+        // Prevent closing when clicking modal content
+        if (modalContent) {
+            modalContent.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        }
+    }
+}
+
+// Initialize toasts if they exist
+if (document.querySelector('.toast')) {
+    $('.toast').toast({
+        autohide: true,
+        delay: 5000,
+        animation: true
+    });
+    
+    $('.toast').toast('show');
+    
+    $('.btn-close').on('click', function() {
+        $(this).closest('.toast').toast('hide');
+    });
+    
+    $('.toast').on('hidden.bs.toast', function() {
+        $(this).remove();
+    });
+}

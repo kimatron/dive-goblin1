@@ -1,299 +1,308 @@
 {% load static %}
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  {% block meta %}
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  {% endblock %}
+    <!-- Meta Tags -->
+    {% block meta %}
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% endblock %}
 
-  {% block extra_meta %}
-  {% endblock %}
+    {% block extra_meta %}
+    {% endblock %}
 
-  {% block corecss %}
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800;900&family=Noto+Sans+Manichaean:wght@400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-HnoPSo2BjR55nmjVPT4JaKsoS11dtklIhsW22wSDC7c4pYVGx2k1RZ8sfF1yFm3sf1HL91IT13tP3RVDD94a6g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Core CSS -->
+    {% block corecss %}
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800;900&family=Noto+Sans+Manichaean:wght@400&display=swap" rel="stylesheet">
+        <!-- Icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% endblock %}
 
-  <link rel="stylesheet" href="{% static 'css/base.css' %}">
-  {% endblock %}
+    {% block extra_css %}
+    {% endblock %}
 
-  {% block extra_css %}
-  {% endblock %}
+    <!-- Core JavaScript -->
+    {% block corejs %}
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    {% endblock %}
 
-  {% block corejs %}
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-  </script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-  </script>
+    {% block extra_js %}
+    {% endblock %}
 
-  {% endblock %}
-
-  {% block extra_js %}
-  {% endblock %}
-
-  <title>Dive Goblin {% block extra_title %}{% endblock %}</title>
+    <title>Dive Goblin {% block extra_title %}{% endblock %}</title>
 </head>
 
 <body>
-<!-- base.html header section -->
-<header class="brutal-header">
-  <!-- Logo and Main Nav -->
-  <div class="main-nav">
-      <div class="container">
-          <div class="nav-grid">
-              <!-- Brutal Logo -->
-              <div class="brutal-logo">
-                  <a href="{% url 'home' %}">
-                      <div class="logo-box">
-                          <div class="logo-text">DIVE</div>
-                          <div class="logo-text-alt">GOBLIN</div>
-                          <div class="logo-decoration">est.2024</div>
-                      </div>
-                  </a>
-              </div>
+    <!-- Header Section -->
+    <header class="brutal-header">
+        <!-- Main Navigation Bar -->
+        <div class="main-nav">
+            <div class="container">
+                <div class="nav-grid">
+                    <!-- Logo Section -->
+                    <div class="brutal-logo">
+                        <a href="{% url 'home' %}" class="logo-link">
+                            <div class="logo-box">
+                                <div class="logo-text">DIVE</div>
+                                <div class="logo-text-alt">GOBLIN</div>
+                                <div class="logo-decoration">est.2024</div>
+                            </div>
+                        </a>
+                    </div>
 
-              <!-- Search Bar -->
-              <div class="search-bar">
-                  <form method="GET" action="{% url 'products' %}">
-                      <div class="search-box">
-                          <input type="text" name="q" placeholder="SEARCH THE VOID..." class="search-input">
-                          <button type="submit" class="search-btn">
-                              <i class="fas fa-search"></i>
-                          </button>
-                      </div>
-                  </form>
-              </div>
+                    <!-- Search Section -->
+                    <div class="search-bar">
+                        <form method="GET" action="{% url 'products' %}" class="search-form">
+                            <div class="search-box">
+                                <input 
+                                    type="text" 
+                                    name="q" 
+                                    placeholder="SEARCH THE VOID..." 
+                                    class="search-input"
+                                    aria-label="Search products">
+                                <button type="submit" class="search-btn" aria-label="Submit search">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
 
-              <!-- Nav Icons -->
-              <div class="nav-actions">
-                  <div class="nav-icon-group">
-                      <!-- Account -->
-                      <div class="nav-icon dropdown">
-                          <button class="icon-btn" type="button" id="accountDropdown" data-toggle="dropdown">
-                              <i class="fas fa-user"></i>
-                              <span>Account</span>
-                          </button>
-                          <div class="dropdown-menu">
-                              {% if request.user.is_authenticated %}
-                                  {% if request.user.is_superuser %}
-                                      <a href="{% url 'product_management' %}">Product Management</a>
-                                  {% endif %}
-                                  <a href="{% url 'profile' %}">My Profile</a>
-                                  <a href="{% url 'account_logout' %}">Logout</a>
-                              {% else %}
-                                  <a href="{% url 'account_signup' %}">Register</a>
-                                  <a href="{% url 'account_login' %}">Login</a>
-                              {% endif %}
-                          </div>
-                      </div>
+                    <!-- Navigation Icons Section -->
+                    <div class="nav-actions">
+                        <div class="nav-icon-group">
+                            <!-- Account Dropdown -->
+                            <div class="nav-icon dropdown">
+                                <button 
+                                    class="icon-btn" 
+                                    type="button" 
+                                    id="accountDropdown" 
+                                    data-toggle="dropdown" 
+                                    aria-expanded="false">
+                                    <i class="fas fa-user"></i>
+                                    <span>Account</span>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="accountDropdown">
+                                    {% if request.user.is_authenticated %}
+                                        {% if request.user.is_superuser %}
+                                            <a class="dropdown-item" href="{% url 'product_management' %}">Product Management</a>
+                                        {% endif %}
+                                        <a class="dropdown-item" href="{% url 'profile' %}">My Profile</a>
+                                        <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
+                                    {% else %}
+                                        <a class="dropdown-item" href="{% url 'account_signup' %}">Register</a>
+                                        <a class="dropdown-item" href="{% url 'account_login' %}">Login</a>
+                                    {% endif %}
+                                </div>
+                            </div>
 
-                      <!-- Wishlist -->
-                      <a href="{% url 'wishlist' %}" class="nav-icon">
-                          <button class="icon-btn">
-                              <i class="fas fa-heart"></i>
-                              <span>Wishlist</span>
-                          </button>
-                      </a>
+                            <!-- Wishlist Button -->
+                            <a href="{% url 'wishlist' %}" class="nav-icon">
+                                <button class="icon-btn" aria-label="Wishlist">
+                                    <i class="fas fa-heart"></i>
+                                    <span>Wishlist</span>
+                                </button>
+                            </a>
 
-                      <!-- Cart -->
-                      <a href="{% url 'view_bag' %}" class="nav-icon">
-                          <button class="icon-btn">
-                              <i class="fas fa-shopping-bag"></i>
-                              <span class="bag-total">
-                                  {% if grand_total %}
-                                      ${{ grand_total|floatformat:2 }}
-                                  {% else %}
-                                      $0.00
-                                  {% endif %}
-                              </span>
-                          </button>
-                      </a>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-<!-- Category Mega Menu -->
-<div class="category-nav">
-  <div class="container">
-      <nav class="mega-menu">
-          <button class="menu-toggle">Shop Categories</button>
-          <div class="menu-content">
-              <div class="menu-grid">
-                  <!-- Diving Gear -->
-                  <div class="menu-column">
-                      <h3>Diving Gear</h3>
-                      <ul>
-                          <li><a href="{% url 'products' %}?category=scuba">Scuba Gear</a></li>
-                          <li><a href="{% url 'products' %}?category=snorkeling">Snorkeling</a></li>
-                          <li><a href="{% url 'products' %}?category=wetsuits">Wetsuits</a></li>
-                      </ul>
-                  </div>
-                  <!-- Apparel & Accessories -->
-                  <div class="menu-column">
-                      <h3>Apparel & Extras</h3>
-                      <ul>
-                          <li><a href="{% url 'products' %}?category=shirts_apparel">Shirts & Apparel</a></li>
-                          <li><a href="{% url 'products' %}?category=accessories">Accessories</a></li>
-                          <li><a href="{% url 'products' %}?category=travel_gear">Travel Gear</a></li>
-                      </ul>
-                  </div>
-                  <!-- Travel & Packages -->
-                  <div class="menu-column">
-                      <h3>Travel & Tours</h3>
-                      <ul>
-                          <li><a href="{% url 'products' %}?category=destinations">Destinations</a></li>
-                          <li><a href="{% url 'products' %}?category=packages">Dive Packages</a></li>
-                      </ul>
-                  </div>
-                  <!-- Special Offers -->
-                  <div class="menu-column">
-                      <h3>Special Offers</h3>
-                      <ul>
-                          <li><a href="{% url 'products' %}?category=new_arrivals">New Arrivals</a></li>
-                          <li><a href="{% url 'products' %}?category=deals">Deals</a></li>
-                          <li><a href="{% url 'products' %}?category=clearance">Clearance</a></li>
-                      </ul>
-                  </div>
-              </div>
-          </div>
-      </nav>
-  </div>
-</div>
-
-<!-- Delivery Notice -->
-
-<div class="delivery-banner">
-    <div class="container">
-        <div class="banner-content">
-            <span><i class="fas fa-truck"></i> Free Delivery over ${{ free_delivery_threshold }}</span>
-            <span><i class="fas fa-shield-alt"></i> Secure Checkout</span>
-            <span><i class="fas fa-undo"></i> Easy Returns</span>
+                            <!-- Shopping Cart Button -->
+                            <a href="{% url 'view_bag' %}" class="nav-icon">
+                                <button class="icon-btn" aria-label="Shopping cart">
+                                    <i class="fas fa-shopping-bag"></i>
+                                    <span class="bag-total">
+                                        {% if grand_total %}
+                                            ${{ grand_total|floatformat:2 }}
+                                        {% else %}
+                                            $0.00
+                                        {% endif %}
+                                    </span>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
-</header>
+        <!-- Category Navigation -->
+        <div class="category-nav">
+            <div class="container">
+                <nav class="mega-menu" aria-label="Category navigation">
+                    <!-- Category Toggle Button -->
+                    <button class="menu-toggle" aria-expanded="false" aria-controls="menuContent">
+                        Shop Categories
+                    </button>
 
-{% if messages %}
-    <div class="message-container">
-        {% for message in messages %}
-            {% with message.level as level %}
-                {% if level == 40 %}
-                    {% include 'includes/toasts/toast_error.html' %}
-                {% elif level == 30 %}
-                    {% include 'includes/toasts/toast_warning.html' %}
-                {% elif level == 25 %}
-                    {% include 'includes/toasts/toast_success.html' %}
-                {% else %}
-                    {% include 'includes/toasts/toast_info.html' %}
-                {% endif %}
-            {% endwith %}
-        {% endfor %}
-    </div>
-{% endif %}
+                    <!-- Mega Menu Content -->
+                    <div class="menu-content" id="menuContent">
+                        <div class="menu-grid">
+                            <!-- Diving Gear Section -->
+                            <div class="menu-column">
+                                <h3>Diving Gear</h3>
+                                <ul>
+                                    <li><a href="{% url 'products' %}?category=scuba">Scuba Gear</a></li>
+                                    <li><a href="{% url 'products' %}?category=snorkeling">Snorkeling</a></li>
+                                    <li><a href="{% url 'products' %}?category=wetsuits">Wetsuits</a></li>
+                                </ul>
+                            </div>
 
+                            <!-- Apparel Section -->
+                            <div class="menu-column">
+                                <h3>Apparel & Extras</h3>
+                                <ul>
+                                    <li><a href="{% url 'products' %}?category=shirts_apparel">Shirts & Apparel</a></li>
+                                    <li><a href="{% url 'products' %}?category=accessories">Accessories</a></li>
+                                    <li><a href="{% url 'products' %}?category=travel_gear">Travel Gear</a></li>
+                                </ul>
+                            </div>
 
-  <main class="container mt-5 pt-5">
+                            <!-- Travel Section -->
+                            <div class="menu-column">
+                                <h3>Travel & Tours</h3>
+                                <ul>
+                                    <li><a href="{% url 'products' %}?category=destinations">Destinations</a></li>
+                                    <li><a href="{% url 'products' %}?category=packages">Dive Packages</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Special Offers Section -->
+                            <div class="menu-column">
+                                <h3>Special Offers</h3>
+                                <ul>
+                                    <li><a href="{% url 'products' %}?category=new_arrivals">New Arrivals</a></li>
+                                    <li><a href="{% url 'products' %}?category=deals">Deals</a></li>
+                                    <li><a href="{% url 'products' %}?category=clearance">Clearance</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Delivery Banner -->
+        <div class="delivery-banner">
+            <div class="container">
+                <div class="banner-content">
+                    <span><i class="fas fa-truck"></i> Free Delivery over ${{ free_delivery_threshold }}</span>
+                    <span><i class="fas fa-shield-alt"></i> Secure Checkout</span>
+                    <span><i class="fas fa-undo"></i> Easy Returns</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Message Container -->
     {% if messages %}
-    <div class="message-container">
-      {% for message in messages %}
-      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-      {% endfor %}
-    </div>
+        <div class="message-container">
+            {% for message in messages %}
+                {% with message.level as level %}
+                    {% if level == 40 %}
+                        {% include 'includes/toasts/toast_error.html' %}
+                    {% elif level == 30 %}
+                        {% include 'includes/toasts/toast_warning.html' %}
+                    {% elif level == 25 %}
+                        {% include 'includes/toasts/toast_success.html' %}
+                    {% else %}
+                        {% include 'includes/toasts/toast_info.html' %}
+                    {% endif %}
+                {% endwith %}
+            {% endfor %}
+        </div>
     {% endif %}
 
-    {% block page_header %}
-    {% endblock %}
+    <!-- Main Content Area -->
+    <main class="container mt-5 pt-5">
+        {% block page_header %}
+        {% endblock %}
 
-    {% block content %}
-    {% endblock %}
-  </main>
+        {% block content %}
+        {% endblock %}
+    </main>
 
-  <footer class="container-fluid bg-dark text-white py-5 mt-5">
-    <div class="row">
-      <!-- About Us Section -->
-      <div class="col-md-4 mb-4 mb-md-0 text-center text-md-left">
-        <h4 class="font-weight-bold mb-3">About Dive Goblin</h4>
-        <p>
-          Dive Goblin is your ultimate destination for unique and high-quality products. Our mission is to provide exceptional service and memorable experiences for our customers.
-        </p>
-      </div>
-  
-      <!-- Social Media Links -->
-      <div class="col-md-4 mb-4 mb-md-0 text-center">
-        <h4 class="font-weight-bold mb-3">Follow Us</h4>
-        <div class="social-icons">
-          <a href="https://www.facebook.com/divegoblin" class="text-white mx-2" aria-label="Facebook">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="#" class="text-white mx-2" aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="#" class="text-white mx-2" aria-label="Twitter">
-            <i class="fab fa-twitter"></i>
-          </a>
+    <!-- Footer -->
+    <footer class="container-fluid bg-dark text-white py-5 mt-5">
+        <div class="row">
+            <!-- About Section -->
+            <div class="col-md-4 mb-4 mb-md-0 text-center text-md-left">
+                <h4 class="font-weight-bold mb-3">About Dive Goblin</h4>
+                <p>
+                    Dive Goblin is your ultimate destination for unique and high-quality products. 
+                    Our mission is to provide exceptional service and memorable experiences for our customers.
+                </p>
+            </div>
+
+            <!-- Social Media Links -->
+            <div class="col-md-4 mb-4 mb-md-0 text-center">
+                <h4 class="font-weight-bold mb-3">Follow Us</h4>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/divegoblin" class="text-white mx-2" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-white mx-2" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-white mx-2" aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="col-md-4 text-center text-md-right">
+                <h4 class="font-weight-bold mb-3">Contact Us</h4>
+                <p>
+                    <strong>Email:</strong> <a href="mailto:info@divegoblin.com" class="text-white">info@divegoblin.com</a><br>
+                    <strong>Phone:</strong> +1 234 567 890
+                </p>
+                <p>
+                    <a href="#" class="text-white">Privacy Policy</a> | 
+                    <a href="#" class="text-white">Terms of Service</a>
+                </p>
+            </div>
         </div>
-      </div>
-  
-      <!-- Contact Us and Legal Information -->
-      <div class="col-md-4 text-center text-md-right">
-        <h4 class="font-weight-bold mb-3">Contact Us</h4>
-        <p>
-          <strong>Email:</strong> <a href="mailto:info@divegoblin.com" class="text-white">info@divegoblin.com</a><br>
-          <strong>Phone:</strong> +1 234 567 890
-        </p>
-        <p>
-          <a href="#" class="text-white">Privacy Policy</a> | 
-          <a href="#" class="text-white">Terms of Service</a>
-        </p>
-      </div>
-    </div>
-  
-    <!-- Footer Bottom -->
-    <div class="row border-top border-light pt-3 mt-3">
-      <div class="col text-center">
-        <p class="mb-0">&copy; {{ current_year }} Dive Goblin. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
-  
 
-  {% block postloadjs %}
-  <script type="text/javascript">
-      // Initialize all toasts
-      $('.toast').toast({
-          autohide: true,
-          delay: 5000,
-          animation: true
-      });
-      
-      // Show all toasts
-      $('.toast').toast('show');
-      
-      // Add click handler for close button
-      $('.btn-close').on('click', function() {
-          $(this).closest('.toast').toast('hide');
-      });
-      
-      // Remove toast from DOM after it's hidden
-      $('.toast').on('hidden.bs.toast', function () {
-          $(this).remove();
-      });
-  </script>
-  <script src="{% static 'js/main.js' %}"></script>
-  {% endblock %}
-  
+        <!-- Copyright -->
+        <div class="row border-top border-light pt-3 mt-3">
+            <div class="col text-center">
+                <p class="mb-0">&copy; {{ current_year }} Dive Goblin. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Post-load JavaScript -->
+    {% block postloadjs %}
+    <script type="text/javascript">
+        // Toast Initialization
+        $('.toast').toast({
+            autohide: true,
+            delay: 5000,
+            animation: true
+        });
+        
+        $('.toast').toast('show');
+        
+        // Toast Close Button Handler
+        $('.btn-close').on('click', function() {
+            $(this).closest('.toast').toast('hide');
+        });
+        
+        // Remove Toast from DOM after hiding
+        $('.toast').on('hidden.bs.toast', function () {
+            $(this).remove();
+        });
+    </script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <!-- <script src="{% static 'js/header.js' %}"></script> -->
+    {% endblock %}
 </body>
-
-
 </html>

@@ -159,3 +159,13 @@ document.addEventListener('DOMContentLoaded', function() {
      initializeFloatingBanner();
     // initializeSlidingBanner();
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const logoutForm = document.querySelector('.logout-form');
+    const submitBtn = logoutForm.querySelector('button[type="submit"]');
+
+    logoutForm.addEventListener('submit', function(e) {
+        submitBtn.classList.add('loading');
+        submitBtn.textContent = 'Signing Out...';
+    });
+});

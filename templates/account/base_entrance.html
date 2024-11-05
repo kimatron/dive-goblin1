@@ -1,1 +1,13 @@
-{% extends "allauth/layouts/entrance.html" %}
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    {% block additional_css %}{% endblock %}
+{% endblock %}
+
+{% block content %}
+    <div class="entrance-wrapper">
+        {% block entrance_content %}{% endblock %}
+    </div>
+{% endblock %}

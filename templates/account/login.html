@@ -1,48 +1,79 @@
 {% extends "account/base_entrance.html" %}
 {% load i18n %}
-{% load allauth account %}
-{% block head_title %}
-    {% trans "Sign In" %}
-{% endblock head_title %}
+{% load static %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
 {% block content %}
-    {% element h1 %}
-        {% trans "Sign In" %}
-    {% endelement %}
+<div class="entrance-container">
+    <h1 class="entrance-title">{% trans "Sign In" %}</h1>
+    
     {% if not SOCIALACCOUNT_ONLY %}
-        {% setvar link %}
-            <a href="{{ signup_url }}">
-            {% endsetvar %}
-            {% setvar end_link %}
-            </a>
-        {% endsetvar %}
-        {% element p %}
-            {% blocktranslate %}If you have not created an account yet, then please {{ link }}sign up{{ end_link }} first.{% endblocktranslate %}
-        {% endelement %}
-        {% url 'account_login' as login_url %}
-        {% element form form=form method="post" action=login_url tags="entrance,login" %}
-            {% slot body %}
-                {% csrf_token %}
-                {% element fields form=form unlabeled=True %}
-                {% endelement %}
-                {{ redirect_field }}
-            {% endslot %}
-            {% slot actions %}
-                {% element button type="submit" tags="prominent,login" %}
+        <p class="entrance-text">
+            {% blocktrans %}
+            If you have not created an account yet, then please <a href="{{ signup_url }}">sign up</a> first.
+            {% endblocktrans %}
+        </p>
+
+        <form class="entrance-form" method="post" action="{% url 'account_login' %}">
+            {% csrf_token %}
+            
+            {% if form.non_field_errors %}
+                <div class="form-errors">
+                    {% for error in form.non_field_errors %}
+                        <p class="form-error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            {% for field in form %}
+                <div class="form-field">
+                    {{ field }}
+                    {% if field.errors %}
+                        {% for error in field.errors %}
+                            <div class="form-error">{{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            {% endfor %}
+            
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+
+            <div class="form-actions">
+                <button class="entrance-button" type="submit">
                     {% trans "Sign In" %}
-                {% endelement %}
-            {% endslot %}
-        {% endelement %}
+                </button>
+                
+                <a href="{% url 'account_reset_password' %}" class="forgot-password">
+                    {% trans "Forgot Password?" %}
+                </a>
+            </div>
+        </form>
     {% endif %}
+
     {% if LOGIN_BY_CODE_ENABLED %}
-        {% element hr %}
-        {% endelement %}
-        {% element h2 %}
-            {% element button href=request_login_code_url tags="prominent,login,secondary" %}
+        <div class="login-code-section">
+            <hr class="divider">
+            <a href="{{ request_login_code_url }}" class="code-login-button">
                 {% trans "Mail me a sign-in code" %}
-            {% endelement %}
-        {% endelement %}
+            </a>
+        </div>
     {% endif %}
+
     {% if SOCIALACCOUNT_ENABLED %}
-        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+        <div class="social-login">
+            <hr class="divider">
+            <h2 class="social-login-title">{% trans "Or sign in with" %}</h2>
+            <div class="social-buttons">
+                {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+            </div>
+        </div>
     {% endif %}
-{% endblock content %}
+</div>
+{% endblock %}

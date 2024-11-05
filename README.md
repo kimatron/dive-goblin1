@@ -16,7 +16,7 @@
 ## Project Overview
 Dive Goblin is an e-commerce platform specializing in dive gear, watersports apparel, and travel-related products. Our goal is to provide enthusiasts with high-quality products and exceptional user experience.
 
-Access to the site here: [Dive Goblin](https://8000-kimatron-divegoblin1-r3dva5yy76r.ws.codeinstitute-ide.net/)
+Access to the site here: [Dive Goblin](https://dive-goblin-30c473dd6e64.herokuapp.com/)
 
 ## Features
 - User registration, login, and logout functionality

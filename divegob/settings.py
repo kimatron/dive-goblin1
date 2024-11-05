@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '9h*gdr6vtx#2e!dktu45vj!mmei9yhx_k^ou0
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['dive-goblin-30c473dd6e64.herokuapp.com', 'localhost', '127.0.0.1''8000-kimatron-divegoblin1-r3dva5yy76r.ws.codeinstitute-ide.net', '8000-kimatron-divegoblin1-xdp538qeiuh.ws.codeinstitute-ide.net']
 

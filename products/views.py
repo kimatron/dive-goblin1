@@ -149,4 +149,5 @@ def remove_from_wishlist(request, product_id):
 @login_required
 def wishlist(request):
     wishlist, created = Wishlist.objects.get_or_create(user=request.user)
-    return render(request, 'wishlist.html', {'wishlist': wishlist})
+    return render(request, 'products/wishlist.html', {'wishlist': wishlist})
+

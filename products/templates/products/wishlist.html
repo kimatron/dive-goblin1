@@ -1,18 +1,59 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/wishlist.css' %}">
+{% endblock %}
 
 {% block content %}
-<h1>My Wishlist</h1>
-<ul>
-    {% for product in wishlist.products.all %}
-        <li>
-            <img src="{{ product.image.url }}" alt="{{ product.name }}" width="50">
-            <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a>
-            - ${{ product.price }}
-            <form action="{% url 'remove_from_wishlist' product.id %}" method="post" style="display:inline;">
-                {% csrf_token %}
-                <button type="submit">Remove</button>
-            </form>
-        </li>
-    {% endfor %}
-</ul>
+<div class="wishlist-container">
+    <div class="wishlist-header">
+        <h1 class="wishlist-title">My Wishlist</h1>
+        {% if wishlist.products.all %}
+            <p class="wishlist-count">{{ wishlist.products.count }} item{{ wishlist.products.count|pluralize }}</p>
+        {% endif %}
+    </div>
+
+    {% if wishlist.products.all %}
+        <div class="wishlist-grid">
+            {% for product in wishlist.products.all %}
+                <div class="wishlist-item brutal-card">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="wishlist-item-image">
+                    {% else %}
+                        <img src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}" class="wishlist-item-image">
+                    {% endif %}
+                    
+                    <div class="wishlist-item-info">
+                        <h2 class="wishlist-item-title">{{ product.name }}</h2>
+                        <p class="wishlist-item-price">${{ product.price }}</p>
+                        
+                        <div class="wishlist-item-actions">
+                            <a href="{% url 'product_detail' product.id %}" class="brutal-btn brutal-btn--secondary">
+                                View Details
+                            </a>
+                            <form action="{% url 'remove_from_wishlist' product.id %}" method="POST" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="brutal-btn brutal-btn--danger">
+                                    Remove
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="wishlist-empty brutal-card">
+            <div class="wishlist-empty-content">
+                <i class="fas fa-heart wishlist-empty-icon"></i>
+                <h2>Your wishlist is empty</h2>
+                <p>Browse our products and add your favorites to your wishlist!</p>
+                <a href="{% url 'products' %}" class="brutal-btn brutal-btn--primary">
+                    Browse Products
+                </a>
+            </div>
+        </div>
+    {% endif %}
+</div>
 {% endblock %}

@@ -51,7 +51,9 @@ body {
     background: var(--brutal-white);
     color: var(--brutal-black);
     line-height: 1.6;
-    padding-top: var(--header-height);
+    /* padding-top: var(--header-height); */
+    padding-top: calc(var(--nav-height) + var(--menu-height) + var(--banner-height));
+    position: relative;
 }
 
 h1, h2, h3 {
@@ -253,6 +255,34 @@ h1, h2, h3 {
     text-transform: uppercase;
 }
 
+/* Delivery Banner positioning */
+.delivery-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+    z-index: 2000;
+}
+
+.delivery-banner.visible {
+    transform: translateY(0);
+}
+
+.banner-trigger {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    background: var(--brutal-accent);
+    color: var(--brutal-white);
+    border: var(--brutal-border);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    z-index: 2001;
+}
 /* 5. Mega Menu */
 /* .category-nav {
     border-bottom: var(--brutal-border);
@@ -440,6 +470,18 @@ h1, h2, h3 {
     color: var(--brutal-accent);
     transform: translateX(5px);
     background: rgba(0, 0, 0, 0.05);
+}
+
+.main-nav {
+    background: var(--brutal-white);
+    border-bottom: var(--brutal-border);
+    padding: 1rem 0;
+}
+
+.category-nav {
+    background: var(--brutal-white);
+    border-bottom: var(--brutal-border);
+    padding: 0.5rem 0;
 }
 
 /* Account Dropdown */

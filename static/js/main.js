@@ -134,3 +134,28 @@ if (document.querySelector('.toast')) {
         $(this).remove();
     });
 }
+
+// For Option 3: Sliding Drawer
+function initializeSlidingBanner() {
+    const banner = document.querySelector('.delivery-banner');
+    const trigger = document.createElement('button');
+    trigger.className = 'banner-trigger';
+    trigger.innerHTML = 'Delivery Info <i class="fas fa-truck"></i>';
+    
+    let isVisible = false;
+    
+    trigger.addEventListener('click', () => {
+        isVisible = !isVisible;
+        banner.classList.toggle('visible', isVisible);
+    });
+    
+    document.body.appendChild(trigger);
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+ 
+    // initializeCollapsibleBanner();
+     initializeFloatingBanner();
+    // initializeSlidingBanner();
+});

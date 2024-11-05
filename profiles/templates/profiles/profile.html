@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="profile-header">
+        <h1 class="profile-title">My Profile</h1>
+        {% if messages %}
+            <div class="message-container">
+                {% for message in messages %}
+                    <div class="profile-message {{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="profile-grid">
+        <div class="profile-info">
+            <div class="brutal-card">
+                <h2>Default Delivery Information</h2>
+                <form action="{% url 'profiles:profile' %}" method="POST" id="profile-update-form">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            {% if field.name != 'default_country' %}
+                                {{ field }}
+                            {% else %}
+                                <label for="{{ field.id_for_label }}" class="country-label">Country</label>
+                                {{ field }}
+                            {% endif %}
+                            {% if field.errors %}
+                                {% for error in field.errors %}
+                                    <span class="error">{{ error }}</span>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <button type="submit" class="brutal-button">Update Information</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="profile-history">
+            <div class="brutal-card">
+                <h2>Order History</h2>
+                {% if orders %}
+                    <div class="order-list">
+                        {% for order in orders %}
+                            <div class="order-item">
+                                <div class="order-info">
+                                    <p class="order-number">Order #{{ order.order_number }}</p>
+                                    <p class="order-date">{{ order.date }}</p>
+                                    <p class="order-total">${{ order.grand_total }}</p>
+                                </div>
+                                <a href="{% url 'order_history' order.order_number %}" 
+                                   class="brutal-button brutal-button--small">
+                                    View Order
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="no-orders">No order history available.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+<script type="text/javascript" src="{% static 'profiles/js/countryfield.js' %}"></script>
+{% endblock %}

@@ -13,7 +13,9 @@
 .StripeElement--focus,
 .stripe-style-input:focus,
 .stripe-style-input:active {
-  box-shadow: 0 1px 3px 0 #CFD7DF;
+  border-color: #000;
+  box-shadow: 5px 5px 0 #000;
+  transform: translateX(-5px) translateY(-5px);
 }
 .StripeElement--webkit-autofill {
   background-color: white !important;

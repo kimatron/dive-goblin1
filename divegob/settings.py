@@ -217,9 +217,13 @@ STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY', '')
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', '')
 STRIPE_WH_SECRET = os.environ.get('STRIPE_WH_SECRET', '')
 DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+
+# Development vs Production Settings
 if 'DEVELOPMENT' in os.environ:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DOMAIN = 'https://kimatron-divegoblin1-xdp538qeiuh.ws.codeinstitute-ide.net/'
 else:
+    DOMAIN = 'https://dive-goblin-30c473dd6e64.herokuapp.com/'
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_USE_TLS = True
     EMAIL_PORT = 587

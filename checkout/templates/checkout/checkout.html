@@ -103,20 +103,23 @@
                     <input type="hidden" value="{{ client_secret }}" name="client_secret">
                 </fieldset>
                 <div class="submit-button text-right mt-5 mb-2">
-                    <a href="{% url 'view_bag' %}"
-                        aria-label="View bag to adjust">
+                    <!-- Back to bag link -->
+                    <a href="{% url 'view_bag' %}" class="btn btn-outline-dark" aria-label="View bag to adjust">
                         <span class="icon">
                             <i class="fas fa-chevron-left"></i>
                         </span>
                         <span>Adjust Bag</span>
                     </a>
-                    <button id="submit-button"
-                        aria-label="Submit order button">
+                
+                    <!-- Submit button -->
+                    <button id="submit-button" class="btn" aria-label="Submit order button">
                         <span class="font-weight-bold">Complete Order</span>
                         <span class="icon">
                             <i class="fas fa-lock"></i>
                         </span>
                     </button>
+                
+                    <!-- Price notification -->
                     <p class="small custom-red my-0">
                         <span class="icon">
                             <i class="fas fa-exclamation-circle"></i>

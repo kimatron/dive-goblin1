@@ -90,7 +90,15 @@ select option[value=""] {
   transform: translateX(-5px) translateY(-5px);
 }
 
+.custom-red {
+  color: #ff0000;
+  font-weight: bold;
+  margin-top: 10px !important;
+}
 
+.icon {
+  margin-right: 5px;
+}
 
 
 

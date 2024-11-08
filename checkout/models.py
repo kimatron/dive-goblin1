@@ -4,6 +4,7 @@ from django.conf import settings
 from products.models import Product
 from django_countries.fields import CountryField
 from profiles.models import UserProfile
+import uuid 
 
 class Order(models.Model):
     order_number = models.CharField(max_length=32, null=False, editable=False)

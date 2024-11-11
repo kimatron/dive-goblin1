@@ -7,19 +7,20 @@ var clientSecret = $('#id_client_secret').text().slice(1, -1);
 console.log('pub', stripePublicKey, 'sec', clientSecret)
 var stripe = Stripe(stripePublicKey);
 var elements = stripe.elements();
+
 var style = {
     base: {
-        color: '#020C1B',
+        color: '#000',
         fontFamily: '"Mulish", sans-serif',
         fontSmoothing: 'antialiased',
         fontSize: '16px',
         '::placeholder': {
-            color: '#020C1B'
+            color: '#666'
         }
     },
     invalid: {
-        color: '#490000',
-        iconColor: '#490000'
+        color: '#dc3545',
+        iconColor: '#dc3545'
     }
 };
 var card = elements.create('card', {style: style});

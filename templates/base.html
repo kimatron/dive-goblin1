@@ -15,17 +15,19 @@
 
     <!-- Core CSS -->
     {% block corecss %}
-        <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800;900&family=Noto+Sans+Manichaean:wght@400&display=swap" rel="stylesheet">
-        <!-- Icons -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <!-- Custom CSS -->
-        <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    {% endblock %}
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800;900&family=Noto+Sans+Manichaean:wght@400&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <!-- Footer CSS -->
+        <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+        <!-- Base CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+{% endblock %}
 
     {% block extra_css %}
     {% endblock %}
@@ -230,54 +232,102 @@
     </main>
 
     <!-- Footer -->
-    <footer class="container-fluid bg-dark text-white py-5 mt-5">
-        <div class="row">
-            <!-- About Section -->
-            <div class="col-md-4 mb-4 mb-md-0 text-center text-md-left">
-                <h4 class="font-weight-bold mb-3">About Dive Goblin</h4>
-                <p>
-                    Dive Goblin is your ultimate destination for unique and high-quality products. 
-                    Our mission is to provide exceptional service and memorable experiences for our customers.
-                </p>
+<footer class="brutal-footer">
+    <div class="container">
+        <!-- Newsletter Section -->
+        <div class="footer-newsletter">
+            <div class="newsletter-box">
+                <h2 class="newsletter-title">JOIN THE GOBLIN CREW</h2>
+                <p class="newsletter-subtitle">Subscribe for exclusive deals and underwater adventures!</p>
+                <form id="newsletter-form" class="newsletter-form">
+                    <div class="input-group">
+                        <input 
+                            type="email" 
+                            name="email" 
+                            placeholder="YOUR EMAIL ADDRESS" 
+                            class="newsletter-input"
+                            required
+                        >
+                        <button type="submit" class="newsletter-submit">
+                            <span class="submit-text">SUBSCRIBE</span>
+                            <span class="submit-icon">→</span>
+                        </button>
+                    </div>
+                </form>
             </div>
+        </div>
 
-            <!-- Social Media Links -->
-            <div class="col-md-4 mb-4 mb-md-0 text-center">
-                <h4 class="font-weight-bold mb-3">Follow Us</h4>
-                <div class="social-icons">
-                    <a href="https://www.facebook.com/divegoblin" class="text-white mx-2" aria-label="Facebook">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#" class="text-white mx-2" aria-label="Instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="text-white mx-2" aria-label="Twitter">
-                        <i class="fab fa-twitter"></i>
-                    </a>
+        <!-- Footer Grid -->
+        <div class="footer-grid">
+            <!-- About Section -->
+            <div class="footer-col">
+                <div class="footer-box">
+                    <h3>ABOUT US</h3>
+                    <p>Dive Goblin is your ultimate destination for diving gear and underwater adventures.</p>
                 </div>
             </div>
 
-            <!-- Contact Information -->
-            <div class="col-md-4 text-center text-md-right">
-                <h4 class="font-weight-bold mb-3">Contact Us</h4>
-                <p>
-                    <strong>Email:</strong> <a href="mailto:info@divegoblin.com" class="text-white">info@divegoblin.com</a><br>
-                    <strong>Phone:</strong> +1 234 567 890
-                </p>
-                <p>
-                    <a href="#" class="text-white">Privacy Policy</a> | 
-                    <a href="#" class="text-white">Terms of Service</a>
-                </p>
+            <!-- Quick Links -->
+            <div class="footer-col">
+                <div class="footer-box">
+                    <h3 class="text-brutal-accent">QUICK LINKS</h3>
+                    <ul class="footer-links">
+                        <li><a href="{% url 'products' %}">Shop</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="footer-col">
+                <div class="footer-box">
+                    <h3>CONTACT</h3>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:info@divegoblin.com">info@divegoblin.com</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+1 234 567 890</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Social Links -->
+            <div class="footer-col">
+                <div class="footer-box">
+                    <h3>FOLLOW US</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- Copyright -->
-        <div class="row border-top border-light pt-3 mt-3">
-            <div class="col text-center">
-                <p class="mb-0">&copy; {{ current_year }} Dive Goblin. All rights reserved.</p>
+        <div class="footer-bottom">
+            <div class="footer-box">
+                <p>&copy; {{ current_year }} Dive Goblin. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
             </div>
         </div>
-    </footer>
+    </div>
+</footer>
 
     <!-- Post-load JavaScript -->
     {% block postloadjs %}
@@ -303,6 +353,8 @@
     </script>
     <script src="{% static 'js/main.js' %}"></script>
     <script src="https://js.stripe.com/v3/"></script>
+    <script src="{% static 'js/newsletter.js' %}"></script>
+
     <!-- <script src="{% static 'js/header.js' %}"></script> -->
     {% endblock %}
 </body>

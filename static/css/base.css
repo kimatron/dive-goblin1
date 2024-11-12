@@ -1,3 +1,7 @@
+.brutal-footer {
+    border: 10px solid red;
+}
+
 /*--------------------------------------------------------------
 Table of Contents:
 1. Root Variables & Reset
@@ -25,7 +29,7 @@ Table of Contents:
     --brutal-accent: #00AC7C;
     --brutal-hover: #5ad641;
     --menu-highlight: #FF6B6B;
-    
+
     /* Structural */
     --brutal-shadow: 6px 6px 0 var(--brutal-black);
     --brutal-border: 3px solid var(--brutal-black);
@@ -33,7 +37,7 @@ Table of Contents:
     --nav-height: 80px;
     --menu-height: 60px;
     --banner-height: 40px;
-    
+
     /* Container */
     --container-max: 1200px;
 }
@@ -56,7 +60,9 @@ body {
     position: relative;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     font-family: 'Noto Sans Manichaean', sans-serif;
     font-weight: 700;
 }
@@ -282,6 +288,7 @@ h1, h2, h3 {
     cursor: pointer;
     z-index: 2001;
 }
+
 /* 5. Mega Menu */
 /* .category-nav {
     border-bottom: var(--brutal-border);
@@ -1112,9 +1119,17 @@ h1, h2, h3 {
 
 /* Animation */
 @keyframes heartbeat {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 .wishlist-empty-icon {
@@ -1173,21 +1188,490 @@ h1, h2, h3 {
     padding: 1rem;
 }
 
-/* 12. Footer */
-.brutal-footer {
-    background: var(--brutal-black);
-    color: var(--brutal-white);
-    padding: 4rem 0 2rem;
-    margin-top: 4rem;
+.newsletter-submit.btn {
+    border-radius: 0;
+    white-space: nowrap;
 }
 
+.brutal-footer {
+    background-color: var(--brutal-black) !important;
+    color: var(--brutal-white);
+    padding: 4rem 0 0 !important;
+    margin-top: 6rem !important;
+    position: relative !important;
+    border-top: 4px solid var(--brutal-black) !important;
+}
+
+/* Newsletter Section  */
+.footer-newsletter {
+    margin-bottom: 4rem;
+}
+
+.brutal-footer .newsletter-box {
+    background: var(--brutal-white) !important;
+    border: 4px solid var(--brutal-black) !important;
+    padding: 2rem !important;
+    max-width: 800px !important;
+    margin: -6rem auto 0 !important;
+    position: relative !important;
+    box-shadow: 6px 6px 0 var(--brutal-black) !important;
+    transform: translateY(0);
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.newsletter-box:hover {
+    transform: translate(-8px, -8px);
+    box-shadow: 12px 12px 0 var(--brutal-accent);
+}
+
+.newsletter-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--brutal-black);
+    margin-bottom: 1rem;
+    text-align: center;
+    border-bottom: var(--brutal-border);
+    padding-bottom: 1rem;
+}
+
+.input-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.newsletter-input {
+    flex: 1;
+    padding: 1rem;
+    border: var(--brutal-border);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: var(--brutal-white);
+}
+
+.newsletter-submit {
+    background: var(--brutal-accent);
+    color: var(--brutal-white);
+    border: var(--brutal-border);
+    padding: 0 2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 4px 4px 0 var(--brutal-black);
+    white-space: nowrap;
+}
+
+.newsletter-submit:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0 var(--brutal-black);
+    background: var(--brutal-hover);
+}
+
+/* Footer Grid - More brutalist */
 .footer-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: 0 1rem;
+    padding: 2rem;
+    background: var(--brutal-black);
+    border-top: var(--brutal-border);
+}
+
+.footer-box {
+    border: 3px solid var(--brutal-white);
+    padding: 1.5rem;
+    height: 100%;
+    transition: all 0.3s ease;
+    background: var(--brutal-black);
+    box-shadow: 6px 6px 0 rgba(255, 255, 255, 0.1);
+}
+
+.footer-box:hover {
+    border-color: var(--brutal-accent);
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0 var(--brutal-accent);
+}
+
+.footer-col h3 {
+    font-size: 1.4rem;
+    font-weight: 900;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    color: var(--brutal-accent);
+    border-bottom: 3px solid var(--brutal-accent);
+    padding-bottom: 0.5rem;
+}
+
+/* Footer Links - More brutalist */
+.footer-links li,
+.footer-contact li {
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.footer-links a,
+.footer-contact a {
+    color: var(--brutal-white);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-block;
+    padding: 0.5rem;
+    font-weight: 600;
+    border: 2px solid transparent;
+}
+
+.footer-links a:hover,
+.footer-contact a:hover {
+    color: var(--brutal-accent);
+    transform: translateX(10px);
+    border: 2px solid var(--brutal-accent);
+}
+
+/* Social Links - More brutalist */
+.social-links {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1rem;
+    position: relative;
+}
+
+.social-link {
+    width: 60px;
+    height: 60px;
+    border: 4px solid var(--brutal-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--brutal-white);
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    background: var(--brutal-black);
+    box-shadow: 6px 6px 0 rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+/* Glitch effect on hover */
+.social-link::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg,
+            transparent,
+            rgba(255, 255, 255, 0.1),
+            transparent);
+    transform: rotate(45deg);
+    transition: 0.5s;
+    opacity: 0;
+}
+
+.social-link:hover::before {
+    animation: glare 1.5s infinite;
+}
+
+.social-link::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--brutal-accent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 0;
+}
+
+.social-link:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0 var(--brutal-accent);
+    color: var(--brutal-white);
+    border-color: var(--brutal-accent);
+}
+
+.social-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.social-link:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--brutal-accent);
+}
+
+.social-link i {
+    font-size: 1.5rem;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.social-link:hover i {
+    animation: iconGlitch 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
+}
+
+@keyframes glare {
+    0% {
+        transform: rotate(45deg) translateY(-100%);
+        opacity: 0;
+    }
+
+    50% {
+        transform: rotate(45deg) translateY(100%);
+        opacity: 1;
+    }
+
+    100% {
+        transform: rotate(45deg) translateY(100%);
+        opacity: 0;
+    }
+}
+
+@keyframes iconGlitch {
+    0% {
+        transform: translate(0);
+    }
+
+    20% {
+        transform: translate(-2px, 2px);
+    }
+
+    40% {
+        transform: translate(-2px, -2px);
+    }
+
+    60% {
+        transform: translate(2px, 2px);
+    }
+
+    80% {
+        transform: translate(2px, -2px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+/* Newsletter submit button enhancement */
+.newsletter-submit {
+    background: var(--brutal-accent);
+    color: var(--brutal-white);
+    border: 4px solid var(--brutal-black);
+    padding: 0 2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 6px 6px 0 var(--brutal-black);
+    position: relative;
+    overflow: hidden;
+}
+
+.newsletter-submit::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent);
+    transform: rotate(45deg);
+    transition: 0.5s;
+    opacity: 0;
+}
+
+.newsletter-submit:hover::before {
+    animation: glare 1.5s infinite;
+}
+
+.newsletter-submit:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 10px 10px 0 var(--brutal-black);
+    background: var(--brutal-hover);
+}
+
+.newsletter-submit:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--brutal-black);
+}
+
+.submit-icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.newsletter-submit:hover .submit-icon {
+    animation: arrowGlitch 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
+}
+
+@keyframes arrowGlitch {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-4px);
+    }
+
+    50% {
+        transform: translateX(4px);
+    }
+
+    75% {
+        transform: translateX(-2px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* Newsletter input enhancement */
+.newsletter-input {
+    flex: 1;
+    padding: 1rem;
+    border: 4px solid var(--brutal-black);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 5px 5px 0 var(--brutal-black);
+    position: relative;
+    overflow: hidden;
+}
+
+.newsletter-input:focus {
+    outline: none;
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0 var(--brutal-accent);
+    animation: inputGlitch 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
+}
+
+.newsletter-input::placeholder {
+    color: #888;
+    transition: color 0.3s ease;
+}
+
+.newsletter-input:focus::placeholder {
+    color: transparent;
+}
+
+@keyframes inputGlitch {
+    0% {
+        border-color: var(--brutal-black);
+    }
+
+    50% {
+        border-color: var(--brutal-accent);
+    }
+
+    100% {
+        border-color: var(--brutal-black);
+    }
+}
+
+/* Footer Bottom - More brutalist */
+.footer-bottom {
+    margin-top: 4rem;
+    text-align: center;
+    background: var(--brutal-black);
+    border-top: var(--brutal-border);
+    padding: 2rem;
+}
+
+.footer-bottom .footer-box {
+    border: none;
+    box-shadow: none;
+}
+
+.footer-legal {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.footer-legal a {
+    color: var(--brutal-white);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border: 2px solid transparent;
+    font-weight: 600;
+}
+
+.footer-legal a:hover {
+    color: var(--brutal-accent);
+    border: 2px solid var(--brutal-accent);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .brutal-footer {
+        padding: 2rem 0 0;
+        margin-top: 4rem;
+    }
+
+    .newsletter-box {
+        margin: -4rem 1rem 0;
+        padding: 1.5rem;
+    }
+
+    .newsletter-title {
+        font-size: 1.8rem;
+    }
+
+    .input-group {
+        flex-direction: column;
+    }
+
+    .newsletter-submit {
+        width: 100%;
+        justify-content: center;
+        padding: 1rem;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 1rem;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    .footer-box {
+        margin-bottom: 1rem;
+    }
+
+    .footer-legal {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .newsletter-box {
+        margin: -3rem 0.5rem 0;
+        padding: 1rem;
+    }
 }
 
 /* 13. Utilities */
@@ -1212,6 +1696,7 @@ h1, h2, h3 {
         transform: translateX(100%);
         opacity: 0;
     }
+
     to {
         transform: translateX(0);
         opacity: 1;
@@ -1219,12 +1704,29 @@ h1, h2, h3 {
 }
 
 @keyframes glitch {
-    0% { transform: translate(0) }
-    20% { transform: translate(-2px, 2px) }
-    40% { transform: translate(-2px, -2px) }
-    60% { transform: translate(2px, 2px) }
-    80% { transform: translate(2px, -2px) }
-    100% { transform: translate(0) }
+    0% {
+        transform: translate(0)
+    }
+
+    20% {
+        transform: translate(-2px, 2px)
+    }
+
+    40% {
+        transform: translate(-2px, -2px)
+    }
+
+    60% {
+        transform: translate(2px, 2px)
+    }
+
+    80% {
+        transform: translate(2px, -2px)
+    }
+
+    100% {
+        transform: translate(0)
+    }
 }
 
 /* Announcement & Notice Styles */

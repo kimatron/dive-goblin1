@@ -29,10 +29,11 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['dive-goblin-30c473dd6e64.herokuapp.com', 'localhost', '127.0.0.1''8000-kimatron-divegoblin1-r3dva5yy76r.ws.codeinstitute-ide.net', '8000-kimatron-divegoblin1-xdp538qeiuh.ws.codeinstitute-ide.net']
 
+CSRF_TRUSTED_ORIGINS = [os.environ.get('CSRF_TRUSTED_ORIGINS')]
 
 # Application definition
 

@@ -3,10 +3,34 @@ from django.urls import reverse
 from products.models import Product
 from django.views.decorators.http import require_POST
 from django.contrib import messages
+
+
 def view_bag(request):
-    """ A view that renders the bag contents page """
+    """
+    Renders the shopping bag page,\
+    displaying the contents of the user's shopping bag.
+
+    Args:
+        request: The HTTP request object.
+
+    Returns:
+        HttpResponse: The rendered shopping bag page.
+    """
     return render(request, 'bag/bag.html')
+
+
 def add_to_bag(request, product_id):
+    """
+    Adds a specified product to the user's shopping bag,\
+    or updates its quantity if it already exists.
+
+    Args:
+        request: The HTTP request object.
+        product_id: The ID of the product to add to the bag.
+    
+    Returns:
+        HttpResponseRedirect: A redirect to the bag page or the URL specified by the `redirect_url` parameter.
+    """
     product = get_object_or_404(Product, id=product_id)
     quantity = int(request.POST.get('quantity', 1))
     redirect_url = request.POST.get('redirect_url') or reverse('view_bag')
@@ -25,6 +49,8 @@ def add_to_bag(request, product_id):
         )
     request.session['bag'] = bag
     return redirect(redirect_url)
+
+
 @require_POST
 def remove_from_bag(request, item_id):
     try:
@@ -38,10 +64,8 @@ def remove_from_bag(request, item_id):
     except Exception as e:
         messages.error(request, f'Error removing item: {e}')
         return redirect('view_bag')
-def checkout(request):
-    """ Display the checkout page """
-    # Add any logic needed for the checkout page here
-    return render(request, 'bag/checkout.html')
+
+
 @require_POST
 def update_bag(request):
     try:
@@ -54,10 +78,13 @@ def update_bag(request):
                     quantity = int(quantity)
                     if quantity > 0:
                         bag[item_id] = quantity
-                        messages.success(request, f'Updated {product.name} quantity to {quantity}')
+                        messages.success(
+                            request,
+                            f'Updated {product.name} quantity to {quantity}')
                     else:
                         bag.pop(item_id, None)
-                        messages.success(request, f'Removed {product.name} from your bag')
+                        messages.success(
+                            request, f'Removed {product.name} from your bag')
                 except (ValueError, Product.DoesNotExist):
                     messages.error(request, 'Invalid update operation')
                     continue
@@ -66,5 +93,3 @@ def update_bag(request):
     except Exception as e:
         messages.error(request, f'Error updating bag: {e}')
         return redirect('view_bag')  # Redirect to the shopping bag page
-
-        

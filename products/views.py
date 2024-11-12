@@ -5,9 +5,8 @@ from django.db.models.functions import Lower
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from .models import Product, Category, Wishlist
+from .forms import ProductForm
 
-
-# Create your views here.
 
 def all_products(request):
     """ A view to show all products, including sorting and search queries """
@@ -39,13 +38,16 @@ def all_products(request):
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
-                messages.error(request, "You didn't enter any search criteria!")
+                messages.error(
+                    request, "You didn't enter any search criteria!")
                 return redirect(reverse('products'))
-            
-            queries = Q(name__icontains=query) | Q(description__icontains=query)
+
+            queries = Q(
+                name__icontains=query) | Q(
+                    description__icontains=query)
             products = products.filter(queries)
 
-    current_sorting = f'{sort}_{direction}' 
+    current_sorting = f'{sort}_{direction}'
 
     context = {
         'products': products,
@@ -55,6 +57,7 @@ def all_products(request):
     }
 
     return render(request, 'products/products.html', context)
+
 
 def product_detail(request, product_id):
     """ A view to show individual product details """
@@ -66,16 +69,18 @@ def product_detail(request, product_id):
 
     return render(request, 'products/product_detail.html', context)
 
+
 @staff_member_required
 def product_management(request):
     """ Product management view for staff members """
     products = Product.objects.all()
-    
+
     context = {
         'products': products,
     }
-    
+
     return render(request, 'products/product_management.html', context)
+
 
 @staff_member_required
 def add_product(request):
@@ -87,16 +92,19 @@ def add_product(request):
             messages.success(request, 'Successfully added product!')
             return redirect(reverse('product_detail', args=[product.id]))
         else:
-            messages.error(request, 'Failed to add product. Please ensure the form is valid.')
+            messages.error(
+                request,
+                'Failed to add product. Please ensure the form is valid.')
     else:
         form = ProductForm()
-        
+
     template = 'products/add_product.html'
     context = {
         'form': form,
     }
 
     return render(request, template, context)
+
 
 @staff_member_required
 def edit_product(request, product_id):
@@ -109,7 +117,9 @@ def edit_product(request, product_id):
             messages.success(request, 'Successfully updated product!')
             return redirect(reverse('product_detail', args=[product.id]))
         else:
-            messages.error(request, 'Failed to update product. Please ensure the form is valid.')
+            messages.error(
+                request,
+                'Failed to update product. Please ensure the form is valid.')
     else:
         form = ProductForm(instance=product)
         messages.info(request, f'You are editing {product.name}')
@@ -122,6 +132,7 @@ def edit_product(request, product_id):
 
     return render(request, template, context)
 
+
 @staff_member_required
 def delete_product(request, product_id):
     """ Delete a product from the store """
@@ -130,24 +141,29 @@ def delete_product(request, product_id):
     messages.success(request, 'Product deleted!')
     return redirect(reverse('products'))
 
+
 @login_required
 def add_to_wishlist(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     wishlist, created = Wishlist.objects.get_or_create(user=request.user)
     wishlist.products.add(product)
-    messages.success(request, f'{product.name} has been added to your wishlist!')
+    messages.success(
+        request, f'{product.name} has been added to your wishlist!')
     return redirect('wishlist')
+
 
 @login_required
 def remove_from_wishlist(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     wishlist = get_object_or_404(Wishlist, user=request.user)
     wishlist.products.remove(product)
-    messages.success(request, f'{product.name} has been removed from your wishlist!')
+    messages.success(
+        request, f'{product.name} has been removed from your wishlist!')
     return redirect('wishlist')
+
 
 @login_required
 def wishlist(request):
     wishlist, created = Wishlist.objects.get_or_create(user=request.user)
-    return render(request, 'products/wishlist.html', {'wishlist': wishlist})
-
+    return render(
+        request, 'products/wishlist.html', {'wishlist': wishlist})

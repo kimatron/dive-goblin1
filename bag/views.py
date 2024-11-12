@@ -27,9 +27,10 @@ def add_to_bag(request, product_id):
     Args:
         request: The HTTP request object.
         product_id: The ID of the product to add to the bag.
-    
+
     Returns:
-        HttpResponseRedirect: A redirect to the bag page or the URL specified by the `redirect_url` parameter.
+        HttpResponseRedirect: A redirect to the bag page\
+        or the URL specified by the `redirect_url` parameter.
     """
     product = get_object_or_404(Product, id=product_id)
     quantity = int(request.POST.get('quantity', 1))
@@ -53,6 +54,17 @@ def add_to_bag(request, product_id):
 
 @require_POST
 def remove_from_bag(request, item_id):
+    """
+    Remove a specified product from the shopping bag.
+
+    Args:
+        request: The HTTP request object.
+        item_id (int): ID of the product to remove from the bag.
+
+    Returns:
+        HttpResponse: Redirects to the bag view with\
+        a success or error message.
+    """
     try:
         product = get_object_or_404(Product, pk=item_id)
         bag = request.session.get('bag', {})
@@ -68,6 +80,16 @@ def remove_from_bag(request, item_id):
 
 @require_POST
 def update_bag(request):
+    """
+    Update quantities of products in the shopping bag based on form data.
+
+    Args:
+        request: The HTTP request object.
+
+    Returns:
+        HttpResponse: Redirects to the bag view with\
+            a success or error message.
+    """
     try:
         bag = request.session.get('bag', {})
         for item_id, quantity in request.POST.items():

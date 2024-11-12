@@ -1,6 +1,7 @@
 from django import forms
 from .models import NewsletterSubscriber, Newsletter
 
+
 class NewsletterForm(forms.ModelForm):
     class Meta:
         model = NewsletterSubscriber
@@ -11,6 +12,7 @@ class NewsletterForm(forms.ModelForm):
                 'placeholder': 'YOUR EMAIL ADDRESS'
             })
         }
+
 
 class NewsletterCreationForm(forms.ModelForm):
     class Meta:

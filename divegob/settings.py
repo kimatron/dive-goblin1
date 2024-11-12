@@ -29,9 +29,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['dive-goblin-30c473dd6e64.herokuapp.com', 'localhost', '127.0.0.1''8000-kimatron-divegoblin1-r3dva5yy76r.ws.codeinstitute-ide.net', '8000-kimatron-divegoblin1-xdp538qeiuh.ws.codeinstitute-ide.net']
+ALLOWED_HOSTS = ['dive-goblin-30c473dd6e64.herokuapp.com', 'localhost', '127.0.0.1', '8000-kimatron-divegoblin1-r3dva5yy76r.ws.codeinstitute-ide.net', '8000-kimatron-divegoblin1-xdp538qeiuh.ws.codeinstitute-ide.net']
 
 CSRF_TRUSTED_ORIGINS = [os.environ.get('CSRF_TRUSTED_ORIGINS')]
 
@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     'django_countries',
     'newsletter',
 
-    #OTHER
+    # OTHER
     'storages',
 
 ]
@@ -91,6 +91,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.static',
                 'bag.contexts.bag_contents',
             ],
             'builtins': [
@@ -197,7 +198,7 @@ if 'USE_AWS' in os.environ:
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
-        # Static and media files
+    # Static and media files
     STATICFILES_STORAGE = 'custom_storages.StaticStorage'
     STATICFILES_LOCATION = 'static'
     DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
@@ -247,11 +248,3 @@ else:
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
     DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
-
-
-
-
-
-
-
-

@@ -3,6 +3,8 @@
 
 {% block extra_title %} - FAQ {% endblock %}
 
+
+
 {% block content %}
 <style>
     .brutal-page {
@@ -170,68 +172,163 @@
         </div>
 
         <!-- FAQ Content -->
-        <div class="faq-section">
-            <!-- Ordering & Shipping -->
-            <div class="faq-category">
-                <h2 class="faq-category-title">Ordering & Shipping</h2>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>How long does shipping take?</span>
-                        <span class="question-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        Standard delivery takes 3-5 business days within Ireland. International shipping times vary by location.
-                    </div>
-                </div>
 
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Do you ship internationally?</span>
-                        <span class="question-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        Yes, we ship to most countries worldwide. Shipping costs and times vary by location.
-                    </div>
-                </div>
+<div class="faq-section">
+    <!-- General Questions -->
+    <div class="faq-category">
+        <h2 class="faq-category-title">General Goblin Business</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Why "Dive Goblin"? Are you actual goblins?</span>
+                <span class="question-icon">+</span>
             </div>
-
-            <!-- Products & Equipment -->
-            <div class="faq-category">
-                <h2 class="faq-category-title">Products & Equipment</h2>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Are your products certified?</span>
-                        <span class="question-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        All our diving equipment meets or exceeds international safety standards and comes with proper certification.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>What's your return policy?</span>
-                        <span class="question-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        We offer a 30-day return policy on unused items in original packaging. Special conditions apply for safety equipment.
-                    </div>
-                </div>
+            <div class="faq-answer">
+                While we can neither confirm nor deny our goblin status, we chose the name because, like goblins, we're obsessed with treasure... except our treasure is finding the best diving gear at the best prices! Plus, have you seen how goblins hoard shiny things? That's basically what our warehouse looks like, but with diving equipment.
             </div>
         </div>
 
-        <!-- Contact Box -->
-        <div class="contact-box">
-            <h2>Still Have Questions?</h2>
-            <p>We're here to help! Contact our support team for personalized assistance.</p>
-            <a href="mailto:support@divegoblin.com" class="contact-btn">
-                Contact Support
-                <i class="fas fa-arrow-right"></i>
-            </a>
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Do I need to speak Goblin to shop here?</span>
+                <span class="question-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                Nope! While we appreciate a good "BLARGHHH!" now and then, we speak all human languages. Our customer service team is fluent in English, Spanish, and occasionally dolphin (still in training for that one).
+            </div>
         </div>
     </div>
+
+    <!-- Ordering & Shipping -->
+    <div class="faq-category">
+        <h2 class="faq-category-title">Shipping & Handling (With Care!)</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>How fast do you ship? Are we talking human-speed or goblin-speed?</span>
+                <span class="question-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                We ship at goblin-speed (which is surprisingly fast)! Standard delivery takes 3-5 business days within Ireland. Our gob-express shipping (next-day delivery) is available for when you need your gear faster than a goblin can say "SCUBA". International shipping times vary, as our delivery goblins sometimes get distracted by shiny objects.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>What about international shipping?</span>
+                <span class="question-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                We ship worldwide! Our network of underwater tunnels... er, we mean, shipping partners, can deliver to most countries. Shipping costs vary by location and whether Mercury is in retrograde. Note: We cannot ship to Atlantis (they're still mad about that incident with the trident).
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Free shipping? Really?</span>
+                <span class="question-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                Orders over €{{ free_delivery_threshold }} get free shipping! Why €{{ free_delivery_threshold }}? Because our accountant goblin insisted on a round number, and who are we to argue with someone who can do math while hanging upside down?
+            </div>
+        </div>
+    </div>
+
+    <!-- Products & Equipment -->
+    <div class="faq-category">
+        <h2 class="faq-category-title">Gear & Gadgets</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Is your equipment certified? Or did goblins make it in a cave?</span>
+                <span class="question-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                All our equipment is certified by the highest diving authorities! While we may be goblins, we take safety VERY seriously. Every piece of gear meets or exceeds international safety standards. We test everything ourselves - if it can survive a goblin's underwater adventure, it can survive anything!
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>What's your return policy? Do I have to solve a riddle first?</span>
+                <span class="question-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                No riddles required! We offer a simple 30-day return policy on unused items in original packaging. Though if you want to solve a riddle, our customer service goblins know plenty! Just don't try returning used wetsuits - we can smell fear... and saltwater.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Do you offer gear maintenance?</span>
+                <span class="question-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                Our certified goblin technicians (yes, that's a thing) offer full maintenance services. We treat your gear like our own precious treasure. Plus, our maintenance cave... er, facility... is state-of-the-art!
+            </div>
+        </div>
+    </div>
+
+    <!-- Size & Fitting -->
+    <div class="faq-category">
+        <h2 class="faq-category-title">Sizing & Fitting</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>How do I know what size wetsuit to order?</span>
+                <span class="question-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                Check our detailed size guide! We've measured everything in both human and goblin sizes (just kidding, it's all human sizes). If you're between sizes, our expert fitting goblins recommend sizing down - wetsuits stretch, but a loose wetsuit is about as useful as a chocolate teapot underwater.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>What if something doesn't fit?</span>
+                <span class="question-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                Easy peasy goblin squeezy! Just return it within 30 days for a different size. Our returns process is so simple, even a cave troll could do it (and they have terrible hand-eye coordination).
+            </div>
+        </div>
+    </div>
+
+    <!-- Special Cases -->
+    <div class="faq-category">
+        <h2 class="faq-category-title">Special Situations & Magical Inquiries</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Do you offer diving gear for unusual situations?</span>
+                <span class="question-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                Whether you're diving in the Arctic, exploring tropical waters, or searching for underwater treasure (that's our specialty!), we've got gear for every situation. Just don't ask about our mermaid-spotting equipment - that's still in beta testing.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>I found Nemo. Do I get a reward?</span>
+                <span class="question-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                Please release him back into the ocean - we're still paying off the legal fees from the last time someone tried to claim that reward. However, if you spot our mascot (the Diving Goblin) in the wild, snap a pic for 10% off your next order!
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Box -->
+<div class="contact-box">
+    <h2>Still Have Questions?</h2>
+    <p>Our goblin support team is standing by (actually, most of them are sitting... or hanging from the ceiling).</p>
+    <p>We promise they don't bite... anymore.</p>
+    <a href="mailto:support@divegoblin.com" class="contact-btn">
+        Summon Support Goblin
+        <i class="fas fa-arrow-right"></i>
+    </a>
 </div>
 
 <script>

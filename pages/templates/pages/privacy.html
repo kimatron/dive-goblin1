@@ -1,0 +1,289 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_title %} - Privacy Policy {% endblock %}
+
+{% block content %}
+<style>
+    .brutal-page {
+        padding: 2rem 0;
+    }
+
+    .brutal-page-header {
+        margin-bottom: 4rem;
+    }
+
+    .brutal-page-title {
+        font-size: clamp(2.5rem, 8vw, 4rem);
+        font-weight: 900;
+        text-transform: uppercase;
+        line-height: 1;
+        margin-bottom: 1rem;
+        position: relative;
+        display: inline-block;
+    }
+
+    .brutal-page-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--brutal-accent);
+    }
+
+    .privacy-nav {
+        position: sticky;
+        top: calc(var(--header-height) + 2rem);
+        background: var(--brutal-white);
+        border: 4px solid var(--brutal-black);
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--brutal-shadow);
+        transition: all 0.3s ease;
+    }
+
+    .privacy-nav:hover {
+        transform: translate(-4px, -4px);
+        box-shadow: 8px 8px 0 var(--brutal-accent);
+    }
+
+    .privacy-nav-title {
+        font-size: 1.2rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 3px solid var(--brutal-black);
+    }
+
+    .privacy-nav-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .privacy-nav-item {
+        margin-bottom: 0.5rem;
+    }
+
+    .privacy-nav-link {
+        color: var(--brutal-black);
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.2s ease;
+        display: block;
+        padding: 0.5rem;
+        border: 2px solid transparent;
+    }
+
+    .privacy-nav-link:hover {
+        color: var(--brutal-accent);
+        transform: translateX(5px);
+        border: 2px solid var(--brutal-accent);
+    }
+
+    .privacy-section {
+        background: var(--brutal-white);
+        border: 4px solid var(--brutal-black);
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--brutal-shadow);
+        transition: all 0.3s ease;
+    }
+
+    .privacy-section:hover {
+        transform: translate(-4px, -4px);
+        box-shadow: 12px 12px 0 var(--brutal-accent);
+    }
+
+    .privacy-section h2 {
+        font-size: 1.8rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 3px solid var(--brutal-black);
+    }
+
+    .privacy-section h3 {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin: 1.5rem 0 1rem;
+    }
+
+    .privacy-section p {
+        margin-bottom: 1rem;
+        line-height: 1.6;
+    }
+
+    .privacy-section ul {
+        margin-bottom: 1rem;
+        padding-left: 1.5rem;
+    }
+
+    .privacy-section li {
+        margin-bottom: 0.5rem;
+    }
+
+    .last-updated {
+        background: var(--brutal-accent);
+        color: var(--brutal-white);
+        padding: 0.5rem 1rem;
+        display: inline-block;
+        margin-bottom: 2rem;
+        font-weight: 600;
+        border: 3px solid var(--brutal-black);
+        box-shadow: 4px 4px 0 var(--brutal-black);
+    }
+
+    @media (max-width: 768px) {
+        .brutal-page {
+            padding: 1rem;
+        }
+
+        .privacy-section {
+            padding: 1.5rem;
+        }
+
+        .privacy-nav {
+            position: relative;
+            top: 0;
+            margin: 1rem;
+        }
+    }
+</style>
+
+<div class="brutal-page">
+    <div class="container">
+        <!-- Page Header -->
+        <div class="brutal-page-header">
+            <h1 class="brutal-page-title">Privacy Policy</h1>
+            <div class="last-updated">Last Updated: March 13, 2024</div>
+        </div>
+
+        <div class="row">
+            <!-- Navigation Sidebar -->
+            <div class="col-md-3">
+                <nav class="privacy-nav">
+                    <h2 class="privacy-nav-title">Quick Links</h2>
+                    <ul class="privacy-nav-list">
+                        <li class="privacy-nav-item">
+                            <a href="#overview" class="privacy-nav-link">Overview</a>
+                        </li>
+                        <li class="privacy-nav-item">
+                            <a href="#information" class="privacy-nav-link">Information We Collect</a>
+                        </li>
+                        <li class="privacy-nav-item">
+                            <a href="#use" class="privacy-nav-link">How We Use Your Data</a>
+                        </li>
+                        <li class="privacy-nav-item">
+                            <a href="#cookies" class="privacy-nav-link">Cookies Policy</a>
+                        </li>
+                        <li class="privacy-nav-item">
+                            <a href="#rights" class="privacy-nav-link">Your Rights</a>
+                        </li>
+                        <li class="privacy-nav-item">
+                            <a href="#contact" class="privacy-nav-link">Contact Us</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9">
+                <section id="overview" class="privacy-section">
+                    <h2>Overview</h2>
+                    <p>At Dive Goblin, we take your privacy seriously (even more seriously than we take our love for underwater treasure). This policy explains how we collect, use, and protect your personal information when you use our website and services.</p>
+                    <p>We promise to protect your data like a goblin guards their gold - with utmost dedication and perhaps a touch of obsession.</p>
+                </section>
+
+                <section id="information" class="privacy-section">
+                    <h2>Information We Collect</h2>
+                    <h3>Information You Provide:</h3>
+                    <ul>
+                        <li>Contact information (name, email, phone number)</li>
+                        <li>Shipping and billing addresses</li>
+                        <li>Payment information (processed securely through our payment providers)</li>
+                        <li>Account preferences and diving certifications</li>
+                    </ul>
+
+                    <h3>Information Automatically Collected:</h3>
+                    <ul>
+                        <li>Device and browser information</li>
+                        <li>IP address and location data</li>
+                        <li>Website usage and interaction data</li>
+                        <li>Shopping preferences and history</li>
+                    </ul>
+                </section>
+
+                <section id="use" class="privacy-section">
+                    <h2>How We Use Your Data</h2>
+                    <p>We use your information to:</p>
+                    <ul>
+                        <li>Process and fulfill your orders</li>
+                        <li>Provide customer support and communicate with you</li>
+                        <li>Improve our products and services</li>
+                        <li>Send you relevant marketing communications (if you've opted in)</li>
+                        <li>Maintain the security of our platform</li>
+                        <li>Comply with legal obligations</li>
+                    </ul>
+                </section>
+
+                <section id="cookies" class="privacy-section">
+                    <h2>Cookies Policy</h2>
+                    <p>We use cookies to enhance your browsing experience. Unlike the cookies our goblins enjoy during break time, these are digital and help us:</p>
+                    <ul>
+                        <li>Remember your preferences</li>
+                        <li>Keep track of your shopping cart</li>
+                        <li>Analyze site traffic and performance</li>
+                        <li>Provide personalized content and recommendations</li>
+                    </ul>
+                    <p>You can control cookie settings through your browser preferences.</p>
+                </section>
+
+                <section id="rights" class="privacy-section">
+                    <h2>Your Rights</h2>
+                    <p>You have the right to:</p>
+                    <ul>
+                        <li>Access your personal data</li>
+                        <li>Correct inaccurate information</li>
+                        <li>Request deletion of your data</li>
+                        <li>Object to data processing</li>
+                        <li>Download your data</li>
+                        <li>Withdraw consent for marketing</li>
+                    </ul>
+                </section>
+
+                <section id="contact" class="privacy-section">
+                    <h2>Contact Us</h2>
+                    <p>Have questions about your privacy? Our Data Protection Goblin (yes, that's a real position) is here to help!</p>
+                    <p>Contact us at:</p>
+                    <ul>
+                        <li>Email: privacy@divegoblin.com</li>
+                        <li>Phone: +1 234 567 890</li>
+                        <li>Address: Goblin Cave #42, Underwater District, Ireland</li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Smooth scroll for privacy navigation
+        document.querySelectorAll('.privacy-nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const section = document.querySelector(this.getAttribute('href'));
+                window.scrollTo({
+                    top: section.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    });
+</script>
+{% endblock %}

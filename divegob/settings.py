@@ -29,11 +29,19 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['dive-goblin-30c473dd6e64.herokuapp.com', 'localhost', '127.0.0.1', '8000-kimatron-divegoblin1-r3dva5yy76r.ws.codeinstitute-ide.net', '8000-kimatron-divegoblin1-xdp538qeiuh.ws.codeinstitute-ide.net']
+ALLOWED_HOSTS = [
+    'dive-goblin-30c473dd6e64.herokuapp.com',
+    'localhost',
+    '127.0.0.1',
+    '8000-kimatron-divegoblin1-r3dva5yy76r.ws.codeinstitute-ide.net',
+    '8000-kimatron-divegoblin1-xdp538qeiuh.ws.codeinstitute-ide.net',
+]
 
-CSRF_TRUSTED_ORIGINS = [os.environ.get('CSRF_TRUSTED_ORIGINS')]
+CSRF_TRUSTED_ORIGINS = [
+    os.environ.get('CSRF_TRUSTED_ORIGINS')
+]
 
 # Application definition
 
@@ -208,9 +216,14 @@ if 'USE_AWS' in os.environ:
     MEDIAFILES_LOCATION = 'media'
 
     # Override static and media URLs in production
-    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
-    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
-
+    STATIC_URL = (
+        f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+    )
+    MEDIA_URL = (
+        f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+    )
+    
+    
 FREE_DELIVERY_THRESHOLD = 100
 STANDARD_DELIVERY_PERCENTAGE = 10
 
@@ -222,9 +235,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Stripe Settings
 
 STRIPE_CURRENCY = 'eur'
-STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY', '')
-STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', '')
-STRIPE_WH_SECRET = os.environ.get('STRIPE_WH_SECRET', '')
+STRIPE_PUBLIC_KEY = os.environ.get(
+    'STRIPE_PUBLIC_KEY',
+    'pk_test_default_value'  # Replace with a test key for local use
+)
+STRIPE_SECRET_KEY = os.environ.get(
+    'STRIPE_SECRET_KEY',
+    'sk_test_default_value'  # Replace with a test key for local use
+)
+STRIPE_WH_SECRET = os.environ.get(
+    'STRIPE_WH_SECRET',
+    'whsec_default_value'  # Replace with a test key for local use
+)
 DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
 
 # Email settings (optional for development)
@@ -242,6 +264,7 @@ BASE_URL = 'http://localhost:8000'  # Change in production
 if 'DEVELOPMENT' in os.environ:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     DOMAIN = 'https://kimatron-divegoblin1-xdp538qeiuh.ws.codeinstitute-ide.net/'
+    DEFAULT_FROM_EMAIL = os.environ.get('divegoblin@example.com')
 else:
     DOMAIN = 'https://dive-goblin-30c473dd6e64.herokuapp.com/'
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

@@ -36,16 +36,17 @@
     <link rel="external" href="https://facebook.com/divegoblin" target="_blank">
 
     <!-- FavIcon -->
-
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/apple-touch-icon.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/favicon-16x16.png' %}">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
     <link rel="manifest" href="{% static 'assets/site.webmanifest' %}">
     {% endblock %}
 
     {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     <link rel="stylesheet" href="{% static 'css/faq.css' %}?v=1.1">
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
     {% endblock %}
 
     <!-- Core JavaScript -->

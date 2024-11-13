@@ -61,7 +61,7 @@ def newsletter_signup(request):
             'status': 'error',
             'message': 'Please enter a valid email address.'
         }, status=400)
-    except Exception as e:
+    except Exception:
         return JsonResponse({
             'status': 'error',
             'message': 'Oops! Something went wrong. Please try again.'

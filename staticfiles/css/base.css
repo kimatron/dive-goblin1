@@ -1,3 +1,42 @@
+/* Ensuring content does not overlap with fixed header */
+@media (max-width: 768px) {
+
+    .container,
+    .brutal-page {
+        padding-top: calc(var(--header-height) + var(--nav-height));
+    }
+
+    .menu-content {
+        position: static;
+        /* Stacks menu vertically for smaller screens */
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+        padding: 1rem;
+        box-shadow: none;
+        /* Removes excessive shadow on mobile */
+    }
+
+    .menu-toggle {
+        width: 100%;
+    }
+
+    .menu-grid {
+        grid-template-columns: 1fr;
+        /* Stacks items in one column for smaller screens */
+    }
+
+    /* Increase spacing at the top for mobile screens to prevent header overlap */
+    main.container {
+        padding-top: calc(var(--header-height) + 10px);
+    }
+
+    /* Ensure buttons and dropdowns scale for smaller viewports */
+    .icon-btn {
+        min-width: 50px;
+        padding: 0.5rem;
+    }
+}
 
 
 /*--------------------------------------------------------------
@@ -1912,12 +1951,29 @@ body .error-box:hover {
 
 /* Glitch Effect */
 @keyframes glitch {
-    0% { transform: translate(0) }
-    20% { transform: translate(-2px, 2px) }
-    40% { transform: translate(-2px, -2px) }
-    60% { transform: translate(2px, 2px) }
-    80% { transform: translate(2px, -2px) }
-    100% { transform: translate(0) }
+    0% {
+        transform: translate(0)
+    }
+
+    20% {
+        transform: translate(-2px, 2px)
+    }
+
+    40% {
+        transform: translate(-2px, -2px)
+    }
+
+    60% {
+        transform: translate(2px, 2px)
+    }
+
+    80% {
+        transform: translate(2px, -2px)
+    }
+
+    100% {
+        transform: translate(0)
+    }
 }
 
 body .error-title .glitch {
@@ -1930,7 +1986,7 @@ body .error-title .glitch {
         margin: 0 1rem;
         padding: 1.5rem;
     }
-    
+
     body .error-btn {
         width: 100%;
         justify-content: center;

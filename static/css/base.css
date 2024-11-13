@@ -1,17 +1,20 @@
-
 /* Ensuring content does not overlap with fixed header */
 @media (max-width: 768px) {
-    .container, .brutal-page {
+
+    .container,
+    .brutal-page {
         padding-top: calc(var(--header-height) + var(--nav-height));
     }
 
     .menu-content {
-        position: static; /* Stacks menu vertically for smaller screens */
+        position: static;
+        /* Stacks menu vertically for smaller screens */
         transform: none;
         opacity: 1;
         visibility: visible;
         padding: 1rem;
-        box-shadow: none; /* Removes excessive shadow on mobile */
+        box-shadow: none;
+        /* Removes excessive shadow on mobile */
     }
 
     .menu-toggle {
@@ -19,7 +22,8 @@
     }
 
     .menu-grid {
-        grid-template-columns: 1fr; /* Stacks items in one column for smaller screens */
+        grid-template-columns: 1fr;
+        /* Stacks items in one column for smaller screens */
     }
 
     /* Increase spacing at the top for mobile screens to prevent header overlap */
@@ -1764,6 +1768,146 @@ h3 {
     }
 }
 
+/* About Page specific styles */
+.brutal-page {
+    padding: 2rem 0;
+}
+
+.brutal-page-header {
+    margin-bottom: 4rem;
+}
+
+.brutal-page-title {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.brutal-page-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--brutal-accent);
+}
+
+.content-box {
+    background: var(--brutal-white);
+    border: 4px solid var(--brutal-black);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--brutal-shadow);
+    transition: all 0.3s ease;
+}
+
+.content-box:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 12px 12px 0 var(--brutal-accent);
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 4rem 0;
+}
+
+.feature-box {
+    background: var(--brutal-white);
+    border: 4px solid var(--brutal-black);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--brutal-shadow);
+    transition: all 0.3s ease;
+}
+
+.feature-box:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0 var(--brutal-accent);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    color: var(--brutal-accent);
+    margin-bottom: 1rem;
+}
+
+.feature-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.team-section {
+    margin-top: 4rem;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.team-member {
+    background: var(--brutal-white);
+    border: 4px solid var(--brutal-black);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--brutal-shadow);
+    transition: all 0.3s ease;
+}
+
+.team-member:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0 var(--brutal-accent);
+}
+
+.member-image {
+    width: 150px;
+    height: 150px;
+    border: 4px solid var(--brutal-black);
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    overflow: hidden;
+}
+
+.member-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.member-name {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.member-role {
+    color: var(--brutal-accent);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .brutal-page {
+        padding: 1rem;
+    }
+
+    .content-box {
+        padding: 1.5rem;
+    }
+}
+
 /* Announcement & Notice Styles */
 .brutal-notice {
     background: var(--brutal-black);
@@ -1947,12 +2091,29 @@ body .error-box:hover {
 
 /* Glitch Effect */
 @keyframes glitch {
-    0% { transform: translate(0) }
-    20% { transform: translate(-2px, 2px) }
-    40% { transform: translate(-2px, -2px) }
-    60% { transform: translate(2px, 2px) }
-    80% { transform: translate(2px, -2px) }
-    100% { transform: translate(0) }
+    0% {
+        transform: translate(0)
+    }
+
+    20% {
+        transform: translate(-2px, 2px)
+    }
+
+    40% {
+        transform: translate(-2px, -2px)
+    }
+
+    60% {
+        transform: translate(2px, 2px)
+    }
+
+    80% {
+        transform: translate(2px, -2px)
+    }
+
+    100% {
+        transform: translate(0)
+    }
 }
 
 body .error-title .glitch {
@@ -1965,7 +2126,7 @@ body .error-title .glitch {
         margin: 0 1rem;
         padding: 1.5rem;
     }
-    
+
     body .error-btn {
         width: 100%;
         justify-content: center;

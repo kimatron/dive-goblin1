@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'dive-goblin-30c473dd6e64.herokuapp.com',
@@ -123,8 +123,25 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+# Email Configuration
+if 'DEVELOPMENT' in os.environ:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DEFAULT_FROM_EMAIL = 'divegoblin@example.com'
+    BASE_URL = 'http://localhost:8000'
+    DOMAIN = 'localhost:8000'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_USE_TLS = True
+    EMAIL_PORT = 587
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
+    DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+    BASE_URL = 'https://dive-goblin-30c473dd6e64.herokuapp.com'
+    DOMAIN = 'dive-goblin-30c473dd6e64.herokuapp.com'
+
+# Allauth settings
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
@@ -251,28 +268,6 @@ STRIPE_WH_SECRET = os.environ.get(
 )
 DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
 
-# Email settings (optional for development)
-
-# EMAIL_HOST ='smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # For development
-# DEFAULT_FROM_EMAIL = 'Dive Goblin <noreply@divegoblin.com>'
-BASE_URL = 'http://localhost:8000'  # Change in production
 
 # Development vs Production Settings
-if 'DEVELOPMENT' in os.environ:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    DOMAIN = 'https://kimatron-divegoblin1-xdp538qeiuh.ws.codeinstitute-ide.net/'
-    DEFAULT_FROM_EMAIL = os.environ.get('divegoblin@example.com')
-else:
-    DOMAIN = 'https://dive-goblin-30c473dd6e64.herokuapp.com/'
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_USE_TLS = True
-    EMAIL_PORT = 587
-    EMAIL_HOST = 'smtp.gmail.com'
-    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
-    DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+# Remove all the commented-out email settings and replace them with this clear configuration:

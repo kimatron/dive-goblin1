@@ -1,4 +1,39 @@
 
+/* Ensuring content does not overlap with fixed header */
+@media (max-width: 768px) {
+    .container, .brutal-page {
+        padding-top: calc(var(--header-height) + var(--nav-height));
+    }
+
+    .menu-content {
+        position: static; /* Stacks menu vertically for smaller screens */
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+        padding: 1rem;
+        box-shadow: none; /* Removes excessive shadow on mobile */
+    }
+
+    .menu-toggle {
+        width: 100%;
+    }
+
+    .menu-grid {
+        grid-template-columns: 1fr; /* Stacks items in one column for smaller screens */
+    }
+
+    /* Increase spacing at the top for mobile screens to prevent header overlap */
+    main.container {
+        padding-top: calc(var(--header-height) + 10px);
+    }
+
+    /* Ensure buttons and dropdowns scale for smaller viewports */
+    .icon-btn {
+        min-width: 50px;
+        padding: 0.5rem;
+    }
+}
+
 
 /*--------------------------------------------------------------
 Table of Contents:

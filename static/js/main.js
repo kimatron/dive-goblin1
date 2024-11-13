@@ -156,16 +156,19 @@ function initializeSlidingBanner() {
 document.addEventListener('DOMContentLoaded', function() {
  
     // initializeCollapsibleBanner();
-     initializeFloatingBanner();
-    // initializeSlidingBanner();
+    //  initializeFloatingBanner();
+    initializeSlidingBanner();
 });
 
 document.addEventListener('DOMContentLoaded', function() {
     const logoutForm = document.querySelector('.logout-form');
-    const submitBtn = logoutForm.querySelector('button[type="submit"]');
-
-    logoutForm.addEventListener('submit', function(e) {
-        submitBtn.classList.add('loading');
-        submitBtn.textContent = 'Signing Out...';
-    });
+    if (logoutForm) {
+        const submitBtn = logoutForm.querySelector('button[type="submit"]');
+        if (submitBtn) {
+            logoutForm.addEventListener('submit', function(e) {
+                submitBtn.classList.add('loading');
+                submitBtn.textContent = 'Signing Out...';
+            });
+        }
+    }
 });

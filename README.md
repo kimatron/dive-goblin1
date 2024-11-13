@@ -313,14 +313,22 @@ Detailed testing documentation can be found in the [TESTING.md](TESTING.md) file
 - **Personal Collection**: Some images were taken by myself from my personal photo collection.
 - **Adobe Firefly**: Logo created using [Adobe Firefly](https://www.adobe.com/sensei/generative-ai/firefly.html).
 
-## Button CSS Styling
+## CSS Styling
+I really utilized open sourced styling from CodePen and Uiverse for inspiration for my front end design, it helped me decide to go with a brutalist theme for my page to make it stand out, and was a lot of fun playing around with other peoples code and seeing what magic I could make happen.
+
 - **UIVERSE**: Button CSS styling inspired by Kirzin on [UIVERSE](https://uiverse.io/Kirzin).
+- **CodePen**: Fuzzy Noise background CSS styling inspired by Nick Cipher on [CodePen](https://codepen.io/luisciphere/pen/WXXgWm).
+- **UIVERSE**: Brutalist Input CSS styling inspired by 0xNihilist on [UIVERSE](https://uiverse.io/0xnihilism/calm-baboon-55).
+
+
 
 ## Tutorials and Coding Assistance
 - **Code Institute**: This project was developed using Code Institute's Boutique Ado tutorial as a base.
 - **W3Schools**: Referenced various coding examples and explanations from [W3Schools](https://www.w3schools.com).
 - **Stack Overflow**: Sourced solutions and ideas for coding issues from the [Stack Overflow](https://stackoverflow.com) community.
 - **Slack Communities**: Received assistance and feedback from various Slack communities.
+
+- **Merlin**: At some point I almost lost my mind with the mess I made of my CSS file, and ran it through an APP to reorganize my code file in a structured manner to clear my head so I could continue with my project. It really helped me to continue to power through.
 
 # Technologies Used
 
@@ -343,10 +351,12 @@ Detailed testing documentation can be found in the [TESTING.md](TESTING.md) file
 
 ## Development Tools
 - **Visual Studio Code**: A powerful and flexible code editor. [Visual Studio Code](https://code.visualstudio.com).
-- **Gitpod**: An online IDE for GitHub that provides a complete development environment. [Gitpod](https://www.gitpod.io).
+- **Gitpod**: When VSCode threw me for a complete loop and would not let my project continue, I had to switch to Gitpod, and thankfully that allowed me to continue. I still can't figure out what broke in my VSCode unfortunately. GitPod is an online IDE for GitHub that provides a complete development environment. [Gitpod](https://www.gitpod.io).
 
 ## Additional Resources
 
 ## Thank You
 A big thank you to all the resources and communities that provided assistance, inspiration, and support throughout the development of this project.
+
+Special shout out to Viola who spent many hours on huddles with me and stopped me from throwing my laptop out the window numerous times :)
 

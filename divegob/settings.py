@@ -256,8 +256,8 @@ DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
 # EMAIL_USE_TLS = True
 # EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 # EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # For development
-DEFAULT_FROM_EMAIL = 'Dive Goblin <noreply@divegoblin.com>'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # For development
+# DEFAULT_FROM_EMAIL = 'Dive Goblin <noreply@divegoblin.com>'
 BASE_URL = 'http://localhost:8000'  # Change in production
 
 # Development vs Production Settings

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 class Category(models.Model):
@@ -34,6 +35,7 @@ class Product(models.Model):
         upload_to='products/', blank=True, null=True)
     rating = models.DecimalField(
         max_digits=3, decimal_places=1, default=0)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name

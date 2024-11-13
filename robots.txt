@@ -1,0 +1,9 @@
+
+User-agent: *
+Allow: /
+Disallow: /accounts/
+Disallow: /checkout/
+Disallow: /cart/
+Disallow: /admin/
+
+Sitemap: https://dive-goblin.herokuapp.com/sitemap.xml

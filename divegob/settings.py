@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.sitemaps',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -65,6 +66,7 @@ INSTALLED_APPS = [
     'django_countries',
     'newsletter',
     'pages',
+
 
     # OTHER
     'storages',
@@ -222,8 +224,8 @@ if 'USE_AWS' in os.environ:
     MEDIA_URL = (
         f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
     )
-    
-    
+
+
 FREE_DELIVERY_THRESHOLD = 100
 STANDARD_DELIVERY_PERCENTAGE = 10
 

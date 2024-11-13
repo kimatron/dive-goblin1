@@ -8,6 +8,11 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Dive Goblin - Your premier destination for diving equipment and underwater adventures. Quality scuba gear, wetsuits, and diving accessories.">
+        <meta name="keywords" content="diving equipment, scuba gear, wetsuits, underwater gear, diving accessories">
+        <meta name="author" content="Dive Goblin">
+        
+
     {% endblock %}
 
     {% block extra_meta %}
@@ -22,13 +27,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800;900&family=Noto+Sans+Manichaean:wght@400&display=swap" rel="stylesheet">
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <!-- Footer CSS -->
-        <link rel="stylesheet" href="{% static 'css/footer.css' %}">
-        <!-- Base CSS -->
+
+        <!-- Custom CSS -->
         <link rel="stylesheet" href="{% static 'css/base.css' %}?v=1.1">
+        <link rel="stylesheet" href="{% static 'css/footer.css' %}">
         <link rel="stylesheet" href="{% static 'css/faq.css' %}?v=1.1">
 
-
+    <!-- SEO Relationships -->
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+    <link rel="external" href="https://facebook.com/divegoblin" target="_blank">
 {% endblock %}
 
     {% block extra_css %}

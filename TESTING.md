@@ -232,6 +232,7 @@
 |--------|-------------|----------|-----------|
 | BUG-001 | Mobile menu overlap | Adjusted z-index | [Before/After](link) |
 | BUG-002 | Payment form timeout | Updated Stripe timeout | [Commit](link) |
+| BUG-003 | Quantity increasing in odd numbers | Javascript was entered twice in .js file and .html, removed duplicated script in html | [Commit](link) |
 
 Example Bug Fix:
 ```css

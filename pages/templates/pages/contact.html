@@ -25,7 +25,8 @@
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="name">Your Name</label>
-                        <input type="text" id="name" name="name" class="brutal-input" required>
+                        <input type="text" id="name" name="name" class="brutal-input" required 
+                               minlength="2" maxlength="100">
                     </div>
                     <div class="form-group">
                         <label for="email">Email Address</label>
@@ -33,11 +34,13 @@
                     </div>
                     <div class="form-group">
                         <label for="subject">Subject</label>
-                        <input type="text" id="subject" name="subject" class="brutal-input" required>
+                        <input type="text" id="subject" name="subject" class="brutal-input" required 
+                               minlength="3" maxlength="200">
                     </div>
                     <div class="form-group">
                         <label for="message">Message</label>
-                        <textarea id="message" name="message" class="brutal-textarea" rows="5" required></textarea>
+                        <textarea id="message" name="message" class="brutal-textarea" rows="5" required 
+                                  minlength="10"></textarea>
                     </div>
                     <button type="submit" class="brutal-button">
                         <span class="button-text">Send Message</span>
@@ -77,4 +80,41 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+<script>
+document.querySelector('.brutal-form').addEventListener('submit', function(e) {
+    // Get form fields
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value.trim();
+    const message = document.getElementById('message').value.trim();
+    
+    let isValid = true;
+    let errorMessage = '';
+    
+    // Simple validation
+    if (name.length < 2) {
+        isValid = false;
+        errorMessage = 'Name must be at least 2 characters long.';
+    } else if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+        isValid = false;
+        errorMessage = 'Please enter a valid email address.';
+    } else if (subject.length < 3) {
+        isValid = false;
+        errorMessage = 'Subject must be at least 3 characters long.';
+    } else if (message.length < 10) {
+        isValid = false;
+        errorMessage = 'Message must be at least 10 characters long.';
+    }
+    
+    if (!isValid) {
+        e.preventDefault();
+
+        alert(errorMessage); // Replace with preferred message display method when time
+    }
+});
+</script>
 {% endblock %}

@@ -1206,11 +1206,40 @@ h3 {
 }
 
 .brutal-toast {
+    border: 3px solid var(--brutal-black);
+    box-shadow: 6px 6px 0 var(--brutal-black);
     background: var(--brutal-white);
-    border: var(--brutal-border);
-    box-shadow: var(--brutal-shadow);
-    margin-bottom: 1rem;
-    animation: slideIn 0.3s ease-out;
+    transition: transform 0.3s ease;
+    min-width: 300px;
+}
+
+.brutal-toast:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 10px 10px 0 var(--brutal-accent);
+}
+
+.brutal-toast .toast-header {
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    border-bottom: 3px solid var(--brutal-accent);
+    padding: 1rem;
+}
+
+.brutal-toast .toast-body {
+    padding: 1.5rem;
+}
+
+.brutal-toast .btn-close {
+    color: var(--brutal-white);
+    opacity: 1;
+}
+
+.success-toast .toast-header {
+    border-color: var(--brutal-accent);
+}
+
+.error-toast .toast-header {
+    border-color: #ff3333;
 }
 
 .toast-header {
@@ -1239,6 +1268,7 @@ h3 {
     margin-top: 6rem !important;
     position: relative !important;
     border-top: 4px solid var(--brutal-black) !important;
+    list-style-type: none;
 }
 
 /* Newsletter Section  */

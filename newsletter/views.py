@@ -16,21 +16,7 @@ import json
 
 @require_POST
 def newsletter_signup(request):
-    """
-    Handle AJAX requests for newsletter sign-ups.
-
-    Receives JSON data containing an email address, validates it, and
-    checks if the email is already subscribed. If valid and new, adds the
-    email to the NewsletterSubscriber database and sends a welcome email.
-
-    Args:
-        request (HttpRequest): The request object containing the JSON payload.
-
-    Returns:
-        JsonResponse: A JSON response indicating the status of the subscription
-                      (success, info if already subscribed, or error for
-                      invalid email).
-    """
+    """Handle AJAX requests for newsletter sign-ups."""
     try:
         data = json.loads(request.body)
         email = data.get('email', '').strip()
@@ -38,9 +24,12 @@ def newsletter_signup(request):
         validate_email(email)
 
         if NewsletterSubscriber.objects.filter(email=email).exists():
+            # Already subscribed - return error toast
+            toast_html = render_to_string('includes/toasts/newsletter_error.html')
             return JsonResponse({
                 'status': 'info',
-                "message": "You're already subscribed!"
+                'message': "You're already subscribed!",
+                'toast_html': toast_html
             })
 
         subscriber = NewsletterSubscriber.objects.create(email=email)
@@ -51,20 +40,33 @@ def newsletter_signup(request):
         except Exception as e:
             print(f"Failed to send welcome email: {e}")
 
+        # Success - return success toast
+        toast_html = render_to_string('includes/toasts/newsletter_success.html')
         return JsonResponse({
             'status': 'success',
-            'message': 'Successfully subscribed! Welcome aboard! 🎉'
+            'message': 'Successfully subscribed! Welcome aboard! 🎉',
+            'toast_html': toast_html
         })
 
     except ValidationError:
+        # Invalid email - return error toast
+        toast_html = render_to_string('includes/toasts/newsletter_error.html', {
+            'message': 'Please enter a valid email address.'
+        })
         return JsonResponse({
             'status': 'error',
-            'message': 'Please enter a valid email address.'
+            'message': 'Please enter a valid email address.',
+            'toast_html': toast_html
         }, status=400)
     except Exception:
+        # Generic error - return error toast
+        toast_html = render_to_string('includes/toasts/newsletter_error.html', {
+            'message': 'Oops! Something went wrong. Please try again.'
+        })
         return JsonResponse({
             'status': 'error',
-            'message': 'Oops! Something went wrong. Please try again.'
+            'message': 'Oops! Something went wrong. Please try again.',
+            'toast_html': toast_html
         }, status=500)
 
 

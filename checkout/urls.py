@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from .webhooks import webhook
 
+app_name = 'checkout'
 
 urlpatterns = [
     path(
@@ -15,4 +16,5 @@ urlpatterns = [
     path(
         'webhook/',
         webhook, name='webhook'),
+    path('order_history/<str:order_number>', views.order_history, name='order_history'),
 ]

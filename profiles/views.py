@@ -12,7 +12,7 @@ from django.urls import reverse
 @login_required
 def profile(request):
     profile = get_object_or_404(UserProfile, user=request.user)
- 
+
     if request.method == 'POST':
         if request.POST.get('form_type') == 'delivery_form':
             form = UserProfileForm(request.POST, instance=profile)
@@ -21,7 +21,7 @@ def profile(request):
                 messages.success(request, 'Delivery information updated successfully')
             else:
                 messages.error(request, 'Update failed. Please ensure the form is valid.')
-        
+
         elif request.POST.get('form_type') == 'info_form':
             info_form = UserInformationForm(request.POST, instance=profile)
             if info_form.is_valid():
@@ -105,22 +105,19 @@ def delete_account(request):
     if request.method == 'POST':
         user = request.user
         password = request.POST.get('password')
-        confirm_delete = request.POST.get('confirm_delete')
 
+        # Verify password
         if not user.check_password(password):
             messages.error(request, 'Incorrect password.')
             return redirect('profiles:profile')
 
-        if not confirm_delete:
-            messages.error(request, 'Please confirm account deletion.')
-            return redirect('profiles:profile')
-
         try:
+            # Delete the user and log them out
             user.delete()
+            logout(request)  # Make sure to import logout from django.contrib.auth
             messages.success(request, 'Your account has been deleted.')
             return redirect('home')
         except Exception as e:
             messages.error(request, f'Error deleting account: {str(e)}')
-            return redirect('profiles:profile')
 
     return redirect('profiles:profile')

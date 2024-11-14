@@ -72,56 +72,96 @@
         </div>
 
         <!-- Order History -->
-<div class="brutal-card wide-section">
-    <div class="card-decoration"></div>
-    <h2>Order History</h2>
-    {% if orders %}
-        <div class="order-list">
-            {% for order in orders %}
-                <div class="order-item">
-                    <div class="order-details">
-                        <div class="order-header">
-                            <span class="order-number">#{{ order.order_number|truncatechars:6 }}</span>
-                            <span class="order-date">{{ order.date|date:"F j, Y" }}</span>
-                        </div>
-                        <div class="order-items">
-                            {% for item in order.lineitems.all %}
-                                <div class="item-detail">
-                                    <span>{{ item.product.name }} × {{ item.quantity }}</span>
-                                    <span>${{ item.lineitem_total }}</span>
+        <div class="brutal-card wide-section">
+            <div class="card-decoration"></div>
+            <h2>Order History</h2>
+            {% if orders %}
+                <div class="order-list">
+                    {% for order in orders %}
+                        <div class="order-item">
+                            <div class="order-details">
+                                <div class="order-header">
+                                    <span class="order-number">#{{ order.order_number|truncatechars:6 }}</span>
+                                    <span class="order-date">{{ order.date|date:"F j, Y" }}</span>
                                 </div>
-                            {% endfor %}
+                                <div class="order-items">
+                                    {% for item in order.lineitems.all %}
+                                        <div class="item-detail">
+                                            <span>{{ item.product.name }} × {{ item.quantity }}</span>
+                                            <span>${{ item.lineitem_total }}</span>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="order-summary">
+                                    <div class="summary-item">
+                                        <span>Subtotal:</span>
+                                        <span>${{ order.order_total }}</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span>Delivery:</span>
+                                        <span>${{ order.delivery_cost }}</span>
+                                    </div>
+                                    <div class="summary-item total">
+                                        <span>Total:</span>
+                                        <span>${{ order.grand_total }}</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="order-summary">
-                            <div class="summary-item">
-                                <span>Subtotal:</span>
-                                <span>${{ order.order_total }}</span>
-                            </div>
-                            <div class="summary-item">
-                                <span>Delivery:</span>
-                                <span>${{ order.delivery_cost }}</span>
-                            </div>
-                            <div class="summary-item total">
-                                <span>Total:</span>
-                                <span>${{ order.grand_total }}</span>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
-            {% endfor %}
+            {% else %}
+                <div class="no-orders">
+                    <p>No orders yet!</p>
+                    <a href="{% url 'products' %}" class="brutal-button">Start Shopping</a>
+                </div>
+            {% endif %}
         </div>
-    {% else %}
-        <div class="no-orders">
-            <p>No orders yet!</p>
-            <a href="{% url 'products' %}" class="brutal-button">Start Shopping</a>
-        </div>
-    {% endif %}
+    </div>
 </div>
+
+<!-- Update Account Modal -->
+<div class="modal fade" id="updateAccountModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content brutal-modal">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Account Details</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{% url 'profiles:update_account' %}" class="update-account-form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" name="username" id="username" value="{{ request.user.username }}" class="brutal-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" value="{{ request.user.email }}" class="brutal-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="current_password">Current Password</label>
+                        <input type="password" name="current_password" id="current_password" class="brutal-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new_password">New Password (optional)</label>
+                        <input type="password" name="new_password" id="new_password" class="brutal-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password">Confirm New Password</label>
+                        <input type="password" name="confirm_password" id="confirm_password" class="brutal-input">
+                    </div>
+                    <button type="submit" class="brutal-button">Update Account</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 
 <!-- Delete Account Modal -->
-<div class="modal fade" id="deleteAccountModal" tabindex="-1">
+<div class="modal fade" id="deleteAccountModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content brutal-modal">
             <div class="modal-header">
@@ -131,24 +171,47 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="delete-warning">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <p>Warning: This action cannot be undone!</p>
-                </div>
-                <form method="POST" action="{% url 'profiles:delete_account' %}">
+                <form method="POST" action="{% url 'profiles:delete_account' %}" id="deleteAccountForm">
                     {% csrf_token %}
+                    <div class="delete-warning text-center">
+                        <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
+                        <h3 class="text-danger">Warning: This Cannot Be Undone!</h3>
+                        <p>Your account and all associated data will be permanently deleted.</p>
+                    </div>
                     <div class="form-group">
-                        <label>Confirm Password</label>
-                        <input type="password" name="password" class="brutal-input" required>
+                        <label>Enter your password to confirm</label>
+                        <input type="password" name="password" class="form-control brutal-input" required>
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="confirm_delete" name="confirm_delete" required>
-                        <label for="confirm_delete">I understand this will permanently delete my account</label>
+                    <div class="form-group form-check">
+                        <input type="checkbox" name="confirm_delete" id="confirm_delete" class="form-check-input" required>
+                        <label class="form-check-label" for="confirm_delete">
+                            I understand this will permanently delete my account
+                        </label>
                     </div>
-                    <button type="submit" class="brutal-button brutal-button--danger">Delete My Account</button>
+                    <div class="text-center mt-4">
+                        <button type="button" class="brutal-button" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="brutal-button brutal-button--danger">Delete My Account</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+{% block postloadjs %}
+{{ block.super }}
+<script>
+    $(document).ready(function() {
+        // Simple form validation for delete account
+        $('#deleteAccountForm').on('submit', function(e) {
+            if (!$('#confirm_delete').is(':checked')) {
+                e.preventDefault();
+                alert('Please confirm account deletion by checking the box.');
+                return false;
+            }
+            return confirm('Are you ABSOLUTELY sure you want to delete your account? This cannot be undone!');
+        });
+    });
+</script>
+{% endblock %}
 {% endblock %}

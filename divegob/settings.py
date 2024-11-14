@@ -85,6 +85,8 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
 ]
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 ROOT_URLCONF = 'divegob.urls'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

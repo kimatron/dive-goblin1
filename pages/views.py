@@ -15,3 +15,12 @@ def privacy_view(request):
 
 def terms(request):
     return render(request, 'pages/terms.html')
+
+
+def contact(request):
+    if request.method == 'POST':
+        # Add your form handling logic here
+        # You might want to send an email or save to database
+        messages.success(request, 'Your message has been sent! We will get back to you soon.')
+        return redirect('pages:contact')
+    return render(request, 'pages/contact.html')

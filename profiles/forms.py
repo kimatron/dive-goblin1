@@ -1,5 +1,6 @@
 from django import forms
 from .models import UserProfile
+from django.contrib.auth.models import User
 
 
 class UserProfileForm(forms.ModelForm):
@@ -32,3 +33,14 @@ class UserProfileForm(forms.ModelForm):
                 self.fields[field].widget.attrs['placeholder'] = placeholder
             self.fields[field].widget.attrs['class'] = 'profile-form-input'
             self.fields[field].label = False
+
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'brutal-input'

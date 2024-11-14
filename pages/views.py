@@ -35,13 +35,13 @@ def contact(request):
                 # Email body
                 email_body = f"""
                 New contact form submission from Dive Goblin:
-                
+
                 Name: {name}
                 Email: {email}
                 Subject: {subject}
                 Message: {message}
                 """
-                
+
                 # Send email
                 send_mail(
                     f'New Contact Form Submission: {subject}',
@@ -50,7 +50,7 @@ def contact(request):
                     [settings.DEFAULT_FROM_EMAIL],  # Send to admin email
                     fail_silently=False,
                 )
-                
+
                 messages.success(request, 'Your message has been sent! We will get back to you soon.')
             except Exception as e:
                 print(f"Error sending email: {e}")  # For debugging

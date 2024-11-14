@@ -2,79 +2,103 @@
 {% load static %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 {% endblock %}
 
 {% block content %}
 <div class="profile-container">
     <div class="profile-header">
         <h1 class="profile-title">My Profile</h1>
-        {% if messages %}
-            <div class="message-container">
-                {% for message in messages %}
-                    <div class="profile-message {{ message.tags }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
+        <p class="profile-subtitle">Welcome back, {{ request.user.username }}!</p>
     </div>
 
     <div class="profile-grid">
-        <div class="profile-info">
-            <div class="brutal-card">
-                <h2>Default Delivery Information</h2>
-                <form action="{% url 'profiles:profile' %}" method="POST" id="profile-update-form">
-                    {% csrf_token %}
-                    {% for field in form %}
-                        <div class="form-group">
-                            {% if field.name != 'default_country' %}
-                                {{ field }}
-                            {% else %}
-                                <label for="{{ field.id_for_label }}" class="country-label">Country</label>
-                                {{ field }}
-                            {% endif %}
-                            {% if field.errors %}
-                                {% for error in field.errors %}
-                                    <span class="error">{{ error }}</span>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
-                    {% endfor %}
-                    <button type="submit" class="brutal-button">Update Information</button>
-                </form>
+        <!-- Account Information -->
+        <div class="brutal-card">
+            <h2>Account Information</h2>
+            <div class="user-info">
+                <div class="info-item">
+                    <div class="info-label">Username</div>
+                    <div class="info-value">{{ request.user.username }}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Email</div>
+                    <div class="info-value">{{ request.user.email }}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Member Since</div>
+                    <div class="info-value">{{ request.user.date_joined|date:"F j, Y" }}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Last Login</div>
+                    <div class="info-value">{{ request.user.last_login|date:"F j, Y" }}</div>
+                </div>
             </div>
+            <button class="brutal-button" data-toggle="modal" data-target="#updateAccountModal">
+                Update Account Details
+            </button>
         </div>
 
-        <div class="profile-history">
-            <div class="brutal-card">
-                <h2>Order History</h2>
-                {% if orders %}
-                    <div class="order-list">
-                        {% for order in orders %}
-                            <div class="order-item">
-                                <div class="order-info">
-                                    <p class="order-number">Order #{{ order.order_number }}</p>
-                                    <p class="order-date">{{ order.date }}</p>
-                                    <p class="order-total">${{ order.grand_total }}</p>
-                                </div>
-                                <a href="{% url 'order_history' order.order_number %}" 
-                                   class="brutal-button brutal-button--small">
-                                    View Order
-                                </a>
-                            </div>
-                        {% endfor %}
+        <!-- Delivery Information -->
+        <div class="brutal-card">
+            <h2>Default Delivery Information</h2>
+            <form action="{% url 'profiles:profile' %}" method="POST" id="profile-update-form">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                            {% for error in field.errors %}
+                                <span class="error">{{ error }}</span>
+                            {% endfor %}
+                        {% endif %}
                     </div>
-                {% else %}
-                    <p class="no-orders">No order history available.</p>
-                {% endif %}
-            </div>
+                {% endfor %}
+                <button type="submit" class="brutal-button">Update Delivery Info</button>
+            </form>
+        </div>
+
+        <!-- Order History -->
+        <div class="brutal-card wide-section">
+            <h2>Order History</h2>
+            {% if orders %}
+                <div class="order-list">
+                    {% for order in orders %}
+                        <div class="order-item">
+                            <div class="order-info">
+                                <div class="info-label">Order Number</div>
+                                <div class="info-value">{{ order.order_number }}</div>
+                                <div class="info-label">Date</div>
+                                <div class="info-value">{{ order.date }}</div>
+                                <div class="info-label">Total</div>
+                                <div class="info-value">${{ order.grand_total }}</div>
+                            </div>
+                            <a href="{% url 'order_history' order.order_number %}" class="brutal-button">
+                                View Details
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="no-orders">
+                    <p>No orders yet!</p>
+                    <a href="{% url 'products' %}" class="brutal-button">Start Shopping</a>
+                </div>
+            {% endif %}
         </div>
     </div>
 </div>
-{% endblock %}
 
-{% block postloadjs %}
-{{ block.super }}
-<script type="text/javascript" src="{% static 'profiles/js/countryfield.js' %}"></script>
+<!-- Messages -->
+{% if messages %}
+    <div class="message-container">
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
 {% endblock %}

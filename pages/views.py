@@ -11,3 +11,7 @@ def faq_view(request):
 
 def privacy_view(request):
     return render(request, 'pages/privacy.html')
+
+
+def terms(request):
+    return render(request, 'pages/terms.html')

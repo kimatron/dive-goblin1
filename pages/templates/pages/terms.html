@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_title %}Terms of Service{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="terms-box" style="border: 3px solid #000; box-shadow: 6px 6px 0 #000; padding: 2rem; margin-bottom: 2rem; background: #fff; position: relative;">
+        <!-- Decorative elements -->
+        <div style="position: absolute; top: -15px; right: -15px; width: 30px; height: 30px; background: #00AC7C; border: 3px solid #000; transform: rotate(15deg);"></div>
+        
+        <h1 style="font-size: 2.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 2rem; border-bottom: 3px solid #000; padding-bottom: 1rem;">Terms of Service</h1>
+        
+        <div class="terms-content" style="font-size: 1.1rem; line-height: 1.6;">
+            <section style="margin-bottom: 2rem;">
+                <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem; color: #00AC7C;">1. Introduction</h2>
+                <p>Welcome to Dive Goblin. By accessing our website, you agree to these terms and conditions.</p>
+            </section>
+
+            <section style="margin-bottom: 2rem;">
+                <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem; color: #00AC7C;">2. Use License</h2>
+                <p>Permission is granted to temporarily download one copy of the materials (information or software) on Dive Goblin's website for personal, non-commercial transitory viewing only.</p>
+            </section>
+
+            <section style="margin-bottom: 2rem;">
+                <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem; color: #00AC7C;">3. Disclaimer</h2>
+                <p>The materials on Dive Goblin's website are provided on an 'as is' basis. Dive Goblin makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
+            </section>
+
+            <section style="margin-bottom: 2rem;">
+                <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem; color: #00AC7C;">4. Limitations</h2>
+                <p>In no event shall Dive Goblin or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Dive Goblin's website.</p>
+            </section>
+
+            <section style="margin-bottom: 2rem;">
+                <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem; color: #00AC7C;">5. Accuracy of Materials</h2>
+                <p>The materials appearing on Dive Goblin's website could include technical, typographical, or photographic errors. Dive Goblin does not warrant that any of the materials on its website are accurate, complete or current.</p>
+            </section>
+
+            <section style="margin-bottom: 2rem;">
+                <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem; color: #00AC7C;">6. Links</h2>
+                <p>Dive Goblin has not reviewed all of the sites linked to its website and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by Dive Goblin of the site.</p>
+            </section>
+
+            <section style="margin-bottom: 2rem;">
+                <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem; color: #00AC7C;">7. Modifications</h2>
+                <p>Dive Goblin may revise these terms of service for its website at any time without notice. By using this website you are agreeing to be bound by the then current version of these terms of service.</p>
+            </section>
+
+            <section style="margin-bottom: 2rem;">
+                <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem; color: #00AC7C;">8. Governing Law</h2>
+                <p>These terms and conditions are governed by and construed in accordance with the laws and you irrevocably submit to the exclusive jurisdiction of the courts in that location.</p>
+            </section>
+        </div>
+
+        <div style="margin-top: 3rem; text-align: center; padding-top: 2rem; border-top: 3px solid #000;">
+            <p style="font-size: 0.9rem; color: #666;">Last updated: {{ current_year }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

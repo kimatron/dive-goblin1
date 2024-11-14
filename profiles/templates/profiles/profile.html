@@ -8,147 +8,147 @@
 
 {% block content %}
 <div class="profile-container">
+    <!-- Profile Header -->
     <div class="profile-header">
         <h1 class="profile-title">My Profile</h1>
         <p class="profile-subtitle">Welcome back, {{ request.user.username }}!</p>
     </div>
 
     <div class="profile-grid">
+        <!-- Member Details -->
+        <div class="brutal-card member-card">
+            <div class="card-decoration"></div>
+            <h2>Member Details</h2>
+            <div class="member-info">
+                <div class="info-group">
+                    <span class="info-label">Username</span>
+                    <span class="info-value">{{ request.user.username }}</span>
+                </div>
+                <div class="info-group">
+                    <span class="info-label">Email</span>
+                    <span class="info-value">{{ request.user.email }}</span>
+                </div>
+                <div class="info-group">
+                    <span class="info-label">Member Since</span>
+                    <span class="info-value">{{ request.user.date_joined|date:"F j, Y" }}</span>
+                </div>
+                <div class="info-group">
+                    <span class="info-label">Last Login</span>
+                    <span class="info-value">{{ request.user.last_login|date:"F j, Y" }}</span>
+                </div>
+            </div>
+            <div class="account-actions">
+                <button class="brutal-button" data-toggle="modal" data-target="#updateAccountModal">
+                    Update Account Details
+                </button>
+                <button class="brutal-button brutal-button--danger" data-toggle="modal" data-target="#deleteAccountModal">
+                    Delete Account
+                </button>
+            </div>
+        </div>
+
         <!-- Personal Information -->
         <div class="brutal-card">
+            <div class="card-decoration"></div>
             <h2>Personal Information</h2>
-            <form method="POST" action="{% url 'profiles:profile' %}" class="info-form">
+            <form method="POST" class="info-form">
                 {% csrf_token %}
                 <input type="hidden" name="form_type" value="info_form">
-                <div class="form-group">
-                    <label for="id_gender">Gender</label>
-                    {{ info_form.gender }}
-                </div>
-                <div class="form-group">
-                    <label for="id_date_of_birth">Date of Birth</label>
-                    {{ info_form.date_of_birth }}
-                </div>
-                <div class="form-group">
-                    <label for="id_diving_level">Diving Level</label>
-                    {{ info_form.diving_level }}
-                </div>
-                <div class="form-group">
-                    <label for="id_bio">About You</label>
-                    {{ info_form.bio }}
-                </div>
+                {{ info_form.as_p }}
                 <button type="submit" class="brutal-button">Update Personal Info</button>
             </form>
         </div>
 
         <!-- Delivery Information -->
         <div class="brutal-card">
+            <div class="card-decoration"></div>
             <h2>Delivery Information</h2>
-            <form action="{% url 'profiles:profile' %}" method="POST" id="profile-update-form">
+            <form method="POST" id="profile-update-form">
                 {% csrf_token %}
                 <input type="hidden" name="form_type" value="delivery_form">
-                <div class="form-group">
-                    <label>Phone Number</label>
-                    {{ form.default_phone_number }}
-                </div>
-                <div class="form-group">
-                    <label>Street Address 1</label>
-                    {{ form.default_street_address1 }}
-                </div>
-                <div class="form-group">
-                    <label>Street Address 2</label>
-                    {{ form.default_street_address2 }}
-                </div>
-                <div class="form-group">
-                    <label>Town or City</label>
-                    {{ form.default_town_or_city }}
-                </div>
-                <div class="form-group">
-                    <label>County</label>
-                    {{ form.default_county }}
-                </div>
-                <div class="form-group">
-                    <label>Postal Code</label>
-                    {{ form.default_postcode }}
-                </div>
-                <div class="form-group">
-                    <label>Country</label>
-                    {{ form.default_country }}
-                </div>
+                {{ form|crispy }}
                 <button type="submit" class="brutal-button">Update Delivery Info</button>
             </form>
         </div>
 
         <!-- Order History -->
-        <div class="brutal-card wide-section">
-            <h2>Order History</h2>
-            {% if orders %}
-                <div class="order-list">
-                    {% for order in orders %}
-                        <div class="order-item">
-                            <div class="order-info">
-                                <div class="info-group">
-                                    <div class="info-label">Order Number:</div>
-                                    <div class="info-value">{{ order.order_number|truncatechars:6 }}</div>
-                                </div>
-                                <div class="info-group">
-                                    <div class="info-label">Date:</div>
-                                    <div class="info-value">{{ order.date }}</div>
-                                </div>
-                                <div class="info-group">
-                                    <div class="info-label">Items:</div>
-                                    <div class="info-value">
-                                        {% for item in order.lineitems.all %}
-                                            {{ item.product.name }} x{{ item.quantity }}<br>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                                <div class="info-group">
-                                    <div class="info-label">Total:</div>
-                                    <div class="info-value">${{ order.grand_total }}</div>
-                                </div>
-                            </div>
-                            <a href="{% url 'profiles:order_history' order.order_number %}" class="brutal-button">
-                                View Details
-                            </a>
+<div class="brutal-card wide-section">
+    <div class="card-decoration"></div>
+    <h2>Order History</h2>
+    {% if orders %}
+        <div class="order-list">
+            {% for order in orders %}
+                <div class="order-item">
+                    <div class="order-details">
+                        <div class="order-header">
+                            <span class="order-number">#{{ order.order_number|truncatechars:6 }}</span>
+                            <span class="order-date">{{ order.date|date:"F j, Y" }}</span>
                         </div>
-                    {% endfor %}
+                        <div class="order-items">
+                            {% for item in order.lineitems.all %}
+                                <div class="item-detail">
+                                    <span>{{ item.product.name }} × {{ item.quantity }}</span>
+                                    <span>${{ item.lineitem_total }}</span>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="order-summary">
+                            <div class="summary-item">
+                                <span>Subtotal:</span>
+                                <span>${{ order.order_total }}</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Delivery:</span>
+                                <span>${{ order.delivery_cost }}</span>
+                            </div>
+                            <div class="summary-item total">
+                                <span>Total:</span>
+                                <span>${{ order.grand_total }}</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            {% else %}
-                <div class="no-orders">
-                    <p>You haven't placed any orders yet.</p>
-                    <a href="{% url 'products' %}" class="brutal-button">Start Shopping</a>
-                </div>
-            {% endif %}
+            {% endfor %}
         </div>
+    {% else %}
+        <div class="no-orders">
+            <p>No orders yet!</p>
+            <a href="{% url 'products' %}" class="brutal-button">Start Shopping</a>
+        </div>
+    {% endif %}
+</div>
     </div>
 </div>
 
-{% if messages %}
-    <div class="message-container">
-        {% for message in messages %}
-            <div class="message-box {% if message.tags %}message-{{ message.tags }}{% endif %}">
-                {{ message }}
+<!-- Delete Account Modal -->
+<div class="modal fade" id="deleteAccountModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content brutal-modal">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Account</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
             </div>
-        {% endfor %}
+            <div class="modal-body">
+                <div class="delete-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Warning: This action cannot be undone!</p>
+                </div>
+                <form method="POST" action="{% url 'profiles:delete_account' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" name="password" class="brutal-input" required>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="confirm_delete" name="confirm_delete" required>
+                        <label for="confirm_delete">I understand this will permanently delete my account</label>
+                    </div>
+                    <button type="submit" class="brutal-button brutal-button--danger">Delete My Account</button>
+                </form>
+            </div>
+        </div>
     </div>
-{% endif %}
-{% endblock %}
-
-{% block postloadjs %}
-{{ block.super }}
-<script>
-    // Initialize country field
-    let countrySelected = $('#id_default_country').val();
-    if(!countrySelected) {
-        $('#id_default_country').css('color', '#aab7c4');
-    }
-    $('#id_default_country').change(function() {
-        countrySelected = $(this).val();
-        if(!countrySelected) {
-            $(this).css('color', '#aab7c4');
-        } else {
-            $(this).css('color', '#000');
-        }
-    });
-</script>
+</div>
 {% endblock %}

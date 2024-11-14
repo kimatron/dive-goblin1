@@ -1,4 +1,4 @@
-/* Profile container and header */
+/* Profile Styles */
 .profile-container {
     padding: 2rem;
     max-width: var(--container-max);
@@ -12,10 +12,23 @@
     border: var(--brutal-border);
     background: var(--brutal-white);
     box-shadow: var(--brutal-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-header::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 40px;
+    height: 40px;
+    background: var(--brutal-accent);
+    transform: rotate(45deg);
 }
 
 .profile-title {
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 900;
     text-transform: uppercase;
     margin-bottom: 1rem;
@@ -25,9 +38,9 @@
 .profile-subtitle {
     font-size: 1.2rem;
     color: var(--brutal-accent);
+    font-weight: 600;
 }
 
-/* Profile Grid */
 .profile-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -38,14 +51,25 @@
     grid-column: 1 / -1;
 }
 
-/* Cards */
+/* Card Styles */
 .brutal-card {
     background: var(--brutal-white);
     border: var(--brutal-border);
     padding: 2rem;
     box-shadow: var(--brutal-shadow);
     transition: transform 0.3s ease;
-    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-decoration {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 30px;
+    height: 30px;
+    background: var(--brutal-accent);
+    transform: rotate(45deg);
 }
 
 .brutal-card:hover {
@@ -54,12 +78,48 @@
 }
 
 .brutal-card h2 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: 800;
     text-transform: uppercase;
     margin-bottom: 1.5rem;
     padding-bottom: 0.5rem;
     border-bottom: var(--brutal-border);
+}
+
+/* Member Card Specific */
+.member-card {
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+}
+
+.member-card h2 {
+    color: var(--brutal-white);
+    border-bottom-color: var(--brutal-accent);
+}
+
+.member-info {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.info-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    border: 2px solid var(--brutal-accent);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.info-label {
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--brutal-accent);
+}
+
+.info-value {
+    font-weight: 600;
 }
 
 /* Form Elements */
@@ -79,7 +139,7 @@
 select {
     width: 100%;
     padding: 0.8rem;
-    border: 2px solid var(--brutal-black);
+    border: var(--brutal-border);
     background: var(--brutal-white);
     font-size: 1rem;
     transition: all 0.3s ease;
@@ -93,49 +153,33 @@ select:focus {
     box-shadow: 4px 4px 0 var(--brutal-accent);
 }
 
-/* User Info Cards */
-.user-info {
-    display: grid;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.info-item {
-    padding: 1rem;
-    border: 2px solid var(--brutal-black);
-    background: var(--brutal-white);
-}
-
-.info-label {
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--brutal-accent);
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem;
-}
-
-.info-value {
-    font-size: 1.1rem;
-    font-weight: 600;
-}
-
 /* Buttons */
 .brutal-button {
     padding: 0.8rem 1.5rem;
     background: var(--brutal-accent);
     color: var(--brutal-white);
-    border: 2px solid var(--brutal-black);
+    border: var(--brutal-border);
     font-weight: 700;
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 4px 4px 0 var(--brutal-black);
+    box-shadow: var(--brutal-shadow);
+    margin: 0.5rem;
 }
 
 .brutal-button:hover {
     transform: translate(-2px, -2px);
     box-shadow: 6px 6px 0 var(--brutal-black);
     background: var(--brutal-hover);
+}
+
+.brutal-button--danger {
+    background: #ff3333;
+}
+
+.brutal-button--danger:hover {
+    background: #ff0000;
+    box-shadow: 6px 6px 0 var(--brutal-black);
 }
 
 /* Order History */
@@ -160,22 +204,31 @@ select:focus {
     box-shadow: 6px 6px 0 var(--brutal-accent);
 }
 
-.no-orders {
+/* Delete Modal */
+.brutal-modal {
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
+}
+
+.modal-header {
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    border-bottom: var(--brutal-border);
+    padding: 1rem;
+}
+
+.delete-warning {
     text-align: center;
-    padding: 2rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-}
-
-/* Error Messages */
-.error {
+    margin: 2rem 0;
     color: #ff3333;
-    font-weight: 600;
-    margin-top: 0.5rem;
-    font-size: 0.9rem;
 }
 
-/* Media Queries */
+.delete-warning i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+/* Responsive */
 @media (max-width: 991px) {
     .profile-grid {
         grid-template-columns: 1fr;
@@ -204,5 +257,6 @@ select:focus {
 
     .brutal-button {
         width: 100%;
+        margin: 0.5rem 0;
     }
 }

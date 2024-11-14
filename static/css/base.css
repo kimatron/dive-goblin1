@@ -1239,6 +1239,7 @@ h3 {
     margin-top: 6rem !important;
     position: relative !important;
     border-top: 4px solid var(--brutal-black) !important;
+    list-style-type: none;
 }
 
 /* Newsletter Section  */

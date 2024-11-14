@@ -16,5 +16,6 @@ urlpatterns = [
     path(
         'webhook/',
         webhook, name='webhook'),
-    path('order_history/<str:order_number>', views.order_history, name='order_history'),
+    path('order_history/<str:order_number>',
+         views.order_history, name='order_history'),
 ]

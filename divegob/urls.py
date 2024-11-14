@@ -33,11 +33,10 @@ urlpatterns = [
     path('', include('home.urls')),
     path('products/', include('products.urls')),
     path('bag/', include('bag.urls')),
-    path('checkout/', include('checkout.urls')),
+    path('checkout/', include('checkout.urls', namespace='checkout')),
     path('profile/', include('profiles.urls', namespace='profiles')),
     path('newsletter/', include('newsletter.urls')),
     path('pages/', include('pages.urls')),
-    path('robots.txt', robots_txt, name='robots_txt'),
     path('robots.txt', robots_txt, name='robots_txt'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 

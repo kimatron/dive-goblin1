@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_title %}Server Error 500{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-8 offset-md-2">
+            <div class="error-content" style="margin: 4rem auto; padding: 2rem; border: 3px solid #000; box-shadow: 6px 6px 0 #000; background: #fff; text-align: center; position: relative;">
+                <!-- Decorative Elements -->
+                <div style="position: absolute; top: -15px; right: -15px; width: 30px; height: 30px; background: #00AC7C; border: 3px solid #000; transform: rotate(15deg);"></div>
+                <div style="position: absolute; bottom: -15px; left: -15px; width: 40px; height: 40px; background: #5ad641; border: 3px solid #000; transform: rotate(-10deg);"></div>
+
+                <!-- Error Message -->
+                <h1 style="font-size: 3rem; font-weight: 900; text-transform: uppercase; margin-bottom: 1rem;">
+                    500<br>
+                    <span style="color: #00AC7C;">Server Error</span>
+                </h1>
+
+                <div style="font-size: 1.2rem; margin: 2rem 0; padding: 1rem; border: 3px solid #000; background: #f8f9fa;">
+                    <p style="margin-bottom: 1rem;">SOMETHING WENT WRONG ON OUR END</p>
+                    <p style="font-family: monospace; color: #00AC7C;">ERROR_CODE: 500</p>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <a href="{% url 'home' %}" style="display: inline-block; padding: 1rem 2rem; font-weight: 800; text-transform: uppercase; color: #fff; background: #00AC7C; border: 3px solid #000; box-shadow: 4px 4px 0 #000; transition: all 0.3s ease; text-decoration: none;" onmouseover="this.style.transform='translate(-2px, -2px)'; this.style.boxShadow='6px 6px 0 #000';" onmouseout="this.style.transform='none'; this.style.boxShadow='4px 4px 0 #000';">
+                        Return to Homepage
+                    </a>
+                </div>
+
+                <!-- Decorative Pattern -->
+                <div style="height: 20px; margin-top: 2rem; background: repeating-linear-gradient(45deg, #00AC7C, #00AC7C 10px, transparent 10px, transparent 20px);"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

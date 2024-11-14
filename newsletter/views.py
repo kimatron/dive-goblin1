@@ -124,14 +124,21 @@ def send_welcome_email(subscriber):
         subscriber (Subscriber): The subscriber object containing the
                                  subscriber's email address.
 
-    Generates a welcome email using a pre-defined HTML template and sends it\
+    Generates a welcome email using a pre-defined HTML template and sends it
     to the subscriber's email address. Includes an unsubscribe link.
     """
     subject = 'Welcome to Dive Goblin Newsletter!'
+
+    # Construct a unique unsubscribe URL for each subscriber
+    unsubscribe_url = f"{
+        settings.BASE_URL}/newsletter/unsubscribe/{
+            subscriber.unsubscribe_token}/"
+
     html_content = render_to_string('newsletter/welcome_email.html', {
-        'unsubscribe_url': settings.BASE_URL + '/newsletter/unsubscribe/'
+        'unsubscribe_url': unsubscribe_url
     })
 
+    # Attempt to send the email
     send_mail(
         subject=subject,
         message='',

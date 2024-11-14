@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = 'DEVELOPMENT' in os.environ
 
 ALLOWED_HOSTS = [
     'dive-goblin-30c473dd6e64.herokuapp.com',
@@ -40,7 +40,8 @@ ALLOWED_HOSTS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    os.environ.get('CSRF_TRUSTED_ORIGINS')
+    'https://8000-kimatron-divegoblin1-xdp538qeiuh.ws.codeinstitute-ide.net',
+    'https://dive-goblin-30c473dd6e64.herokuapp.com',
 ]
 
 # Application definition
@@ -271,3 +272,20 @@ DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
 
 # Development vs Production Settings
 # Remove all the commented-out email settings and replace them with this clear configuration:
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'ERROR'),
+        },
+    },
+}
+

@@ -1,4 +1,52 @@
 # Dive Goblin - Testing Documentation
+## GIF Demonstrations of Dive Goblin Functionality
+
+Due to ongoing issues with deployed site styling not loading correctly despite extensive troubleshooting (including collecting static files and checking AWS bucket settings), I am providing GIFs to showcase the core functionality of Dive Goblin as it appears on the local development server. These GIFs demonstrate that the primary features work as intended and offer insight into user interactions with the site.
+
+### Why Include GIF Demonstrations?
+Displaying GIFs of the functional local version of Dive Goblin serves to:
+- **Provide Proof of Concept**: Demonstrate that the features are implemented and work as expected in a controlled environment.
+- **Highlight User Experience**: Offer a clear visualization of how users can navigate and utilize the e-commerce platform.
+- **Assist Reviewers and Stakeholders**: Give context to potential issues in the deployed version and highlight the difference between local functionality and deployment outcomes.
+
+### Features Demonstrated
+1. **User Authentication**
+   - Log In / Log Out  
+     ![Log In / Log Out GIF](media/documentation/registerloginoutnewsletter.gif)
+   - Register User / Sign Up for Newsletter  
+     ![Register User GIF](link-to-register-user-gif)
+2. **Shopping Features**
+   - Adding Products to Cart  
+     ![Add to Cart GIF](media/documentation/addtocartwishliststripecheckout.gif)
+   - Adding Items to Wishlist  
+     ![Add to Wishlist GIF](link-to-add-to-wishlist-gif)
+   - Browsing and Filtering Products  
+     ![Browse Products GIF](link-to-browse-products-gif)
+3. **User Account Management**
+   - Viewing Order History  
+     ![Order History GIF](link-to-order-history-gif)
+   - Accessing Account Details Page  
+     ![Account Page GIF](link-to-account-page-gif)
+4. **Informational Pages**
+   - Contact Page  
+     ![Contact Page GIF](media/documentation/searchcontactaboutfaq.gif)
+   - About Us Page  
+     ![About Us Page GIF](link-to-about-us-page-gif)
+   - Privacy Policy Page  
+     ![Privacy Policy GIF](media/documentation/privacytermsfb.gif)
+   - FAQ Page  
+     ![FAQ Page GIF](link-to-faq-page-gif)
+5. **Checkout Process**
+   - Stripe Integration for Secure Payments  
+     ![Stripe Checkout GIF](link-to-stripe-checkout-gif)
+   - Order Confirmation Page  
+     ![Order Confirmation GIF](link-to-order-confirmation-gif)
+
+By including these GIFs, I aim to provide an overview that ensures the functionality can be reviewed effectively, even with current styling issues on the deployed version.
+
+
+I have no idea why my site changes in appearance with Debug settings changed from true to false, but then they also work on false on my local deployed version sometimes, but not when pushed to Heroku. 
+
 
 ## Table of Contents
 1. [Validation Testing](#validation-testing)
@@ -123,6 +171,7 @@
 |-----------|-------------|-----------------|---------------|-----------|
 | Valid Payment | 4242424242424242 | Payment success | As expected | [GIF](link) |
 | Invalid Card | 4000000000000002 | Payment failed | As expected | [GIF](link) |
+| Not Test Card Card | ******************* | Payment failed | As expected | [GIF](link) |
 
 ---
 

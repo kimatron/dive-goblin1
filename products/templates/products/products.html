@@ -22,7 +22,7 @@
                                 
                                 <!-- Image Container -->
                                 <div class="brutal-card__image">
-                                    <a href="{% url 'product_detail' product_id=product.id %}">
+                                    <a href="{% url 'products:product_detail' product_id=product.id %}">
                                         {% if product.image %}
                                             <img src="{{ product.image.url }}" alt="{{ product.name }}">
                                         {% else %}
@@ -62,7 +62,7 @@
                                                 Add to Cart
                                             </button>
                                         </form>
-                                        <form action="{% url 'add_to_wishlist' product.id %}" method="POST" class="wishlist-form">
+                                        <form action="{% url 'products:add_to_wishlist' product.id %}" method="POST" class="wishlist-form">
                                             {% csrf_token %}
                                             <button type="submit" class="brutal-btn brutal-btn--wishlist">
                                                 <i class="fas fa-heart"></i>

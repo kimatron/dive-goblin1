@@ -165,7 +165,7 @@ def add_to_wishlist(request, product_id):
     wishlist.products.add(product)
     messages.success(
         request, f'{product.name} has been added to your wishlist!')
-    return redirect('wishlist')
+    return redirect('products:wishlist')
 
 
 @login_required
@@ -175,7 +175,7 @@ def remove_from_wishlist(request, product_id):
     wishlist.products.remove(product)
     messages.success(
         request, f'{product.name} has been removed from your wishlist!')
-    return redirect('wishlist')
+    return redirect('products:wishlist')
 
 
 @login_required

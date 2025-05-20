@@ -79,7 +79,7 @@
 
                     <!-- Search Section -->
                     <div class="search-bar">
-                        <form method="GET" action="{% url 'products' %}" class="search-form">
+                        <form method="GET" action="{% url 'products:products' %}" class="search-form">
                             <div class="search-box">
                                 <input 
                                     type="text" 
@@ -111,7 +111,7 @@
                                 <div class="dropdown-menu" aria-labelledby="accountDropdown">
                                     {% if request.user.is_authenticated %}
                                         {% if request.user.is_superuser %}
-                                            <a class="dropdown-item" href="{% url 'product_management' %}">Product Management</a>
+                                            <a class="dropdown-item" href="{% url 'products:product_management' %}">Product Management</a>
                                         {% endif %}
                                         <a class="dropdown-item" href="{% url 'profiles:profile' %}">My Profile</a>
                                         <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
@@ -123,7 +123,7 @@
                             </div>
 
                             <!-- Wishlist Button -->
-                            <a href="{% url 'wishlist' %}" class="nav-icon">
+                            <a href="{% url 'products:wishlist' %}" class="nav-icon">
                                 <button class="icon-btn" aria-label="Wishlist">
                                     <i class="fas fa-heart"></i>
                                     <span>Wishlist</span>
@@ -165,9 +165,9 @@
                             <div class="menu-column">
                                 <h3>Diving Gear</h3>
                                 <ul>
-                                    <li><a href="{% url 'products' %}?category=scuba">Scuba Gear</a></li>
-                                    <li><a href="{% url 'products' %}?category=snorkeling">Snorkeling</a></li>
-                                    <li><a href="{% url 'products' %}?category=wetsuits">Wetsuits</a></li>
+                                    <li><a href="{% url 'products:products' %}?category=scuba">Scuba Gear</a></li>
+                                    <li><a href="{% url 'products:products' %}?category=snorkeling">Snorkeling</a></li>
+                                    <li><a href="{% url 'products:products' %}?category=wetsuits">Wetsuits</a></li>
                                 </ul>
                             </div>
 
@@ -175,9 +175,9 @@
                             <div class="menu-column">
                                 <h3>Apparel & Extras</h3>
                                 <ul>
-                                    <li><a href="{% url 'products' %}?category=shirts_apparel">Shirts & Apparel</a></li>
-                                    <li><a href="{% url 'products' %}?category=accessories">Accessories</a></li>
-                                    <li><a href="{% url 'products' %}?category=travel_gear">Travel Gear</a></li>
+                                    <li><a href="{% url 'products:products' %}%}?category=shirts_apparel">Shirts & Apparel</a></li>
+                                    <li><a href="{% url 'products:products' %}?category=accessories">Accessories</a></li>
+                                    <li><a href="{% url 'products:products' %}?category=travel_gear">Travel Gear</a></li>
                                 </ul>
                             </div>
 
@@ -185,8 +185,8 @@
                             <div class="menu-column">
                                 <h3>Travel & Tours</h3>
                                 <ul>
-                                    <li><a href="{% url 'products' %}?category=destinations">Destinations</a></li>
-                                    <li><a href="{% url 'products' %}?category=packages">Dive Packages</a></li>
+                                    <li><a href="{% url 'products:products' %}?category=destinations">Destinations</a></li>
+                                    <li><a href="{% url 'products:products' %}?category=packages">Dive Packages</a></li>
                                 </ul>
                             </div>
 
@@ -194,9 +194,9 @@
                             <div class="menu-column">
                                 <h3>Special Offers</h3>
                                 <ul>
-                                    <li><a href="{% url 'products' %}?category=new_arrivals">New Arrivals</a></li>
-                                    <li><a href="{% url 'products' %}?category=deals">Deals</a></li>
-                                    <li><a href="{% url 'products' %}?category=clearance">Clearance</a></li>
+                                    <li><a href="{% url 'products:products' %}?category=new_arrivals">New Arrivals</a></li>
+                                    <li><a href="{% url 'products:products' %}?category=deals">Deals</a></li>
+                                    <li><a href="{% url 'products:products' %}?category=clearance">Clearance</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -286,7 +286,7 @@
                 <div class="footer-box">
                     <h3>QUICK LINKS</h3>
                     <ul class="footer-links">
-                        <li><a href="{% url 'products' %}">Shop</a></li>
+                        <li><a href="{% url 'products:products' %}">Shop</a></li>
                         <li><a href="{% url 'pages:about' %}">About</a></li>
                         <li><a href="{% url 'pages:contact' %}">Contact</a></li>
                         <li><a href="{% url 'pages:faq' %}">FAQs</a></li>

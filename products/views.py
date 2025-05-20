@@ -70,15 +70,19 @@ def product_detail(request, product_id):
     return render(request, 'products/product_detail.html', context)
 
 
-@staff_member_required
+@login_required
 def product_management(request):
-    """ Product management view for staff members """
+    """ View to display the product management page """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+        
     products = Product.objects.all()
-
+    
     context = {
         'products': products,
     }
-
+    
     return render(request, 'products/product_management.html', context)
 
 

@@ -73,7 +73,7 @@
             </div>
 
             <div class="cart-actions-bottom">
-                <a href="{% url 'products' %}" class="brutal-btn brutal-btn-continue">
+                <a href="{% url 'products:products' %}" class="brutal-btn brutal-btn-continue">
                     Continue Shopping
                 </a>
                 <a href="{% url 'checkout:checkout' %}" class="brutal-btn brutal-btn-checkout">
@@ -89,7 +89,7 @@
             <i class="fas fa-shopping-cart empty-cart-icon"></i>
             <h2>Your cart is empty</h2>
             <p>Add some awesome products to your cart!</p>
-            <a href="{% url 'products' %}" class="brutal-btn brutal-btn-continue">
+            <a href="{% url 'products:products' %}" class="brutal-btn brutal-btn-continue">
                 Start Shopping
             </a>
         </div>

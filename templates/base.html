@@ -241,6 +241,33 @@
             color: var(--primary-color);
         }
 
+        /* Dropdown styling */
+.dropdown-menu {
+    position: absolute;
+    min-width: 180px;
+    background: white;
+    border: 3px solid #000;
+    box-shadow: var(--shadow-size) var(--shadow-size) 0 #000;
+    z-index: 1000;
+    padding: 0;
+    margin-top: 5px;
+}
+
+.dropdown-item {
+    display: block;
+    padding: 10px 15px;
+    color: #000;
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+}
+
+.dropdown-item:hover {
+    background: #f9f9f9;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
         /* Utilities */
         .no-margin {
             margin: 0;
@@ -299,20 +326,40 @@
         </div>
         
         <!-- Navigation Buttons -->
-        <div class="nav-buttons">
-            <a href="{% url 'account_login' %}" class="nav-button">
-                <i class="fas fa-user"></i>
-                <span>ACCOUNT</span>
-            </a>
-            <a href="{% url 'products:wishlist' %}" class="nav-button">
-                <i class="fas fa-heart"></i>
-                <span>WISHLIST</span>
-            </a>
-            <a href="{% url 'view_bag' %}" class="nav-button">
-                <i class="fas fa-shopping-bag"></i>
-                <span>${{ grand_total|default:"0.00" }}</span>
-            </a>
+<!-- Navigation Buttons -->
+<div class="nav-buttons">
+    <!-- Account Dropdown -->
+    <div class="dropdown">
+        <button class="nav-button" id="accountDropdown" data-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user"></i>
+            <span>ACCOUNT</span>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="accountDropdown">
+            {% if request.user.is_authenticated %}
+                {% if request.user.is_superuser %}
+                    <a class="dropdown-item" href="{% url 'products:product_management' %}">Product Management</a>
+                {% endif %}
+                <a class="dropdown-item" href="{% url 'profiles:profile' %}">My Profile</a>
+                <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
+            {% else %}
+                <a class="dropdown-item" href="{% url 'account_signup' %}">Register</a>
+                <a class="dropdown-item" href="{% url 'account_login' %}">Login</a>
+            {% endif %}
         </div>
+    </div>
+    
+    <!-- Wishlist Button -->
+    <a href="{% url 'products:wishlist' %}" class="nav-button">
+        <i class="fas fa-heart"></i>
+        <span>WISHLIST</span>
+    </a>
+    
+    <!-- Shopping Cart Button -->
+    <a href="{% url 'view_bag' %}" class="nav-button">
+        <i class="fas fa-shopping-bag"></i>
+        <span>${{ grand_total|default:"0.00" }}</span>
+    </a>
+</div>
         
         <!-- Categories -->
         <div class="categories-container">

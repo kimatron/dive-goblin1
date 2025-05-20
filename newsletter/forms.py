@@ -19,5 +19,5 @@ class NewsletterCreationForm(forms.ModelForm):
         model = Newsletter
         fields = ['subject', 'content']
         widgets = {
-            'content': forms.Textarea(attrs={'rows': 10}),
+            'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 10}),
         }

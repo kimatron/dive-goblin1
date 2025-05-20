@@ -1,20 +1,38 @@
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('Document ready, initializing components...');
+    
+    // Initialize desktop mega menu
     initializeMegaMenu();
+    
+    // Initialize mobile menu
+    initializeMobileMenu();
+    
+    // Initialize external links
+    makeExternalLinksOpenInNewTab();
+    
+    // Initialize toasts
+    initializeToasts();
+    
+    // Initialize quantity controls (if needed)
     initializeQuantityControls();
-    initializeModal();
 });
 
 function initializeMegaMenu() {
+    console.log('Initializing mega menu...');
     const menuToggle = document.querySelector('.menu-toggle');
     const menuContent = document.querySelector('.menu-content');
 
-    if (!menuToggle || !menuContent) return;
+    if (!menuToggle || !menuContent) {
+        console.log('Mega menu elements not found');
+        return;
+    }
 
     // Menu Toggle Click Handler
     menuToggle.addEventListener('click', function(e) {
         e.stopPropagation();
-        menuToggle.classList.toggle('active');
+        this.classList.toggle('active');
         menuContent.classList.toggle('active');
+        console.log('Mega menu toggled');
     });
 
     // Close menu when clicking outside
@@ -29,35 +47,94 @@ function initializeMegaMenu() {
     menuContent.addEventListener('click', function(e) {
         e.stopPropagation();
     });
+}
 
-    // Mobile Menu Accordion
-    function initializeMobileMenu() {
-        const menuColumns = document.querySelectorAll('.menu-column');
-        
-        menuColumns.forEach(column => {
-            const heading = column.querySelector('h3');
-            const list = column.querySelector('ul');
+function initializeMobileMenu() {
+    console.log('Initializing mobile menu...');
+    // Mobile menu toggle
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    
+    if (mobileMenuToggle && mobileMenu) {
+        console.log('Mobile menu elements found');
+        mobileMenuToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Mobile menu toggle clicked');
+            mobileMenu.classList.toggle('active');
             
-            if (heading && list && window.innerWidth <= 768) {
-                heading.style.cursor = 'pointer';
-                
-                heading.addEventListener('click', () => {
-                    menuColumns.forEach(col => {
-                        const colList = col.querySelector('ul');
-                        const isCurrentColumn = col === column;
-                        
-                        if (colList) {
-                            colList.style.display = isCurrentColumn && 
-                                                  colList.style.display !== 'block' ? 'block' : 'none';
-                        }
-                    });
-                });
+            // Toggle icon between bars and times
+            const icon = this.querySelector('i');
+            if (icon) {
+                if (icon.classList.contains('fa-bars')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
             }
         });
+    } else {
+        console.log('Mobile menu elements not found:', { mobileMenuToggle, mobileMenu });
     }
+    
+    // Mobile category accordions
+    const categoryHeaders = document.querySelectorAll('.mobile-category-header');
+    console.log('Category headers found:', categoryHeaders.length);
+    
+    categoryHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+            // Get the target ID from data attribute
+            const targetId = this.getAttribute('data-target');
+            const content = document.querySelector(targetId);
+            console.log('Category clicked:', targetId);
+            
+            // Toggle active class on content
+            if (content) {
+                content.classList.toggle('active');
+                
+                // Toggle the chevron icon
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('fa-chevron-down')) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            }
+        });
+    });
+}
 
-    initializeMobileMenu();
-    window.addEventListener('resize', initializeMobileMenu);
+function makeExternalLinksOpenInNewTab() {
+    // Make external links open in new tab with proper rel attributes
+    const externalLinks = document.querySelectorAll('a[href^="http"]:not([href*="' + window.location.host + '"])');
+    
+    externalLinks.forEach(function(link) {
+        link.setAttribute('target', '_blank');
+        link.setAttribute('rel', 'noopener noreferrer');
+    });
+}
+
+function initializeToasts() {
+    // Initialize toasts if jQuery and Bootstrap are available
+    if (typeof $ !== 'undefined' && typeof $.fn.toast !== 'undefined') {
+        $('.toast').toast({
+            autohide: false
+        });
+        
+        $('.toast').toast('show');
+        
+        $('.toast .close, .toast .btn-close').on('click', function() {
+            $(this).closest('.toast').toast('hide');
+        });
+        
+        $('.toast').on('hidden.bs.toast', function() {
+            $(this).remove();
+        });
+    }
 }
 
 function initializeQuantityControls() {
@@ -88,87 +165,3 @@ function initializeQuantityControls() {
         });
     });
 }
-
-function initializeModal() {
-    const modalClose = document.querySelector('.brutal-modal__close');
-    const imageModal = document.getElementById('imageModal');
-    const modalContent = document.querySelector('.brutal-modal__content');
-
-    if (modalClose && imageModal) {
-        // Close button click
-        modalClose.addEventListener('click', () => {
-            imageModal.classList.remove('active');
-        });
-
-        // Click outside modal
-        imageModal.addEventListener('click', (e) => {
-            if (e.target === imageModal) {
-                imageModal.classList.remove('active');
-            }
-        });
-
-        // Prevent closing when clicking modal content
-        if (modalContent) {
-            modalContent.addEventListener('click', (e) => {
-                e.stopPropagation();
-            });
-        }
-    }
-}
-
-// Initialize toasts if they exist
-if (document.querySelector('.toast')) {
-    $('.toast').toast({
-        autohide: true,
-        delay: 5000,
-        animation: true
-    });
-    
-    $('.toast').toast('show');
-    
-    $('.btn-close').on('click', function() {
-        $(this).closest('.toast').toast('hide');
-    });
-    
-    $('.toast').on('hidden.bs.toast', function() {
-        $(this).remove();
-    });
-}
-
-// For Option 3: Sliding Drawer
-function initializeSlidingBanner() {
-    const banner = document.querySelector('.delivery-banner');
-    const trigger = document.createElement('button');
-    trigger.className = 'banner-trigger';
-    trigger.innerHTML = 'Delivery Info <i class="fas fa-truck"></i>';
-    
-    let isVisible = false;
-    
-    trigger.addEventListener('click', () => {
-        isVisible = !isVisible;
-        banner.classList.toggle('visible', isVisible);
-    });
-    
-    document.body.appendChild(trigger);
-}
-
-
-document.addEventListener('DOMContentLoaded', function() {
- 
-    // initializeCollapsibleBanner();
-    //  initializeFloatingBanner();
-    initializeSlidingBanner();
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    const logoutForm = document.querySelector('.logout-form');
-    if (logoutForm) {
-        const submitBtn = logoutForm.querySelector('button[type="submit"]');
-        if (submitBtn) {
-            logoutForm.addEventListener('submit', function(e) {
-                submitBtn.classList.add('loading');
-                submitBtn.textContent = 'Signing Out...';
-            });
-        }
-    }
-});

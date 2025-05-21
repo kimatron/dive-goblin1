@@ -514,19 +514,7 @@
             }
         }
         
-        // Make external links open in new tabs
-        document.addEventListener('DOMContentLoaded', function() {
-            const externalLinks = document.querySelectorAll('a[href^="http"]:not([href*="' + window.location.host + '"])');
-            
-            externalLinks.forEach(function(link) {
-                if (!link.hasAttribute('target')) {
-                    link.setAttribute('target', '_blank');
-                }
-                if (!link.hasAttribute('rel')) {
-                    link.setAttribute('rel', 'noopener noreferrer');
-                }
-            });
-            
+
             // Initialize toasts
             if (typeof $ !== 'undefined' && typeof $.fn.toast !== 'undefined') {
                 $('.toast').toast({
@@ -548,6 +536,7 @@
         <script src="https://js.stripe.com/v3/"></script>
         <script src="{% static 'js/newsletter.js' %}"></script>
         <script src="{% static 'js/profile.js' %}"></script>
+        <script src="{% static 'js/external-links.js' %}"></script>
     {% endblock %}
 </body>
 </html>

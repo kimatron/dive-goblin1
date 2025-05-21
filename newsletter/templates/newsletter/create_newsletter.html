@@ -1,5 +1,44 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
+
+{% block extra_css %}
+<style>
+    .newsletter-editor {
+        border: 3px solid var(--brutal-black);
+        box-shadow: 6px 6px 0 var(--brutal-black);
+        padding: 2rem;
+        background-color: var(--brutal-white);
+        margin-bottom: 4rem;
+    }
+    
+    .newsletter-title {
+        font-size: 2.5rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+        border-bottom: 3px solid var(--brutal-black);
+        padding-bottom: 1rem;
+    }
+    
+    .preview-section {
+        border: 3px dashed var(--brutal-black);
+        padding: 1.5rem;
+        margin-top: 2rem;
+        background-color: #f8f9fa;
+    }
+    
+    .preview-header {
+        font-weight: 800;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+    }
+    
+    .action-buttons {
+        margin-top: 2rem;
+    }
+</style>
+{% endblock %}
 
 {% block page_header %}
 <div class="container header-container">
@@ -11,34 +50,46 @@
 
 {% block content %}
 <div class="overlay"></div>
-<div class="container">
+<div class="container mt-5">
     <div class="row">
-        <div class="col-12 col-md-8 offset-md-2">
-            <div class="brutal-form">
-                <h2 class="logo-font mb-4">Create Newsletter</h2>
-                <h5 class="text-muted">Send updates to your subscribers</h5>
+        <div class="col-12">
+            <div class="newsletter-editor">
+                <h1 class="newsletter-title">Create Newsletter</h1>
+                <p class="lead mb-4">Send updates to your subscribers</p>
                 
                 <form method="POST" action="{% url 'create_newsletter' %}">
                     {% csrf_token %}
                     
-                    <div class="form-group mb-3">
-                        <label for="{{ form.subject.id_for_label }}">Subject</label>
-                        {{ form.subject|add_class:"brutal-input" }}
+                    <div class="form-group mb-4">
+                        <label for="{{ form.subject.id_for_label }}" class="form-label fw-bold">Subject</label>
+                        {{ form.subject|as_crispy_field }}
                     </div>
                     
-                    <div class="form-group mb-3">
-                        <label for="{{ form.content.id_for_label }}">Content</label>
-                        {{ form.content|add_class:"brutal-input" }}
-                        <small class="form-text text-muted">You can use HTML for formatting.</small>
+                    <div class="form-group mb-4">
+                        <label for="{{ form.content.id_for_label }}" class="form-label fw-bold">Content</label>
+                        {{ form.content|as_crispy_field }}
+                        <small class="form-text text-muted">You can use HTML for formatting your newsletter. Be creative with your content!</small>
                     </div>
                     
-                    <div class="text-right">
-                        <a href="{% url 'admin:index' %}" class="btn btn-outline-black rounded-0">Cancel</a>
+                    <div class="preview-section">
+                        <h4 class="preview-header">How to Format Your Newsletter</h4>
+                        <p>Use HTML tags to format your content. Here are some examples:</p>
+                        <ul>
+                            <li><code>&lt;h2&gt;Section Title&lt;/h2&gt;</code> - For section titles</li>
+                            <li><code>&lt;p&gt;Your paragraph&lt;/p&gt;</code> - For paragraphs</li>
+                            <li><code>&lt;strong&gt;Bold text&lt;/strong&gt;</code> - For bold text</li>
+                            <li><code>&lt;em&gt;Italic text&lt;/em&gt;</code> - For italic text</li>
+                            <li><code>&lt;a href="https://example.com"&gt;Link text&lt;/a&gt;</code> - For links</li>
+                            <li><code>&lt;img src="https://example.com/image.jpg" alt="Description" style="width:100%;max-width:600px"&gt;</code> - For images</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="action-buttons text-end">
+                        <a href="{% url 'admin:index' %}" class="brutal-btn brutal-btn--secondary me-2">
+                            <i class="fas fa-times"></i> Cancel
+                        </a>
                         <button type="submit" class="brutal-btn brutal-btn--primary">
-                            <span class="icon">
-                                <i class="fas fa-paper-plane"></i>
-                            </span>
-                            <span>Send Newsletter</span>
+                            <i class="fas fa-paper-plane"></i> Send Newsletter
                         </button>
                     </div>
                 </form>
@@ -46,4 +97,14 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+<script>
+    // Preview functionality could be added here
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Newsletter editor initialized');
+    });
+</script>
 {% endblock %}

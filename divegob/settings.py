@@ -131,8 +131,8 @@ SITE_ID = 1
 
 # Email Configuration
 if 'DEVELOPMENT' in os.environ:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-else:
+#     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = 'smtp.gmail.com'
     EMAIL_USE_TLS = True

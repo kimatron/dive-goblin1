@@ -1,16 +1,46 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block page_header %}
+<div class="container header-container">
+    <div class="row">
+        <div class="col"></div>
+    </div>
+</div>
+{% endblock %}
+
 {% block content %}
-<div>
-    <h1>You have been unsubscribed</h1>
-
-    <p>Hi there,</p>
-
-    <p>We're sorry to see you go! You have been successfully unsubscribed from the Dive Goblin Newsletter.</p>
-
-    <p>If this was a mistake or if you wish to resubscribe in the future, feel free to sign up again on our website.</p>
-
-    <p>Best regards,<br>The Dive Goblin Team</p>
+<div class="overlay"></div>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 col-md-8 offset-md-2">
+            <div class="brutal-form text-center p-5">
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                            <h2 class="brutal-title">Unsubscribed Successfully</h2>
+                            <p class="lead mb-4">{{ message }}</p>
+                            <div class="border-top border-dark my-4 w-50 mx-auto"></div>
+                            <p>We're sorry to see you go! If you ever change your mind, you can always sign up again.</p>
+                        {% else %}
+                            <h2 class="brutal-title">Something Went Wrong</h2>
+                            <p class="lead mb-4">{{ message }}</p>
+                            <div class="border-top border-dark my-4 w-50 mx-auto"></div>
+                            <p>If you continue having problems, please contact us.</p>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <h2 class="brutal-title">Unsubscribe</h2>
+                    <p class="lead mb-4">You have been successfully unsubscribed from our newsletter.</p>
+                {% endif %}
+                
+                <div class="mt-4">
+                    <a href="{% url 'home' %}" class="brutal-btn brutal-btn--primary">
+                        Return to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

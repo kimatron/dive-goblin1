@@ -32,17 +32,21 @@ class Newsletter(models.Model):
 
         subscribers = NewsletterSubscriber.objects.filter(is_active=True)
 
-        html_content = render_to_string('newsletter/email_template.html', {
-            'subject': self.subject,
-            'content': self.content,
-            'unsubscribe_url': settings.BASE_URL + '/newsletter/unsubscribe/'
-        })
-
         emails = []
         for subscriber in subscribers:
+            # Create a personalized unsubscribe URL for each subscriber
+            unsubscribe_url = f"{settings.BASE_URL}/newsletter/unsubscribe/{subscriber.unsubscribe_token}/"
+            
+            # Render the email template with the personalized unsubscribe URL
+            html_content = render_to_string('newsletter/email_template.html', {
+                'subject': self.subject,
+                'content': self.content,
+                'unsubscribe_url': unsubscribe_url
+            })
+
             email = (
                 self.subject,
-                '',
+                '',  # Empty string for text content (we're using HTML only)
                 html_content,
                 settings.DEFAULT_FROM_EMAIL,
                 [subscriber.email],

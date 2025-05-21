@@ -3,12 +3,14 @@ from django.utils import timezone
 from django.template.loader import render_to_string
 from django.core.mail import send_mass_mail
 from django.conf import settings
+import uuid
 
 
 class NewsletterSubscriber(models.Model):
     email = models.EmailField(unique=True)
     date_subscribed = models.DateTimeField(default=timezone.now)
     is_active = models.BooleanField(default=True)
+    unsubscribe_token = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
     def __str__(self):
         return self.email

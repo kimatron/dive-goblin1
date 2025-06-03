@@ -24,13 +24,14 @@ def terms(request):
 
 def contact(request):
     if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
-            subject = form.cleaned_data['subject']
-            message = form.cleaned_data['message']
-
+        # Get data directly from POST
+        name = request.POST.get('name', '').strip()
+        email = request.POST.get('email', '').strip()
+        subject = request.POST.get('subject', '').strip()
+        message = request.POST.get('message', '').strip()
+        
+        # Basic validation
+        if name and email and subject and message:
             try:
                 # Email body
                 email_body = f"""
@@ -47,16 +48,19 @@ def contact(request):
                     f'New Contact Form Submission: {subject}',
                     email_body,
                     settings.DEFAULT_FROM_EMAIL,
-                    [settings.DEFAULT_FROM_EMAIL],  # Send to admin email
+                    [settings.DEFAULT_FROM_EMAIL],
                     fail_silently=False,
                 )
 
                 messages.success(request, 'Your message has been sent! We will get back to you soon.')
+                
             except Exception as e:
-                print(f"Error sending email: {e}")  # For debugging
+                print(f"Error sending email: {e}")
                 messages.error(request, 'Sorry, there was an error sending your message. Please try again later.')
+        else:
+            messages.error(request, 'Please fill in all fields.')
 
-            return redirect('pages:contact')
+        return redirect('pages:contact')
     else:
         form = ContactForm()
 

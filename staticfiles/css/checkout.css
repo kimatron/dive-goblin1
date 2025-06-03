@@ -1,0 +1,112 @@
+/* Brutalist Stripe Elements Style */
+.StripeElement, .stripe-style-input {
+  box-sizing: border-box;
+  height: 50px;
+  padding: 15px;
+  border: 3px solid #000;
+  background-color: #fff;
+  font-family: 'Mulish', monospace;
+  font-size: 16px;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+.StripeElement--focus,
+.stripe-style-input:focus,
+.stripe-style-input:active {
+  border-color: #000;
+  box-shadow: 5px 5px 0 #000;
+  transform: translateX(-5px) translateY(-5px);
+}
+
+.StripeElement--invalid {
+  border-color: #ff0000;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: white !important;
+}
+.stripe-style-input::placeholder {
+  color: navy;
+}
+.text-info {
+  color: navy !important;
+}
+select,
+select option {
+    color: navy;
+}
+select:invalid,
+select option[value=""] {
+    color: navy !important;
+}
+/* Loading Overlay */
+#loading-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+}
+
+.loading-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 5px solid #fff;
+  padding: 20px;
+}
+
+/* Brutalist Button Style */
+#submit-button {
+  background: #fff;
+  border: 3px solid #000;
+  padding: 15px 30px;
+  font-family: 'Mulish', monospace;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit-button a {
+  text-decoration: none;
+  color: #000;
+  margin-right: 15px;
+  padding: 10px 20px;
+  border: 3px solid #000;
+  transition: all 0.3s ease;
+}
+
+#submit-button:hover {
+  background: #000;
+  color: #fff;
+  box-shadow: 5px 5px 0 #666;
+  transform: translateX(-5px) translateY(-5px);
+}
+
+.submit-button button:hover {
+  background: #fff;
+  color: #000;
+  box-shadow: 5px 5px 0 #666;
+  transform: translateX(-5px) translateY(-5px);
+}
+
+.custom-red {
+  color: #ff0000;
+  font-weight: bold;
+  margin-top: 10px !important;
+}
+
+.icon {
+  margin-right: 5px;
+}
+
+
+
+
+
+

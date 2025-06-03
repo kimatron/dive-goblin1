@@ -2,75 +2,171 @@
 {% load static %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'pages/about.css' %}">
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
 {% endblock %}
 
 {% block extra_title %} - About Us {% endblock %}
 
 {% block content %}
-
-<div class="brutal-page">
+<div class="brutal-page about-page">
     <div class="container">
-        <!-- Page Header -->
-        <div class="brutal-page-header">
-            <h1 class="brutal-page-title">About Dive Goblin</h1>
+        <!-- Hero Section -->
+        <div class="about-hero">
+            <div class="hero-content">
+                <h1 class="brutal-title glitch" data-text="DIVE GOBLIN">DIVE GOBLIN</h1>
+                <div class="hero-subtitle">
+                    <span class="subtitle-box">UNDERWATER GEAR SPECIALISTS</span>
+                </div>
+                <p class="hero-description">We're not just another diving equipment store - we're a community of diving enthusiasts dedicated to helping you explore the underwater world one splash at a time.</p>
+            </div>
         </div>
 
-        <!-- Main Content -->
-        <div class="content-box">
-            <h2>Our Story</h2>
-            <p>Founded in 2024, Dive Goblin emerged from a passion for diving and a desire to make quality diving gear accessible to everyone. We're not just another diving equipment store - we're a community of diving enthusiasts dedicated to helping you explore the underwater world one splash at a time .</p>
+        <!-- Story Section -->
+        <div class="story-section">
+            <div class="story-box">
+                <div class="story-header">
+                    <h2 class="section-title">OUR STORY</h2>
+                    <div class="title-decoration"></div>
+                </div>
+                <div class="story-content">
+                    <p>Founded in 2024, Dive Goblin emerged from a passion for diving and a desire to make quality diving gear accessible to everyone. We started in a small garage with a dream to revolutionize how divers find and purchase their equipment.</p>
+                    <div class="highlight-box">
+                        <i class="fas fa-quote-left"></i>
+                        <p>"Every dive is an adventure waiting to happen. We just make sure you're properly equipped for it."</p>
+                        <span class="quote-author">- Dive Goblin Team</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Features Grid -->
-        <div class="feature-grid">
-            <div class="feature-box">
-                <div class="feature-icon">
-                    <i class="fas fa-medal"></i>
+        <div class="features-section">
+            <h2 class="section-title">WHY CHOOSE US</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <h3>QUALITY FIRST</h3>
+                    <p>Hand-picked equipment ensuring the highest standards of quality and safety for every dive.</p>
+                    <div class="feature-accent"></div>
                 </div>
-                <h3 class="feature-title">Quality First</h3>
-                <p>We hand-pick every piece of equipment to ensure the highest standards of quality and safety.</p>
-            </div>
 
-            <div class="feature-box">
-                <div class="feature-icon">
-                    <i class="fas fa-hands-helping"></i>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>EXPERT SUPPORT</h3>
+                    <p>Our team of diving experts is always here to help you find the perfect gear for your needs.</p>
+                    <div class="feature-accent"></div>
                 </div>
-                <h3 class="feature-title">Expert Support</h3>
-                <p>Our team of diving experts is always here to help you find the perfect gear for your needs.</p>
-            </div>
 
-            <div class="feature-box">
-                <div class="feature-icon">
-                    <i class="fas fa-globe-americas"></i>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <h3>GLOBAL COMMUNITY</h3>
+                    <p>Join our worldwide community of divers sharing experiences and underwater adventures.</p>
+                    <div class="feature-accent"></div>
                 </div>
-                <h3 class="feature-title">Global Community</h3>
-                <p>Join our worldwide community of divers sharing experiences and adventures.</p>
             </div>
         </div>
 
         <!-- Team Section -->
         <div class="team-section">
-            <div class="content-box">
-                <h2>Meet The Team</h2>
-                <div class="team-grid">
-                    <div class="team-member">
-                        <div class="member-image">
-                            <img src="{% static 'images/bigwave.jpg' %}?v=1" alt="Team Member">
+            <h2 class="section-title">MEET THE GOBLINS</h2>
+            <div class="team-grid">
+                <!-- Team Member 1 -->
+                <div class="team-card">
+                    <div class="card-upper">
+                        <div class="member-image-container">
+                            <img src="{% static 'images/bigwave.jpg' %}" alt="Kim Hanlon" onerror="this.src='https://api.dicebear.com/7.x/adventurer/svg?seed=Kim'">
                         </div>
-                        <h3 class="member-name">Kim Hanlon</h3>
-                        <div class="member-role">Founder & CEO</div>
-                        <p>Diving enthusiast with 15 years of experience in underwater exploration.</p>
                     </div>
+                    <div class="card-lower">
+                        <h3 class="member-name">KIM HANLON</h3>
+                        <h4 class="member-role">FOUNDER & CEO</h4>
+                        <div class="member-description">
+                            <p>Diving enthusiast with 15+ years of underwater exploration. Kim's vision drives our mission to make diving accessible to all.</p>
+                        </div>
+                        <div class="member-stats">
+                            <div class="stat">
+                                <span class="stat-number">500+</span>
+                                <span class="stat-label">DIVES</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">15</span>
+                                <span class="stat-label">YEARS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                    <div class="team-member">
-                        <div class="member-image">
-                            <img src="{% static 'images/emilija.jpg' %}" alt="Team Member">
+                <!-- Team Member 2 -->
+                <div class="team-card">
+                    <div class="card-upper">
+                        <div class="member-image-container">
+                            <img src="{% static 'images/emilija.jpg' %}" alt="Emilija Smith" onerror="this.src='https://api.dicebear.com/7.x/adventurer/svg?seed=Emilija'">
                         </div>
-                        <h3 class="member-name">Emilija Smith</h3>
-                        <div class="member-role">Head of Equipment</div>
-                        <p>Master diver and equipment specialist with a passion for safety.</p>
                     </div>
+                    <div class="card-lower">
+                        <h3 class="member-name">EMILIJA SMITH</h3>
+                        <h4 class="member-role">HEAD OF EQUIPMENT</h4>
+                        <div class="member-description">
+                            <p>Master diver and equipment specialist with an obsession for safety. Emilija ensures every product meets our brutal standards.</p>
+                        </div>
+                        <div class="member-stats">
+                            <div class="stat">
+                                <span class="stat-number">800+</span>
+                                <span class="stat-label">DIVES</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">12</span>
+                                <span class="stat-label">YEARS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Values Section -->
+        <div class="values-section">
+            <div class="values-container">
+                <h2 class="section-title">OUR VALUES</h2>
+                <div class="values-grid">
+                    <div class="value-item">
+                        <div class="value-number">01</div>
+                        <h4>SAFETY FIRST</h4>
+                        <p>Every product is rigorously tested</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-number">02</div>
+                        <h4>COMMUNITY</h4>
+                        <p>Building connections underwater and above</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-number">03</div>
+                        <h4>INNOVATION</h4>
+                        <p>Constantly improving the diving experience</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-number">04</div>
+                        <h4>ACCESSIBILITY</h4>
+                        <p>Making diving gear available to everyone</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <div class="cta-box">
+                <h2>READY TO DIVE IN?</h2>
+                <p>Join thousands of divers who trust Dive Goblin for their underwater adventures.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="brutal-btn brutal-btn--primary">SHOP NOW</a>
+                    <a href="{% url 'pages:contact' %}" class="brutal-btn brutal-btn--secondary">CONTACT US</a>
                 </div>
             </div>
         </div>

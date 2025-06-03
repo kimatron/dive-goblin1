@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     makeExternalLinksOpenInNewTab();
     
     // Initialize toasts
-    // initializeToasts();
+    initializeToasts();
     
     // Initialize quantity controls (if needed)
     initializeQuantityControls();
@@ -118,57 +118,57 @@ function makeExternalLinksOpenInNewTab() {
     });
 }
 
-// function initializeToasts() {
-//     console.log('Initializing toasts...');
+function initializeToasts() {
+    console.log('Initializing toasts...');
     
-//     // Initialize toasts if jQuery and Bootstrap are available
-//     if (typeof $ !== 'undefined' && typeof $.fn.toast !== 'undefined') {
-//         // Initialize all toasts with both auto and manual dismiss
-//         $('.toast').toast({
-//             autohide: true,
-//             delay: 5000  // Auto dismiss after 5 seconds
-//         });
+    // Initialize toasts if jQuery and Bootstrap are available
+    if (typeof $ !== 'undefined' && typeof $.fn.toast !== 'undefined') {
+        // Initialize all toasts with both auto and manual dismiss
+        $('.toast').toast({
+            autohide: true,
+            delay: 5000  // Auto dismiss after 5 seconds
+        });
         
-//         // Show all toasts
-//         $('.toast').toast('show');
+        // Show all toasts
+        $('.toast').toast('show');
         
-//         // Ensure close buttons work properly
-//         $('.toast .close, .toast .btn-close').off('click').on('click', function() {
-//             console.log('Toast close button clicked');
-//             $(this).closest('.toast').toast('hide');
-//         });
+        // Ensure close buttons work properly
+        $('.toast .close, .toast .btn-close').off('click').on('click', function() {
+            console.log('Toast close button clicked');
+            $(this).closest('.toast').toast('hide');
+        });
         
-//         // Clean up toasts when hidden
-//         $('.toast').on('hidden.bs.toast', function() {
-//             $(this).remove();
-//         });
-//     } else {
-//         console.log('jQuery or Bootstrap toast not available');
+        // Clean up toasts when hidden
+        $('.toast').on('hidden.bs.toast', function() {
+            $(this).remove();
+        });
+    } else {
+        console.log('jQuery or Bootstrap toast not available');
         
-//         // Fallback for vanilla JS
-//         document.querySelectorAll('.toast .close, .toast .btn-close').forEach(button => {
-//             button.addEventListener('click', function() {
-//                 const toast = this.closest('.toast');
-//                 if (toast) {
-//                     toast.style.opacity = '0';
-//                     setTimeout(() => {
-//                         toast.remove();
-//                     }, 300);
-//                 }
-//             });
-//         });
+        // Fallback for vanilla JS
+        document.querySelectorAll('.toast .close, .toast .btn-close').forEach(button => {
+            button.addEventListener('click', function() {
+                const toast = this.closest('.toast');
+                if (toast) {
+                    toast.style.opacity = '0';
+                    setTimeout(() => {
+                        toast.remove();
+                    }, 300);
+                }
+            });
+        });
         
-//         // Auto hide toasts after 5 seconds
-//         setTimeout(() => {
-//             document.querySelectorAll('.toast').forEach(toast => {
-//                 toast.style.opacity = '0';
-//                 setTimeout(() => {
-//                     toast.remove();
-//                 }, 300);
-//             });
-//         }, 5000);
-//     }
-// }
+        // Auto hide toasts after 5 seconds
+        setTimeout(() => {
+            document.querySelectorAll('.toast').forEach(toast => {
+                toast.style.opacity = '0';
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            });
+        }, 5000);
+    }
+}
 
 function initializeQuantityControls() {
     // Quantity Controls

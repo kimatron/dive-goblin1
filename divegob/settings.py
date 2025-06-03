@@ -290,3 +290,19 @@ LOGGING = {
     },
 }
 
+# FORCE LOCAL STATIC FILES FOR DEVELOPMENT - ADD THIS SECTION AT THE VERY BOTTOM
+if 'DEVELOPMENT' in os.environ or DEBUG:
+    # Disable AWS for local development
+    import os
+    if 'USE_AWS' in os.environ:
+        del os.environ['USE_AWS']
+    
+    # Force local static files
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+    STATIC_URL = '/static/'
+    
+    # Override AWS settings
+    AWS_STORAGE_BUCKET_NAME = None
+    AWS_S3_CUSTOM_DOMAIN = None
+    
+    print("🔧 DEVELOPMENT MODE: Using local static files instead of AWS")

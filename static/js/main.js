@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('=== DOM CONTENT LOADED ===');
     console.log('Document ready, initializing components...');
+    
+    // Rest of your existing code...
     
     // Initialize desktop mega menu
     initializeMegaMenu();
@@ -15,6 +18,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize quantity controls (if needed)
     initializeQuantityControls();
+    
+    // Initialize product image modal
+    initializeProductModal();
 });
 
 function initializeMegaMenu() {
@@ -196,5 +202,65 @@ function initializeQuantityControls() {
                 input.dispatchEvent(new Event('change'));
             }
         });
+    });
+}
+
+function initializeProductModal() {
+    console.log('=== initializeProductModal CALLED ===');
+    
+    // Check what exists on the page
+    console.log('Modal element:', document.getElementById('imageModal'));
+    console.log('Image box element:', document.querySelector('.brutal-image-box'));
+    console.log('Image element:', document.querySelector('.brutal-product__main-image'));
+    
+    // Only run on pages that have a modal
+    const modal = document.getElementById('imageModal');
+    if (!modal) {
+        console.log('No modal found on this page - skipping modal initialization');
+        return;
+    }
+
+    console.log('Modal found, initializing...');
+
+    // Remove any existing onclick handlers to prevent conflicts
+    const imageBox = document.querySelector('.brutal-image-box');
+    if (imageBox) {
+        imageBox.removeAttribute('onclick');
+        
+        // Add our clean click handler
+        imageBox.addEventListener('click', function(e) {
+            console.log('Image clicked, opening modal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    }
+
+    // Clean close functionality
+    const closeBtn = document.getElementById('modalClose');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function(e) {
+            console.log('Close button clicked');
+            e.stopPropagation();
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+    }
+
+    // Click outside to close
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            console.log('Clicked outside modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    });
+
+    // Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            console.log('Escape pressed');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
     });
 }

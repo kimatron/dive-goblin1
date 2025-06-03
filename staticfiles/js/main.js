@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize quantity controls (if needed)
     initializeQuantityControls();
+    
+    // Initialize product image modal
+    initializeProductModal();
 });
 
 function initializeMegaMenu() {
@@ -168,6 +171,79 @@ function initializeToasts() {
             });
         }, 5000);
     }
+}
+
+function initializeProductModal() {
+    console.log('Initializing product modal...');
+    
+    // Product image modal functionality
+    const productImages = document.querySelectorAll('.brutal-image-box img, .brutal-product__main-image');
+    
+    // Create modal if it doesn't exist
+    if (!document.getElementById('imageModal')) {
+        createModal();
+    }
+    
+    function createModal() {
+        const modalHtml = `
+            <div class="brutal-modal" id="imageModal">
+                <div class="brutal-modal__content">
+                    <button class="brutal-modal__close" id="modalClose">&times;</button>
+                    <img class="brutal-modal__image" id="modalImage" src="" alt="">
+                </div>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', modalHtml);
+    }
+    
+    // Open modal when clicking product images
+    productImages.forEach(img => {
+        img.addEventListener('click', function() {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            
+            if (modal && modalImg) {
+                modalImg.src = this.src;
+                modalImg.alt = this.alt;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                console.log('Modal opened');
+            }
+        });
+    });
+    
+    // Close modal functionality
+    function closeModal() {
+        const modal = document.getElementById('imageModal');
+        if (modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restore scrolling
+            console.log('Modal closed');
+        }
+    }
+    
+    // Close button click
+    document.addEventListener('click', function(e) {
+        if (e.target.id === 'modalClose' || e.target.classList.contains('brutal-modal__close')) {
+            e.preventDefault();
+            e.stopPropagation();
+            closeModal();
+        }
+    });
+    
+    // Click outside modal to close
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('brutal-modal')) {
+            closeModal();
+        }
+    });
+    
+    // Escape key to close
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
 }
 
 function initializeQuantityControls() {

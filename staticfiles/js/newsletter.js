@@ -1,7 +1,3 @@
-// EMERGENCY SIMPLE VERSION - newsletter.js
-console.log('=== NEWSLETTER.JS FILE IS LOADING ===');
-alert('Newsletter.js file loaded!'); // This should show immediately when page loads
-
 document.addEventListener('DOMContentLoaded', function() {
     const newsletterForm = document.querySelector('#newsletter-form, .newsletter-form');
     

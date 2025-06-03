@@ -6,10 +6,10 @@
     <div class="brutal-product-detail">
         <!-- Product Images Section -->
         <div class="brutal-product__images">
-            <div class="brutal-image-box" onclick="document.getElementById('imageModal').classList.add('active')">
-                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="brutal-product__main-image">
-                <div class="image-zoom-hint">Click to zoom</div>
-            </div>
+        <div class="brutal-image-box">
+    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="brutal-product__main-image">
+    <div class="image-zoom-hint">Click to zoom</div>
+</div>
         </div>
 
         <!-- Product Info Section -->
@@ -77,13 +77,12 @@
 <!-- Image Modal -->
 <div class="brutal-modal" id="imageModal">
     <div class="brutal-modal__content">
+        <button class="brutal-modal__close" id="modalClose">&times;</button>
         <img src="{{ product.image.url }}" alt="{{ product.name }}" class="brutal-modal__image">
-        <button class="brutal-modal__close">&times;</button>
     </div>
 </div>
 {% endblock %}
 
 {% block postloadjs %}
 {{ block.super }}
-
 {% endblock %}

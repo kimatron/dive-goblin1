@@ -20,17 +20,29 @@ def newsletter_signup(request):
     try:
         data = json.loads(request.body)
         email = data.get('email', '').strip()
+        
+        print(f"DEBUG: Email received: {email}")
 
         validate_email(email)
 
         if NewsletterSubscriber.objects.filter(email=email).exists():
             # Already subscribed - return error toast
+            print("DEBUG: Email already exists, rendering error template")
+            
+            # Don't pass 'message' - let the template use its default text
             toast_html = render_to_string('includes/toasts/newsletter_error.html')
-            return JsonResponse({
+            
+            print(f"DEBUG: Toast HTML generated: {toast_html[:100]}...")
+            
+            response_data = {
                 'status': 'info',
-                'message': "You're already subscribed!",
+                'message': "You're already subscribed!",  # This is for the JSON response
                 'toast_html': toast_html
-            })
+            }
+            
+            print(f"DEBUG: Response data: {response_data}")
+            
+            return JsonResponse(response_data)
 
         subscriber = NewsletterSubscriber.objects.create(email=email)
 
@@ -41,7 +53,9 @@ def newsletter_signup(request):
             print(f"Failed to send welcome email: {e}")
 
         # Success - return success toast
-        toast_html = render_to_string('includes/toasts/newsletter_success.html')
+        toast_html = render_to_string('includes/toasts/newsletter_success.html', {
+            'message': 'Successfully subscribed! Welcome aboard! 🎉'
+        })
         return JsonResponse({
             'status': 'success',
             'message': 'Successfully subscribed! Welcome aboard! 🎉',

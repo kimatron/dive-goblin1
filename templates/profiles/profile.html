@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+<script>console.log('Static files working');</script>
 
 {% block extra_css %}
     {{ block.super }}
@@ -7,223 +9,308 @@
 {% endblock %}
 
 {% block content %}
-<div class="profile-container">
-    <!-- Profile Header -->
-    <div class="profile-header">
-        <h1 class="profile-title">My Profile</h1>
-        <p class="profile-subtitle">Welcome back, {{ request.user.username }}!</p>
-    </div>
-
-    <div class="profile-grid">
-        <!-- Member Details -->
-        <div class="brutal-card member-card">
-            <div class="card-decoration"></div>
-            <h2>Member Details</h2>
-            <div class="member-info">
-                <div class="info-group">
-                    <span class="info-label">Username</span>
-                    <span class="info-value">{{ request.user.username }}</span>
-                </div>
-                <div class="info-group">
-                    <span class="info-label">Email</span>
-                    <span class="info-value">{{ request.user.email }}</span>
-                </div>
-                <div class="info-group">
-                    <span class="info-label">Member Since</span>
-                    <span class="info-value">{{ request.user.date_joined|date:"F j, Y" }}</span>
-                </div>
-                <div class="info-group">
-                    <span class="info-label">Last Login</span>
-                    <span class="info-value">{{ request.user.last_login|date:"F j, Y" }}</span>
+<div class="profile-wrapper">
+    <div class="profile-container">
+        <!-- Profile Card -->
+        <div class="profile-card">
+            <div class="upper-container">
+                <div class="image-container">
+                    {{ request.user.username|first|upper }}
                 </div>
             </div>
-            <div class="account-actions">
-        <button class="brutal-button" data-bs-toggle="modal" data-bs-target="#updateAccountModal">
-        Update Account Details
-        </button>
-        <button class="brutal-button brutal-button--danger" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
-        Delete Account
-    </button>
-</div>
+            <div class="lower-container">
+                <h3>{{ request.user.username }}</h3>
+                <h4>{{ request.user.email }}</h4>
+                
+                <div class="profile-bio">
+                    {% if request.user.userprofile.bio %}
+                        "{{ request.user.userprofile.bio|truncatechars:100 }}"
+                    {% else %}
+                        No bio added yet...
+                    {% endif %}
+                </div>
+                
+                <div class="profile-stats">
+                    <div class="stat-box">
+                        <div class="stat-value">{{ orders.count }}</div>
+                        <div class="stat-label">Orders</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">
+                            {% if request.user.userprofile.diving_level %}
+                                {{ request.user.userprofile.get_diving_level_display|truncatechars:8 }}
+                            {% else %}
+                                New
+                            {% endif %}
+                        </div>
+                        <div class="stat-label">Level</div>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn-brutal" onclick="showEditForm()">Edit Profile</button>
+                    <button class="btn-brutal danger" onclick="showDeleteForm()">Delete Account</button>
+                </div>
+            </div>
         </div>
 
-        <!-- Personal Information -->
-        <div class="brutal-card">
-            <div class="card-decoration"></div>
-            <h2>Personal Information</h2>
-            <form method="POST" class="info-form">
-                {% csrf_token %}
-                <input type="hidden" name="form_type" value="info_form">
-                {{ info_form.as_p }}
-                <button type="submit" class="brutal-button">Update Personal Info</button>
-            </form>
-        </div>
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Personal Information Display -->
+            <div class="info-card">
+                <div class="card-header">
+                    <h3>Personal Information</h3>
+                </div>
+                <div class="card-body">
+                    <div class="info-display">
+                        <div class="info-item">
+                            <span class="info-label">Gender</span>
+                            <span class="info-value">
+                                {% if request.user.userprofile.gender %}
+                                    {{ request.user.userprofile.get_gender_display }}
+                                {% else %}
+                                    <span class="info-empty">Not specified</span>
+                                {% endif %}
+                            </span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Date of Birth</span>
+                            <span class="info-value">
+                                {% if request.user.userprofile.date_of_birth %}
+                                    {{ request.user.userprofile.date_of_birth|date:"F j, Y" }}
+                                {% else %}
+                                    <span class="info-empty">Not specified</span>
+                                {% endif %}
+                            </span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Diving Level</span>
+                            <span class="info-value">
+                                {% if request.user.userprofile.diving_level %}
+                                    {{ request.user.userprofile.get_diving_level_display }}
+                                {% else %}
+                                    <span class="info-empty">Not specified</span>
+                                {% endif %}
+                            </span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Member Since</span>
+                            <span class="info-value">{{ request.user.date_joined|date:"F j, Y" }}</span>
+                        </div>
+                    </div>
+                    
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="form_type" value="info_form">
+                        
+                        <div class="form-group">
+                            <label class="form-label">Gender</label>
+                            <select name="gender" class="form-select">
+                                <option value="">Prefer not to say</option>
+                                <option value="M" {% if request.user.userprofile.gender == 'M' %}selected{% endif %}>Male</option>
+                                <option value="F" {% if request.user.userprofile.gender == 'F' %}selected{% endif %}>Female</option>
+                                <option value="O" {% if request.user.userprofile.gender == 'O' %}selected{% endif %}>Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Date of Birth</label>
+                            <input type="date" name="date_of_birth" value="{{ request.user.userprofile.date_of_birth|date:'Y-m-d' }}" class="form-input">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Diving Level</label>
+                            <select name="diving_level" class="form-select">
+                                <option value="">Select Level</option>
+                                <option value="beginner" {% if request.user.userprofile.diving_level == 'beginner' %}selected{% endif %}>Beginner</option>
+                                <option value="intermediate" {% if request.user.userprofile.diving_level == 'intermediate' %}selected{% endif %}>Intermediate</option>
+                                <option value="advanced" {% if request.user.userprofile.diving_level == 'advanced' %}selected{% endif %}>Advanced</option>
+                                <option value="professional" {% if request.user.userprofile.diving_level == 'professional' %}selected{% endif %}>Professional</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Bio</label>
+                            <textarea name="bio" class="form-textarea" placeholder="Tell us about yourself...">{{ request.user.userprofile.bio }}</textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit">Update Personal Info</button>
+                    </form>
+                </div>
+            </div>
 
-        <!-- Delivery Information -->
-        <div class="brutal-card">
-            <div class="card-decoration"></div>
-            <h2>Delivery Information</h2>
-            <form method="POST" id="profile-update-form">
-                {% csrf_token %}
-                <input type="hidden" name="form_type" value="delivery_form">
-                {{ form|crispy }}
-                <button type="submit" class="brutal-button">Update Delivery Info</button>
-            </form>
-        </div>
+            <!-- Delivery Information -->
+            <div class="info-card">
+                <div class="card-header">
+                    <h3>Delivery Information</h3>
+                </div>
+                <div class="card-body">
+                    <div class="info-display">
+                        <div class="info-item">
+                            <span class="info-label">Phone</span>
+                            <span class="info-value">
+                                {% if request.user.userprofile.default_phone_number %}
+                                    {{ request.user.userprofile.default_phone_number }}
+                                {% else %}
+                                    <span class="info-empty">Not specified</span>
+                                {% endif %}
+                            </span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Address</span>
+                            <span class="info-value">
+                                {% if request.user.userprofile.default_street_address1 %}
+                                    {{ request.user.userprofile.default_street_address1 }}
+                                    {% if request.user.userprofile.default_town_or_city %}
+                                        , {{ request.user.userprofile.default_town_or_city }}
+                                    {% endif %}
+                                {% else %}
+                                    <span class="info-empty">Not specified</span>
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="form_type" value="delivery_form">
+                        
+                        <div class="form-group">
+                            <label class="form-label">Phone Number</label>
+                            <input type="text" name="default_phone_number" value="{{ request.user.userprofile.default_phone_number }}" class="form-input">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Street Address</label>
+                            <input type="text" name="default_street_address1" value="{{ request.user.userprofile.default_street_address1 }}" class="form-input">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">City</label>
+                            <input type="text" name="default_town_or_city" value="{{ request.user.userprofile.default_town_or_city }}" class="form-input">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Postal Code</label>
+                            <input type="text" name="default_postcode" value="{{ request.user.userprofile.default_postcode }}" class="form-input">
+                        </div>
+                        
+                        <button type="submit" class="btn-submit">Update Delivery Info</button>
+                    </form>
+                </div>
+            </div>
 
-        <!-- Order History -->
-        <div class="brutal-card wide-section">
-            <div class="card-decoration"></div>
-            <h2>Order History</h2>
-            {% if orders %}
-                <div class="order-list">
-                    {% for order in orders %}
+            <!-- Order History -->
+            <div class="info-card">
+                <div class="card-header">
+                    <h3>Order History</h3>
+                </div>
+                <div class="card-body">
+                    {% if orders %}
+                        {% for order in orders %}
                         <div class="order-item">
-                            <div class="order-details">
-                                <div class="order-header">
-                                    <span class="order-number">#{{ order.order_number|truncatechars:6 }}</span>
-                                    <span class="order-date">{{ order.date|date:"F j, Y" }}</span>
+                            <div class="order-header">
+                                <span>Order #{{ order.order_number|truncatechars:8 }}</span>
+                                <span>{{ order.date|date:"M j, Y" }}</span>
+                            </div>
+                            <div class="order-body">
+                                {% for item in order.lineitems.all %}
+                                <div class="order-line">
+                                    <span>{{ item.product.name }} × {{ item.quantity }}</span>
+                                    <span>${{ item.lineitem_total }}</span>
                                 </div>
-                                <div class="order-items">
-                                    {% for item in order.lineitems.all %}
-                                        <div class="item-detail">
-                                            <span>{{ item.product.name }} × {{ item.quantity }}</span>
-                                            <span>${{ item.lineitem_total }}</span>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                                <div class="order-summary">
-                                    <div class="summary-item">
-                                        <span>Subtotal:</span>
-                                        <span>${{ order.order_total }}</span>
-                                    </div>
-                                    <div class="summary-item">
-                                        <span>Delivery:</span>
-                                        <span>${{ order.delivery_cost }}</span>
-                                    </div>
-                                    <div class="summary-item total">
-                                        <span>Total:</span>
-                                        <span>${{ order.grand_total }}</span>
-                                    </div>
+                                {% endfor %}
+                                <div class="order-total">
+                                    Total: ${{ order.grand_total }}
                                 </div>
                             </div>
                         </div>
-                    {% endfor %}
+                        {% endfor %}
+                    {% else %}
+                        <div style="text-align: center; padding: 2rem;">
+                            <p style="margin-bottom: 1rem;">No orders yet!</p>
+                            <a href="{% url 'products:products' %}" class="btn-brutal">Start Shopping</a>
+                        </div>
+                    {% endif %}
                 </div>
-            {% else %}
-                <div class="no-orders">
-                    <p>No orders yet!</p>
-                    <a href="{% url 'products:products' %}" class="brutal-button">Start Shopping</a>
-                </div>
-            {% endif %}
+            </div>
         </div>
     </div>
 </div>
 
-<!-- Update Account Modal -->
-<div class="modal fade" id="updateAccountModal" tabindex="-1" aria-labelledby="updateAccountModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content brutal-modal">
-            <div class="modal-header">
-                <h5 class="modal-title" id="updateAccountModalLabel">Update Account Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="{% url 'profiles:update_account' %}" class="update-account-form">
-                    {% csrf_token %}
-                    <div class="form-group mb-3">
-                        <label for="username">Username</label>
-                        <input type="text" name="username" id="username" value="{{ request.user.username }}" class="brutal-input">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="email">Email</label>
-                        <input type="email" name="email" id="email" value="{{ request.user.email }}" class="brutal-input">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="current_password">Current Password</label>
-                        <input type="password" name="current_password" id="current_password" class="brutal-input" required>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="new_password">New Password (optional)</label>
-                        <input type="password" name="new_password" id="new_password" class="brutal-input">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="confirm_password">Confirm New Password</label>
-                        <input type="password" name="confirm_password" id="confirm_password" class="brutal-input">
-                    </div>
-                    <button type="submit" class="brutal-button">Update Account</button>
-                </form>
-            </div>
+<!-- Edit Account Modal -->
+<div id="editModal" class="modal-overlay">
+    <div class="modal-card">
+        <div class="modal-header">
+            <h3 class="modal-title">Edit Account</h3>
+        </div>
+        <div class="modal-body">
+            <form method="POST" action="{% url 'profiles:update_account' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <input type="text" name="username" value="{{ request.user.username }}" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" name="email" value="{{ request.user.email }}" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Current Password</label>
+                    <input type="password" name="current_password" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">New Password (optional)</label>
+                    <input type="password" name="new_password" id="newPass" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Confirm New Password</label>
+                    <input type="password" name="confirm_password" id="confirmPass" class="form-input">
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn-brutal">Update Account</button>
+                    <button type="button" class="btn-brutal btn-cancel" onclick="hideEditForm()">Cancel</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
 <!-- Delete Account Modal -->
-<div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content brutal-modal">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteAccountModalLabel">Delete Account</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div id="deleteModal" class="modal-overlay">
+    <div class="modal-card">
+        <div class="modal-header">
+            <h3 class="modal-title" style="color: #ff3333;">Delete Account</h3>
+        </div>
+        <div class="modal-body">
+            <div class="warning-box">
+                <div class="warning-icon">⚠️</div>
+                <h4 style="color: #ff3333; margin: 0 0 10px 0;">This Cannot Be Undone!</h4>
+                <p style="margin: 0;">Your account and all data will be permanently deleted.</p>
             </div>
-            <div class="modal-body">
-                <form method="POST" action="{% url 'profiles:delete_account' %}" id="deleteAccountForm">
-                    {% csrf_token %}
-                    <div class="delete-warning text-center mb-4">
-                        <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
-                        <h3 class="text-danger">Warning: This Cannot Be Undone!</h3>
-                        <p>Your account and all associated data will be permanently deleted.</p>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label>Enter your password to confirm</label>
-                        <input type="password" name="password" class="brutal-input" required>
-                    </div>
-                    <div class="form-group form-check mb-3">
-                        <input type="checkbox" name="confirm_delete" id="confirm_delete" class="form-check-input" required>
-                        <label class="form-check-label" for="confirm_delete">
-                            I understand this will permanently delete my account
-                        </label>
-                    </div>
-                    <div class="text-center mt-4">
-                        <button type="button" class="brutal-button" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="brutal-button brutal-button--danger">Delete My Account</button>
-                    </div>
-                </form>
-            </div>
+            <form method="POST" action="{% url 'profiles:delete_account' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="form-label">Enter Password to Confirm</label>
+                    <input type="password" name="password" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                        <input type="checkbox" name="confirm_delete" id="confirmCheck" required>
+                        I understand this will permanently delete my account
+                    </label>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn-brutal danger">Delete Account</button>
+                    <button type="button" class="btn-brutal btn-cancel" onclick="hideDeleteForm()">Cancel</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+{% endblock %}
 
 {% block postloadjs %}
 {{ block.super }}
-<script>
-$(document).ready(function() {
-    // Debug the modal button
-    $('[data-target="#updateAccountModal"]').on('click', function(e) {
-        console.log('Modal button clicked');
-        e.preventDefault();
-        $('#updateAccountModal').modal('show');
-    });
-    
-    // Debug modal events
-    $('#updateAccountModal').on('show.bs.modal', function () {
-        console.log('Modal is about to show');
-    });
-    
-    $('#updateAccountModal').on('shown.bs.modal', function () {
-        console.log('Modal is now visible');
-    });
-    
-    // Original delete form validation
-    $('#deleteAccountForm').on('submit', function(e) {
-        if (!$('#confirm_delete').is(':checked')) {
-            e.preventDefault();
-            alert('Please confirm account deletion by checking the box.');
-            return false;
-        }
-        return confirm('Are you ABSOLUTELY sure you want to delete your account? This cannot be undone!');
-    });
-});
-</script>
-{% endblock %}
+<script src="{% static 'js/profile.js' %}"></script>
 {% endblock %}

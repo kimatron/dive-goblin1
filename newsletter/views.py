@@ -21,49 +21,66 @@ def newsletter_signup(request):
         data = json.loads(request.body)
         email = data.get('email', '').strip()
         
-        print(f"DEBUG: Email received: {email}")
+        print(f"DEBUG: Email received: '{email}'")
+        print(f"DEBUG: Email length: {len(email)}")
+        print(f"DEBUG: Email type: {type(email)}")
 
         validate_email(email)
+        print(f"DEBUG: Email validation passed")
 
+        # Add detailed database check
+        existing_count = NewsletterSubscriber.objects.filter(email=email).count()
+        print(f"DEBUG: Existing subscribers with this email: {existing_count}")
+        
+        if existing_count > 0:
+            print(f"DEBUG: Found existing subscriber(s)")
+            existing_subs = NewsletterSubscriber.objects.filter(email=email)
+            for sub in existing_subs:
+                print(f"DEBUG: Existing subscriber: '{sub.email}' (ID: {sub.id})")
+        
         if NewsletterSubscriber.objects.filter(email=email).exists():
             # Already subscribed - return error toast
             print("DEBUG: Email already exists, rendering error template")
             
-            # Don't pass 'message' - let the template use its default text
             toast_html = render_to_string('includes/toasts/newsletter_error.html')
-            
-            print(f"DEBUG: Toast HTML generated: {toast_html[:100]}...")
             
             response_data = {
                 'status': 'info',
-                'message': "You're already subscribed!",  # This is for the JSON response
+                'message': "You're already subscribed!",
                 'toast_html': toast_html
             }
             
-            print(f"DEBUG: Response data: {response_data}")
-            
+            print(f"DEBUG: Returning 'already exists' response")
             return JsonResponse(response_data)
 
+        print(f"DEBUG: Email does NOT exist, creating new subscriber")
         subscriber = NewsletterSubscriber.objects.create(email=email)
+        print(f"DEBUG: NEW SUBSCRIBER CREATED with ID: {subscriber.id}")
 
         # Send welcome email (if email settings are configured)
         try:
             send_welcome_email(subscriber)
+            print(f"DEBUG: Welcome email sent successfully")
         except Exception as e:
-            print(f"Failed to send welcome email: {e}")
+            print(f"DEBUG: Failed to send welcome email: {e}")
 
         # Success - return success toast
+        print(f"DEBUG: Rendering SUCCESS template")
         toast_html = render_to_string('includes/toasts/newsletter_success.html', {
             'message': 'Successfully subscribed! Welcome aboard! 🎉'
         })
-        return JsonResponse({
+        
+        response_data = {
             'status': 'success',
             'message': 'Successfully subscribed! Welcome aboard! 🎉',
             'toast_html': toast_html
-        })
+        }
+        
+        print(f"DEBUG: Returning SUCCESS response")
+        return JsonResponse(response_data)
 
-    except ValidationError:
-        # Invalid email - return error toast
+    except ValidationError as e:
+        print(f"DEBUG: Email validation failed: {e}")
         toast_html = render_to_string('includes/toasts/newsletter_error.html', {
             'message': 'Please enter a valid email address.'
         })
@@ -72,8 +89,8 @@ def newsletter_signup(request):
             'message': 'Please enter a valid email address.',
             'toast_html': toast_html
         }, status=400)
-    except Exception:
-        # Generic error - return error toast
+    except Exception as e:
+        print(f"DEBUG: Unexpected error: {e}")
         toast_html = render_to_string('includes/toasts/newsletter_error.html', {
             'message': 'Oops! Something went wrong. Please try again.'
         })
@@ -82,6 +99,7 @@ def newsletter_signup(request):
             'message': 'Oops! Something went wrong. Please try again.',
             'toast_html': toast_html
         }, status=500)
+        
 
 
 @staff_member_required

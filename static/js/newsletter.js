@@ -50,23 +50,18 @@ function showEmergencyToast(htmlString) {
         top: 50px;
         right: 50px;
         z-index: 999999;
-        background: white;
-        border: 5px solid black;
-        box-shadow: 10px 10px 0 black;
-        padding: 20px;
-        max-width: 400px;
-        font-family: Arial, sans-serif;
     `;
     
-    // Instead of using the HTML string, create our own content
-    container.innerHTML = `
-        <div style="background: black; color: white; padding: 10px; margin: -20px -20px 15px -20px; font-weight: bold;">
-            <span>Oops!</span>
-            <button onclick="this.closest('.emergency-toast-container').remove()" style="float: right; background: none; border: none; color: white; font-size: 20px; cursor: pointer;">×</button>
-        </div>
-        <h3 style="margin: 0 0 10px 0; font-size: 18px; font-weight: bold;">Already a Goblin! 🤿</h3>
-        <p style="margin: 0; font-size: 14px;">Looks like you're already part of our underwater crew!</p>
-    `;
+    // USE THE ACTUAL HTML FROM BACKEND instead of hardcoded text
+    container.innerHTML = htmlString;
+    
+    // Add close functionality to the new toast
+    const closeButton = container.querySelector('.btn-close');
+    if (closeButton) {
+        closeButton.addEventListener('click', function() {
+            container.remove();
+        });
+    }
     
     document.body.appendChild(container);
     
@@ -78,7 +73,7 @@ function showEmergencyToast(htmlString) {
     }, 5000);
     
     console.log('EMERGENCY: Toast created and added to page');
-}
+} // ← THIS CLOSING BRACKET WAS MISSING!
 
 function getCookie(name) {
     let cookieValue = null;

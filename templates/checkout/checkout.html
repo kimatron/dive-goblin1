@@ -1,150 +1,864 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+    {{ block.super }}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+        
+        .checkout-wrapper {
+            font-family: 'Space Mono', monospace;
+            background: #fefefe;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .checkout-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .checkout-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: #ffffff;
+            border: 4px solid #000;
+            box-shadow: 8px 8px 0 #000;
+        }
+
+        .checkout-title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 0;
+            color: #000;
+        }
+
+        .checkout-content {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 2rem;
+        }
+
+        /* Form Section */
+        .checkout-form {
+            background: #ffffff;
+            border: 4px solid #000;
+            box-shadow: 6px 6px 0 #000;
+            padding: 2rem;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px dashed #ccc;
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 0 0 1.5rem 0;
+            padding: 0.5rem 1rem;
+            background: #000;
+            color: #fff;
+            border: none;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #000;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 1rem;
+            border: 3px solid #000;
+            background: #fff;
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 3px 3px 0 #000;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            background: #ffe600;
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0 #000;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        /* Stripe Elements Container */
+        .stripe-card-container {
+            border: 3px solid #000;
+            background: #fff;
+            box-shadow: 3px 3px 0 #000;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .stripe-card-container.focused {
+            background: #ffe600;
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0 #000;
+        }
+
+        /* Individual Stripe Elements */
+        .stripe-element {
+            padding: 1rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 16px;
+            color: #000;
+        }
+
+        #card-number-element {
+            border-bottom: 2px solid #eee;
+        }
+
+        .stripe-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        #card-expiry-element {
+            border-right: 2px solid #eee;
+        }
+
+        #card-cvc-element {
+            /* No border needed */
+        }
+
+        .StripeElement {
+            box-sizing: border-box;
+            height: 60px;
+            padding: 1rem;
+            border: none;
+            background-color: transparent;
+            font-family: 'Space Mono', monospace;
+            font-size: 16px;
+            color: #000;
+        }
+
+        .StripeElement--focus {
+            background-color: transparent;
+        }
+
+        .StripeElement--invalid {
+            color: #ff3333;
+        }
+
+        .StripeElement--webkit-autofill {
+            background-color: #fff !important;
+        }
+
+        #card-errors {
+            color: #ff3333;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background: #ffebee;
+            border: 2px solid #ff3333;
+            display: none;
+        }
+
+        #card-errors.show {
+            display: block;
+        }
+
+        .save-info-section {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #f0f0f0;
+            border: 2px solid #000;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-wrapper input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+
+        /* Order Summary */
+        .order-summary {
+            background: #ffffff;
+            border: 4px solid #000;
+            box-shadow: 8px 8px 0 #000;
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+
+        .summary-header {
+            background: #000;
+            color: #fff;
+            padding: 1.5rem;
+            border-bottom: 4px solid #000;
+        }
+
+        .summary-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .summary-content {
+            padding: 1.5rem;
+        }
+
+        .order-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .item-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border: 2px solid #000;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-name {
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin: 0 0 0.25rem 0;
+            text-transform: uppercase;
+        }
+
+        .item-qty {
+            font-size: 0.8rem;
+            color: #666;
+            margin: 0;
+        }
+
+        .item-price {
+            font-weight: 700;
+            color: var(--brutal-accent);
+        }
+
+        .order-totals {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #000;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .total-row.grand {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid #000;
+        }
+
+        /* Action Buttons */
+        .checkout-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            align-items: center;
+        }
+
+        .btn-brutal {
+            padding: 1rem 2rem;
+            border: 3px solid #000;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Space Mono', monospace;
+            box-shadow: 4px 4px 0 #000;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-back {
+            background: #fff;
+            color: #000;
+        }
+
+        .btn-back:hover {
+            background: #f0f0f0;
+            color: #000;
+            text-decoration: none;
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 #000;
+        }
+
+        .btn-submit {
+            background: var(--brutal-accent);
+            color: #fff;
+            flex: 1;
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            background: var(--brutal-hover);
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 #000;
+        }
+
+        .btn-submit:disabled {
+            background: #ccc;
+            color: #666;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: 4px 4px 0 #000;
+        }
+
+        .charge-warning {
+            text-align: center;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #ffebee;
+            border: 2px solid #ff3333;
+            color: #ff3333;
+            font-weight: 700;
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .loading-content {
+            background: #fff;
+            padding: 2rem;
+            border: 4px solid #000;
+            box-shadow: 8px 8px 0 #000;
+            text-align: center;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #ccc;
+            border-top: 4px solid var(--brutal-accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .checkout-wrapper {
+                padding: 1rem 0.5rem;
+                .form-row, .stripe-row {
+    grid-template-columns: 1fr !important;
+}
+
+.form-input, .form-select, select {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+            }
+
+            .checkout-title {
+                font-size: 2rem;
+            }
+
+            .checkout-content {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .order-summary {
+                order: -1;
+                position: static;
+            }
+
+            .form-row, .stripe-row {
+                grid-template-columns: 1fr;
+            }
+
+            #card-number-element {
+                border-bottom: 2px solid #eee;
+                border-right: none;
+            }
+
+            #card-expiry-element {
+                border-right: none;
+                border-bottom: 2px solid #eee;
+            }
+
+            .checkout-actions {
+                flex-direction: column;
+            }
+
+            .btn-brutal {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .checkout-form {
+                padding: 1.5rem;
+            }
+
+            .summary-content {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .checkout-header {
+                padding: 1rem;
+            }
+
+            .checkout-title {
+                font-size: 1.5rem;
+            }
+
+            .checkout-form {
+                padding: 1rem;
+            }
+
+            .form-input, .form-select {
+                padding: 0.75rem;
+            }
+        }
+    </style>
 {% endblock %}
-{% block extra_title %}Checkout{% endblock %}
+
 {% block content %}
-<div class="container m-3">
-    <div class="row">
-        <div class="col mt-2">
-            <h1 class="text-center mx-auto py-2">Checkout</h1>
+<div class="checkout-wrapper">
+    <div class="checkout-container">
+        <!-- Header -->
+        <div class="checkout-header">
+            <h1 class="checkout-title">Secure Checkout</h1>
         </div>
-    </div>
-    <div class="row p-3 my-4 mx-auto">
-        <div class="col col-lg-6 order-lg-last">
-            <p class="font-weight-bold">Order Summary ({{ product_count }})</p>
-            <div class="row">
-                <div class="col-7 offset-2">
-                    <p class="mb-1 mt-0 small">Item</p>
+
+        <div class="checkout-content">
+            <!-- Order Summary (Mobile: shows first) -->
+            <div class="order-summary">
+                <div class="summary-header">
+                    <h2 class="summary-title">Order Summary ({{ product_count }})</h2>
                 </div>
-                <div class="col-3 text-right">
-                    <p class="mb-1 mt-0 small">Subtotal</p>
-                </div>
-            </div>
-            {% for item in bag_items %}
-            <div class="row">
-                <div class="col-2 mb-1">
-                    <a href="{% url 'products:product_detail' item.product.id %}"
-                        aria-label="">
+                <div class="summary-content">
+                    <!-- Order Items -->
+                    {% for item in bag_items %}
+                    <div class="order-item">
                         {% if item.product.image %}
-                        <img class="w-100" src="{{ item.product.image.url }}"
-                            alt="An image of {{ product.name }}">
+                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="item-image">
                         {% else %}
-                        <img class="w-100" src="{{ MEDIA_URL }}noimage.png"
-                            alt="No image placeholder for {{ product.name }}">
+                            <img src="{{ MEDIA_URL }}noimage.png" alt="No image" class="item-image">
                         {% endif %}
-                    </a>
-                </div>
-                <div class="col-7">
-                    <p class="my-0"><strong>{{ item.product.name }}</strong></p>
-                    <p class="my-0 small">Qty: 1</p>
-                </div>
-                <div class="col-3 text-right">
-                    <p class="my-0 small">€{{ item.product.price }}</p>
+                        <div class="item-details">
+                            <p class="item-name">{{ item.product.name }}</p>
+                            <p class="item-qty">Qty: {{ item.quantity }}</p>
+                        </div>
+                        <div class="item-price">${{ item.product.price }}</div>
+                    </div>
+                    {% endfor %}
+
+                    <!-- Order Totals -->
+                    <div class="order-totals">
+                        <div class="total-row">
+                            <span>Subtotal:</span>
+                            <span>${{ total|floatformat:2 }}</span>
+                        </div>
+                        <div class="total-row">
+                            <span>Delivery:</span>
+                            <span>
+                                {% if delivery %}
+                                    ${{ delivery|floatformat:2 }}
+                                {% else %}
+                                    <strong style="color: var(--brutal-accent);">FREE</strong>
+                                {% endif %}
+                            </span>
+                        </div>
+                        <div class="total-row grand">
+                            <span>Total:</span>
+                            <span>${{ grand_total|floatformat:2 }}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            {% endfor %}
-            <hr class="my-0">
-            <div class="row text-right">
-                <div class="col-7 offset-2">
-                    <p class="font-weight-bold my-0">Order Total:</p>
-                    <p class="font-weight-bold my-0">Delivery: </p>
-                    <p class="font-weight-bold my-0">Grand Total:</p>
-                </div>
-                <div class="col-3">
-                    <p class="my-0">${{ total | floatformat:2 }}</p>
-                    <p class="my-0"><strong class="custom-red">FREE</strong></p>
-                    <p class="my-0"><strong>€{{ grand_total | floatformat:2 }}</strong></p>
-                </div>
-            </div>
-        </div>
-        <div class="col col-lg-6 mx-auto">
-            <p>Please fill out the form to complete your order!</p>
-            <form action="{% url 'checkout:checkout' %}" method="POST" id="payment-form">
-                {% csrf_token %}
-                <fieldset class="rounded-0 px-3 mb-5">
-                    <legend class="fieldset-label font-weight-bold small px-2 w-auto">Details</legend>
-                    {{ order_form.full_name | as_crispy_field }}
-                    {{ order_form.email | as_crispy_field }}
-                </fieldset>
-                <fieldset class="rounded-0 px-3 mb-5">
-                    <legend class="fieldset-label font-weight-bold small px-2 w-auto">Delivery</legend>
-                    {{ order_form.phone_number | as_crispy_field }}
-                    {{ order_form.street_address1 | as_crispy_field }}
-                    {{ order_form.street_address2 | as_crispy_field }}
-                    {{ order_form.town_or_city | as_crispy_field }}
-                    {{ order_form.county | as_crispy_field }}
-                    {{ order_form.postcode | as_crispy_field }}
-                    {{ order_form.country | as_crispy_field }}
-                    <div class="form-check form-check-inline float-right mr-0">
+
+            <!-- Checkout Form -->
+            <div class="checkout-form">
+                <form action="{% url 'checkout:checkout' %}" method="POST" id="payment-form">
+                    {% csrf_token %}
+                    
+                    <!-- Personal Details -->
+                    <div class="form-section">
+                        <h3 class="section-title">Personal Details</h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="id_full_name">Full Name *</label>
+                            {{ order_form.full_name }}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="id_email">Email Address *</label>
+                            {{ order_form.email }}
+                        </div>
+                    </div>
+
+                    <!-- Delivery Information -->
+                    <div class="form-section">
+                        <h3 class="section-title">Delivery Information</h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="id_phone_number">Phone Number *</label>
+                            {{ order_form.phone_number }}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="id_street_address1">Street Address 1 *</label>
+                            {{ order_form.street_address1 }}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="id_street_address2">Street Address 2</label>
+                            {{ order_form.street_address2 }}
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="id_town_or_city">Town/City *</label>
+                                {{ order_form.town_or_city }}
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="id_county">County/State</label>
+                                {{ order_form.county }}
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="id_postcode">Postal Code</label>
+                                {{ order_form.postcode }}
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="id_country">Country *</label>
+                                {{ order_form.country }}
+                            </div>
+                        </div>
+
                         {% if user.is_authenticated %}
-                        <label class="form-check-label" for="id-save-info">Save this as my default delivery
-                            information</label>
-                        <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info"
-                            checked>
+                        <div class="save-info-section">
+                            <div class="checkbox-wrapper">
+                                <input class="form-check-input" type="checkbox" id="id-save-info" name="save-info" checked>
+                                <label class="form-check-label" for="id-save-info">
+                                    Save this as my default delivery information
+                                </label>
+                            </div>
+                        </div>
                         {% else %}
-                        <label class="form-check-label" for="id-save-info">
-                            <a class="font-weight-bold text-info" href="{% url 'account_signup' %}">Create an
-                                account</a> or
-                            <a class="font-weight-bold text-info" href="{% url 'account_login' %}">login</a> to save
-                            this information
-                        </label>
+                        <div class="save-info-section">
+                            <p>
+                                <a href="{% url 'account_signup' %}" style="color: var(--brutal-accent); font-weight: 700;">Create an account</a> 
+                                or 
+                                <a href="{% url 'account_login' %}" style="color: var(--brutal-accent); font-weight: 700;">login</a> 
+                                to save this information
+                            </p>
+                        </div>
                         {% endif %}
                     </div>
-                </fieldset>
-                <fieldset class="rounded-0 px-3">
-                    <legend class="fieldset-label font-weight-bold px-2 w-auto">Payment</legend>
-                    <div class="mb-3" id="card-element"></div>
-                    <div class="mb-3" id="card-errors" role="alert"></div>
-                    <input type="hidden" value="{{ client_secret }}" name="client_secret">
-                        <!-- Loading animation -->
-    <div class="loading-spinner" style="display: none;">
-        <div class="spinner-border text-light" role="status">
-            <span class="sr-only">Processing payment...</span>
-        </div>
-    </div>
-                </fieldset>
-                <div class="submit-button text-right mt-5 mb-2">
-                    <!-- Back to bag link -->
-                    <a href="{% url 'view_bag' %}" class="btn btn-outline-dark" aria-label="View bag to adjust">
-                        <span class="icon">
+
+                    <!-- Payment Information -->
+                    <div class="form-section">
+                        <h3 class="section-title">Payment Information</h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Card Details *</label>
+                            <div class="stripe-card-container" id="stripe-container">
+                                <div id="card-number-element" class="stripe-element">
+                                    <!-- Card number will be inserted here -->
+                                </div>
+                                <div class="stripe-row">
+                                    <div id="card-expiry-element" class="stripe-element">
+                                        <!-- Expiry will be inserted here -->
+                                    </div>
+                                    <div id="card-cvc-element" class="stripe-element">
+                                        <!-- CVC will be inserted here -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="card-errors" role="alert"></div>
+                        </div>
+
+                        <input type="hidden" value="{{ client_secret }}" name="client_secret">
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="checkout-actions">
+                        <a href="{% url 'view_bag' %}" class="btn-brutal btn-back">
                             <i class="fas fa-chevron-left"></i>
-                        </span>
-                        <span>Adjust Bag</span>
-                    </a>
-                
-                    <!-- Submit button -->
-                    <button id="submit-button" class="btn" aria-label="Submit order button">
-                        <span class="font-weight-bold">Complete Order</span>
-                        <span class="icon">
+                            <span>Back to Bag</span>
+                        </a>
+                        
+                        <button id="submit-button" type="submit" class="btn-brutal btn-submit">
+                            <span>Complete Order</span>
                             <i class="fas fa-lock"></i>
-                        </span>
-                    </button>
-                
-                    <!-- Price notification -->
-                    <p class="small custom-red my-0">
-                        <span class="icon">
-                            <i class="fas fa-exclamation-circle"></i>
-                        </span>
-                        <span>Your card will be charged <strong>€{{ grand_total|floatformat:2 }}</strong></span>
-                    </p>
-                </div>
-            </form>
+                        </button>
+                    </div>
+
+                    <div class="charge-warning">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
-<div id="loading-overlay">
-    <div>
-        <div class="loader">
-            <img src="#" alt="">
-        </div>
+
+<!-- Loading Overlay -->
+<div id="loading-overlay" class="loading-overlay">
+    <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <h3>Processing your payment...</h3>
+        <p>Please do not refresh or close this page</p>
     </div>
 </div>
 {% endblock %}
+
 {% block postloadjs %}
 {{ block.super }}
 {{ stripe_public_key|json_script:"id_stripe_public_key" }}
 {{ client_secret|json_script:"id_client_secret" }}
-<script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
+<script>
+console.log('Starting Stripe setup...');
+
+// Get Stripe keys
+var stripePublicKey = JSON.parse(document.getElementById('id_stripe_public_key').textContent);
+var clientSecret = JSON.parse(document.getElementById('id_client_secret').textContent);
+
+console.log('Stripe Public Key:', stripePublicKey ? 'Found' : 'Missing');
+console.log('Client Secret:', clientSecret ? 'Found' : 'Missing');
+
+if (!stripePublicKey || !clientSecret) {
+    console.error('Missing Stripe configuration');
+    alert('Payment system configuration error. Please try again.');
+}
+
+// Initialize Stripe
+var stripe = Stripe(stripePublicKey);
+var elements = stripe.elements();
+
+// Style for Stripe elements
+var style = {
+    base: {
+        color: '#000',
+        fontFamily: '"Space Mono", monospace',
+        fontSmoothing: 'antialiased',
+        fontSize: '16px',
+        fontWeight: '400',
+        '::placeholder': {
+            color: '#666'
+        }
+    },
+    invalid: {
+        color: '#ff3333',
+        iconColor: '#ff3333'
+    },
+    complete: {
+        color: '#000'
+    }
+};
+
+// Create individual elements
+var cardNumber = elements.create('cardNumber', {
+    style: style,
+    placeholder: '1234 1234 1234 1234'
+});
+
+var cardExpiry = elements.create('cardExpiry', {
+    style: style,
+    placeholder: 'MM/YY'
+});
+
+var cardCvc = elements.create('cardCvc', {
+    style: style,
+    placeholder: 'CVC'
+});
+
+// Mount elements
+cardNumber.mount('#card-number-element');
+cardExpiry.mount('#card-expiry-element');
+cardCvc.mount('#card-cvc-element');
+
+console.log('Stripe elements mounted');
+
+// Handle focus states
+var stripeContainer = document.getElementById('stripe-container');
+
+function addFocusClass() {
+    stripeContainer.classList.add('focused');
+}
+
+function removeFocusClass() {
+    stripeContainer.classList.remove('focused');
+}
+
+cardNumber.addEventListener('focus', addFocusClass);
+cardExpiry.addEventListener('focus', addFocusClass);
+cardCvc.addEventListener('focus', addFocusClass);
+
+cardNumber.addEventListener('blur', removeFocusClass);
+cardExpiry.addEventListener('blur', removeFocusClass);
+cardCvc.addEventListener('blur', removeFocusClass);
+
+// Handle validation errors
+function handleCardErrors(event) {
+    var errorDiv = document.getElementById('card-errors');
+    if (event.error) {
+        errorDiv.textContent = event.error.message;
+        errorDiv.classList.add('show');
+    } else {
+        errorDiv.textContent = '';
+        errorDiv.classList.remove('show');
+    }
+}
+
+cardNumber.addEventListener('change', handleCardErrors);
+cardExpiry.addEventListener('change', handleCardErrors);
+cardCvc.addEventListener('change', handleCardErrors);
+
+// Handle form submit
+var form = document.getElementById('payment-form');
+form.addEventListener('submit', function(ev) {
+    ev.preventDefault();
+    console.log('Form submitted, processing payment...');
+    
+    // Disable form
+    cardNumber.update({ 'disabled': true});
+    cardExpiry.update({ 'disabled': true});
+    cardCvc.update({ 'disabled': true});
+    document.getElementById('submit-button').disabled = true;
+    document.getElementById('loading-overlay').style.display = 'flex';
+    
+    var saveInfo = Boolean(document.getElementById('id-save-info')?.checked);
+    var csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+    
+    var postData = {
+        'csrfmiddlewaretoken': csrfToken,
+        'client_secret': clientSecret,
+        'save_info': saveInfo,
+    };
+    
+    var url = '/checkout/cache_checkout_data/';
+    
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(postData)
+    }).then(function() {
+        stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: cardNumber,
+                billing_details: {
+                    name: form.full_name.value.trim(),
+                    phone: form.phone_number.value.trim(),
+                    email: form.email.value.trim(),
+                    address: {
+                        line1: form.street_address1.value.trim(),
+                        line2: form.street_address2.value.trim(),
+                        city: form.town_or_city.value.trim(),
+                        country: form.country.value.trim(),
+                        state: form.county.value.trim(),
+                    }
+                }
+            },
+            shipping: {
+                name: form.full_name.value.trim(),
+                phone: form.phone_number.value.trim(),
+                address: {
+                    line1: form.street_address1.value.trim(),
+                    line2: form.street_address2.value.trim(),
+                    city: form.town_or_city.value.trim(),
+                    country: form.country.value.trim(),
+                    postal_code: form.postcode.value.trim(),
+                    state: form.county.value.trim(),
+                }
+            },
+        }).then(function(result) {
+            if (result.error) {
+                console.error('Payment failed:', result.error);
+                var errorDiv = document.getElementById('card-errors');
+                errorDiv.textContent = result.error.message;
+                errorDiv.classList.add('show');
+                
+                // Re-enable form
+                document.getElementById('loading-overlay').style.display = 'none';
+                cardNumber.update({ 'disabled': false});
+                cardExpiry.update({ 'disabled': false});
+                cardCvc.update({ 'disabled': false});
+                document.getElementById('submit-button').disabled = false;
+            } else {
+                if (result.paymentIntent.status === 'succeeded') {
+                    console.log('Payment successful, submitting form...');
+                    form.submit();
+                }
+            }
+        });
+    }).catch(function(error) {
+        console.error('Error:', error);
+        location.reload();
+    });
+});
+
+console.log('Stripe setup complete');
+</script>
 {% endblock %}

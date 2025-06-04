@@ -1,99 +1,506 @@
-<!-- bag.html -->
 {% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    {{ block.super }}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+        
+        .bag-wrapper {
+            font-family: 'Space Mono', monospace;
+            background: #fefefe;
+            min-height: 80vh;
+            padding: 2rem 1rem;
+        }
+
+        .bag-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .bag-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: #ffffff;
+            border: 4px solid #000;
+            box-shadow: 8px 8px 0 #000;
+        }
+
+        .bag-title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 0;
+            color: #000;
+        }
+
+        .bag-count {
+            font-size: 1.2rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .bag-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        /* Cart Items */
+        .cart-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .cart-item {
+            background: #ffffff;
+            border: 4px solid #000;
+            box-shadow: 6px 6px 0 #000;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .cart-item:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 8px 8px 0 var(--brutal-accent);
+        }
+
+        .item-content {
+            display: grid;
+            grid-template-columns: 100px 1fr auto auto;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .item-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border: 3px solid #000;
+        }
+
+        .item-details h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 0 0 0.5rem 0;
+            color: #000;
+        }
+
+        .item-sku {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0;
+        }
+
+        .item-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--brutal-accent);
+            text-align: center;
+        }
+
+        .item-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .qty-btn {
+            width: 35px;
+            height: 35px;
+            border: 3px solid #000;
+            background: #fff;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .qty-btn:hover {
+            background: #000;
+            color: #fff;
+        }
+
+        .qty-input {
+            width: 60px;
+            height: 35px;
+            border: 3px solid #000;
+            text-align: center;
+            font-weight: 700;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .remove-btn {
+            background: #ff3333;
+            color: #fff;
+            border: 3px solid #000;
+            padding: 0.5rem 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+        }
+
+        .remove-btn:hover {
+            background: #ff0000;
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0 #000;
+        }
+
+        /* Cart Summary */
+        .cart-summary {
+            background: #ffffff;
+            border: 4px solid #000;
+            box-shadow: 8px 8px 0 #000;
+            padding: 2rem;
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+
+        .summary-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 0 0 1.5rem 0;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #000;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .summary-row.total {
+            border-bottom: none;
+            border-top: 3px solid #000;
+            padding-top: 1rem;
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .delivery-alert {
+            background: #ffe600;
+            border: 3px solid #000;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+            font-weight: 700;
+            color: #000;
+        }
+
+        .cart-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-brutal {
+            padding: 1rem;
+            border: 3px solid #000;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Space Mono', monospace;
+            box-shadow: 4px 4px 0 #000;
+        }
+
+        .btn-continue {
+            background: #fff;
+            color: #000;
+        }
+
+        .btn-continue:hover {
+            background: #f0f0f0;
+            color: #000;
+            text-decoration: none;
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 #000;
+        }
+
+        .btn-checkout {
+            background: var(--brutal-accent);
+            color: #fff;
+        }
+
+        .btn-checkout:hover {
+            background: var(--brutal-hover);
+            color: #fff;
+            text-decoration: none;
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 #000;
+        }
+
+        /* Empty Cart */
+        .empty-cart {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: #ffffff;
+            border: 4px solid #000;
+            box-shadow: 8px 8px 0 #000;
+        }
+
+        .empty-cart-icon {
+            font-size: 4rem;
+            color: #ccc;
+            margin-bottom: 1.5rem;
+        }
+
+        .empty-cart h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 0 0 1rem 0;
+            color: #000;
+        }
+
+        .empty-cart p {
+            font-size: 1.1rem;
+            color: #666;
+            margin: 0 0 2rem 0;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .bag-wrapper {
+                padding: 1rem 0.5rem;
+            }
+
+            .bag-title {
+                font-size: 2rem;
+            }
+
+            .bag-content {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .item-content {
+                grid-template-columns: 80px 1fr;
+                grid-template-rows: auto auto auto;
+                gap: 1rem;
+            }
+
+            .item-image {
+                width: 80px;
+                height: 80px;
+                grid-row: 1 / 3;
+            }
+
+            .item-details {
+                grid-column: 2;
+                grid-row: 1;
+            }
+
+            .item-price {
+                grid-column: 2;
+                grid-row: 2;
+                text-align: left;
+                font-size: 1.3rem;
+            }
+
+            .item-controls {
+                grid-column: 1 / 3;
+                grid-row: 3;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .cart-summary {
+                position: static;
+            }
+
+            .cart-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .bag-header {
+                padding: 1rem;
+            }
+
+            .bag-title {
+                font-size: 1.5rem;
+            }
+
+            .cart-item {
+                padding: 1rem;
+            }
+
+            .cart-summary {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+{% endblock %}
 
 {% block content %}
-<div class="brutal-cart-container">
-    <h1 class="brutal-cart-title">Shopping Cart</h1>
-
-    {% if bag_items %}
-    <div class="brutal-cart">
-        <!-- Cart Header -->
-        <div class="cart-header">
-            <div class="cart-header-item">Product</div>
-            <div class="cart-header-item">Quantity</div>
-            <div class="cart-header-item">Price</div>
-            <div class="cart-header-item">Action</div>
+<div class="bag-wrapper">
+    <div class="bag-container">
+        <!-- Header -->
+        <div class="bag-header">
+            <h1 class="bag-title">Shopping Bag</h1>
+            {% if bag_items %}
+                <p class="bag-count">{{ bag_items|length }} item{{ bag_items|length|pluralize }} in your bag</p>
+            {% endif %}
         </div>
 
-        <!-- Cart Items -->
-        {% for item in bag_items %}
-        <div class="cart-item">
-            <div class="cart-product">
-                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="cart-product-image">
-                <div class="cart-product-details">
-                    <h3>{{ item.product.name }}</h3>
-                    <p class="cart-product-sku">SKU: {{ item.product.sku }}</p>
+        {% if bag_items %}
+        <div class="bag-content">
+            <!-- Cart Items -->
+            <div class="cart-items">
+                {% for item in bag_items %}
+                <div class="cart-item">
+                    <div class="item-content">
+                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="item-image">
+                        
+                        <div class="item-details">
+                            <h3>{{ item.product.name }}</h3>
+                            <p class="item-sku">SKU: {{ item.product.sku|default:"N/A" }}</p>
+                        </div>
+                        
+                        <div class="item-price">${{ item.product.price }}</div>
+                        
+                        <div class="item-controls">
+                            <div class="quantity-control">
+                                <form method="post" action="{% url 'update_bag' %}" style="display: inline;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="item_id" value="{{ item.item_id }}">
+                                    <button type="button" class="qty-btn" onclick="decreaseQty(this)">-</button>
+                                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="99" class="qty-input" data-item-id="{{ item.item_id }}">
+                                    <button type="button" class="qty-btn" onclick="increaseQty(this)">+</button>
+                                    <button type="submit" class="remove-btn" style="display: none;" id="update-{{ item.item_id }}">Update</button>
+                                </form>
+                            </div>
+                            
+                            <form method="post" action="{% url 'remove_from_bag' item.item_id %}" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="remove-btn" onclick="return confirm('Remove this item?')">
+                                    Remove
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="cart-quantity">
-                <form action="{% url 'update_bag' %}" method="post" class="cart-quantity-form">
-                    {% csrf_token %}
-                    <input type="hidden" name="item_id" value="{{ item.item_id }}">
-                    <input type="number" name="quantity_{{ item.item_id }}" 
-                           value="{{ item.quantity }}" min="1" 
-                           class="quantity-input">
-                    <button type="submit" class="brutal-btn brutal-btn-update">Update</button>
-                </form>
+                {% endfor %}
             </div>
 
-            <div class="cart-price">${{ item.product.price }}</div>
-
-            <div class="cart-actions">
-                <form action="{% url 'remove_from_bag' item.item_id %}" method="post">
-                    {% csrf_token %}
-                    <button type="submit" class="brutal-btn brutal-btn-remove">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </form>
-            </div>
-        </div>
-        {% endfor %}
-
-        <!-- Cart Summary -->
-        <div class="cart-summary">
-            <div class="cart-totals">
-                <div class="cart-total-row">
-                    <span>Subtotal</span>
-                    <span>${{ total }}</span>
+            <!-- Cart Summary -->
+            <div class="cart-summary">
+                <h2 class="summary-title">Order Summary</h2>
+                
+                <div class="summary-row">
+                    <span>Subtotal ({{ bag_items|length }} item{{ bag_items|length|pluralize }})</span>
+                    <span>${{ total|floatformat:2 }}</span>
                 </div>
-                <div class="cart-total-row">
+                
+                <div class="summary-row">
                     <span>Delivery</span>
-                    <span>${{ delivery }}</span>
+                    <span>
+                        {% if delivery %}
+                            ${{ delivery|floatformat:2 }}
+                        {% else %}
+                            <strong style="color: var(--brutal-accent);">FREE</strong>
+                        {% endif %}
+                    </span>
                 </div>
-                <div class="cart-total-row grand-total">
+                
+                <div class="summary-row total">
                     <span>Total</span>
-                    <span>${{ grand_total }}</span>
+                    <span>${{ grand_total|floatformat:2 }}</span>
                 </div>
+
                 {% if free_delivery_delta > 0 %}
                 <div class="delivery-alert">
-                    Spend ${{ free_delivery_delta }} more for free delivery!
+                    <strong>Spend ${{ free_delivery_delta|floatformat:2 }} more for FREE delivery!</strong>
                 </div>
                 {% endif %}
-            </div>
 
-            <div class="cart-actions-bottom">
-                <a href="{% url 'products:products' %}" class="brutal-btn brutal-btn-continue">
-                    Continue Shopping
-                </a>
-                <a href="{% url 'checkout:checkout' %}" class="brutal-btn brutal-btn-checkout">
-                    Secure Checkout
-                </a>
+                <div class="cart-actions">
+                    <a href="{% url 'checkout:checkout' %}" class="btn-brutal btn-checkout">
+                        Secure Checkout
+                    </a>
+                    <a href="{% url 'products:products' %}" class="btn-brutal btn-continue">
+                        Continue Shopping
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
 
-    {% else %}
-    <div class="empty-cart">
-        <div class="empty-cart-content">
+        {% else %}
+        <!-- Empty Cart -->
+        <div class="empty-cart">
             <i class="fas fa-shopping-cart empty-cart-icon"></i>
-            <h2>Your cart is empty</h2>
-            <p>Add some awesome products to your cart!</p>
-            <a href="{% url 'products:products' %}" class="brutal-btn brutal-btn-continue">
+            <h2>Your bag is empty</h2>
+            <p>Discover amazing diving gear and start your underwater adventure!</p>
+            <a href="{% url 'products:products' %}" class="btn-brutal btn-continue">
                 Start Shopping
             </a>
         </div>
+        {% endif %}
     </div>
-    {% endif %}
 </div>
+
+<script>
+function increaseQty(btn) {
+    const input = btn.previousElementSibling;
+    const currentVal = parseInt(input.value);
+    if (currentVal < 99) {
+        input.value = currentVal + 1;
+        showUpdateButton(input);
+    }
+}
+
+function decreaseQty(btn) {
+    const input = btn.nextElementSibling;
+    const currentVal = parseInt(input.value);
+    if (currentVal > 1) {
+        input.value = currentVal - 1;
+        showUpdateButton(input);
+    }
+}
+
+function showUpdateButton(input) {
+    const itemId = input.dataset.itemId;
+    const updateBtn = document.getElementById('update-' + itemId);
+    if (updateBtn) {
+        updateBtn.style.display = 'block';
+        updateBtn.textContent = 'Update';
+        updateBtn.style.background = '#ffe600';
+        updateBtn.style.color = '#000';
+    }
+}
+
+// Auto-submit quantity changes after a delay
+let updateTimeout;
+document.querySelectorAll('.qty-input').forEach(input => {
+    input.addEventListener('change', function() {
+        clearTimeout(updateTimeout);
+        updateTimeout = setTimeout(() => {
+            this.closest('form').submit();
+        }, 1000);
+    });
+});
+</script>
 {% endblock %}

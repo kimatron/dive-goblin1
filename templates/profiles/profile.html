@@ -159,35 +159,33 @@
 </div>
 
 <!-- Delete Account Modal -->
-<div class="modal fade" id="deleteAccountModal">
+<div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content brutal-modal">
             <div class="modal-header">
-                <h5 class="modal-title">Delete Account</h5>
-                <button type="button" class="close" data-dismiss="modal">
-                    <span>&times;</span>
-                </button>
+                <h5 class="modal-title" id="deleteAccountModalLabel">Delete Account</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form method="POST" action="{% url 'profiles:delete_account' %}" id="deleteAccountForm">
                     {% csrf_token %}
-                    <div class="delete-warning text-center">
+                    <div class="delete-warning text-center mb-4">
                         <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
                         <h3 class="text-danger">Warning: This Cannot Be Undone!</h3>
                         <p>Your account and all associated data will be permanently deleted.</p>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label>Enter your password to confirm</label>
-                        <input type="password" name="password" class="form-control brutal-input" required>
+                        <input type="password" name="password" class="brutal-input" required>
                     </div>
-                    <div class="form-group form-check">
+                    <div class="form-group form-check mb-3">
                         <input type="checkbox" name="confirm_delete" id="confirm_delete" class="form-check-input" required>
                         <label class="form-check-label" for="confirm_delete">
                             I understand this will permanently delete my account
                         </label>
                     </div>
                     <div class="text-center mt-4">
-                        <button type="button" class="brutal-button" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="brutal-button" data-bs-dismiss="modal">Cancel</button>
                         <button type="submit" class="brutal-button brutal-button--danger">Delete My Account</button>
                     </div>
                 </form>

@@ -121,35 +121,33 @@
 </div>
 
 <!-- Update Account Modal -->
-<div class="modal fade" id="updateAccountModal">
+<div class="modal fade" id="updateAccountModal" tabindex="-1" aria-labelledby="updateAccountModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content brutal-modal">
             <div class="modal-header">
-                <h5 class="modal-title">Update Account Details</h5>
-                <button type="button" class="close" data-dismiss="modal">
-                    <span>&times;</span>
-                </button>
+                <h5 class="modal-title" id="updateAccountModalLabel">Update Account Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form method="POST" action="{% url 'profiles:update_account' %}" class="update-account-form">
                     {% csrf_token %}
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label for="username">Username</label>
                         <input type="text" name="username" id="username" value="{{ request.user.username }}" class="brutal-input">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label for="email">Email</label>
                         <input type="email" name="email" id="email" value="{{ request.user.email }}" class="brutal-input">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label for="current_password">Current Password</label>
                         <input type="password" name="current_password" id="current_password" class="brutal-input" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label for="new_password">New Password (optional)</label>
                         <input type="password" name="new_password" id="new_password" class="brutal-input">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label for="confirm_password">Confirm New Password</label>
                         <input type="password" name="confirm_password" id="confirm_password" class="brutal-input">
                     </div>

@@ -27,9 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
-
 # SECURITY WARNING: don't run with debug turned on in production!
-# Modify this line
 DEBUG = 'DEVELOPMENT' in os.environ
 
 ALLOWED_HOSTS = [
@@ -46,7 +44,6 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -68,11 +65,7 @@ INSTALLED_APPS = [
     'django_countries',
     'newsletter',
     'pages',
-
-
-    # OTHER
     'storages',
-
 ]
 
 MIDDLEWARE = [
@@ -87,10 +80,7 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
 ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 ROOT_URLCONF = 'divegob.urls'
-
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 TEMPLATES = [
@@ -119,20 +109,17 @@ TEMPLATES = [
 ]
 
 AUTHENTICATION_BACKENDS = (
-    # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
-
-    # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
 SITE_ID = 1
 
-
-# Email Configuration
+# Email Configuration - FIXED LOGIC
 if 'DEVELOPMENT' in os.environ:
-#     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# else:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DEFAULT_FROM_EMAIL = 'webmaster@localhost'
+else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = 'smtp.gmail.com'
     EMAIL_USE_TLS = True
@@ -154,10 +141,7 @@ LOGIN_REDIRECT_URL = '/'
 
 WSGI_APPLICATION = 'divegob.wsgi.application'
 
-
 # Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
 if 'DATABASE_URL' in os.environ:
     DATABASES = {
         'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
@@ -170,10 +154,7 @@ else:
         }
     }
 
-
 # Password validation
-# https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -189,24 +170,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
-# https://docs.djangoproject.com/en/3.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.2/howto/static-files/
-
+# Static files configuration - COMPLETELY REWRITTEN
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
@@ -216,19 +187,22 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
+# AWS Configuration - FIXED
 if 'USE_AWS' in os.environ:
-    # Cache control
-    AWS_S3_OBJECT_PARAMETERS = {
-        'CacheControl': 'max-age=300',  # 5 minutes instead of 3 years!
-    }
-    # Bucket Config
+    print("🚀 Using AWS S3 for static and media files")
+    
+    # AWS Settings
     AWS_STORAGE_BUCKET_NAME = 'dive-goblin'
     AWS_S3_REGION_NAME = 'eu-north-1'
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-
+    
+    # S3 Object Parameters - REDUCED CACHE TIME FOR DEVELOPMENT
+    AWS_S3_OBJECT_PARAMETERS = {
+        'CacheControl': 'max-age=86400',  # 24 hours instead of 3 years
+    }
+    
     # Static and media files
     STATICFILES_STORAGE = 'custom_storages.StaticStorage'
     STATICFILES_LOCATION = 'static'
@@ -236,43 +210,30 @@ if 'USE_AWS' in os.environ:
     MEDIAFILES_LOCATION = 'media'
 
     # Override static and media URLs in production
-    STATIC_URL = (
-        f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
-    )
-    MEDIA_URL = (
-        f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
-    )
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+    
+    # Force Django to use S3 for staticfiles
+    AWS_S3_FILE_OVERWRITE = True
+    AWS_DEFAULT_ACL = None
+    
+else:
+    print("🔧 Using local static files")
+    # Use WhiteNoise for local development
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
+# Other settings
 FREE_DELIVERY_THRESHOLD = 100
 STANDARD_DELIVERY_PERCENTAGE = 10
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Stripe Settings
-
 STRIPE_CURRENCY = 'eur'
-STRIPE_PUBLIC_KEY = os.environ.get(
-    'STRIPE_PUBLIC_KEY',
-    'pk_test_default_value'  # Replace with a test key for local use
-)
-STRIPE_SECRET_KEY = os.environ.get(
-    'STRIPE_SECRET_KEY',
-    'sk_test_default_value'  # Replace with a test key for local use
-)
-STRIPE_WH_SECRET = os.environ.get(
-    'STRIPE_WH_SECRET',
-    'whsec_default_value'  # Replace with a test key for local use
-)
-DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY', 'pk_test_default_value')
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', 'sk_test_default_value')
+STRIPE_WH_SECRET = os.environ.get('STRIPE_WH_SECRET', 'whsec_default_value')
 
-
-# Development vs Production Settings
-# Remove all the commented-out email settings and replace them with this clear configuration:
-
+# Logging
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -288,21 +249,3 @@ LOGGING = {
         },
     },
 }
-
-# FORCE LOCAL STATIC FILES FOR DEVELOPMENT
-
-if 'DEVELOPMENT' in os.environ or DEBUG:
-    # Disable AWS for local development
-    import os
-    if 'USE_AWS' in os.environ:
-        del os.environ['USE_AWS']
-    
-    # Force local static files
-    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-    STATIC_URL = '/static/'
-    
-    # Override AWS settings
-    AWS_STORAGE_BUCKET_NAME = None
-    AWS_S3_CUSTOM_DOMAIN = None
-    
-    print("🔧 DEVELOPMENT MODE: Using local static files instead of AWS")

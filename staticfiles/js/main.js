@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('=== DOM CONTENT LOADED ===');
     console.log('Document ready, initializing components...');
+    
+    // Rest of your existing code...
     
     // Initialize desktop mega menu
     initializeMegaMenu();
@@ -173,79 +176,6 @@ function initializeToasts() {
     }
 }
 
-function initializeProductModal() {
-    console.log('Initializing product modal...');
-    
-    // Product image modal functionality
-    const productImages = document.querySelectorAll('.brutal-image-box img, .brutal-product__main-image');
-    
-    // Create modal if it doesn't exist
-    if (!document.getElementById('imageModal')) {
-        createModal();
-    }
-    
-    function createModal() {
-        const modalHtml = `
-            <div class="brutal-modal" id="imageModal">
-                <div class="brutal-modal__content">
-                    <button class="brutal-modal__close" id="modalClose">&times;</button>
-                    <img class="brutal-modal__image" id="modalImage" src="" alt="">
-                </div>
-            </div>
-        `;
-        document.body.insertAdjacentHTML('beforeend', modalHtml);
-    }
-    
-    // Open modal when clicking product images
-    productImages.forEach(img => {
-        img.addEventListener('click', function() {
-            const modal = document.getElementById('imageModal');
-            const modalImg = document.getElementById('modalImage');
-            
-            if (modal && modalImg) {
-                modalImg.src = this.src;
-                modalImg.alt = this.alt;
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent background scrolling
-                console.log('Modal opened');
-            }
-        });
-    });
-    
-    // Close modal functionality
-    function closeModal() {
-        const modal = document.getElementById('imageModal');
-        if (modal) {
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto'; // Restore scrolling
-            console.log('Modal closed');
-        }
-    }
-    
-    // Close button click
-    document.addEventListener('click', function(e) {
-        if (e.target.id === 'modalClose' || e.target.classList.contains('brutal-modal__close')) {
-            e.preventDefault();
-            e.stopPropagation();
-            closeModal();
-        }
-    });
-    
-    // Click outside modal to close
-    document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('brutal-modal')) {
-            closeModal();
-        }
-    });
-    
-    // Escape key to close
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closeModal();
-        }
-    });
-}
-
 function initializeQuantityControls() {
     // Quantity Controls
     const quantityControls = document.querySelectorAll('.quantity-control, .brutal-quantity-controls');
@@ -272,5 +202,65 @@ function initializeQuantityControls() {
                 input.dispatchEvent(new Event('change'));
             }
         });
+    });
+}
+
+function initializeProductModal() {
+    console.log('=== initializeProductModal CALLED ===');
+    
+    // Check what exists on the page
+    console.log('Modal element:', document.getElementById('imageModal'));
+    console.log('Image box element:', document.querySelector('.brutal-image-box'));
+    console.log('Image element:', document.querySelector('.brutal-product__main-image'));
+    
+    // Only run on pages that have a modal
+    const modal = document.getElementById('imageModal');
+    if (!modal) {
+        console.log('No modal found on this page - skipping modal initialization');
+        return;
+    }
+
+    console.log('Modal found, initializing...');
+
+    // Remove any existing onclick handlers to prevent conflicts
+    const imageBox = document.querySelector('.brutal-image-box');
+    if (imageBox) {
+        imageBox.removeAttribute('onclick');
+        
+        // Add our clean click handler
+        imageBox.addEventListener('click', function(e) {
+            console.log('Image clicked, opening modal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    }
+
+    // Clean close functionality
+    const closeBtn = document.getElementById('modalClose');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function(e) {
+            console.log('Close button clicked');
+            e.stopPropagation();
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+    }
+
+    // Click outside to close
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            console.log('Clicked outside modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    });
+
+    // Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            console.log('Escape pressed');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
     });
 }

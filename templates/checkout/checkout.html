@@ -35,11 +35,19 @@
             color: #000;
         }
 
-        .checkout-content {
-            display: grid;
-            grid-template-columns: 1fr 400px;
-            gap: 2rem;
-        }
+.checkout-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.order-summary {
+    background: #ffffff;
+    border: 4px solid #000;
+    box-shadow: 8px 8px 0 #000;
+    padding: 0;
+    position: static;
+}
 
         /* Form Section */
         .checkout-form {
@@ -102,11 +110,25 @@
             box-shadow: 5px 5px 0 #000;
         }
 
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    width: 100%;
+    max-width: 100%;
+}
+
+.form-row .form-group {
+    min-width: 0; /* Prevents grid items from overflowing */
+}
+
+.form-row .form-input,
+.form-row .form-select {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
 
         /* Stripe Elements Container */
         .stripe-card-container {
@@ -204,14 +226,7 @@
         }
 
         /* Order Summary */
-        .order-summary {
-            background: #ffffff;
-            border: 4px solid #000;
-            box-shadow: 8px 8px 0 #000;
-            height: fit-content;
-            position: sticky;
-            top: 2rem;
-        }
+
 
         .summary-header {
             background: #000;
@@ -397,19 +412,21 @@
         }
 
         /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .checkout-wrapper {
-                padding: 1rem 0.5rem;
-                .form-row, .stripe-row {
-    grid-template-columns: 1fr !important;
-}
+@media (max-width: 768px) {
+    .checkout-wrapper {
+        padding: 1rem 0.5rem;
+    }
 
-.form-input, .form-select, select {
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-}
-            }
+    .form-row {
+        grid-template-columns: 1fr !important;
+        gap: 1rem;
+    }
+
+    .form-input, .form-select, select {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
 
             .checkout-title {
                 font-size: 2rem;
@@ -420,14 +437,11 @@
                 gap: 1rem;
             }
 
-            .order-summary {
-                order: -1;
-                position: static;
-            }
 
-            .form-row, .stripe-row {
-                grid-template-columns: 1fr;
-            }
+
+            .stripe-row {
+    grid-template-columns: 1fr !important;
+}
 
             #card-number-element {
                 border-bottom: 2px solid #eee;

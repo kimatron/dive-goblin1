@@ -207,23 +207,32 @@
             display: block;
         }
 
-        .save-info-section {
-            margin: 1.5rem 0;
-            padding: 1rem;
-            background: #f0f0f0;
-            border: 2px solid #000;
-        }
+.save-info-section {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: #f0f0f0;
+    border: 2px solid #000;
+}
 
-        .checkbox-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-left: 0.5rem;
+}
 
-        .checkbox-wrapper input[type="checkbox"] {
-            width: auto;
-            margin: 0;
-        }
+.checkbox-wrapper input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.checkbox-wrapper label {
+    margin-left: 1rem; /* Push text further right */
+    line-height: 1.4;
+    margin-top: 0;
+    margin-bottom: 0;
+}
 
         /* Order Summary */
 

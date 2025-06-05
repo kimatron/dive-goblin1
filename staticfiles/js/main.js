@@ -2,8 +2,6 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('=== DOM CONTENT LOADED ===');
     console.log('Document ready, initializing components...');
     
-    // Rest of your existing code...
-    
     // Initialize desktop mega menu
     initializeMegaMenu();
     
@@ -21,6 +19,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize product image modal
     initializeProductModal();
+
+    // Initialize go-to-top button
+    initializeGoToTopButton();
 });
 
 function initializeMegaMenu() {
@@ -263,4 +264,54 @@ function initializeProductModal() {
             document.body.style.overflow = 'auto';
         }
     });
+}
+
+function initializeGoToTopButton() {
+    console.log('Initializing go-to-top button...');
+    
+    // Create the go-to-top button
+    const goToTopBtn = document.createElement('button');
+    goToTopBtn.innerHTML = '↑';
+    goToTopBtn.className = 'go-to-top';
+    goToTopBtn.setAttribute('aria-label', 'Go to top of page');
+    goToTopBtn.setAttribute('title', 'Go to top');
+    
+    document.body.appendChild(goToTopBtn);
+    console.log('Go-to-top button added to DOM');
+    
+    // Show/hide button based on scroll position
+    function toggleGoToTopButton() {
+        if (window.pageYOffset > 300) {
+            goToTopBtn.classList.add('visible');
+        } else {
+            goToTopBtn.classList.remove('visible');
+        }
+    }
+    
+    // Initial check
+    toggleGoToTopButton();
+    
+    // Listen for scroll events
+    let ticking = false;
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            requestAnimationFrame(function() {
+                toggleGoToTopButton();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+    
+    // Smooth scroll to top when clicked
+    goToTopBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        console.log('Go-to-top button clicked');
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    console.log('Go-to-top button initialized successfully');
 }

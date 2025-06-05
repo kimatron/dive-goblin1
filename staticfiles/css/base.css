@@ -1312,28 +1312,116 @@ h3 {
 }
 
 /* Footer Links - More brutalist */
-.footer-links li,
-.footer-contact li {
-    margin-bottom: 1rem;
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.footer-links a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--brutal-white);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 0.5rem;
+    border: 2px solid transparent;
+    font-weight: 600;
+    position: relative;
+}
+
+.footer-links a:before {
+    content: '→';
+    color: var(--brutal-accent);
+    font-weight: bold;
     transition: transform 0.3s ease;
 }
 
-.footer-links a,
-.footer-contact a {
-    color: var(--brutal-white);
-    text-decoration: none;
-    transition: all 0.2s ease;
-    display: inline-block;
-    padding: 0.5rem;
-    font-weight: 600;
-    border: 2px solid transparent;
-}
-
-.footer-links a:hover,
-.footer-contact a:hover {
+.footer-links a:hover {
     color: var(--brutal-accent);
     transform: translateX(10px);
     border: 2px solid var(--brutal-accent);
+    text-decoration: none;
+}
+
+.footer-links a:hover:before {
+    transform: translateX(5px);
+}
+
+/* Contact Info Improvements */
+.footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem;
+}
+
+.contact-item i {
+    width: 20px;
+    text-align: center;
+    color: var(--brutal-accent);
+    font-size: 1.1rem;
+}
+
+.contact-item a {
+    color: var(--brutal-white);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+    color: var(--brutal-accent);
+    text-decoration: none;
+}
+
+/* Go to Top Button */
+.go-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: var(--brutal-accent);
+    color: white;
+    border: 4px solid #000;
+    border-radius: 0;
+    box-shadow: 6px 6px 0 #000;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    font-family: 'Space Mono', monospace;
+}
+
+.go-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.go-to-top:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0 #000;
+    background: var(--brutal-hover);
+    color: white;
+}
+
+.go-to-top:focus {
+    outline: 3px solid var(--brutal-accent);
+    outline-offset: 2px;
 }
 
 /* Social Links - More brutalist */

@@ -4,12 +4,13 @@ from django.db.models import Q
 from django.db.models.functions import Lower
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Product, Category, Wishlist
 from .forms import ProductForm
 
 
 def all_products(request):
-    """ A view to show all products, including sorting and search queries """
+    """ A view to show all products, including sorting and search queries with pagination """
     products = Product.objects.all()
     query = None
     categories = None
@@ -40,12 +41,25 @@ def all_products(request):
             if not query:
                 messages.error(
                     request, "You didn't enter any search criteria!")
-                return redirect(reverse('products'))
+                return redirect(reverse('products:products'))
 
             queries = Q(
                 name__icontains=query) | Q(
                     description__icontains=query)
             products = products.filter(queries)
+
+    # Pagination
+    paginator = Paginator(products, 12)  # Show 12 products per page
+    page = request.GET.get('page')
+    
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page
+        products = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range, deliver last page
+        products = paginator.page(paginator.num_pages)
 
     current_sorting = f'{sort}_{direction}'
 

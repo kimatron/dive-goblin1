@@ -71,7 +71,7 @@
         </div>
     </div>
 
-    <!-- Header -->
+<!-- Header -->
     <header class="brutal-header">
         <!-- Logo -->
         <div class="logo-container">
@@ -98,6 +98,12 @@
         
         <!-- Navigation Buttons -->
         <div class="nav-buttons">
+            <!-- SHOP ALL - prominent button -->
+            <a href="{% url 'products:products' %}" class="nav-button shop-all-btn">
+                <i class="fas fa-store"></i>
+                <span>SHOP ALL</span>
+            </a>
+
             <!-- Account Dropdown -->
             <div class="dropdown">
                 <button class="nav-button dropdown-toggle" id="accountDropdown" data-toggle="dropdown" aria-expanded="false">
@@ -134,7 +140,7 @@
         <!-- Categories -->
         <div class="categories-container">
             <button class="category-toggle" onclick="toggleCategories()">
-                <span>SHOP CATEGORIES</span>
+                <span>BROWSE CATEGORIES</span>
                 <i class="fas fa-chevron-down"></i>
             </button>
             <div id="categoryMenu" class="category-menu">
@@ -171,6 +177,7 @@
                             <li><a href="{% url 'products:products' %}?category=new_arrivals">New Arrivals</a></li>
                             <li><a href="{% url 'products:products' %}?category=deals">Deals</a></li>
                             <li><a href="{% url 'products:products' %}?category=clearance">Clearance</a></li>
+                            <li><a href="{% url 'products:products' %}">View All Products</a></li>
                         </ul>
                     </div>
                 </div>

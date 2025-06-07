@@ -306,6 +306,54 @@ h3 {
     color: inherit !important;
 }
 
+/* Shop All Button  */
+.shop-all-btn {
+    background: var(--brutal-accent) !important;
+    color: var(--brutal-white) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.shop-all-btn:hover,
+.shop-all-btn:focus {
+    background: var(--brutal-hover) !important;
+    color: var(--brutal-white) !important;
+    transform: translate(-4px, -4px);
+    box-shadow: 12px 12px 0 var(--brutal-black);
+}
+
+.shop-all-btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: rotate(45deg);
+    transition: 0.5s;
+    opacity: 0;
+}
+
+.shop-all-btn:hover::before {
+    animation: shopAllShine 1.5s infinite;
+}
+
+@keyframes shopAllShine {
+    0% {
+        transform: rotate(45deg) translateY(-100%);
+        opacity: 0;
+    }
+    50% {
+        transform: rotate(45deg) translateY(100%);
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(45deg) translateY(100%);
+        opacity: 0;
+    }
+}
+
 /* Dropdown Menu */
 .dropdown-menu {
     background: var(--brutal-white, #fff) !important;

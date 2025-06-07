@@ -32,7 +32,10 @@ class Product(models.Model):
         'Category', related_name='products',
         blank=True, on_delete=models.CASCADE)
     image = models.ImageField(
-        upload_to='products/', blank=True, null=True)
+    upload_to='products/', 
+    blank=True, 
+    null=True,
+    default='products/dgdefault.png')
     rating = models.DecimalField(
         max_digits=3, decimal_places=1, default=0)
     updated_at = models.DateTimeField(auto_now=True)

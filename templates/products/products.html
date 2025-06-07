@@ -30,16 +30,20 @@
                                         {% endif %}
                                     </a>
                                 </div>
-                                <div class="brutal-modal" id="imageModal">
+                                
+                                <!-- Modal - Only show if product has image -->
+                                {% if product.image %}
+                                <div class="brutal-modal" id="imageModal-{{ product.id }}">
                                     <div class="brutal-modal__content">
                                         <img src="{{ product.image.url }}" alt="{{ product.name }}" class="brutal-modal__image">
                                         <button class="brutal-modal__close">&times;</button>
                                     </div>
                                 </div>
+                                {% endif %}
 
                                 <!-- Content -->
                                 <div class="brutal-card__content">
-                                    <h3 class= "brutal-card__title p-1">{{ product.name }}</h3>
+                                    <h3 class="brutal-card__title p-1">{{ product.name }}</h3>
                                     
                                     <!-- Rating -->
                                     <div class="brutal-card__rating">

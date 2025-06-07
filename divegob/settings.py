@@ -45,6 +45,7 @@ CSRF_TRUSTED_ORIGINS = [
 
 # Application definition
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -154,6 +155,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
+
 # Database
 if 'DATABASE_URL' in os.environ:
     DATABASES = {
@@ -262,3 +264,218 @@ LOGGING = {
         },
     },
 }
+
+JAZZMIN_SETTINGS = {
+    # Site Title & Branding
+    "site_title": "Dive Goblin Admin",
+    "site_header": "🌊 Dive Goblin Control Center 🤿",
+    "site_brand": "Dive Goblin",
+    "site_logo": "images/divegoblogo.png",
+    "login_logo": None,
+    "login_logo_dark": None,
+    "site_logo_classes": "img-circle",
+    "site_icon": None,
+    
+    # Welcome message with diving theme
+    "welcome_sign": """
+    <div style='text-align: center; padding: 20px; background: linear-gradient(135deg, #006994 0%, #00AC7C 100%); color: white; border-radius: 10px; margin: 20px 0;'>
+        <h2 style='margin: 0; color: white;'>🌊 Welcome to Dive Goblin Admin Portal 🤿</h2>
+        <p style='margin: 10px 0; color: #e0f7fa;'>Manage your underwater empire from the depths!</p>
+        <div style='margin-top: 15px; font-size: 1.5em;'>
+            🐠 🦈 🐙 🐡 🦀 🐚
+        </div>
+    </div>
+    """,
+    
+    "copyright": "© 2024 Dive Goblin - Underwater Adventures Await",
+    
+    # Search Configuration
+    "search_model": ["auth.User", "products.Product", "newsletter.NewsletterSubscriber"],
+    
+    # Top Navigation Menu
+    "topmenu_links": [
+        {
+            "name": "🏠 Home", 
+            "url": "/", 
+            "new_window": True,
+            "permissions": []
+        },
+        {
+            "name": "🌊 Shop", 
+            "url": "/products/", 
+            "new_window": True,
+            "permissions": []
+        },
+        {
+            "name": "📧 Contact Support", 
+            "url": "mailto:divegoblin@gmail.com", 
+            "new_window": True,
+            "permissions": []
+        },
+        {
+            "name": "📊 Dashboard Stats", 
+            "url": "admin:index", 
+            "permissions": ["auth.view_user"]
+        },
+    ],
+    
+    # User Menu (right side dropdown)
+    "usermenu_links": [
+        {
+            "name": "🌊 View Dive Goblin Site", 
+            "url": "/", 
+            "new_window": True
+        },
+        {
+            "name": "📧 Email Support", 
+            "url": "mailto:divegoblin@gmail.com", 
+            "new_window": True
+        },
+        {
+            "model": "auth.user"
+        }
+    ],
+    
+    # App and Model Organization
+    "order_with_respect_to": [
+        "auth", 
+        "products", 
+        "checkout", 
+        "newsletter", 
+        "profiles"
+    ],
+    
+    # Custom Icons
+    "icons": {
+        # Auth & Users
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-swimmer",
+        "auth.Group": "fas fa-users",
+        
+        # Products (Diving Equipment)
+        "products": "fas fa-fish",
+        "products.Product": "fas fa-mask",
+        "products.Category": "fas fa-water",
+        "products.Wishlist": "fas fa-heart",
+        
+        # Orders & Checkout
+        "checkout": "fas fa-credit-card",
+        "checkout.Order": "fas fa-shopping-cart",
+        "checkout.OrderLineItem": "fas fa-list",
+        
+        # Newsletter & Marketing
+        "newsletter": "fas fa-paper-plane",
+        "newsletter.NewsletterSubscriber": "fas fa-envelope-open-text",
+        "newsletter.Newsletter": "fas fa-newspaper",
+        
+        # User Profiles
+        "profiles": "fas fa-id-card",
+        "profiles.UserProfile": "fas fa-user-circle",
+        
+        # Other useful diving-themed icons
+        "pages": "fas fa-file-alt",
+        "bag": "fas fa-shopping-bag",
+    },
+    
+    # Layout & Navigation
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "hide_apps": [],
+    "hide_models": [],
+    
+    # Form Layout Options
+    "changeform_format": "horizontal_tabs",  # Default form layout
+    "changeform_format_overrides": {
+        "auth.user": "vertical_tabs",          # User forms with side tabs
+        "products.product": "horizontal_tabs", # Product forms with top tabs
+        "checkout.order": "collapsible",       # Order forms as accordion
+        "newsletter.newsletter": "carousel",   # Newsletter as carousel
+    },
+    
+    # Advanced Features
+    "related_modal_active": True,    # Popups instead of new pages
+    "use_google_fonts_cdn": True,    # Better fonts
+    "show_ui_builder": True,         # LIVE CUSTOMIZER BUTTON!
+    
+    # Language & Localization
+    "language_chooser": False,
+    
+    # Custom CSS & JS
+    "custom_css": "admin/css/dive_goblin_admin.css",
+    "custom_js": "admin/js/dive_goblin_admin.js",
+    
+    # Advanced Menu Configuration
+    "show_required_asterisk": True,
+    "confirm_unsaved_changes": True,
+    
+    # Custom Links in Different Sections
+    "model_links": {
+        "auth.User": {
+            "name": "👥 All Divers",
+            "icon": "fas fa-swimmers",
+        }
+    },
+}
+
+# UI Theme Configuration 
+JAZZMIN_UI_TWEAKS = {
+    # Text Sizes
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": False,
+    "brand_small_text": False,
+    
+    # Color Scheme (Ocean Theme)
+    "brand_colour": "navbar-info",
+    "accent": "accent-info",
+    "navbar": "navbar-dark",
+    "no_navbar_border": False,
+    
+    # Layout Options
+    "navbar_fixed": True,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": True,
+    
+    # Sidebar Configuration
+    "sidebar": "sidebar-dark-info",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": True,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": True,
+    
+    # Theme Selection
+    "theme": "cosmo",
+    "dark_mode_theme": "darkly", 
+    
+    # Button Styling
+    "button_classes": {
+        "primary": "btn-info",
+        "secondary": "btn-outline-info",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success"
+    },
+    
+    # Advanced UI Options
+    "actions_sticky_top": True,          # Keep actions visible when scrolling
+}
+
+JAZZMIN_SETTINGS.update({
+    # Dashboard customization
+    "show_recent_actions": True,
+    "show_log_entries": 10,
+    
+    # Advanced form features
+    "changeform_format_overrides": {
+        "auth.user": "collapsible",
+        "products.product": "horizontal_tabs",
+        "checkout.order": "vertical_tabs",
+        "newsletter.newsletter": "carousel",
+        "profiles.userprofile": "horizontal_tabs",
+    },
+    
+})

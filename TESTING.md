@@ -357,5 +357,21 @@ class ProductModelTest(TestCase):
         product = Product.objects.create(name="Dive Mask", price=29.99)
         self.assertEqual(product.name, "Dive Mask")
         self.assertEqual(product.price, 29.99)
+```
 
+# BUGS noticed along the way:
+
+#### Go to top button doesn't work unless user is logged in for some reason.
+
+#### Stock numbers don't correlate - 5 items in stock but can purchase 10 eg
+
+#### Favicon not loading properly
+
+#### Images not uploading to aws from front end product management - need to be forced upload with script
+
+#### Various responsive issues on front end - shopping cart not displaying correctly
+
+#### Javascript not loading properly in development causing issues such as quantity button not loading properly or modals not opening/closing - lots of issues with set up using aws - not loading from local static etc
+
+#### Navigation drop down menu obscuring main body, bad ux
 

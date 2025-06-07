@@ -4,9 +4,8 @@ from botocore.exceptions import NoCredentialsError, ClientError
 import mimetypes
 from pathlib import Path
 
-# Import your environment variables from env.py
 try:
-    import env  # This loads your env.py file
+    import env
     print("✅ Loaded env.py")
 except ImportError:
     print("❌ Could not import env.py")
@@ -72,6 +71,44 @@ def force_upload_static():
                     print(f"❌ Failed to upload {s3_key}: {e}")
         
         print(f"\n🎉 Force upload complete! {uploaded_count} files uploaded.")
+        
+        print(f"\n📁 Now uploading media files...")
+        
+        # Media files directory
+        media_root = Path('media')
+        
+        if media_root.exists():
+            media_uploaded_count = 0
+            
+            # Walk through all media files
+            for file_path in media_root.rglob('*'):
+                if file_path.is_file():
+                    relative_path = file_path.relative_to(media_root)
+                    s3_key = f"media/{relative_path.as_posix()}"
+                    
+                    content_type, _ = mimetypes.guess_type(str(file_path))
+                    if content_type is None:
+                        content_type = 'binary/octet-stream'
+                    
+                    try:
+                        s3_client.upload_file(
+                            str(file_path),
+                            bucket_name,
+                            s3_key,
+                            ExtraArgs={
+                                'ContentType': content_type,
+                                'ACL': 'public-read'
+                            }
+                        )
+                        media_uploaded_count += 1
+                        print(f"✅ Uploaded media: {s3_key}")
+                        
+                    except ClientError as e:
+                        print(f"❌ Failed to upload media {s3_key}: {e}")
+            
+            print(f"\n🎉 Media upload complete! {media_uploaded_count} media files uploaded.")
+        else:
+            print("❌ Media directory doesn't exist")
         
     except Exception as e:
         print(f"❌ Error: {e}")

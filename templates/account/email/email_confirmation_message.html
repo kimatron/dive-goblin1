@@ -1,226 +1,47 @@
+{% extends "account/email/base_message.html" %}
 {% load account %}
 {% load i18n %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirm Your Dive Goblin Account</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
+{% block content %}
+{% user_display user as user_display %}
+<div style="font-family: 'Space Mono', monospace; max-width: 600px; margin: 0 auto; background: #ffffff; border: 4px solid #000; box-shadow: 8px 8px 0 #000;">
+    <div style="background: #00AC7C; color: #fff; padding: 2rem; text-align: center; border-bottom: 4px solid #000;">
+        <h1 style="margin: 0; font-size: 2rem; font-weight: 900; text-transform: uppercase;">🤿 DIVE GOBLIN</h1>
+        <p style="margin: 0.5rem 0 0; font-size: 1.1rem;">Welcome to the Crew!</p>
+    </div>
+    
+    <div style="padding: 2rem;">
+        <h2 style="color: #000; font-size: 1.5rem; margin-bottom: 1rem;">Hi {{ user_display }},</h2>
         
-        body {
-            font-family: 'Space Mono', monospace;
-            line-height: 1.6;
-            color: #000;
-            background-color: #fefefe;
-            margin: 0;
-            padding: 20px;
-        }
+        <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem;">
+            Thanks for joining our underwater crew! We're excited to have you aboard.
+        </p>
         
-        .email-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: #fff;
-            border: 4px solid #000;
-            box-shadow: 8px 8px 0 #000;
-        }
+        <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem;">
+            To start your diving adventure with us, please confirm your email address by clicking the button below:
+        </p>
         
-        .email-header {
-            background: #00AC7C;
-            color: #fff;
-            padding: 2rem;
-            text-align: center;
-            border-bottom: 4px solid #000;
-            position: relative;
-        }
-        
-        .email-header::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            right: -15px;
-            width: 30px;
-            height: 30px;
-            background: #ffe600;
-            border: 3px solid #000;
-            transform: rotate(15deg);
-        }
-        
-        .logo {
-            font-size: 2rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin: 0;
-        }
-        
-        .logo-subtitle {
-            font-size: 1rem;
-            margin: 0.5rem 0 0 0;
-            opacity: 0.9;
-        }
-        
-        .email-body {
-            padding: 2rem;
-        }
-        
-        .welcome-message {
-            background: #f8f9fa;
-            border: 3px solid #000;
-            padding: 1.5rem;
-            margin: 1rem 0 2rem 0;
-            text-align: center;
-        }
-        
-        .welcome-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin: 0 0 0.5rem 0;
-            color: #00AC7C;
-        }
-        
-        .confirm-button {
-            display: inline-block;
-            background: #00AC7C;
-            color: #fff;
-            padding: 1rem 2rem;
-            text-decoration: none;
-            font-weight: 700;
-            text-transform: uppercase;
-            border: 4px solid #000;
-            box-shadow: 6px 6px 0 #000;
-            margin: 1rem 0;
-            transition: all 0.3s ease;
-        }
-        
-        .confirm-button:hover {
-            background: #5ad641;
-            color: #fff;
-            text-decoration: none;
-            transform: translate(-2px, -2px);
-            box-shadow: 8px 8px 0 #000;
-        }
-        
-        .email-footer {
-            background: #000;
-            color: #fff;
-            padding: 1.5rem;
-            text-align: center;
-            border-top: 4px solid #000;
-        }
-        
-        .footer-links {
-            margin: 1rem 0;
-        }
-        
-        .footer-links a {
-            color: #00AC7C;
-            text-decoration: none;
-            margin: 0 1rem;
-            font-weight: 700;
-        }
-        
-        .security-note {
-            background: #ffe600;
-            border: 3px solid #000;
-            padding: 1rem;
-            margin: 1.5rem 0;
-            font-weight: 700;
-            text-align: center;
-        }
-        
-        .email-text {
-            margin: 1rem 0;
-            font-size: 1rem;
-        }
-        
-        @media (max-width: 600px) {
-            .email-container {
-                border: 2px solid #000;
-                box-shadow: 4px 4px 0 #000;
-            }
-            
-            .email-header {
-                padding: 1.5rem;
-            }
-            
-            .logo {
-                font-size: 1.5rem;
-            }
-            
-            .email-body {
-                padding: 1.5rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="email-container">
-        <!-- Header -->
-        <div class="email-header">
-            <div class="logo">DIVE GOBLIN</div>
-            <div class="logo-subtitle">Underwater Gear Specialists</div>
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="{{ activate_url }}" style="display: inline-block; padding: 1rem 2rem; background: #00AC7C; color: #fff; text-decoration: none; font-weight: 700; text-transform: uppercase; border: 4px solid #000; box-shadow: 6px 6px 0 #000; transition: all 0.3s ease;">
+                CONFIRM EMAIL
+            </a>
         </div>
         
-        <!-- Body -->
-        <div class="email-body">
-            <div class="welcome-message">
-                <div class="welcome-title">Welcome to the Crew!</div>
-                <p style="margin: 0;">{% user_display user as user_display %}Ready to dive in, {{ user_display }}?</p>
-            </div>
-            
-            <p class="email-text">
-                {% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
-                You're receiving this email because you registered an account on {{ site_name }}.
-                {% endblocktrans %}
-            </p>
-            
-            <p class="email-text">
-                <strong>To complete your registration and start exploring our underwater gear collection, please confirm your email address:</strong>
-            </p>
-            
-            <div style="text-align: center; margin: 2rem 0;">
-                <a href="{{ activate_url }}" class="confirm-button">
-                    🤿 CONFIRM EMAIL ADDRESS
-                </a>
-            </div>
-            
-            <div class="security-note">
-                <strong>🔒 Security Note:</strong> This link will expire in 24 hours for your security.
-            </div>
-            
-            <p class="email-text">
-                If you didn't create an account with us, you can safely ignore this email.
-            </p>
-            
-            <p class="email-text">
-                <strong>What's next?</strong><br>
-                Once confirmed, you'll be able to:
-            </p>
-            <ul style="margin: 0.5rem 0; padding-left: 2rem;">
-                <li>Browse our complete diving gear collection</li>
-                <li>Save items to your wishlist</li>
-                <li>Track your orders and purchase history</li>
-                <li>Get exclusive deals and diving tips</li>
-            </ul>
-        </div>
+        <p style="font-size: 0.9rem; color: #666; line-height: 1.6;">
+            This link will verify your account and give you full access to our gear, guides, and goblin-approved diving equipment.
+        </p>
         
-        <!-- Footer -->
-        <div class="email-footer">
-            <p style="margin: 0 0 1rem 0;">
-                <strong>Need help?</strong> Our goblin support team is here for you!
-            </p>
-            <div class="footer-links">
-                <a href="https://{{ current_site.domain }}">Visit Store</a>
-                <a href="https://{{ current_site.domain }}/pages/contact/">Contact Us</a>
-                <a href="https://{{ current_site.domain }}/pages/faq/">FAQ</a>
-            </div>
-            <p style="margin: 1rem 0 0 0; font-size: 0.8rem; opacity: 0.8;">
-                © {% now "Y" %} Dive Goblin. All rights reserved.<br>
-                Bringing you the best underwater gear since 2024.
+        <p style="font-size: 0.9rem; color: #666; line-height: 1.6; margin-top: 2rem;">
+            If you didn't create this account, you can safely ignore this email.
+        </p>
+        
+        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid #eee; text-align: center;">
+            <p style="font-weight: 700; margin-bottom: 0.5rem;">Ready to dive in?</p>
+            <p style="font-weight: 700; color: #00AC7C;">The Dive Goblin Team</p>
+            <p style="font-size: 0.8rem; color: #666; margin-top: 1rem;">
+                P.S. Keep an eye out for exclusive deals and diving tips in your inbox!
             </p>
         </div>
     </div>
-</body>
-</html>
+</div>
+{% endblock content %}

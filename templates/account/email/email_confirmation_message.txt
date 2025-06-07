@@ -2,9 +2,7 @@
 {% load account %}
 {% load i18n %}
 
-{% block content %}{% autoescape off %}{% user_display user as user_display %}
-{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
-🤿 Welcome to Dive Goblin!
+{% block content %}{% autoescape off %}{% user_display user as user_display %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}🤿 Welcome to Dive Goblin!
 
 Hi {{ user_display }},
 
@@ -21,54 +19,4 @@ If you didn't create this account, you can safely ignore this email.
 Ready to dive in?
 The Dive Goblin Team
 
-P.S. Keep an eye out for exclusive deals and diving tips in your inbox!
-{% endblocktrans %}{% endautoescape %}{% endblock content %}
-
-# templates/account/email/email_confirmation_message.html (Optional - for HTML emails)
-{% extends "account/email/base_message.html" %}
-{% load account %}
-{% load i18n %}
-
-{% block content %}
-{% user_display user as user_display %}
-<div style="font-family: 'Space Mono', monospace; max-width: 600px; margin: 0 auto; background: #ffffff; border: 4px solid #000; box-shadow: 8px 8px 0 #000;">
-    <div style="background: #00AC7C; color: #fff; padding: 2rem; text-align: center; border-bottom: 4px solid #000;">
-        <h1 style="margin: 0; font-size: 2rem; font-weight: 900; text-transform: uppercase;">🤿 DIVE GOBLIN</h1>
-        <p style="margin: 0.5rem 0 0; font-size: 1.1rem;">Welcome to the Crew!</p>
-    </div>
-    
-    <div style="padding: 2rem;">
-        <h2 style="color: #000; font-size: 1.5rem; margin-bottom: 1rem;">Hi {{ user_display }},</h2>
-        
-        <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem;">
-            Thanks for joining our underwater crew! We're excited to have you aboard.
-        </p>
-        
-        <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem;">
-            To start your diving adventure with us, please confirm your email address by clicking the button below:
-        </p>
-        
-        <div style="text-align: center; margin: 2rem 0;">
-            <a href="{{ activate_url }}" style="display: inline-block; padding: 1rem 2rem; background: #00AC7C; color: #fff; text-decoration: none; font-weight: 700; text-transform: uppercase; border: 4px solid #000; box-shadow: 6px 6px 0 #000; transition: all 0.3s ease;">
-                CONFIRM EMAIL
-            </a>
-        </div>
-        
-        <p style="font-size: 0.9rem; color: #666; line-height: 1.6;">
-            This link will verify your account and give you full access to our gear, guides, and goblin-approved diving equipment.
-        </p>
-        
-        <p style="font-size: 0.9rem; color: #666; line-height: 1.6; margin-top: 2rem;">
-            If you didn't create this account, you can safely ignore this email.
-        </p>
-        
-        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid #eee; text-align: center;">
-            <p style="font-weight: 700; margin-bottom: 0.5rem;">Ready to dive in?</p>
-            <p style="font-weight: 700; color: #00AC7C;">The Dive Goblin Team</p>
-            <p style="font-size: 0.8rem; color: #666; margin-top: 1rem;">
-                P.S. Keep an eye out for exclusive deals and diving tips in your inbox!
-            </p>
-        </div>
-    </div>
-</div>
-{% endblock content %}
+P.S. Keep an eye out for exclusive deals and diving tips in your inbox!{% endblocktrans %}{% endautoescape %}{% endblock content %}

@@ -71,6 +71,19 @@ h3 {
     font-weight: 700;
 }
 
+a {
+    color: inherit !important ;
+    text-decoration: none;
+}
+
+a.brutal-btn,
+a.brutal-btn:visited,
+a.brutal-btn:hover,
+a.brutal-btn:active {
+    color: inherit;             
+    text-decoration: none;
+}
+
 /* 3. Layout & Grid */
 .container {
     max-width: var(--container-max);

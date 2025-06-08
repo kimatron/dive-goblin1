@@ -1,0 +1,523 @@
+:root {
+    --form-border: 3px solid var(--brutal-black);
+    --form-shadow: 6px 6px 0 var(--brutal-black);
+}
+
+.entrance-container {
+    max-width: 500px;
+    margin: 8rem auto 2rem;
+    padding: 2.5rem;
+    background: var(--brutal-white);
+    border: var(--form-border);
+    box-shadow: var(--form-shadow);
+    position: relative;
+}
+
+.entrance-container::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 20px;
+    height: 20px;
+    background: var(--brutal-hover);
+    border: var(--form-border);
+    transform: rotate(45deg);
+}
+
+.entrance-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    color: var(--brutal-black);
+    position: relative;
+    display: inline-block;
+}
+
+.entrance-title::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--brutal-accent);
+}
+
+.entrance-text {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.entrance-text a {
+    color: var(--brutal-accent);
+    text-decoration: none;
+    font-weight: bold;
+    position: relative;
+    padding: 0 2px;
+}
+
+.entrance-text a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--brutal-accent);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.entrance-text a:hover::after {
+    transform: scaleX(1);
+}
+
+.entrance-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-field {
+    position: relative;
+}
+
+.form-field input {
+    width: 100%;
+    padding: 1rem;
+    border: var(--form-border);
+    background: var(--brutal-white);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-field input:focus {
+    outline: none;
+    transform: translate(-4px, -4px);
+    box-shadow: 6px 6px 0 var(--brutal-accent);
+}
+
+.form-error {
+    color: #ff3333;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    font-weight: 600;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.entrance-button {
+    padding: 1rem 2rem;
+    background: var(--brutal-accent);
+    color: var(--brutal-white);
+    border: var(--form-border);
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--form-shadow);
+}
+
+.entrance-button:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0 var(--brutal-black);
+}
+
+.forgot-password {
+    color: var(--brutal-black);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    position: relative;
+    padding: 0.5rem 1rem;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.forgot-password:hover {
+    border-color: var(--brutal-accent);
+    transform: translate(-2px, -2px);
+}
+
+.divider {
+    margin: 2rem 0;
+    border: none;
+    height: 2px;
+    background: var(--brutal-black);
+    position: relative;
+}
+
+.divider::before {
+    content: '×';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--brutal-white);
+    padding: 0 1rem;
+    color: var(--brutal-black);
+    font-weight: bold;
+}
+
+.login-code-section {
+    text-align: center;
+}
+
+.code-login-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: var(--brutal-white);
+    color: var(--brutal-black);
+    border: var(--form-border);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: var(--form-shadow);
+}
+
+.code-login-button:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0 var(--brutal-accent);
+}
+
+.social-login {
+    text-align: center;
+}
+
+.social-login-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+}
+
+.social-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .entrance-container {
+        margin: 6rem 1rem 2rem;
+        padding: 1.5rem;
+    }
+
+    .entrance-title {
+        font-size: 2rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .forgot-password {
+        margin-top: 1rem;
+    }
+
+    .social-buttons {
+        flex-direction: column;
+    }
+}
+
+/* logout style */
+
+.logout-container {
+    max-width: 500px;
+    margin: 8rem auto 2rem;
+    padding: 0 1.5rem;
+}
+
+.brutal-card {
+    background: var(--brutal-white);
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
+    padding: 2.5rem;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.brutal-card:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 10px 10px 0 var(--brutal-black);
+}
+
+.brutal-card::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 20px;
+    height: 20px;
+    background: var(--brutal-accent);
+    border: var(--brutal-border);
+    transform: rotate(45deg);
+}
+
+.card-content {
+    text-align: center;
+}
+
+.logout-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    color: var(--brutal-black);
+    position: relative;
+    display: inline-block;
+}
+
+.logout-title::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--brutal-accent);
+}
+
+.logout-icon {
+    font-size: 3rem;
+    color: var(--brutal-accent);
+    margin: 2rem 0;
+    animation: pulse 2s infinite;
+}
+
+.logout-text {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.logout-form {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.button-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.brutal-btn {
+    padding: 0.8rem 1.5rem;
+    border: var(--brutal-border);
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    min-width: 120px;
+}
+
+.brutal-btn--danger {
+    background: #ff3333;
+    color: var(--brutal-white);
+    box-shadow: 4px 4px 0 var(--brutal-black);
+}
+
+.brutal-btn--danger:hover {
+    background: #ff0000;
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--brutal-black);
+}
+
+.brutal-btn--secondary {
+    background: var(--brutal-white);
+    color: var(--brutal-black);
+    box-shadow: 4px 4px 0 var(--brutal-black);
+}
+
+.brutal-btn--secondary:hover {
+    background: var(--brutal-accent);
+    color: var(--brutal-white);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--brutal-black);
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .logout-container {
+        margin: 6rem 1rem 2rem;
+    }
+
+    .brutal-card {
+        padding: 1.5rem;
+    }
+
+    .logout-title {
+        font-size: 2rem;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .brutal-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Loading State */
+.brutal-btn.loading {
+    position: relative;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+.brutal-btn.loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    border: 2px solid var(--brutal-white);
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translateY(-50%) rotate(0deg); }
+    100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* Add this to the END of your existing static/css/login.css file */
+
+/* Google Login Button Styling */
+.socialaccount_providers {
+    text-align: center;
+    margin: 2rem 0;
+    padding: 0;
+    list-style: none;
+}
+
+.socialaccount_providers li {
+    margin: 1rem 0;
+}
+
+/* Style the Google login link */
+.social-buttons ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.social-buttons li {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Style the Google link specifically */
+a[title="Google"] {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.75rem !important;
+    padding: 1rem 2rem !important;
+    background: var(--brutal-white) !important;
+    color: var(--brutal-black) !important;
+    border: var(--brutal-border) !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    font-family: inherit !important;
+    box-shadow: var(--form-shadow) !important;
+    transition: all 0.3s ease !important;
+    margin: 1rem 0 !important;
+    font-size: 0.9rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+a[title="Google"]:hover {
+    background: #4285f4 !important;
+    color: var(--brutal-white) !important;
+    text-decoration: none !important;
+    transform: translate(-4px, -4px) !important;
+    box-shadow: 8px 8px 0 var(--brutal-black) !important;
+}
+
+/* Add Google icon before the text */
+a[title="Google"]:before {
+    content: "G";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: #4285f4;
+    color: white;
+    border-radius: 50%;
+    font-weight: 900;
+    font-size: 14px;
+}
+
+/* Style the social login section container */
+.social-login {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.social-login-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    color: var(--brutal-black);
+}
+
+.social-buttons {
+    width: 100%;
+}
+
+/* Improve the divider styling */
+.social-login .divider {
+    margin: 2rem 0;
+    border: none;
+    height: 2px;
+    background: var(--brutal-black);
+    position: relative;
+}
+
+.social-login .divider::before {
+    content: 'OR';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--brutal-white);
+    padding: 0 1rem;
+    color: var(--brutal-black);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}

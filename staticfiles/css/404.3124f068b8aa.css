@@ -1,0 +1,169 @@
+/* 404 Error Page */
+.error-page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 2rem;
+}
+
+.error-content {
+    text-align: center;
+    z-index: 2;
+}
+
+.error-title {
+    font-size: 12rem;
+    font-weight: 900;
+    margin-bottom: 2rem;
+    line-height: 1;
+    position: relative;
+}
+
+.error-title .glitch {
+    position: relative;
+    display: inline-block;
+    animation: glitch 1s infinite;
+}
+
+.error-title .glitch::before,
+.error-title .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.error-title .glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 var(--brutal-accent);
+    clip: rect(24px, 550px, 90px, 0);
+    animation: glitch-anim 3s infinite linear alternate-reverse;
+}
+
+.error-title .glitch::after {
+    left: -2px;
+    text-shadow: -2px 0 var(--brutal-hover);
+    clip: rect(85px, 550px, 140px, 0);
+    animation: glitch-anim 2s infinite linear alternate-reverse;
+}
+
+.error-box {
+    background: var(--brutal-white);
+    border: 4px solid var(--brutal-black);
+    padding: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    box-shadow: 8px 8px 0 var(--brutal-black);
+    transform: translateY(0);
+    transition: all 0.3s ease;
+}
+
+.error-box:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 12px 12px 0 var(--brutal-accent);
+}
+
+.error-box h2 {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.error-decoration {
+    width: 100px;
+    height: 4px;
+    background: var(--brutal-accent);
+    margin: 2rem auto;
+}
+
+.error-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    background: var(--brutal-accent);
+    color: var(--brutal-white);
+    border: 4px solid var(--brutal-black);
+    font-weight: 800;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: 6px 6px 0 var(--brutal-black);
+    transition: all 0.3s ease;
+}
+
+.error-btn:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 10px 10px 0 var(--brutal-black);
+    background: var(--brutal-hover);
+    color: var(--brutal-white);
+    text-decoration: none;
+}
+
+.error-btn .arrow {
+    transition: transform 0.3s ease;
+}
+
+.error-btn:hover .arrow {
+    transform: translateX(6px);
+}
+
+.error-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    opacity: 0.1;
+    z-index: 1;
+}
+
+.grid-box {
+    border: 2px solid var(--brutal-black);
+}
+
+@keyframes glitch {
+    0% { transform: translate(0) }
+    20% { transform: translate(-2px, 2px) }
+    40% { transform: translate(-2px, -2px) }
+    60% { transform: translate(2px, 2px) }
+    80% { transform: translate(2px, -2px) }
+    100% { transform: translate(0) }
+}
+
+@keyframes glitch-anim {
+    0% { clip: rect(42px, 9999px, 44px, 0); }
+    20% { clip: rect(12px, 9999px, 59px, 0); }
+    40% { clip: rect(96px, 9999px, 61px, 0); }
+    60% { clip: rect(82px, 9999px, 17px, 0); }
+    80% { clip: rect(67px, 9999px, 34px, 0); }
+    100% { clip: rect(13px, 9999px, 48px, 0); }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .error-title {
+        font-size: 8rem;
+    }
+    
+    .error-box h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .error-title {
+        font-size: 6rem;
+    }
+    
+    .error-box {
+        padding: 1.5rem;
+    }
+}

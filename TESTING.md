@@ -375,3 +375,120 @@ class ProductModelTest(TestCase):
 
 #### Navigation drop down menu obscuring main body, bad ux
 
+## Bug Report: AWS S3 Storage Configuration Issue
+
+### Description
+Images uploaded through the Django admin and product management interface were not automatically uploading to the AWS S3 bucket. Files were being saved locally instead of to the configured S3 storage, despite AWS credentials being correctly configured.
+
+### Impact
+- **Severity**: High
+- **Affected Areas**: Product management, media file uploads, static file collection
+- **User Experience**: Images uploaded in production were not persisting between deployments
+- **Data Loss Risk**: Media files could be lost during Heroku dyno restarts
+
+### Symptoms Observed
+- ✅ AWS credentials were correctly configured
+- ✅ S3 bucket existed and was accessible
+- ✅ Manual upload script using boto3 worked perfectly
+- ❌ Django admin uploads saved to local filesystem
+- ❌ `collectstatic` command saved files locally
+- ❌ Product images were not visible on deployed site
+
+### Root Cause Analysis
+
+**Primary Cause**: Django version incompatibility with storage configuration
+
+The application was using Django 5.1, but the AWS S3 storage was configured using **deprecated settings** that were removed in Django 4.2+:
+
+```python
+# ❌ DEPRECATED - No longer works in Django 5.1
+DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+```
+
+**Contributing Factors**:
+1. Django 5.1 completely ignores the old `DEFAULT_FILE_STORAGE` setting
+2. The new `STORAGES` dictionary format was not implemented
+3. No deprecation warnings were visible during development
+4. Manual boto3 script worked, masking the Django configuration issue
+
+### Solution Implemented
+
+**1. Updated Storage Configuration**
+Replaced deprecated settings with Django 5.1 compatible `STORAGES` dictionary:
+
+```python
+# ✅ NEW - Works with Django 5.1
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {
+            "access_key": AWS_ACCESS_KEY_ID,
+            "secret_key": AWS_SECRET_ACCESS_KEY,
+            "bucket_name": AWS_STORAGE_BUCKET_NAME,
+            "region_name": AWS_S3_REGION_NAME,
+            "default_acl": "public-read",
+            "location": "media",
+        },
+    },
+    "staticfiles": {
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {
+            # ... static file configuration
+            "location": "static",
+        },
+    },
+}
+```
+
+**2. Removed Dependencies**
+- Deleted unused `custom_storages.py` file
+- Removed deprecated setting references
+
+**3. Testing Process**
+```bash
+# Local testing with S3
+export USE_AWS=true
+python manage.py runserver
+
+# Static files test
+python manage.py collectstatic --noinput
+
+# Production deployment
+git push heroku main
+```
+
+### Verification Steps
+1. ✅ Local admin upload → files appear in S3 bucket
+2. ✅ Product management upload → automatic S3 storage
+3. ✅ Static files collection → CSS/JS files in S3
+4. ✅ Production deployment → images persist correctly
+5. ✅ Image URLs resolve to S3 domain
+
+### Prevention Measures
+- **Documentation**: Updated deployment guide with Django 5.1 requirements
+- **Testing**: Added S3 storage verification to deployment checklist
+- **Monitoring**: Implemented storage backend logging for future debugging
+
+### Lessons Learned
+- Always check Django version compatibility when upgrading
+- Deprecated settings may fail silently without obvious error messages
+- Manual workarounds (boto3 script) can mask underlying configuration issues
+- The new `STORAGES` format provides better separation of static vs media file handling
+
+### References
+- [Django 5.1 STORAGES Documentation](https://docs.djangoproject.com/en/5.1/ref/settings/#storages)
+- [django-storages S3 Backend](https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html)
+- [Django 4.2 Storage Migration Guide](https://docs.djangoproject.com/en/4.2/releases/4.2/#storages)
+
+### Time to Resolution
+- **Detection**: 5 days (masked by working manual script)
+- **Investigation**: 2 hours (comparing Django versions)
+- **Implementation**: 30 minutes (settings update)
+- **Testing & Verification**: 1 hour
+
+---
+
+**Status**: ✅ **Resolved**  
+**Fixed in**: Commit - "Fix S3 storage for Django 5.1"  
+**Verified**: Production deployment successful with automatic S3 uploads

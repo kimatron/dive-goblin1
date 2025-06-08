@@ -202,7 +202,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# AWS Configuration - FIXED
+# AWS Configuration - FIXED FOR DJANGO 5.1
 if 'USE_AWS' in os.environ:
     print("🚀 Using AWS S3 for static and media files")
     
@@ -213,30 +213,59 @@ if 'USE_AWS' in os.environ:
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
     
-    # S3 Object Parameters - REDUCED CACHE TIME FOR DEVELOPMENT
+    # S3 Object Parameters
     AWS_S3_OBJECT_PARAMETERS = {
-        'CacheControl': 'max-age=86400',  # 24 hours instead of 3 years
+        'CacheControl': 'max-age=86400',
     }
     
-    # Static and media files
-    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
-    STATICFILES_LOCATION = 'static'
-    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
-    MEDIAFILES_LOCATION = 'media'
-
-    # Override static and media URLs in production
-    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
-    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+    # ✅ NEW STORAGES FORMAT (Required for Django 5.1)
+    STORAGES = {
+        "default": {
+            "BACKEND": "storages.backends.s3.S3Storage",
+            "OPTIONS": {
+                "access_key": AWS_ACCESS_KEY_ID,
+                "secret_key": AWS_SECRET_ACCESS_KEY,
+                "bucket_name": AWS_STORAGE_BUCKET_NAME,
+                "region_name": AWS_S3_REGION_NAME,
+                "default_acl": "public-read",
+                "custom_domain": AWS_S3_CUSTOM_DOMAIN,
+                "object_parameters": AWS_S3_OBJECT_PARAMETERS,
+                "file_overwrite": False,
+                "location": "media",  # Files go in media/ folder
+            },
+        },
+        "staticfiles": {
+            "BACKEND": "storages.backends.s3.S3Storage",
+            "OPTIONS": {
+                "access_key": AWS_ACCESS_KEY_ID,
+                "secret_key": AWS_SECRET_ACCESS_KEY,
+                "bucket_name": AWS_STORAGE_BUCKET_NAME,
+                "region_name": AWS_S3_REGION_NAME,
+                "default_acl": "public-read",
+                "custom_domain": AWS_S3_CUSTOM_DOMAIN,
+                "object_parameters": AWS_S3_OBJECT_PARAMETERS,
+                "location": "static",  # Files go in static/ folder
+            },
+        },
+    }
     
-    # Force Django to use S3 for staticfiles
-    AWS_S3_FILE_OVERWRITE = True
-    AWS_DEFAULT_ACL = None
+    # Override static and media URLs
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
     
 else:
     print("🔧 Using local static files")
-    # Use WhiteNoise for local development
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
+    
+    # ✅ LOCAL STORAGES FORMAT (Also required for Django 5.1)
+    STORAGES = {
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+    }
+    
 # Other settings
 FREE_DELIVERY_THRESHOLD = 100
 STANDARD_DELIVERY_PERCENTAGE = 10

@@ -89,7 +89,7 @@ Access to the site here: [Dive Goblin](https://dive-goblin-30c473dd6e64.herokuap
 
 ---
 
-Feel free to customize this section further and add images and GIFs to illustrate each feature more effectively.
+## Wireframes
 
 
 ## User Stories

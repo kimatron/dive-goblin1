@@ -91,6 +91,38 @@ Access to the site here: [Dive Goblin](https://dive-goblin-30c473dd6e64.herokuap
 
 ## Wireframes
 
+# Database Schema (ERD)
+
+## Core Entities
+
+| Entity | Description | Key Fields |
+|--------|-------------|------------|
+| **User** | Django built-in authentication | id, username, email, password |
+| **UserProfile** | Extended user information | user_id (FK), diving_level, bio, default_address |
+| **Product** | Diving equipment catalog | id, name, price, stock, category_id (FK) |
+| **Category** | Product organization | id, name, friendly_name |
+| **Order** | Customer purchases | id, order_number, user_profile_id (FK), totals |
+| **OrderLineItem** | Products within orders | order_id (FK), product_id (FK), quantity |
+| **Wishlist** | Saved products | user_id (FK), products (M2M) |
+| **NewsletterSubscriber** | Email marketing | email (unique), is_active |
+
+## Relationships
+
+| Relationship | Type | Description |
+|--------------|------|-------------|
+| User ↔ UserProfile | One-to-One | Each user has one profile |
+| User ↔ Wishlist | One-to-One | Each user has one wishlist |
+| User ↔ Order | One-to-Many | Users can have multiple orders |
+| Category ↔ Product | One-to-Many | Products belong to one category |
+| Wishlist ↔ Product | Many-to-Many | Products can be in multiple wishlists |
+| Order ↔ Product | Many-to-Many | Via OrderLineItem intermediate table |
+
+## Key Features
+
+- **User Management**: Authentication + diving-specific profiles
+- **Product Catalog**: Organized by categories with inventory tracking
+- **Shopping**: Wishlist and order management with Stripe integration
+- **Marketing**: Independent newsletter subscription system
 
 ## User Stories
 
@@ -271,31 +303,232 @@ Dive Goblin aims to continuously evolve and expand by:
 By leveraging these strategies, Dive Goblin aims to establish itself as a leading e-commerce platform in the dive and watersports industry, delivering exceptional value and experiences to its customers.
 
 
-## Technical Setup
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/kimatron/dive-goblin1.git
-    ```
-2. Navigate to the project directory:
-    ```bash
-    cd dive-goblin
-    ```
-3. Install dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
-4. Set up the database:
-    ```bash
-    python manage.py migrate
-    ```
-5. Create a superuser:
-    ```bash
-    python manage.py createsuperuser
-    ```
-6. Run the development server:
-    ```bash
-    python manage.py runserver
-    ```
+# Technical Setup
+
+## Prerequisites
+
+Before setting up Dive Goblin, ensure you have the following installed:
+
+- **Python 3.12+** - [Download Python](https://www.python.org/downloads/)
+- **Git** - [Download Git](https://git-scm.com/downloads/)
+- **pip** (comes with Python)
+
+Optional for full functionality:
+- **PostgreSQL** (for production-like database)
+- **Stripe Account** (for payment processing)
+- **AWS Account** (for media storage in production)
+
+## Local Development Setup
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/kimatron/dive-goblin1.git
+cd dive-goblin1
+```
+
+### 2. Create Virtual Environment
+```bash
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment
+# On Windows:
+venv\Scripts\activate
+# On macOS/Linux:
+source venv/bin/activate
+```
+
+### 3. Install Dependencies
+```bash
+# Upgrade pip to latest version
+python -m pip install --upgrade pip
+
+# Install project dependencies
+pip install -r requirements.txt
+```
+
+### 4. Environment Configuration
+Create a `.env` file in the project root:
+```bash
+# Create .env file
+touch .env  # On Windows: type nul > .env
+```
+
+Add the following environment variables to `.env`:
+```env
+# Django Settings
+SECRET_KEY=your-secret-key-here
+DEBUG=True
+DATABASE_URL=sqlite:///db.sqlite3
+
+# Email Configuration (Optional for development)
+EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
+
+# Stripe Keys (Optional - use test keys)
+STRIPE_PUBLIC_KEY=pk_test_your_stripe_public_key
+STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key
+STRIPE_WH_SECRET=whsec_your_webhook_secret
+
+# AWS Settings (Optional for development)
+# USE_AWS=True
+# AWS_ACCESS_KEY_ID=your_aws_access_key
+# AWS_SECRET_ACCESS_KEY=your_aws_secret_key
+```
+
+### 5. Database Setup
+```bash
+# Create database tables
+python manage.py migrate
+
+# Load sample data (optional)
+python manage.py loaddata fixtures/categories.json
+python manage.py loaddata fixtures/products.json
+```
+
+### 6. Create Superuser
+```bash
+python manage.py createsuperuser
+```
+Follow the prompts to create your admin account.
+
+### 7. Collect Static Files
+```bash
+python manage.py collectstatic --noinput
+```
+
+### 8. Run Development Server
+```bash
+python manage.py runserver
+```
+
+The application will be available at: `http://127.0.0.1:8000/`
+
+## Testing the Setup
+
+### Verify Installation
+```bash
+# Check Django version
+python manage.py --version
+
+# Run system checks
+python manage.py check
+
+# Run tests
+python manage.py test
+```
+
+### Access Different Areas
+- **Homepage**: `http://127.0.0.1:8000/`
+- **Admin Panel**: `http://127.0.0.1:8000/admin/`
+- **Products**: `http://127.0.0.1:8000/products/`
+- **User Registration**: `http://127.0.0.1:8000/accounts/signup/`
+
+## Configuration for Production Features
+
+### Stripe Payment Setup (Optional)
+1. Create a [Stripe account](https://stripe.com/)
+2. Get your test API keys from the Stripe dashboard
+3. Add keys to your `.env` file
+4. Test payments will work with test card: `4242424242424242`
+
+### Email Configuration (Optional)
+For production-like email functionality:
+```env
+# Gmail SMTP (example)
+EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER=your-email@gmail.com
+EMAIL_HOST_PASSWORD=your-app-password
+DEFAULT_FROM_EMAIL=your-email@gmail.com
+```
+
+### AWS S3 Setup (Optional)
+For media file storage:
+```env
+USE_AWS=True
+AWS_ACCESS_KEY_ID=your_access_key
+AWS_SECRET_ACCESS_KEY=your_secret_key
+AWS_STORAGE_BUCKET_NAME=your-bucket-name
+AWS_S3_REGION_NAME=your-region
+```
+
+## Common Issues & Solutions
+
+### Issue: `ModuleNotFoundError`
+**Solution**: Ensure virtual environment is activated and dependencies are installed:
+```bash
+pip install -r requirements.txt
+```
+
+### Issue: Database errors
+**Solution**: Reset database:
+```bash
+python manage.py flush
+python manage.py migrate
+python manage.py createsuperuser
+```
+
+### Issue: Static files not loading
+**Solution**: Collect static files:
+```bash
+python manage.py collectstatic --noinput
+```
+
+### Issue: Permission denied on Windows
+**Solution**: Run terminal as administrator or use:
+```bash
+python -m pip install --user -r requirements.txt
+```
+
+## Development Workflow
+
+### Making Changes
+```bash
+# After model changes
+python manage.py makemigrations
+python manage.py migrate
+
+# After installing new packages
+pip freeze > requirements.txt
+
+# Before committing
+python manage.py check
+python manage.py test
+```
+
+### Working with Git
+```bash
+# Create feature branch
+git checkout -b feature/your-feature
+
+# After making changes
+git add .
+git commit -m "Description of changes"
+git push origin feature/your-feature
+```
+
+## Technology Stack
+
+- **Backend**: Django 5.1.3, Python 3.12
+- **Database**: SQLite (development), PostgreSQL (production)
+- **Frontend**: HTML5, CSS3, JavaScript, Bootstrap 5
+- **Payment Processing**: Stripe
+- **Authentication**: Django Allauth
+- **File Storage**: Local (development), AWS S3 (production)
+- **Email**: Console backend (development), SMTP (production)
+
+## Next Steps
+
+After successful setup:
+1. Explore the admin panel to add products and categories
+2. Test user registration and login functionality
+3. Add products to cart and test checkout flow
+4. Configure Stripe for payment testing
+5. Customize the design and add your own products
+
+For deployment instructions, see the [Deployment Guide](DEPLOYMENT.md).
 
 ## Testing
 Detailed testing documentation can be found in the [TESTING.md](TESTING.md) file.

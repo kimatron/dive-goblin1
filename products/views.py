@@ -112,7 +112,7 @@ def add_product(request):
         if form.is_valid():
             product = form.save()
             messages.success(request, 'Successfully added product!')
-            return redirect(reverse('products:product_detail', args=[product.id]))
+            return redirect(reverse('products:product_management'))
         else:
             messages.error(
                 request,
@@ -141,7 +141,7 @@ def edit_product(request, product_id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Successfully updated product!')
-            return redirect(reverse('products:product_detail', args=[product.id]))
+            return redirect(reverse('products:product_management'))
         else:
             messages.error(
                 request,
@@ -167,9 +167,16 @@ def delete_product(request, product_id):
         return redirect(reverse('home'))
         
     product = get_object_or_404(Product, pk=product_id)
-    product.delete()
-    messages.success(request, 'Product deleted!')
-    return redirect(reverse('products:products'))
+    
+    # Add confirmation step
+    if request.method == 'POST':
+        product_name = product.name  # Store name before deletion
+        product.delete()
+        messages.success(request, f'Product "{product_name}" has been deleted!')
+        return redirect(reverse('products:product_management'))
+    
+    # If GET request, show confirmation page
+    return render(request, 'products/confirm_delete.html', {'product': product})
 
 
 @login_required

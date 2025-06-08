@@ -375,6 +375,8 @@ class ProductModelTest(TestCase):
 
 #### Navigation drop down menu obscuring main body, bad ux
 
+### When deleting/editing products in product management, there is no delete confirmation stage, and once an action is completed the user is taken out of the product management section. Not a big issue, just bad ux
+
 ## Bug Report: AWS S3 Storage Configuration Issue
 
 ### Description

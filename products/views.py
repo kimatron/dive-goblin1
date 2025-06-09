@@ -167,16 +167,10 @@ def delete_product(request, product_id):
         return redirect(reverse('home'))
         
     product = get_object_or_404(Product, pk=product_id)
-    
-    # Add confirmation step
-    if request.method == 'POST':
-        product_name = product.name  # Store name before deletion
-        product.delete()
-        messages.success(request, f'Product "{product_name}" has been deleted!')
-        return redirect(reverse('products:product_management'))
-    
-    # If GET request, show confirmation page
-    return render(request, 'products/confirm_delete.html', {'product': product})
+    product_name = product.name  # Store name before deletion
+    product.delete()
+    messages.success(request, f'Product "{product_name}" has been deleted!')
+    return redirect(reverse('products:product_management'))
 
 
 @login_required

@@ -88,5 +88,5 @@ window.addEventListener('load', () => {
     noiseEffect.init();
 
     // Clean up when page unloads
-    window.addEventListener('unload', noiseEffect.cleanup);
+    window.addEventListener('beforeunload', noiseEffect.cleanup);
 });

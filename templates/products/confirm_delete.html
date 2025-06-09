@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-8 offset-md-2">
+                <div class="card mt-5" style="border: 4px solid #000; box-shadow: 8px 8px 0 #000;">
+                    <div class="card-header bg-danger text-white" style="border-bottom: 3px solid #000;">
+                        <h3 class="mb-0" style="font-weight: 700; text-transform: uppercase;">
+                            <i class="fas fa-exclamation-triangle"></i> Confirm Deletion
+                        </h3>
+                    </div>
+                    <div class="card-body" style="padding: 2rem;">
+                        <div class="text-center mb-4">
+                            {% if product.image %}
+                                <img src="{{ product.image.url }}" alt="{{ product.name }}" 
+                                     style="max-width: 200px; max-height: 200px; object-fit: cover; border: 3px solid #000;">
+                            {% else %}
+                                <img src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}" 
+                                     style="max-width: 200px; max-height: 200px; object-fit: cover; border: 3px solid #000;">
+                            {% endif %}
+                        </div>
+                        
+                        <div class="alert alert-danger" style="border: 3px solid #dc3545; background: #f8d7da;">
+                            <h4 class="alert-heading">Are you sure?</h4>
+                            <p class="mb-3">You are about to permanently delete the following product:</p>
+                            <hr style="border-color: #dc3545;">
+                            <p class="mb-0">
+                                <strong>Product Name:</strong> {{ product.name }}<br>
+                                <strong>Price:</strong> €{{ product.price }}<br>
+                                {% if product.category %}
+                                    <strong>Category:</strong> {{ product.category.friendly_name }}<br>
+                                {% endif %}
+                                <strong>Stock:</strong> {{ product.stock }}
+                            </p>
+                        </div>
+                        
+                        <div class="warning-box mb-4 p-3" style="background: #fff3cd; border: 3px solid #ffc107;">
+                            <p class="mb-0" style="font-weight: 700; color: #856404;">
+                                <i class="fas fa-exclamation-circle"></i> 
+                                This action cannot be undone. The product will be permanently removed from your store.
+                            </p>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'products:product_management' %}" 
+                               class="btn btn-secondary btn-lg" 
+                               style="border: 3px solid #000; box-shadow: 4px 4px 0 #000; font-weight: 700; text-transform: uppercase;">
+                                <i class="fas fa-arrow-left"></i> Cancel
+                            </a>
+                            
+                            <form method="POST" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" 
+                                        class="btn btn-danger btn-lg"
+                                        style="border: 3px solid #000; box-shadow: 4px 4px 0 #000; font-weight: 700; text-transform: uppercase;"
+                                        onclick="return confirm('Are you absolutely sure you want to delete {{ product.name }}?')">
+                                    <i class="fas fa-trash"></i> Delete Product
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

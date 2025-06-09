@@ -13,6 +13,11 @@
         <meta name="author" content="Dive Goblin">
     {% endblock %}
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link rel="preconnect" href="https://stackpath.bootstrapcdn.com">
+
     {% block extra_meta %}
     {% endblock %}
 
@@ -89,8 +94,9 @@
             <form method="GET" action="{% url 'products:products' %}" class="search-form">
                 <div class="search-box">
                     <input type="text" name="q" placeholder="SEARCH THE VOID..." class="search-input">
-                    <button type="submit" class="search-btn">
-                        <i class="fas fa-search"></i>
+                <button type="submit" class="search-btn" aria-label="Search products">
+    <i class="fas fa-search" aria-hidden="true"></i>
+                </button>
                     </button>
                 </div>
             </form>
@@ -284,15 +290,15 @@
                 <div class="footer-box">
                     <h3>FOLLOW US</h3>
                     <div class="social-links">
-                        <a href="https://www.facebook.com/divegoblin/" class="social-link" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="social-link" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://github.com/kimatron" class="social-link" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-github"></i>
-                        </a>
+                        <a href="https://www.facebook.com/divegoblin/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Facebook">
+    <i class="fab fa-facebook-f" aria-hidden="true"></i>
+</a>
+<a href="#" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
+    <i class="fab fa-instagram" aria-hidden="true"></i>
+</a>
+<a href="https://github.com/kimatron" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="View our GitHub">
+    <i class="fab fa-github" aria-hidden="true"></i>
+</a>
                     </div>
                 </div>
             </div>

@@ -117,6 +117,7 @@ The development followed Agile methodologies with user stories driving feature d
 - **Price Calculation**: Real-time totals with delivery costs
 - **Free Delivery Threshold**: €100 minimum for free shipping
 
+![Dive Goblin Responsive Showcase](assets/readme/wishlist.gif)
 
 #### 💳 Secure Checkout
 - **Stripe Integration**: PCI-compliant payment processing
@@ -598,10 +599,9 @@ def filtered_products(request):
 
 ### Custom Error Pages
 - **404 Page**: Custom "dive deeper" themed error page
-- **500 Page**: Server error with contact information
-- **403 Page**: Permission denied with helpful navigation
+- **500 Page**: Server error with contact informations
 
-![Content Pages Demo](assets/readme/404page.png)
+![Content Pages Demo](assets/readme/errorpages.gif)
 
 ### Form Validation
 - **Client-side**: JavaScript validation for immediate feedback

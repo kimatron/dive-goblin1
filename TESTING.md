@@ -2,7 +2,9 @@
 
 ## Overview
 
-This document provides comprehensive testing documentation for the Dive Goblin e-commerce platform. All core functionality has been thoroughly tested across multiple browsers, devices, and user scenarios to ensure a robust and reliable shopping experience.
+This document provides comprehensive testing documentation for the Dive Goblin e-commerce platform. All core functionality has been thoroughly tested across multiple browsers, devices, and user scenarios to ensure a robust and reliable shopping experience. 
+
+As well as the documentation tables in this file, GIFs of most functions and tests in action can be found in the README.md file.
 
 ## Table of Contents
 1. [Testing Strategy](#testing-strategy)
@@ -55,18 +57,26 @@ This document provides comprehensive testing documentation for the Dive Goblin e
 | Contact | ✅ Pass | None | Validated |
 | About | ✅ Pass | None | Validated |
 
+![Dive Goblin Responsive Showcase](assets/readme/htmlvalidate.png)
+
 ### CSS Validation (W3C CSS Validator)
 | File | Result | Issues Found | Status |
 |------|---------|--------------|--------|
 | base.css | ✅ Pass | None | Validated |
 | checkout.css | ✅ Pass | None | Validated |
 
+![Dive Goblin Responsive Showcase](assets/readme/cssvalidator.png)
+
 ### JavaScript Validation (JSHint)
 | File | Result | Issues Found | Status |
 |------|---------|--------------|--------|
 | stripe_elements.js | ✅ Pass | None | Validated |
 | countryfield.js | ✅ Pass | None | Validated |
-| quantity_input_script.js | ✅ Pass | None | Validated |
+| main.js | ✅ Pass | None | Validated |
+
+![Dive Goblin Responsive Showcase](assets/readme/jshint.png)
+
+**Note**: JSHint warnings relate to ES6 feature detection settings, not code errors. All JavaScript functionality tested and working correctly.
 
 ### Python Validation (PEP8/Black)
 | File Type | Result | Issues Found | Status |
@@ -77,6 +87,7 @@ This document provides comprehensive testing documentation for the Dive Goblin e
 | URLs | ✅ Pass | None | Validated |
 | Settings | ✅ Pass | None | Validated |
 
+![Dive Goblin Responsive Showcase](assets/readme/pythonlint.png)
 ---
 
 ## User Story Testing
@@ -141,7 +152,7 @@ This document provides comprehensive testing documentation for the Dive Goblin e
 ### Product Catalog Functions
 | Function | Action | Expected Result | Actual Result | Status |
 |----------|--------|-----------------|---------------|--------|
-| Product Sorting | Select sort option | Products reorder accordingly | ✅ Sorting works | Pass |
+| Product Sorting | Select sort option | Products reorder accordingly | NOT IMPLEMENTED | NOT IMPLEMENTED |
 | Category Filtering | Select category | Only category products shown | ✅ Filtering accurate | Pass |
 | Pagination | Navigate pages | Proper page navigation | ✅ Pagination works | Pass |
 | Product Images | Hover/Click | Image interactions work | ✅ Images responsive | Pass |
@@ -331,10 +342,12 @@ This document provides comprehensive testing documentation for the Dive Goblin e
 ### Lighthouse Audit Results
 | Page | Performance | Accessibility | Best Practices | SEO | PWA |
 |------|-------------|---------------|----------------|-----|-----|
-| **Home** | 95 | 100 | 92 | 100 | N/A |
-| **Products** | 92 | 98 | 94 | 100 | N/A |
-| **Product Detail** | 90 | 100 | 95 | 98 | N/A |
+| **Home** | 92 |  | 95 | 100 | N/A |
+| **Products** | 92 | 98 | 100 | 100 | N/A |
+| **Product Detail** | 78 | 95 | 100 | 100 | N/A |
 | **Checkout** | 88 | 100 | 95 | 95 | N/A |
+
+![Dive Goblin Responsive Showcase](assets/readme/lighthousehome.png)
 
 ### Core Web Vitals
 | Metric | Target | Home | Products | Product Detail | Status |
@@ -348,7 +361,7 @@ This document provides comprehensive testing documentation for the Dive Goblin e
 |------|------------|-------------|-----------|----------|
 | **Home** | 1.2s | 0.4s | 850KB | 15 |
 | **Products** | 1.5s | 0.6s | 1.2MB | 22 |
-| **Product Detail** | 1.1s | 0.3s | 650KB | 12 |
+| **Product Detail** | 3.1s | 0.3s | 650KB | 12 |
 | **Checkout** | 1.0s | 0.3s | 580KB | 10 |
 
 ---
@@ -382,6 +395,7 @@ This document provides comprehensive testing documentation for the Dive Goblin e
 | **BUG-003** | Favicon not loading consistently across all browsers | Low | Visual branding | All users | Fixed | Browser refresh |
 | **BUG-004** | Shopping cart display issues on mobile devices | Medium | UX/Display | Mobile users | Fixed | Use desktop version |
 | **BUG-005** | Product management: no delete confirmation dialog | Low | Admin UX | Admin users | Fixed | Careful clicking |
+| **BUG-007** | Google OAuth signup redirects to login page instead of completing registration | Low | UX inconvenience | New users using Google signup | 🔴 Open | Use email registration instead |
 
 ### Bug Details
 
@@ -409,9 +423,39 @@ This document provides comprehensive testing documentation for the Dive Goblin e
 | **BUG-FIX-003** | Quantity buttons duplicated functionality | Removed duplicate JavaScript | 2024-09 | [Commit](link) |
 | **BUG-FIX-004** | Payment form timeout issues | Updated Stripe timeout settings | 2024-08 | [Commit](link) |
 | **BUG-FIX-005** | Newsletter double submission | Added form submission prevention | 2024-08 | [Commit](link) |
+| Bug ID | Description | Solution | Date Fixed | Evidence |
+|--------|-------------|----------|------------|-----------|
+| **BUG-FIX-006** | Shopping cart quantity update not working | Fixed form field naming mismatch between template and view | 2025-01 | Cart updates now work correctly |
+
+### Example Bug Fix: Shopping Cart Quantity Update Issue
+
+**Problem:**
+Users could change quantities in the shopping cart using +/- buttons, but clicking "Update" had no effect. The cart quantities would revert to their original values.
+
+**Root Cause:**
+Form field naming mismatch between template and view expectations:
+
+```html
+<!-- ❌ BEFORE - Template was sending -->
+<input type="number" name="quantity" value="{{ item.quantity }}">
+<input type="hidden" name="item_id" value="{{ item.item_id }}">
+
+# ❌ View was expecting field names like:
+for item_id, quantity in request.POST.items():
+    if item_id.startswith('quantity_'):  # Looking for 'quantity_123' format
+  ```
+**Solution:**
+
+Updated template to match view expectations:
+
+```html
+<!-- ✅ AFTER - Template now sends -->
+<input type="number" name="quantity_{{ item.item_id }}" value="{{ item.quantity }}">
+```
+
 
 ### Example Bug Fix: AWS S3 Storage Issue
-```python
+```py
 # BEFORE (Deprecated Django 4.1 settings)
 DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
 STATICFILES_STORAGE = 'custom_storages.StaticStorage'
@@ -474,6 +518,8 @@ STORAGES = {
   - [ ] Load time analysis
   - [ ] Image optimization
   
+  ![Dive Goblin Responsive Showcase](assets/readme/lighthousehome.png)
+
 - [ ] **Security Testing**
   - [ ] Authentication security
   - [ ] CSRF protection
@@ -518,11 +564,13 @@ The Dive Goblin e-commerce platform has undergone comprehensive testing across a
 - Mobile cart display optimization
 
 The platform is production-ready and provides a secure, accessible, and performant shopping experience for diving equipment enthusiasts.
-```
+
 
 # BUGS noticed along the way:
 
 #### Go to top button doesn't work unless user is logged in for some reason.
+
+#### Weird caching on safari from a link in whatsapp. Even though the domain is the same, when I click the old whatsapp link it brings me to an old cached badlayout version of the site, but if I click another link from the email with the same domain I get the up to date version.
 
 #### Stock numbers don't correlate - 5 items in stock but can purchase 10 eg
 
@@ -536,7 +584,7 @@ The platform is production-ready and provides a secure, accessible, and performa
 
 #### Navigation drop down menu obscuring main body, bad ux - FIXED 22/5/25
 
-### When deleting/editing products in product management, there is no delete confirmation stage, and once an action is completed the user is taken out of the product management section. Not a big issue, just bad ux. -FIXED 9/6/25
+#### When deleting/editing products in product management, there is no delete confirmation stage, and once an action is completed the user is taken out of the product management section. Not a big issue, just bad ux. -FIXED 9/6/25
 
 ## Bug Report: AWS S3 Storage Configuration Issue
 

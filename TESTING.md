@@ -404,7 +404,7 @@ This document provides comprehensive testing documentation for the Dive Goblin e
 
 | Bug ID | Description | Solution | Date Fixed | Evidence |
 |--------|-------------|----------|------------|-----------|
-| **BUG-FIX-001** | AWS S3 storage not working with Django 5.1 | Updated to new STORAGES dict format | 2024-10 | [Commit](link) |
+| **BUG-FIX-001** | AWS S3 storage not working with Django 5.1 | Updated to new STORAGES dict format | 2025-06 | [Commit](link) |
 | **BUG-FIX-002** | Mobile menu z-index overlap | Adjusted CSS z-index values | 2024-09 | [Commit](link) |
 | **BUG-FIX-003** | Quantity buttons duplicated functionality | Removed duplicate JavaScript | 2024-09 | [Commit](link) |
 | **BUG-FIX-004** | Payment form timeout issues | Updated Stripe timeout settings | 2024-08 | [Commit](link) |
@@ -526,17 +526,17 @@ The platform is production-ready and provides a secure, accessible, and performa
 
 #### Stock numbers don't correlate - 5 items in stock but can purchase 10 eg
 
-#### Favicon not loading properly
+#### Favicon not loading properly - FIXED
 
-#### Images not uploading to aws from front end product management - need to be forced upload with script
+#### Images not uploading to aws from front end product management - need to be forced upload with script - FIXED
 
-#### Various responsive issues on front end - shopping cart not displaying correctly
+#### Various responsive issues on front end - shopping cart not displaying correctly - FIXED
 
-#### Javascript not loading properly in development causing issues such as quantity button not loading properly or modals not opening/closing - lots of issues with set up using aws - not loading from local static etc
+#### Javascript not loading properly in development causing issues such as quantity button not loading properly or modals not opening/closing - lots of issues with set up using aws - not loading from local static etc - FIXED 2/6/25
 
-#### Navigation drop down menu obscuring main body, bad ux
+#### Navigation drop down menu obscuring main body, bad ux - FIXED 22/5/25
 
-### When deleting/editing products in product management, there is no delete confirmation stage, and once an action is completed the user is taken out of the product management section. Not a big issue, just bad ux.
+### When deleting/editing products in product management, there is no delete confirmation stage, and once an action is completed the user is taken out of the product management section. Not a big issue, just bad ux. -FIXED 9/6/25
 
 ## Bug Report: AWS S3 Storage Configuration Issue
 

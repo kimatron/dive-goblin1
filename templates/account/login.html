@@ -19,42 +19,70 @@
             {% endblocktrans %}
         </p>
 
-        <form class="entrance-form" method="post" action="{% url 'account_login' %}">
-            {% csrf_token %}
-            
-            {% if form.non_field_errors %}
-                <div class="form-errors">
-                    {% for error in form.non_field_errors %}
-                        <p class="form-error">{{ error }}</p>
-                    {% endfor %}
-                </div>
-            {% endif %}
-            
-            {% for field in form %}
-                <div class="form-field">
-                    {{ field }}
-                    {% if field.errors %}
-                        {% for error in field.errors %}
-                            <div class="form-error">{{ error }}</div>
-                        {% endfor %}
-                    {% endif %}
-                </div>
+<form class="entrance-form" method="post" action="{% url 'account_login' %}">
+    {% csrf_token %}
+    
+    {% if form.non_field_errors %}
+        <div class="form-errors">
+            {% for error in form.non_field_errors %}
+                <p class="form-error">{{ error }}</p>
             {% endfor %}
-            
-            {% if redirect_field_value %}
-                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-            {% endif %}
+        </div>
+    {% endif %}
+    
+    <!-- Username/Email Field -->
+    <div class="form-field">
+        <input type="text" 
+               name="{{ form.login.name }}" 
+               placeholder="{% trans 'Username or Email' %}" 
+               value="{{ form.login.value|default:'' }}"
+               required 
+               class="form-input">
+        {% if form.login.errors %}
+            {% for error in form.login.errors %}
+                <div class="form-error">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    
+    <!-- Password Field -->
+    <div class="form-field">
+        <input type="password" 
+               name="{{ form.password.name }}" 
+               placeholder="{% trans 'Password' %}" 
+               required 
+               class="form-input">
+        {% if form.password.errors %}
+            {% for error in form.password.errors %}
+                <div class="form-error">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    
+    <!-- Remember Me -->
+    {% if form.remember %}
+    <div class="form-field">
+        <label class="checkbox-label">
+            <input type="checkbox" name="{{ form.remember.name }}" {% if form.remember.value %}checked{% endif %}>
+            {% trans 'Remember Me' %}
+        </label>
+    </div>
+    {% endif %}
+    
+    {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+    {% endif %}
 
-            <div class="form-actions">
-                <button class="entrance-button" type="submit">
-                    {% trans "Sign In" %}
-                </button>
-                
-                <a href="{% url 'account_reset_password' %}" class="forgot-password">
-                    {% trans "Forgot Password?" %}
-                </a>
-            </div>
-        </form>
+    <div class="form-actions">
+        <button class="entrance-button" type="submit">
+            {% trans "Sign In" %}
+        </button>
+        
+        <a href="{% url 'account_reset_password' %}" class="forgot-password">
+            {% trans "Forgot Password?" %}
+        </a>
+    </div>
+</form>
     {% endif %}
 
     {% if LOGIN_BY_CODE_ENABLED %}

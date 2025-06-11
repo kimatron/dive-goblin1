@@ -10,7 +10,12 @@ from .forms import ProductForm
 
 
 def all_products(request):
-    """ A view to show all products, including sorting and search queries with pagination """
+    """
+    A view to show all products, including sorting and search queries
+    with pagination.
+
+    Handles filtering by category, search queries, and sorting options.
+    """
     products = Product.objects.all()
     query = None
     categories = None
@@ -51,7 +56,7 @@ def all_products(request):
     # Pagination
     paginator = Paginator(products, 12)  # Show 12 products per page
     page = request.GET.get('page')
-    
+
     try:
         products = paginator.page(page)
     except PageNotAnInteger:
@@ -90,13 +95,13 @@ def product_management(request):
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
-        
+
     products = Product.objects.all()
-    
+
     context = {
         'products': products,
     }
-    
+
     return render(request, 'products/product_management.html', context)
 
 
@@ -106,7 +111,7 @@ def add_product(request):
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
-        
+
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
@@ -134,7 +139,7 @@ def edit_product(request, product_id):
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
-        
+
     product = get_object_or_404(Product, pk=product_id)
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES, instance=product)
@@ -165,7 +170,7 @@ def delete_product(request, product_id):
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
-        
+
     product = get_object_or_404(Product, pk=product_id)
     product_name = product.name  # Store name before deletion
     product.delete()

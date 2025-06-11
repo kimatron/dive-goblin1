@@ -388,7 +388,7 @@
                                     {% csrf_token %}
                                     <input type="hidden" name="item_id" value="{{ item.item_id }}">
                                     <button type="button" class="qty-btn" onclick="decreaseQty(this)">-</button>
-                                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="99" class="qty-input" data-item-id="{{ item.item_id }}">
+                                    <input type="number" name="quantity_{{ item.item_id }}" value="{{ item.quantity }}" min="1" max="99" class="qty-input" data-item-id="{{ item.item_id }}">
                                     <button type="button" class="qty-btn" onclick="increaseQty(this)">+</button>
                                     <button type="submit" class="remove-btn" style="display: none;" id="update-{{ item.item_id }}">Update</button>
                                 </form>

@@ -105,13 +105,13 @@ The development followed Agile methodologies with user stories driving feature d
 - **Product Catalog**: Organized by categories (Scuba, Snorkeling, Apparel, etc.)
 - **Advanced Search**: Filter by name, description, and category
 - **Product Details**: High-quality images, detailed descriptions, pricing
-- **Inventory Tracking**: Stock levels and availability status
+- **Inventory Tracking**: Stock levels and availability status **bug**
 - **Admin CRUD**: Full product management through admin interface
 
-![Product Management Demo](media/documentation/addtocartwishliststripecheckout.gif)
+![Product Management Demo](assets/readme/productmanagement.gif)
 
 #### 🛒 Shopping Experience
-- **Shopping Cart**: Add, remove, and update product quantities
+- **Shopping Cart**: Add, remove, and update product quantities **bug - update product quantity**
 - **Wishlist**: Save products for future purchase
 - **Quantity Controls**: Intuitive +/- buttons with validation
 - **Price Calculation**: Real-time totals with delivery costs
@@ -140,10 +140,12 @@ The development followed Agile methodologies with user stories driving feature d
 #### 🔐 Authentication
 - **Django Allauth Integration**: Secure user authentication
 - **Password Reset**: Email-based password recovery
-- **Social Login**: Ready for social media authentication
+- **Social Login**: Ready for social media authentication ***BUG - google register is redirecting to google login**
 - **Session Management**: Secure session handling
 
-![Authentication Demo](media/documentation/registerloginoutnewsletter.gif)
+![Authentication Demo](assets/readme/googleloginlogoutregister.gif)
+![Authentication Demo](assets/readme/passwordemail.png)
+
 
 ### Content Management
 
@@ -599,7 +601,7 @@ def filtered_products(request):
 - **500 Page**: Server error with contact information
 - **403 Page**: Permission denied with helpful navigation
 
-![Content Pages Demo](assets/readme/404page.gif)
+![Content Pages Demo](assets/readme/404page.png)
 
 ### Form Validation
 - **Client-side**: JavaScript validation for immediate feedback
@@ -1341,11 +1343,11 @@ The brutalist design wasn't just aesthetic - it reflects the bold, no-nonsense a
 - **International Shipping**: Expanded geographic coverage
 - **Multi-Currency**: Regional pricing and currency support
 - **B2B Portal**: Wholesale accounts for dive shops
-- **Subscription Service**: Regular gear maintenance packages
+- **Subscription Service**: Regular gear maintenance packages, and apparel mystery boxes
 
 ---
 
-## Fin
+## Fin (see what I did there :) )
 
 Dive Goblin represents a comprehensive full-stack e-commerce solution that successfully combines modern web technologies with a unique design aesthetic. The project demonstrates proficiency in backend development, frontend design, e-commerce functionality, cloud deployment, and professional development practices.
 

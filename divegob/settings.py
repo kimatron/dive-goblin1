@@ -306,19 +306,6 @@ JAZZMIN_SETTINGS = {
     "site_logo_classes": "img-circle",
     "site_icon": None,
     
-    # Welcome message with diving theme
-    "welcome_sign": """
-    <div style='text-align: center; padding: 20px; background: linear-gradient(135deg, #006994 0%, #00AC7C 100%); color: white; border-radius: 10px; margin: 20px 0;'>
-        <h2 style='margin: 0; color: white;'>🌊 Welcome to Dive Goblin Admin Portal 🤿</h2>
-        <p style='margin: 10px 0; color: #e0f7fa;'>Manage your underwater empire from the depths!</p>
-        <div style='margin-top: 15px; font-size: 1.5em;'>
-            🐠 🦈 🐙 🐡 🦀 🐚
-        </div>
-    </div>
-    """,
-    
-    "copyright": "© 2024 Dive Goblin - Underwater Adventures Await",
-    
     # Search Configuration
     "search_model": ["auth.User", "products.Product", "newsletter.NewsletterSubscriber"],
     

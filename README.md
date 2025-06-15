@@ -1304,13 +1304,21 @@ JAZZMIN_SETTINGS = {
 - **Personal Photography**: Team photos and diving experiences
 - **Techsini**: Responsive mockup generation
 
+### Unpolished
+
+Some pages of note that I haven't gotten round to polishing up stylewise:
+
+Password Reset
+Forgotten Password
+505 page
+
 ### Special Thanks & Development Journey
 
-This project has been quite the adventure! Building a full-stack e-commerce platform turned out to be a lot like planning a deep-sea dive - you need the right equipment, careful preparation, and problem-solving skills when unexpected challenges arise.
+This project has been quite the adventure! Building a full-stack e-commerce platform turned out to be a lot like planning a dive - you need the right equipment, careful preparation, and problem-solving skills when unexpected challenges arise. Regular dips into hackathons throughout getting this project complete really helped solidify a lot of knowledge.
 
 **🤿 The Real MVPs:**
 - **Viola**: My debugging partner who spent countless hours on huddles with me, preventing multiple laptop-throwing incidents and helping solve the most frustrating issues. Her patience during those "why isn't this working?!" moments was invaluable.
-- **Code Institute Mentors**: For technical guidance and keeping me on track when I got lost in Django documentation
+- **Code Institute Mentors**: For technical guidance and allowing a little grace when the world was consuming me.
 - **The Slack Community**: Fellow students who shared solutions and reminded me I wasn't alone in this journey
 - **My Family**: For understanding why I disappeared into coding sessions for weeks
 

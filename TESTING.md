@@ -4,7 +4,9 @@
 
 This document provides comprehensive testing documentation for the Dive Goblin e-commerce platform. All core functionality has been thoroughly tested across multiple browsers, devices, and user scenarios to ensure a robust and reliable shopping experience. 
 
-As well as the documentation tables in this file, GIFs of most functions and tests in action can be found in the README.md file.
+As well as the documentation tables in this file, GIFs of most functions and tests in action can be found in the README.md file, showcasing the features and functions of the site.
+
+I am happy with most of the Lighthouse reports, though they are a little low on some pages for mobile site. There are still some small contrasting issues on some sections of the site, but most of them have been dealt with, along with all missing aria labels.
 
 ## Table of Contents
 1. [Testing Strategy](#testing-strategy)
@@ -38,7 +40,7 @@ As well as the documentation tables in this file, GIFs of most functions and tes
 ### Test Environment
 - **Development**: Local Django server with SQLite
 - **Production**: Heroku deployment with PostgreSQL
-- **Browsers**: Chrome, Firefox, Safari, Edge
+- **Browsers**: Chrome, Firefox, Safari, Edge ( who even uses that any more haha, sorry Microsoft xx)
 - **Devices**: Desktop, tablet, mobile (responsive testing)
 
 ---
@@ -136,6 +138,7 @@ As well as the documentation tables in this file, GIFs of most functions and tes
 
 ![Password Forget Email](assets/readme/passwordemail.png)
 
+![Unsubscibe Function](assets/readme/unsubscribed.png)
 
 ## Functionality Testing
 

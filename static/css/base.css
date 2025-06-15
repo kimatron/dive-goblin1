@@ -281,6 +281,7 @@ a.brutal-btn:active {
     border: 4px solid var(--brutal-black, #000) !important;
     background: var(--brutal-white, #fff) !important;
     padding: 1rem 1.5rem;
+    min-height: 48px;
     min-width: 110px;
     text-align: center;
     box-shadow: 8px 8px 0 var(--brutal-black, #000);
@@ -291,9 +292,10 @@ a.brutal-btn:active {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: var(--brutal-black, #000) !important;
+    color: var(--brutal-black, #000000) !important;
     font-weight: 700;
     position: relative;
+    font-weight: 700;
 }
 
 .nav-button:hover,
@@ -301,7 +303,7 @@ a.brutal-btn:active {
     transform: translate(-4px, -4px);
     box-shadow: 12px 12px 0 var(--brutal-accent, #00AC7C);
     background: var(--brutal-black, #000) !important;
-    color: var(--brutal-white, #fff) !important;
+    color: var(--brutal-white, #FFFFFF) !important;
     text-decoration: none;
 }
 
@@ -321,8 +323,8 @@ a.brutal-btn:active {
 
 /* Shop All Button  */
 .shop-all-btn {
-    background: var(--brutal-accent) !important;
-    color: var(--brutal-white) !important;
+    background: #006B56 !important;
+    color: #FFFFFF !important;
     position: relative;
     overflow: hidden;
 }
@@ -616,31 +618,50 @@ a.brutal-btn:active {
 }
 /* 6. Buttons */
 .brutal-btn {
-    padding: 0.75rem 1.5rem;
-    border: var(--brutal-border);
     background: var(--brutal-white);
-    color: var(--brutal-black);
+    color: #000000; /* Ensure high contrast */
+    border: 3px solid #000000;
+    min-height: 44px; /* Meet WCAG touch target size */
+    min-width: 44px;
     font-weight: 700;
     text-transform: uppercase;
     box-shadow: var(--brutal-shadow);
     transition: all 0.3s ease;
     cursor: pointer;
+    position: relative;
 }
 
-.brutal-btn:hover {
+.brutal-btn:hover,
+.brutal-btn:focus {
+    background: #000000;
+    color: #FFFFFF; /* High contrast on hover/focus */
     transform: translate(-3px, -3px);
-    box-shadow: 8px 8px 0 var(--brutal-black);
+    box-shadow: 8px 8px 0 #000000;
+    text-decoration: none;
 }
 
 .brutal-btn--primary {
-    background: var(--brutal-accent);
-    color: var(--brutal-white);
+    background: #006B56; /* Darker green for better contrast */
+    color: #FFFFFF;
+    border: 3px solid #000000;
+}
+
+.brutal-btn--primary:hover,
+.brutal-btn--primary:focus {
+    background: #004D3F; /* Even darker on hover */
+    color: #FFFFFF;
 }
 
 .brutal-btn--cart {
-    flex: 1;
-    background: var(--brutal-accent);
-    color: var(--brutal-white);
+    background: #006B56; /* Darker green for better contrast */
+    color: #FFFFFF;
+    border: 3px solid #000000;
+}
+
+.brutal-btn--cart:hover,
+.brutal-btn--cart:focus {
+    background: #004D3F;
+    color: #FFFFFF;
 }
 
 /* 7. Product Cards & Grid */
@@ -2473,3 +2494,14 @@ body .error-title .glitch {
     }
 }
 
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}

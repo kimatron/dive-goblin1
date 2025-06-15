@@ -57,7 +57,7 @@ As well as the documentation tables in this file, GIFs of most functions and tes
 | Contact | ✅ Pass | None | Validated |
 | About | ✅ Pass | None | Validated |
 
-![Dive Goblin Responsive Showcase](assets/readme/htmlvalidate.png)
+![HTML Validation](assets/readme/htmlvalidate.png)
 
 ### CSS Validation (W3C CSS Validator)
 | File | Result | Issues Found | Status |
@@ -65,7 +65,7 @@ As well as the documentation tables in this file, GIFs of most functions and tes
 | base.css | ✅ Pass | None | Validated |
 | checkout.css | ✅ Pass | None | Validated |
 
-![Dive Goblin Responsive Showcase](assets/readme/cssvalidator.png)
+![CSS Validator](assets/readme/cssvalidator.png)
 
 ### JavaScript Validation (JSHint)
 | File | Result | Issues Found | Status |
@@ -74,7 +74,7 @@ As well as the documentation tables in this file, GIFs of most functions and tes
 | countryfield.js | ✅ Pass | None | Validated |
 | main.js | ✅ Pass | None | Validated |
 
-![Dive Goblin Responsive Showcase](assets/readme/jshint.png)
+![JShint](assets/readme/jshint.png)
 
 **Note**: JSHint warnings relate to ES6 feature detection settings, not code errors. All JavaScript functionality tested and working correctly.
 
@@ -87,7 +87,7 @@ As well as the documentation tables in this file, GIFs of most functions and tes
 | URLs | ✅ Pass | None | Validated |
 | Settings | ✅ Pass | None | Validated |
 
-![Dive Goblin Responsive Showcase](assets/readme/pythonlint.png)
+![Python Linter](assets/readme/pythonlint.png)
 ---
 
 ## User Story Testing
@@ -342,10 +342,11 @@ As well as the documentation tables in this file, GIFs of most functions and tes
 ### Lighthouse Audit Results
 | Page | Performance | Accessibility | Best Practices | SEO | PWA |
 |------|-------------|---------------|----------------|-----|-----|
-| **Home** | 92 |  | 95 | 100 | N/A |
+| **Home** | 92 | 95 | 100 | 100 | N/A |
 | **Products** | 92 | 98 | 100 | 100 | N/A |
 | **Product Detail** | 78 | 95 | 100 | 100 | N/A |
 | **Checkout** | 88 | 100 | 95 | 95 | N/A |
+| **Contact** | 90 | 95 | 100 | 100 | N/A |
 
 ![Dive Goblin Responsive Showcase](assets/readme/lighthousehome.png)
 

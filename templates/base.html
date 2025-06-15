@@ -76,119 +76,142 @@
         </div>
     </div>
 
-<!-- Header -->
-    <header class="brutal-header">
-        <!-- Logo -->
-        <div class="logo-container">
-            <a href="{% url 'home' %}" class="logo-link">
-                <div class="logo-box">
-                    <div class="logo-text">DIVE</div>
-                    <div class="logo-text-alt">GOBLIN</div>
-                    <div class="logo-decoration">EST.2024</div>
-                </div>
-            </a>
-        </div>
-        
-        <!-- Search -->
-        <div class="search-container">
-            <form method="GET" action="{% url 'products:products' %}" class="search-form">
-                <div class="search-box">
-                    <input type="text" name="q" placeholder="SEARCH THE VOID..." class="search-input">
+<header class="brutal-header">
+    <!-- Logo -->
+    <div class="logo-container">
+        <a href="{% url 'home' %}" class="logo-link" aria-label="Dive Goblin Homepage">
+            <div class="logo-box">
+                <div class="logo-text">DIVE</div>
+                <div class="logo-text-alt">GOBLIN</div>
+                <div class="logo-decoration">EST.2024</div>
+            </div>
+        </a>
+    </div>
+    
+    <!-- Search -->
+    <div class="search-container">
+        <form method="GET" action="{% url 'products:products' %}" class="search-form" role="search">
+            <label for="search-input" class="sr-only">Search for diving products</label>
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    id="search-input"
+                    name="q" 
+                    placeholder="Search for diving gear..." 
+                    class="search-input"
+                    aria-label="Search for diving products"
+                    aria-describedby="search-hint"
+                >
+                <div id="search-hint" class="sr-only">Enter keywords to search for diving equipment and accessories</div>
                 <button type="submit" class="search-btn" aria-label="Search products">
-    <i class="fas fa-search" aria-hidden="true"></i>
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <span class="sr-only">Search</span>
                 </button>
-                </div>
-            </form>
-        </div>
-        
-        <!-- Navigation Buttons -->
-        <div class="nav-buttons">
-            <!-- SHOP ALL - prominent button -->
-            <a href="{% url 'products:products' %}" class="nav-button shop-all-btn">
-                <i class="fas fa-store"></i>
-                <span>SHOP ALL</span>
-            </a>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Navigation Buttons -->
+    <nav class="nav-buttons" role="navigation" aria-label="Main navigation">
+        <!-- SHOP ALL - prominent button -->
+        <a href="{% url 'products:products' %}" class="nav-button shop-all-btn" aria-label="Shop all diving products">
+            <i class="fas fa-store" aria-hidden="true"></i>
+            <span>SHOP ALL</span>
+        </a>
 
-            <!-- Account Dropdown -->
-            <div class="dropdown">
-                <button class="nav-button dropdown-toggle" id="accountDropdown" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fas fa-user"></i>
-                    <span>ACCOUNT</span>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="accountDropdown">
-                    {% if request.user.is_authenticated %}
-                        {% if request.user.is_superuser %}
-                            <a class="dropdown-item" href="{% url 'products:product_management' %}">Product Management</a>
-                        {% endif %}
-                        <a class="dropdown-item" href="{% url 'profiles:profile' %}">My Profile</a>
-                        <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
-                    {% else %}
-                        <a class="dropdown-item" href="{% url 'account_signup' %}">Register</a>
-                        <a class="dropdown-item" href="{% url 'account_login' %}">Login</a>
+        <!-- Account Dropdown -->
+        <div class="dropdown">
+            <button 
+                class="nav-button dropdown-toggle" 
+                id="accountDropdown" 
+                data-toggle="dropdown" 
+                aria-expanded="false"
+                aria-haspopup="true"
+                aria-label="Account menu"
+            >
+                <i class="fas fa-user" aria-hidden="true"></i>
+                <span>ACCOUNT</span>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="accountDropdown" role="menu">
+                {% if request.user.is_authenticated %}
+                    {% if request.user.is_superuser %}
+                        <a class="dropdown-item" href="{% url 'products:product_management' %}" role="menuitem">Product Management</a>
                     {% endif %}
-                </div>
+                    <a class="dropdown-item" href="{% url 'profiles:profile' %}" role="menuitem">My Profile</a>
+                    <a class="dropdown-item" href="{% url 'account_logout' %}" role="menuitem">Logout</a>
+                {% else %}
+                    <a class="dropdown-item" href="{% url 'account_signup' %}" role="menuitem">Register</a>
+                    <a class="dropdown-item" href="{% url 'account_login' %}" role="menuitem">Login</a>
+                {% endif %}
             </div>
-            
-            <!-- Wishlist Button -->
-            <a href="{% url 'products:wishlist' %}" class="nav-button">
-                <i class="fas fa-heart"></i>
-                <span>WISHLIST</span>
-            </a>
-            
-            <!-- Shopping Cart Button -->
-            <a href="{% url 'view_bag' %}" class="nav-button">
-                <i class="fas fa-shopping-bag"></i>
-                <span>${{ grand_total|default:"0.00" }}</span>
-            </a>
         </div>
         
-        <!-- Categories -->
-        <div class="categories-container">
-            <button class="category-toggle" onclick="toggleCategories()">
-                <span>BROWSE CATEGORIES</span>
-                <i class="fas fa-chevron-down"></i>
-            </button>
-            <div id="categoryMenu" class="category-menu">
-                <div class="category-grid">
-                    <div class="category-column">
-                        <h3 class="category-heading">DIVING GEAR</h3>
-                        <ul>
-                            <li><a href="{% url 'products:products' %}?category=scuba">Scuba Gear</a></li>
-                            <li><a href="{% url 'products:products' %}?category=snorkeling">Snorkeling</a></li>
-                            <li><a href="{% url 'products:products' %}?category=wetsuits">Wetsuits</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="category-column">
-                        <h3 class="category-heading">APPAREL & EXTRAS</h3>
-                        <ul>
-                            <li><a href="{% url 'products:products' %}?category=shirts_apparel">Shirts & Apparel</a></li>
-                            <li><a href="{% url 'products:products' %}?category=accessories">Accessories</a></li>
-                            <li><a href="{% url 'products:products' %}?category=travel_gear">Travel Gear</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="category-column">
-                        <h3 class="category-heading">TRAVEL & TOURS</h3>
-                        <ul>
-                            <li><a href="{% url 'products:products' %}?category=destinations">Destinations</a></li>
-                            <li><a href="{% url 'products:products' %}?category=packages">Dive Packages</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="category-column">
-                        <h3 class="category-heading">SPECIAL OFFERS</h3>
-                        <ul>
-                            <li><a href="{% url 'products:products' %}?category=new_arrivals">New Arrivals</a></li>
-                            <li><a href="{% url 'products:products' %}?category=deals">Deals</a></li>
-                            <li><a href="{% url 'products:products' %}?category=clearance">Clearance</a></li>
-                            <li><a href="{% url 'products:products' %}">View All Products</a></li>
-                        </ul>
-                    </div>
+        <!-- Wishlist Button -->
+        <a href="{% url 'products:wishlist' %}" class="nav-button" aria-label="View wishlist">
+            <i class="fas fa-heart" aria-hidden="true"></i>
+            <span>WISHLIST</span>
+        </a>
+        
+        <!-- Shopping Cart Button -->
+        <a href="{% url 'view_bag' %}" class="nav-button" aria-label="View shopping cart - Total: ${{ grand_total|default:'0.00' }}">
+            <i class="fas fa-shopping-bag" aria-hidden="true"></i>
+            <span>${{ grand_total|default:"0.00" }}</span>
+        </a>
+    </nav>
+    
+    <!-- Categories -->
+    <div class="categories-container">
+        <button 
+            class="category-toggle" 
+            onclick="toggleCategories()"
+            aria-expanded="false"
+            aria-controls="categoryMenu"
+            aria-label="Browse product categories"
+        >
+            <span>BROWSE CATEGORIES</span>
+            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+        </button>
+        <div id="categoryMenu" class="category-menu" aria-hidden="true">
+            <nav class="category-grid" role="navigation" aria-label="Product categories">
+                <div class="category-column">
+                    <h3 class="category-heading">DIVING GEAR</h3>
+                    <ul role="list">
+                        <li><a href="{% url 'products:products' %}?category=scuba">Scuba Gear</a></li>
+                        <li><a href="{% url 'products:products' %}?category=snorkeling">Snorkeling</a></li>
+                        <li><a href="{% url 'products:products' %}?category=wetsuits">Wetsuits</a></li>
+                    </ul>
                 </div>
-            </div>
+                
+                <div class="category-column">
+                    <h3 class="category-heading">APPAREL & EXTRAS</h3>
+                    <ul role="list">
+                        <li><a href="{% url 'products:products' %}?category=shirts_apparel">Shirts & Apparel</a></li>
+                        <li><a href="{% url 'products:products' %}?category=accessories">Accessories</a></li>
+                        <li><a href="{% url 'products:products' %}?category=travel_gear">Travel Gear</a></li>
+                    </ul>
+                </div>
+                
+                <div class="category-column">
+                    <h3 class="category-heading">TRAVEL & TOURS</h3>
+                    <ul role="list">
+                        <li><a href="{% url 'products:products' %}?category=destinations">Destinations</a></li>
+                        <li><a href="{% url 'products:products' %}?category=packages">Dive Packages</a></li>
+                    </ul>
+                </div>
+                
+                <div class="category-column">
+                    <h3 class="category-heading">SPECIAL OFFERS</h3>
+                    <ul role="list">
+                        <li><a href="{% url 'products:products' %}?category=new_arrivals">New Arrivals</a></li>
+                        <li><a href="{% url 'products:products' %}?category=deals">Deals</a></li>
+                        <li><a href="{% url 'products:products' %}?category=clearance">Clearance</a></li>
+                        <li><a href="{% url 'products:products' %}">View All Products</a></li>
+                    </ul>
+                </div>
+            </nav>
         </div>
-    </header>
+    </div>
+</header>
 
     <!-- Toast Messages Container -->
     <div class="message-container" aria-live="polite" aria-atomic="true">

@@ -1,3 +1,10 @@
+"""
+Profile views for Dive Goblin e-commerce platform.
+
+Handles user profile management, order history, account updates,
+and account deletion functionality.
+"""
+
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -11,6 +18,18 @@ from django.urls import reverse
 
 @login_required
 def profile(request):
+    """
+    Display and handle updates to user profile information.
+    
+    Handles both delivery information and personal information updates
+    via separate forms identified by form_type parameter.
+    
+    Args:
+        request (HttpRequest): The HTTP request object.
+        
+    Returns:
+        HttpResponse: Rendered profile page with forms and order history.
+    """
     profile = get_object_or_404(UserProfile, user=request.user)
 
     if request.method == 'POST':
@@ -47,6 +66,18 @@ def profile(request):
 
 @login_required
 def order_history(request, order_number):
+    """
+    Display order details from user's order history.
+    
+    Shows past order confirmation with a note that this is historical data.
+    
+    Args:
+        request (HttpRequest): The HTTP request object.
+        order_number (str): The order number to display.
+        
+    Returns:
+        HttpResponse: Rendered checkout success page with order details.
+    """
     order = get_object_or_404(Order, order_number=order_number)
 
     messages.info(request, (
@@ -65,6 +96,18 @@ def order_history(request, order_number):
 
 @login_required
 def update_account(request):
+    """
+    Handle account updates including username, email, and password changes.
+    
+    Requires current password verification for security. Updates username
+    and email if provided, and changes password if new password is given.
+    
+    Args:
+        request (HttpRequest): The HTTP request object containing form data.
+        
+    Returns:
+        HttpResponseRedirect: Redirect to profile page with success/error message.
+    """
     if request.method == 'POST':
         user = request.user
         current_password = request.POST.get('current_password')
@@ -102,6 +145,18 @@ def update_account(request):
 
 @login_required
 def delete_account(request):
+    """
+    Handle user account deletion with password verification.
+    
+    Permanently deletes the user account after password confirmation.
+    Logs out the user and redirects to home page upon successful deletion.
+    
+    Args:
+        request (HttpRequest): The HTTP request object containing password.
+        
+    Returns:
+        HttpResponseRedirect: Redirect to home page or profile with message.
+    """
     if request.method == 'POST':
         user = request.user
         password = request.POST.get('password')
@@ -114,7 +169,7 @@ def delete_account(request):
         try:
             # Delete the user and log them out
             user.delete()
-            logout(request)  # Make sure to import logout from django.contrib.auth
+            logout(request)
             messages.success(request, 'Your account has been deleted.')
             return redirect('home')
         except Exception as e:

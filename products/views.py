@@ -1,3 +1,10 @@
+"""
+Product views for Dive Goblin e-commerce platform.
+
+Handles product display, search, filtering, CRUD operations,
+and wishlist functionality for the diving equipment store.
+"""
+
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
@@ -11,10 +18,16 @@ from .forms import ProductForm
 
 def all_products(request):
     """
-    A view to show all products, including sorting and search queries
-    with pagination.
+    Display all products with filtering, search, and pagination.
 
-    Handles filtering by category, search queries, and sorting options.
+    Handles category filtering, search queries, sorting options,
+    and pagination for the product catalog.
+    
+    Args:
+        request (HttpRequest): The HTTP request object with GET parameters.
+        
+    Returns:
+        HttpResponse: Rendered products page with filtered/sorted product list.
     """
     products = Product.objects.all()
     query = None
@@ -79,7 +92,19 @@ def all_products(request):
 
 
 def product_detail(request, product_id):
-    """ A view to show individual product details """
+    """
+    Display detailed information for a single product.
+    
+    Args:
+        request (HttpRequest): The HTTP request object.
+        product_id (int): The ID of the product to display.
+        
+    Returns:
+        HttpResponse: Rendered product detail page.
+        
+    Raises:
+        Http404: If product with given ID doesn't exist.
+    """
     product = get_object_or_404(Product, pk=product_id)
 
     context = {
@@ -91,7 +116,15 @@ def product_detail(request, product_id):
 
 @login_required
 def product_management(request):
-    """ View to display the product management page """
+    """
+    Display product management interface for superusers.
+    
+    Args:
+        request (HttpRequest): The HTTP request object.
+        
+    Returns:
+        HttpResponse: Rendered product management page or redirect if unauthorized.
+    """
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
@@ -107,7 +140,15 @@ def product_management(request):
 
 @login_required
 def add_product(request):
-    """ Add a product to the store """
+    """
+    Add a new product to the store (superuser only).
+    
+    Args:
+        request (HttpRequest): The HTTP request object with form data.
+        
+    Returns:
+        HttpResponse: Rendered add product page or redirect after successful creation.
+    """
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
@@ -135,7 +176,16 @@ def add_product(request):
 
 @login_required
 def edit_product(request, product_id):
-    """ Edit a product in the store """
+    """
+    Edit an existing product (superuser only).
+    
+    Args:
+        request (HttpRequest): The HTTP request object with form data.
+        product_id (int): The ID of the product to edit.
+        
+    Returns:
+        HttpResponse: Rendered edit product page or redirect after successful update.
+    """
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
@@ -166,7 +216,16 @@ def edit_product(request, product_id):
 
 @login_required
 def delete_product(request, product_id):
-    """ Delete a product from the store """
+    """
+    Delete a product from the store (superuser only).
+    
+    Args:
+        request (HttpRequest): The HTTP request object.
+        product_id (int): The ID of the product to delete.
+        
+    Returns:
+        HttpResponseRedirect: Redirect to product management page with success message.
+    """
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
@@ -180,6 +239,16 @@ def delete_product(request, product_id):
 
 @login_required
 def add_to_wishlist(request, product_id):
+    """
+    Add a product to the user's wishlist.
+    
+    Args:
+        request (HttpRequest): The HTTP request object.
+        product_id (int): The ID of the product to add to wishlist.
+        
+    Returns:
+        HttpResponseRedirect: Redirect to wishlist page with success message.
+    """
     product = get_object_or_404(Product, id=product_id)
     wishlist, created = Wishlist.objects.get_or_create(user=request.user)
     wishlist.products.add(product)
@@ -190,6 +259,16 @@ def add_to_wishlist(request, product_id):
 
 @login_required
 def remove_from_wishlist(request, product_id):
+    """
+    Remove a product from the user's wishlist.
+    
+    Args:
+        request (HttpRequest): The HTTP request object.
+        product_id (int): The ID of the product to remove from wishlist.
+        
+    Returns:
+        HttpResponseRedirect: Redirect to wishlist page with success message.
+    """
     product = get_object_or_404(Product, id=product_id)
     wishlist = get_object_or_404(Wishlist, user=request.user)
     wishlist.products.remove(product)
@@ -200,6 +279,15 @@ def remove_from_wishlist(request, product_id):
 
 @login_required
 def wishlist(request):
+    """
+    Display the user's wishlist.
+    
+    Args:
+        request (HttpRequest): The HTTP request object.
+        
+    Returns:
+        HttpResponse: Rendered wishlist page with user's saved products.
+    """
     wishlist, created = Wishlist.objects.get_or_create(user=request.user)
     return render(
         request, 'products/wishlist.html', {'wishlist': wishlist})

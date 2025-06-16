@@ -63,7 +63,7 @@ I had to change the color scheme last minute due to low contrast errors in WAVE,
 | Contact | ✅ Pass | None | Validated |
 | About | ✅ Pass | None | Validated |
 
-![HTML Validation](assets/readme/htmlvalidate.png)
+![HTML Validation](assets/readme/htmlvalidation.png)
 
 ### CSS Validation (W3C CSS Validator)
 | File | Result | Issues Found | Status |

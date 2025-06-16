@@ -1,3 +1,10 @@
+"""
+Checkout views for Dive Goblin e-commerce platform.
+
+Handles the checkout process, payment integration with Stripe,
+order creation, and confirmation email functionality.
+"""
+
 from django.shortcuts import (
     render, redirect, reverse, get_object_or_404, HttpResponse
     )
@@ -19,6 +26,18 @@ import json
 
 @require_POST
 def cache_checkout_data(request):
+    """
+    Cache checkout data in Stripe PaymentIntent metadata.
+    
+    Stores bag contents, save info preference, and username in Stripe
+    for webhook processing and order completion.
+    
+    Args:
+        request (HttpRequest): POST request containing client_secret and form data.
+        
+    Returns:
+        HttpResponse: 200 on success, 400 on error.
+    """
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -35,6 +54,18 @@ def cache_checkout_data(request):
 
 
 def checkout(request):
+    """
+    Handle checkout page display and order processing.
+    
+    On GET: Display checkout form with Stripe payment intent.
+    On POST: Process order form, create order, and redirect to success page.
+    
+    Args:
+        request (HttpRequest): The HTTP request object.
+        
+    Returns:
+        HttpResponse: Rendered checkout page or redirect to success/error page.
+    """
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
@@ -132,7 +163,17 @@ def checkout(request):
 
 def checkout_success(request, order_number):
     """
-    Handle successful checkouts
+    Handle successful checkout completion.
+    
+    Processes order confirmation, sends confirmation email,
+    saves user profile data if requested, and clears shopping bag.
+    
+    Args:
+        request (HttpRequest): The HTTP request object.
+        order_number (str): The order number for the completed order.
+        
+    Returns:
+        HttpResponse: Rendered checkout success page with order details.
     """
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
@@ -178,6 +219,18 @@ def checkout_success(request, order_number):
 
 @login_required
 def order_history(request, order_number):
+    """
+    Display historical order details for authenticated users.
+    
+    Shows past order information with a note that this is historical data.
+    
+    Args:
+        request (HttpRequest): The HTTP request object.
+        order_number (str): The order number to display.
+        
+    Returns:
+        HttpResponse: Rendered checkout success page with historical order data.
+    """
     order = get_object_or_404(Order, order_number=order_number)
 
     messages.info(request, (

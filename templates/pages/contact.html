@@ -44,7 +44,7 @@
                         <label for="message">Message</label>
                         <textarea id="message" name="message" class="brutal-textarea" rows="5" required 
                                   minlength="10"></textarea
-                                  placeholder="Tell us everything. Or at least the interesting bits."></textarea>
+                                  placeholder="Tell us everything. Or at least the interesting bits.">
                     </div>
                     <button type="submit" class="brutal-button">
                         <span class="button-text">Send Message</span>
@@ -117,7 +117,7 @@ document.querySelector('.brutal-form').addEventListener('submit', function(e) {
     if (!isValid) {
         e.preventDefault();
 
-        alert(errorMessage); // Replace with preferred message display method when time
+        alert(errorMessage);
     }
 });
 </script>

@@ -1,3 +1,9 @@
+"""
+Shopping bag views for Dive Goblin e-commerce platform.
+
+Handles shopping cart functionality including viewing bag contents,
+adding products, updating quantities, and removing items.
+"""
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from products.models import Product

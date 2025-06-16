@@ -1,3 +1,10 @@
+"""
+Pages views for Dive Goblin e-commerce platform.
+
+Handles static page rendering and contact form functionality
+including about, FAQ, privacy policy, terms of service, and contact pages.
+"""
+
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -7,22 +14,70 @@ from .forms import ContactForm
 
 
 def about_view(request):
+    """
+    Render the about page with company information.
+    
+    Args:
+        request (HttpRequest): The HTTP request object.
+        
+    Returns:
+        HttpResponse: Rendered about page template.
+    """
     return render(request, 'pages/about.html')
 
 
 def faq_view(request):
+    """
+    Render the frequently asked questions page.
+    
+    Args:
+        request (HttpRequest): The HTTP request object.
+        
+    Returns:
+        HttpResponse: Rendered FAQ page template.
+    """
     return render(request, 'pages/faq.html')
 
 
 def privacy_view(request):
+    """
+    Render the privacy policy page.
+    
+    Args:
+        request (HttpRequest): The HTTP request object.
+        
+    Returns:
+        HttpResponse: Rendered privacy policy template.
+    """
     return render(request, 'pages/privacy.html')
 
 
 def terms(request):
+    """
+    Render the terms of service page.
+    
+    Args:
+        request (HttpRequest): The HTTP request object.
+        
+    Returns:
+        HttpResponse: Rendered terms of service template.
+    """
     return render(request, 'pages/terms.html')
 
 
 def contact(request):
+    """
+    Handle contact form display and submission.
+    
+    On GET: Display empty contact form.
+    On POST: Process form data, send email to admin, and show success/error message.
+    
+    Args:
+        request (HttpRequest): The HTTP request object containing form data.
+        
+    Returns:
+        HttpResponse: Rendered contact page or redirect after form submission.
+    """
     if request.method == 'POST':
         # Get data directly from POST
         name = request.POST.get('name', '').strip()

@@ -8,7 +8,7 @@ As well as the documentation tables in this file, GIFs of most functions and tes
 
 I am happy with most of the Lighthouse reports, though they are a little low on some pages for mobile site. There are still some small contrasting issues on some sections of the site, but most of them have been dealt with, along with all missing aria labels.
 
-I had to change the color scheme last minute due to low contrast errors in WAVE, which I am not entirely happy about, but it fixed (most of) the errors :)
+I had to change the color scheme last minute due to low contrast errors in WAVE, which I am not entirely happy about, but it fixed (most of) the errors :) Now showing some small issues in mobile site in regards to the new color scheme, but unfortunately my last minute change to fix the low contrast errors has put me under pressure for a complete re mobile testing. 
 
 ![HTML Validation](assets/readme/wave.png)
 
@@ -578,7 +578,7 @@ The platform is production-ready and provides a secure, accessible, and performa
 
 #### Go to top button doesn't work unless user is logged in for some reason.
 
-#### Weird caching on safari from a link in whatsapp. Even though the domain is the same, when I click the old whatsapp link it brings me to an old cached badlayout version of the site, but if I click another link from the email with the same domain I get the up to date version.
+#### Weird caching on safari from a link in whatsapp. Even though the domain is the same, when I click the old whatsapp link it brings me to an old cached badlayout version of the site, but if I click another link from the email with the same domain I get the up to date version. -Not fixed
 
 #### Stock numbers don't correlate - 5 items in stock but can purchase 10 eg
 

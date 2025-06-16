@@ -1219,16 +1219,125 @@ This deployment guide provides comprehensive coverage of all aspects needed to s
 - **Segmentation**: Diving experience level and purchase history
 - **GDPR Compliance**: Clear opt-in/opt-out processes
 
-#### SEO Implementation
-- **Technical SEO**: Sitemap.xml, robots.txt, meta descriptions
-- **Content SEO**: Diving-focused keywords and long-tail phrases
-- **Local SEO**: Geographic targeting for diving locations
+### SEO Implementation
 
+#### Technical SEO
+Dive Goblin implements comprehensive SEO strategies to improve search engine visibility:
+
+**Core SEO Features:**
+- **robots.txt**: Configured to manage web crawler access
+- **sitemap.xml**: XML sitemap for improved search engine indexing
+- **Meta Tags**: Descriptive meta tags in all HTML templates
+- **Semantic HTML**: Proper heading hierarchy and semantic elements
+- **External Links**: Proper `rel` attributes for SEO and security
+
+**robots.txt Configuration:**
+```
+User-agent: *
+Disallow: /accounts/
+Disallow: /bag/checkout/
+Disallow: /profiles/
+
+# Allow search engines to access the sitemap
+Sitemap: https://dive-goblin-30c473dd6e64.herokuapp.com/sitemap.xml
+```
+
+**sitemap.xml Structure:**
 ```xml
-<!-- meta tags -->
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://dive-goblin-30c473dd6e64.herokuapp.com/</loc>
+        <lastmod>2024-05-20</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://dive-goblin-30c473dd6e64.herokuapp.com/products/</loc>
+        <lastmod>2024-05-20</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://dive-goblin-30c473dd6e64.herokuapp.com/accounts/login/</loc>
+        <lastmod>2024-05-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://dive-goblin-30c473dd6e64.herokuapp.com/accounts/signup/</loc>
+        <lastmod>2024-05-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://dive-goblin-30c473dd6e64.herokuapp.com/bag/</loc>
+        <lastmod>2024-05-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://dive-goblin-30c473dd6e64.herokuapp.com/pages/contact/</loc>
+        <lastmod>2024-05-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://dive-goblin-30c473dd6e64.herokuapp.com/pages/about/</loc>
+        <lastmod>2024-05-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://dive-goblin-30c473dd6e64.herokuapp.com/pages/faq/</loc>
+        <lastmod>2024-05-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://dive-goblin-30c473dd6e64.herokuapp.com/pages/privacy/</loc>
+        <lastmod>2024-05-20</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://dive-goblin-30c473dd6e64.herokuapp.com/pages/terms/</loc>
+        <lastmod>2024-05-20</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+</urlset>
+```
+
+#### Content SEO Strategy
+
+**Meta Tag Implementation:**
+```html
 <meta name="description" content="Dive Goblin - Premium diving equipment and scuba gear. Quality masks, fins, wetsuits and accessories for diving enthusiasts.">
 <meta name="keywords" content="diving equipment, scuba gear, diving masks, wetsuits, diving accessories">
+<meta name="author" content="Dive Goblin">
 ```
+
+**SEO Prioritization Strategy:**
+| Page Type | Priority | Change Frequency | Reasoning |
+|-----------|----------|------------------|-----------|
+| Homepage | 1.0 | Weekly | Most important page, frequently updated with discount codes/ special offers |
+| Products | 0.9 | Weekly | High priority, inventory changes |
+| User Pages | 0.8 | Monthly | Important for user engagement |
+| Info Pages | 0.7 | Monthly | Valuable content pages |
+| FAQ | 0.6 | Monthly | Support content |
+| Legal Pages | 0.5 | Yearly | Static compliance content |
+
+**Keyword Strategy:**
+- **Primary Keywords**: "diving equipment", "scuba gear", "diving accessories"
+- **Long-tail Keywords**: "beginner diving equipment Ireland", "professional scuba gear"
+- **Local SEO**: Geographic targeting for diving locations and shops
+
+#### Technical SEO Features
+- **URL Structure**: Clean, descriptive URLs (`/products/category-name/`)
+- **Page Speed**: Optimized images and efficient CSS/JS loading
+- **Mobile-First**: Responsive design following Google's mobile-first indexing
+- **Accessibility**: ARIA labels and semantic HTML for better search engine understanding
 
 ### Business Model
 
@@ -1241,6 +1350,12 @@ This deployment guide provides comprehensive coverage of all aspects needed to s
 - Product sales with 40-60% markup
 - Premium shipping options
 - Future: Diving course bookings and equipment rentals
+
+**Marketing Channels:**
+- **Organic Search**: SEO-optimized content and technical implementation
+- **Social Media**: Facebook community building and engagement
+- **Email Marketing**: Newsletter campaigns and automated sequences
+- **Content Marketing**: Diving guides, tips, and educational content
 
 ---
 ## Fun bits and Quirks
@@ -1342,7 +1457,7 @@ The brutalist design wasn't just aesthetic - it reflects the bold, no-nonsense a
 
 ### Technical Improvements
 - **Performance**: Image optimization and caching strategies
-- **Accessibility**: Enhanced screen reader support
+- **Accessibility**: Enhanced screen reader support, further improve lower contrasting colors
 - **Mobile App**: React Native companion application
 - **Inventory Integration**: Real-time stock management
 - **Analytics**: Advanced user behavior tracking

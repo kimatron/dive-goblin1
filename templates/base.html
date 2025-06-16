@@ -111,7 +111,7 @@
     </div>
     
     <!-- Navigation Buttons -->
-    <nav class="nav-buttons" role="navigation" aria-label="Main navigation">
+    <nav class="nav-buttons" aria-label="Main navigation">
         <!-- SHOP ALL - prominent button -->
         <a href="{% url 'products:products' %}" class="nav-button shop-all-btn" aria-label="Shop all diving products">
             <i class="fas fa-store" aria-hidden="true"></i>
@@ -171,10 +171,10 @@
             <i class="fas fa-chevron-down" aria-hidden="true"></i>
         </button>
         <div id="categoryMenu" class="category-menu" aria-hidden="true">
-            <nav class="category-grid" role="navigation" aria-label="Product categories">
+            <nav class="category-grid" aria-label="Product categories">
                 <div class="category-column">
                     <h3 class="category-heading">DIVING GEAR</h3>
-                    <ul role="list">
+                    <ul>
                         <li><a href="{% url 'products:products' %}?category=scuba">Scuba Gear</a></li>
                         <li><a href="{% url 'products:products' %}?category=snorkeling">Snorkeling</a></li>
                         <li><a href="{% url 'products:products' %}?category=wetsuits">Wetsuits</a></li>
@@ -183,7 +183,7 @@
                 
                 <div class="category-column">
                     <h3 class="category-heading">APPAREL & EXTRAS</h3>
-                    <ul role="list">
+                    <ul>
                         <li><a href="{% url 'products:products' %}?category=shirts_apparel">Shirts & Apparel</a></li>
                         <li><a href="{% url 'products:products' %}?category=accessories">Accessories</a></li>
                         <li><a href="{% url 'products:products' %}?category=travel_gear">Travel Gear</a></li>
@@ -192,7 +192,7 @@
                 
                 <div class="category-column">
                     <h3 class="category-heading">TRAVEL & TOURS</h3>
-                    <ul role="list">
+                    <ul>
                         <li><a href="{% url 'products:products' %}?category=destinations">Destinations</a></li>
                         <li><a href="{% url 'products:products' %}?category=packages">Dive Packages</a></li>
                     </ul>
@@ -200,7 +200,7 @@
                 
                 <div class="category-column">
                     <h3 class="category-heading">SPECIAL OFFERS</h3>
-                    <ul role="list">
+                    <ul>
                         <li><a href="{% url 'products:products' %}?category=new_arrivals">New Arrivals</a></li>
                         <li><a href="{% url 'products:products' %}?category=deals">Deals</a></li>
                         <li><a href="{% url 'products:products' %}?category=clearance">Clearance</a></li>
@@ -277,7 +277,6 @@
     </form>
   </div>
 </div>
-
 
         <!-- Footer Grid -->
         <div class="footer-grid">

@@ -32,12 +32,17 @@
     
     <!-- Username/Email Field -->
     <div class="form-field">
+        <label for="id_login" class="sr-only">{% trans 'Username or Email' %}</label>
         <input type="text" 
+               id="id_login"
                name="{{ form.login.name }}" 
                placeholder="{% trans 'Username or Email' %}" 
                value="{{ form.login.value|default:'' }}"
                required 
-               class="form-input">
+               class="form-input"
+               aria-label="{% trans 'Username or Email' %}"
+               aria-describedby="login-help">
+        <div id="login-help" class="sr-only">Enter your username or email address</div>
         {% if form.login.errors %}
             {% for error in form.login.errors %}
                 <div class="form-error">{{ error }}</div>
@@ -47,11 +52,16 @@
     
     <!-- Password Field -->
     <div class="form-field">
+        <label for="id_password" class="sr-only">{% trans 'Password' %}</label>
         <input type="password" 
+               id="id_password"
                name="{{ form.password.name }}" 
                placeholder="{% trans 'Password' %}" 
                required 
-               class="form-input">
+               class="form-input"
+               aria-label="{% trans 'Password' %}"
+               aria-describedby="password-help">
+        <div id="password-help" class="sr-only">Enter your password</div>
         {% if form.password.errors %}
             {% for error in form.password.errors %}
                 <div class="form-error">{{ error }}</div>
@@ -62,8 +72,12 @@
     <!-- Remember Me -->
     {% if form.remember %}
     <div class="form-field">
-        <label class="checkbox-label">
-            <input type="checkbox" name="{{ form.remember.name }}" {% if form.remember.value %}checked{% endif %}>
+        <label class="checkbox-label" for="id_remember">
+            <input type="checkbox" 
+                   id="id_remember"
+                   name="{{ form.remember.name }}" 
+                   {% if form.remember.value %}checked{% endif %}
+                   aria-label="{% trans 'Remember Me' %}">
             {% trans 'Remember Me' %}
         </label>
     </div>
@@ -74,11 +88,11 @@
     {% endif %}
 
     <div class="form-actions">
-        <button class="entrance-button" type="submit">
+        <button class="entrance-button" type="submit" aria-label="{% trans 'Sign in to your account' %}">
             {% trans "Sign In" %}
         </button>
         
-        <a href="{% url 'account_reset_password' %}" class="forgot-password">
+        <a href="{% url 'account_reset_password' %}" class="forgot-password" aria-label="{% trans 'Reset your forgotten password' %}">
             {% trans "Forgot Password?" %}
         </a>
     </div>
@@ -88,7 +102,7 @@
     {% if LOGIN_BY_CODE_ENABLED %}
         <div class="login-code-section">
             <hr class="divider">
-            <a href="{{ request_login_code_url }}" class="code-login-button">
+            <a href="{{ request_login_code_url }}" class="code-login-button" aria-label="{% trans 'Request a sign-in code via email' %}">
                 {% trans "Mail me a sign-in code" %}
             </a>
         </div>

@@ -24,9 +24,10 @@ Table of Contents:
 /* 1. Root Variables & Reset */
 :root {
     /* Colors */
-    --brutal-black: #000000;
-    --brutal-white: #ffffff;
-    --brutal-accent: #00AC7C;
+    --brutal-black: #000;
+    --brutal-white: #fff;
+    --brutal-accent: #006B4F;        /* Dark green for white backgrounds */
+    --brutal-accent-light: #00D4AA;  /* Bright green for black backgrounds */
     --brutal-hover: #5ad641;
     --menu-highlight: #FF6B6B;
 
@@ -149,10 +150,11 @@ a.brutal-btn:active {
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 1px;
+    color: var(--brutal-accent-light);
 }
 
 .banner-item i {
-    color: var(--brutal-accent, #00AC7C);
+    color: var(--brutal-accent-light);;
     font-size: 1rem;
 }
 
@@ -782,11 +784,11 @@ a.brutal-btn:active {
 }
 
 .brutal-page-btn:hover {
-    background: var(--brutal-black);
-    color: var(--brutal-white);
+    background: var(--brutal-accent-light); /* Changed from black to bright green */
+    color: var(--brutal-black); /* Keep black text for contrast */
     text-decoration: none;
     transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0 var(--brutal-accent);
+    box-shadow: 6px 6px 0 var(--brutal-black); /* Changed shadow to black for visibility */
 }
 
 .brutal-page-btn.current {
@@ -797,7 +799,8 @@ a.brutal-btn:active {
 }
 
 .brutal-page-btn.current:hover {
-    background: var(--brutal-hover);
+    background: var(--brutal-accent-light); /* Changed to bright green */
+    color: var(--brutal-black); /* Black text for contrast */
     box-shadow: 6px 6px 0 var(--brutal-black);
 }
 
@@ -1509,6 +1512,7 @@ a.brutal-btn:active {
   transform: translate(-4px, -4px);
   box-shadow: 8px 8px 0 #000;
   background: #004466;
+  background: var(--brutal-accent-light);
 }
 .newsletter-submit:focus {
   outline: none;
@@ -1545,7 +1549,7 @@ a.brutal-btn:active {
     font-weight: 900;
     margin-bottom: 1.5rem;
     text-transform: uppercase;
-    color: var(--brutal-accent);
+    color: var(--brutal-accent-light);
     border-bottom: 3px solid var(--brutal-accent);
     padding-bottom: 0.5rem;
 }
@@ -1555,6 +1559,7 @@ a.brutal-btn:active {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    color: var(--brutal-accent-light);
 }
 
 .footer-links a {
@@ -1568,17 +1573,19 @@ a.brutal-btn:active {
     border: 2px solid transparent;
     font-weight: 600;
     position: relative;
+    color: var(--brutal-accent-light);
 }
 
 .footer-links a:before {
     content: '→';
-    color: var(--brutal-accent);
+    color: var(--brutal-accent-light);
     font-weight: bold;
     transition: transform 0.3s ease;
+    
 }
 
 .footer-links a:hover {
-    color: var(--brutal-accent);
+    color: var(--brutal-accent-light);
     transform: translateX(10px);
     border: 2px solid var(--brutal-accent);
     text-decoration: none;

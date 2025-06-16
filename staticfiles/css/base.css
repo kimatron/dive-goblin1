@@ -2021,6 +2021,12 @@ a.brutal-btn:active {
         margin-top: 4rem;
     }
 
+    .nav-button {
+        background: #ffffff !important;
+        color: #000000 !important;
+        border: 3px solid #000000 !important;
+    }
+    
     .newsletter-box {
         margin: -4rem 1rem 0;
         padding: 1.5rem;

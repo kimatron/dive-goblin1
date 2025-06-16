@@ -96,6 +96,66 @@ The development followed Agile methodologies with user stories driving feature d
 - Regular testing with actual divers influenced feature priorities
 
 ---
+## User Story Prioritization - MoSCoW Method
+
+### Must Have (Critical for MVP)
+| Priority | User Story | Status | Notes |
+|----------|------------|--------|-------|
+| 🔴 **MUST** | User registration and authentication | ✅ Complete | Core security requirement |
+| 🔴 **MUST** | Browse and view products | ✅ Complete | Essential e-commerce function |
+| 🔴 **MUST** | Add products to shopping cart | ✅ Complete | Core shopping functionality |
+| 🔴 **MUST** | Secure payment processing | ✅ Complete | Essential for transactions |
+| 🔴 **MUST** | Order confirmation and tracking | ✅ Complete | Customer confidence requirement |
+
+### Should Have (Important but not critical)
+| Priority | User Story | Status | Notes |
+|----------|------------|--------|-------|
+| 🟡 **SHOULD** | User profile management | ✅ Complete | Enhanced user experience |
+| 🟡 **SHOULD** | Product wishlist functionality | ✅ Complete | Customer retention feature |
+| 🟡 **SHOULD** | Responsive mobile design | ✅ Complete | Modern UX requirement |
+| 🟡 **SHOULD** | Newsletter subscription | ✅ Complete | Marketing capability |
+| 🟡 **SHOULD** | Contact form | ✅ Complete | Customer service channel |
+
+### Could Have (Nice to have features)
+| Priority | User Story | Status | Notes |
+|----------|------------|--------|-------|
+| 🟦 **COULD** | Product search and filtering | ✅ Complete | Enhanced discovery |
+| 🟦 **COULD** | Admin product management | ⚠️ Partial | CRUD issues documented in TESTING.md |
+| 🟦 **COULD** | Social media integration | ✅ Complete | Brand presence |
+
+### Won't Have (Future iterations)
+| Priority | User Story | Status | Notes |
+|----------|------------|--------|-------|
+| ⚪ **WON'T** | Product reviews and ratings | 📋 Backlog | Planned for v2.0 |
+| ⚪ **WON'T** | Multi-currency support | 📋 Backlog | International expansion |
+| ⚪ **WON'T** | Inventory management system | 📋 Backlog | Advanced admin features |
+| ⚪ **WON'T** | Real-time chat support | 📋 Backlog | Customer service enhancement |
+
+### Sample User Story with Full Acceptance Criteria
+
+**Epic**: Shopping Experience  
+**Priority**: 🔴 **MUST HAVE**  
+**User Story**: As a shopper, I want to complete a purchase so I can buy diving equipment
+
+**Acceptance Criteria:**
+- [x] User can add products to shopping cart
+- [x] User can update quantities and remove items  
+- [x] Checkout form validates all required fields
+- [x] Stripe payment processing works securely
+- [x] Order confirmation page displays after successful payment
+- [ ] Email confirmation sent to user
+- [x] Order appears in user's order history
+- [x] Guest checkout available for non-registered users
+
+**Definition of Done:**
+- [x] Feature works across all device sizes (mobile-first)
+- [x] Manual testing completed and documented in TESTING.md
+- [x] Accessibility standards met (WCAG 2.1 AA)
+- [x] Security requirements satisfied (CSRF, XSS protection)
+- [x] Performance benchmarks met (Lighthouse 85+)
+
+**Current Status**: ✅ **FUNCTIONAL**
+
 
 ## Features
 
@@ -1308,7 +1368,32 @@ Sitemap: https://dive-goblin-30c473dd6e64.herokuapp.com/sitemap.xml
     </url>
 </urlset>
 ```
+### SEO Implementation - External Links
 
+**rel Attributes for Security and SEO:**
+All external links in Dive Goblin implement proper `rel` attributes:
+
+- `rel="noopener noreferrer"` - Prevents window.opener security vulnerabilities
+- `rel="external"` - Indicates external resources for SEO
+- Social media links open in new tabs with security attributes
+
+**Implementation Example:**
+```html
+<a href="https://www.facebook.com/divegoblin/" 
+   target="_blank" 
+   rel="noopener noreferrer external">
+   Facebook Page
+</a>
+```
+### Javascript
+```
+// Automatically add rel attributes to external links
+const externalLinks = document.querySelectorAll('a[href^="http"]:not([href*="' + window.location.host + '"])');
+externalLinks.forEach(function(link) {
+    link.setAttribute('target', '_blank');
+    link.setAttribute('rel', 'noopener noreferrer external');
+});
+```
 #### Content SEO Strategy
 
 **Meta Tag Implementation:**

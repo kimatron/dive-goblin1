@@ -8,6 +8,10 @@ As well as the documentation tables in this file, GIFs of most functions and tes
 
 I am happy with most of the Lighthouse reports, though they are a little low on some pages for mobile site. There are still some small contrasting issues on some sections of the site, but most of them have been dealt with, along with all missing aria labels.
 
+I had to change the color scheme last minute due to low contrast errors in WAVE, which I am not entirely happy about, but it fixed (most of) the errors :)
+
+![HTML Validation](assets/readme/wave.png)
+
 ## Table of Contents
 1. [Testing Strategy](#testing-strategy)
 2. [Validation Testing](#validation-testing)

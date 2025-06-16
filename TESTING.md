@@ -594,6 +594,8 @@ The platform is production-ready and provides a secure, accessible, and performa
 
 #### When deleting/editing products in product management, there is no delete confirmation stage, and once an action is completed the user is taken out of the product management section. Not a big issue, just bad ux. -FIXED 9/6/25
 
+#### Noticed an issue that appears sometimes, when adding a product with no image on the front end, the product is added but for some reason, sporadically clicking on the product from the product management page throws a server error, but the product is uploaded. Don't have the same issue when a product is added ith an image.
+
 ## Bug Report: AWS S3 Storage Configuration Issue
 
 ### Description
